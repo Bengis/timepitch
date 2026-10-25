@@ -11,9 +11,21 @@ export type TransportMark = { id: string; atMs: number; seekMs: number; label: s
 
 // Textos propios de la barra (player-messages.ts es del armazón).
 const TEXT = {
-  es: { previous: 'Evento anterior', next: 'Evento siguiente', back: 'Retroceder 10 s', forward: 'Avanzar 10 s', start: "0'", halftime: 'Descanso' },
-  en: { previous: 'Previous event', next: 'Next event', back: 'Back 10 s', forward: 'Forward 10 s', start: "0'", halftime: 'Half-time' },
+  es: { previous: 'Evento anterior', next: 'Evento siguiente', back: 'Retroceder 10 s', forward: 'Avanzar 10 s', start: "0'", halftime: 'Descanso',
+    minute: 'Minuto', left: 'quedan', lasts: (speed: string, total: string) => `${speed}×: el partido dura ${total}` },
+  en: { previous: 'Previous event', next: 'Next event', back: 'Back 10 s', forward: 'Forward 10 s', start: "0'", halftime: 'Half-time',
+    minute: 'Minute', left: 'left', lasts: (speed: string, total: string) => `${speed}×: the match lasts ${total}` },
 };
+
+// TP251 (25-oct: «los tiempos no casan en general»): la grabación de cada motor dura distinto (TouchLines y GRF
+// en vivo van comprimidos: 5:00 para 90'; la demo, 96:51). Las velocidades multiplican la grabación, así que se muestran
+// como lo que dura el partido entero a esa velocidad, y la barra en minutos de partido.
+/** Tiempo real que dura `ms` de grabación a `speed`: minutos redondeados desde 90 s; por debajo, segundos. */
+export function realDuration(ms: number, speed: number): string {
+  const seconds = ms / speed / 1000;
+  return seconds >= 90 ? `${Math.round(seconds / 60)} min` : `${Math.max(1, Math.round(seconds))} s`;
+}
+
 
 const svg = (body: ReactNode, filled = false) => <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill={filled ? 'currentColor' : 'none'} stroke={filled ? 'none' : 'currentColor'} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">{body}</svg>;
 const ten = <text x="12" y="15.5" fontSize="7" fill="currentColor" stroke="none" textAnchor="middle" fontWeight="700">10</text>;
@@ -29,11 +41,13 @@ const ICON = {
   soundOff: svg(<><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" /><path d="M16 9.5l5 5M21 9.5l-5 5" /></>),
 };
 
-export function PlaybackControls({ state, descriptor, cursor, onPlay, onPause, onSeek, onSpeed, onReplay, marks, sound }: {
+export function PlaybackControls({ state, descriptor, cursor, onPlay, onPause, onSeek, onSpeed, onReplay, marks, sound, clock }: {
   state: PlaybackState; descriptor: SessionDescriptor; cursor: MatchCursor; onPlay: () => void; onPause: () => void; onSeek: (ms: number) => void; onSpeed: (speed: number) => void; onReplay: () => void;
   marks?: readonly TransportMark[];
   /** Interruptor del sonido del partido (TP231); sin él no se muestra. */
   sound?: { enabled: boolean; onToggle: () => void };
+  /** TP251: reloj del partido. Con él, la barra va en minutos de partido y las velocidades dicen cuánto dura el partido. */
+  clock?: { now: string; end: string };
 }) {
   const t = usePlayerText(), { locale, t: app } = useLanguage(), x = TEXT[locale === 'es' ? 'es' : 'en'];
   const duration = descriptor.durationMs, current = state.pendingSeekMs ?? state.elapsedMs;
@@ -62,14 +76,19 @@ export function PlaybackControls({ state, descriptor, cursor, onPlay, onPause, o
         {marks && duration ? <div className="pbk-marks">{marks.map(m => <button key={m.id} type="button" className="pbk-mk unified-mark" data-kind={m.kind} title={m.label} aria-label={m.label}
           style={at(m.atMs)} onClick={() => onSeek(m.seekMs)}>{m.kind === 'halftime' ? null : m.icon}</button>)}</div> : null}
         <input className="pbk-range" type="range" aria-label={t.position} min="0" max={duration ?? 0} step="1" value={current} disabled={duration === null} onChange={e => onSeek(Number(e.target.value))} />
-        <div className="pbk-lbls" aria-hidden="true"><span>{x.start}</span>{ht !== null && <span className="pbk-lbl-ht" style={at(ht)}>{x.halftime}</span>}<span>{matchTime(duration)}</span></div>
+        <div className="pbk-lbls" aria-hidden="true"><span>{x.start}</span>{ht !== null && <span className="pbk-lbl-ht" style={at(ht)}>{x.halftime}</span>}<span>{clock ? clock.end : matchTime(duration)}</span></div>
       </div>
       <div className="pbk-speed" role="group" aria-label={t.speed}>
-        {PLAYBACK_SPEEDS.map(speed => <button key={speed} type="button" aria-pressed={state.speed === speed} onClick={() => onSpeed(speed)}>{speed.toLocaleString(locale)}×</button>)}
+        {clock && duration
+          ? PLAYBACK_SPEEDS.map(speed => { const total = realDuration(duration, speed), name = x.lasts(speed.toLocaleString(locale), total);
+            return <button key={speed} type="button" aria-pressed={state.speed === speed} aria-label={name} title={name} onClick={() => onSpeed(speed)}>{total}</button>; })
+          : PLAYBACK_SPEEDS.map(speed => <button key={speed} type="button" aria-pressed={state.speed === speed} onClick={() => onSpeed(speed)}>{speed.toLocaleString(locale)}×</button>)}
       </div>
     </div>
     <div className="pbk-meta">
-      <output className="unified-playback-time" title={t.elapsed}><small>{t.playbackTime}</small> {matchTime(current)} / {matchTime(duration)}</output>
+      {clock && duration
+        ? <output className="unified-playback-time"><small>{x.minute}</small> {clock.now} · {x.left} {realDuration(Math.max(0, duration - current), state.speed)}</output>
+        : <output className="unified-playback-time" title={t.elapsed}><small>{t.playbackTime}</small> {matchTime(current)} / {matchTime(duration)}</output>}
       <label className="pbk-phase">{t.phase}<select value={cursor.period} onChange={e => { const phase = descriptor.periods.find(p => p.period === Number(e.target.value)); if (phase?.startMs != null) onSeek(phase.startMs); }}>
         {!descriptor.periods.some(p => p.period === cursor.period) && <option value={cursor.period}>—</option>}{descriptor.periods.map(p => <option key={p.period} value={p.period} disabled={p.startMs === null}>{p.period}{p.startMs === null ? ` · ${t.missing}` : ''}</option>)}
       </select></label>

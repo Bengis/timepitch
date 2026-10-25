@@ -410,7 +410,8 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
   const scopeClock = analysisCtx || snapshot.clockMs !== null && !displayClock ? minuteLabel(source, snapshot.presentedCursor.period, snapshot.clockMs ?? 0) : displayClock?.text ?? matchTime(elapsed);
   const scopeBar = (compact = false) => <AnalysisScopeBar revealed={revealed} final={finalRequested} ended={state.isMatchEnd} clock={scopeClock} compact={compact}
     onReveal={() => { setReveal(true); setAnalysisScope('final'); }} onScope={setAnalysisScope} />;
-  const transport=<PlaybackControls state={state} descriptor={snapshot.descriptor} cursor={cursorAt(snapshot.descriptor, elapsed)} onPlay={playback.play} onPause={playback.pause} onSeek={seek} onSpeed={playback.setSpeed} onReplay={playback.replay} marks={analysisCtx ? marks : undefined} sound={{ enabled: soundOn, onToggle: toggleSound }} />;
+  const transport=<PlaybackControls state={state} descriptor={snapshot.descriptor} cursor={cursorAt(snapshot.descriptor, elapsed)} onPlay={playback.play} onPause={playback.pause} onSeek={seek} onSpeed={playback.setSpeed} onReplay={playback.replay} marks={analysisCtx ? marks : undefined} sound={{ enabled: soundOn, onToggle: toggleSound }}
+    clock={shell ? { now: displayClock?.text ?? matchTime(view?.clockMs ?? snapshot.clockMs), end: d.periods.length > 1 ? "90'" : matchTime(d.durationMs) } : undefined} />;
   const explorer=<MatchEventExplorer snapshot={sequence?{...snapshot,events:snapshot.events.filter(e=>e.elapsedMs!==null&&e.elapsedMs<=elapsed)}:snapshot} players={players} onSeek={watch} onPlayer={openPlayer} onWindow={readWindow} resolvedEvents={resolvedActions} watchRequest={watchRequest} />;
   const filtersUseful=historicalMotion||!!snapshot.layers;
   // TP239: versiones, hashes y fuentes (antes, pestaña «Data»), plegados al final de la columna del partido.

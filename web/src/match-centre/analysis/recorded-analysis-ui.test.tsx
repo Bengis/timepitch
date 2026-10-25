@@ -43,9 +43,9 @@ describe('recorded match analysis in the Match Centre', () => {
     expect(timeline.querySelector('li[data-kind="shot"]')).toHaveTextContent('saved');
     // TP205: en el primer minuto la posesión es «—», no 100 % / 0 %.
     expect(summary.querySelector('[data-stat="possession"]')).toHaveTextContent(/^—Possession—$/);
-    // TP205: los dos relojes llevan rótulo (reloj del partido frente a tiempo de reproducción).
+    // TP205/TP251: el marcador lleva su rótulo y la barra habla en minutos de partido y en tiempo real que queda.
     expect(document.querySelector('.tp-sb-clabel')).toHaveTextContent('Match clock');
-    expect(document.querySelector('.unified-playback-time')).toHaveTextContent(/^Playback /);
+    expect(document.querySelector('.unified-playback-time')).toHaveTextContent(/^Minute .* · left /);
     expect(document.querySelector('.unified-mark[data-kind="goal"]')).toBeInTheDocument();
     // TouchLines no graba faltas ni tarjetas: se dice, no se muestra 0.
     expect(summary.querySelector('[data-stat="fouls"]')).toBeNull();

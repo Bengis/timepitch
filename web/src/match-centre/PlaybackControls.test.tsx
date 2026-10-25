@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, within } from '@testing-library/react';
-import { PlaybackControls, type TransportMark } from './PlaybackControls';
+import { PlaybackControls, realDuration, type TransportMark } from './PlaybackControls';
 import { LanguageProvider } from '../i18n';
 import type { PlaybackState } from './playback';
 import type { SessionDescriptor } from './session';
@@ -77,4 +77,13 @@ describe('PlaybackControls (barra de emisión)', () => {
       expect(screen.getByRole('button', { name: 'Sonido' })).toHaveAttribute('title', 'Silenciar el sonido del partido');
     } finally { localStorage.removeItem('timepitch.locale'); }
   });
+});
+
+// TP251: las velocidades se muestran como lo que dura de verdad el partido entero.
+it('realDuration turns a recording and a speed into real minutes or seconds', () => {
+  expect(realDuration(5_811_700, 1)).toBe('97 min');   // demo GRF, 96:51 de grabación
+  expect(realDuration(5_811_700, 20)).toBe('5 min');
+  expect(realDuration(300_000, 1)).toBe('5 min');      // TouchLines: 5:00 de grabación para 90'
+  expect(realDuration(300_000, 10)).toBe('30 s');
+  expect(realDuration(300_000, 120)).toBe('3 s');
 });
