@@ -50,8 +50,9 @@ const NOTES_ES: Record<string, string> = {
   'Physical GRF recording: goals and scorers come from engine telemetry.': 'Grabación física de GRF: goles y goleadores salen de la telemetría del motor.',
   'Pass outcomes, recoveries and possession were not exported and are left out.': 'El resultado de los pases, las recuperaciones y la posesión no se exportaron y quedan fuera.',
   'Fictional cross-era simulation: this match never took place.': 'Simulación ficticia entre épocas: este partido nunca se jugó.',
+  'TouchLines recording: goals and scorers come from the engine events.': 'Grabación de TouchLines: goles y goleadores salen de los eventos del motor.',
 };
-const noteIn = (note: string, locale: 'en' | 'es') => locale === 'es' ? NOTES_ES[note] ?? note : note;
+export const noteIn = (note: string, locale: 'en' | 'es') => locale === 'es' ? NOTES_ES[note] ?? note : note;
 
 /** TP250 (juez del hackathon: «no veo nada que ocurra en la nube»): el camino real de la crónica, paso a paso. */
 export function AzurePipeline({ locale }: { locale: 'en' | 'es' }) {

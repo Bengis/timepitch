@@ -212,7 +212,7 @@ export default function App() {
         <VersusScreen teams={teams} home={home} away={away}
           // TP236 (24-oct: «el match no debería requerir dos clics»): «Jugar partido» simula directamente.
           onPlay={()=>{void start();}} playDisabled={!canStart}
-          onOpenAiReport={()=>{setDemoAutoplay(false);setDemoReport(true);navigate({mode:'demo'});}}
+          // TP253 (25-oct: «pa mi esto sobra, mejor al final una crónica»): sin píldora en la portada; la crónica IA va al final del partido.
           // TP237: a la vista, las dos elecciones que definen el partido: motor y modo gráfico.
           // TP248: las cuatro opciones (dos motores y dos gráficos) a la vista, no en «Opciones».
           playControls={<div className="vs-choices">

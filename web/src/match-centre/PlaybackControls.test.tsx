@@ -87,3 +87,17 @@ it('realDuration turns a recording and a speed into real minutes or seconds', ()
   expect(realDuration(300_000, 10)).toBe('30 s');
   expect(realDuration(300_000, 120)).toBe('3 s');
 });
+
+// TP252: el arranque automático deja el partido en unos 5 minutos, con cualquier motor.
+it('autoplaySpeedFor leaves the match at 5 minutes, never in slow motion (TP254)', async () => {
+  const { autoplaySpeedFor } = await import('./MatchCentre');
+  expect(autoplaySpeedFor(5_811_700)).toBeCloseTo(19.3723, 3); // demo GRF: 96:51 → 5 min
+  expect(autoplaySpeedFor(300_000)).toBe(1);                   // TouchLines: 5:00 → 5 min
+  expect(autoplaySpeedFor(60_000)).toBe(1);                    // más corta que 5 min: 1×, sin cámara lenta
+});
+
+it('TP254: halfOptions offers FIFA-style half lengths that fit the recording, plus its natural length', async () => {
+  const { halfOptions } = await import('./PlaybackControls');
+  expect(halfOptions(5_811_700, 2).map(o => o.minutes)).toEqual([2, 2.5, 3, 5, 10, 48]); // 48: la demo a 1×
+  expect(halfOptions(300_000, 2).map(o => [o.minutes, o.speed])).toEqual([[2, 1.25], [2.5, 1]]);
+});

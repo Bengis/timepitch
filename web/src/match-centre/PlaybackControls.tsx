@@ -12,14 +12,28 @@ export type TransportMark = { id: string; atMs: number; seekMs: number; label: s
 // Textos propios de la barra (player-messages.ts es del armazón).
 const TEXT = {
   es: { previous: 'Evento anterior', next: 'Evento siguiente', back: 'Retroceder 10 s', forward: 'Avanzar 10 s', start: "0'", halftime: 'Descanso',
-    minute: 'Minuto', left: 'quedan', lasts: (speed: string, total: string) => `${speed}×: el partido dura ${total}` },
+    minute: 'Minuto', left: 'quedan', lasts: (speed: string, total: string) => `${speed}×: el partido dura ${total}`,
+    halfLength: 'Cada parte', half: (min: string, total: string) => `Partes de ${min} min: el partido dura ${total} min` },
   en: { previous: 'Previous event', next: 'Next event', back: 'Back 10 s', forward: 'Forward 10 s', start: "0'", halftime: 'Half-time',
-    minute: 'Minute', left: 'left', lasts: (speed: string, total: string) => `${speed}×: the match lasts ${total}` },
+    minute: 'Minute', left: 'left', lasts: (speed: string, total: string) => `${speed}×: the match lasts ${total}`,
+    halfLength: 'Each half', half: (min: string, total: string) => `${min}-minute halves: the match lasts ${total} min` },
 };
 
 // TP251 (25-oct: «los tiempos no casan en general»): la grabación de cada motor dura distinto (TouchLines y GRF
 // en vivo van comprimidos: 5:00 para 90'; la demo, 96:51). Las velocidades multiplican la grabación, así que se muestran
 // como lo que dura el partido entero a esa velocidad, y la barra en minutos de partido.
+// TP254 («¿qué opciones da FIFA?»): como en FIFA, se elige la duración de cada parte. Solo las que caben sin
+// cámara lenta (velocidad ≥ 1×); 2,5 min por parte deja el partido en los 5 minutos del arranque (TP252).
+export const HALF_MINUTES = [2, 2.5, 3, 5, 10] as const;
+/** Velocidad que deja cada parte en `halfMinutes` minutos reales. */
+export const speedForHalf = (durationMs: number, halves: number, halfMinutes: number) => durationMs / (halves * halfMinutes * 60_000);
+/** Duraciones de parte posibles para esta grabación, con su velocidad. */
+export function halfOptions(durationMs: number, halves: number): { minutes: number; speed: number }[] {
+  const options = HALF_MINUTES.map(minutes => ({ minutes, speed: speedForHalf(durationMs, halves, minutes) })).filter(o => o.speed >= 1 - 1e-9);
+  // La duración natural de la grabación (1×, «tiempo real» en la demo) siempre está, si no coincide ya con una de la lista.
+  const exact = durationMs / halves / 60_000, natural = exact >= 10 ? Math.round(exact) : Math.round(exact * 10) / 10;
+  return options.some(o => Math.abs(o.speed - 1) < 1e-6) ? options : [...options, { minutes: natural, speed: 1 }];
+}
 /** Tiempo real que dura `ms` de grabación a `speed`: minutos redondeados desde 90 s; por debajo, segundos. */
 export function realDuration(ms: number, speed: number): string {
   const seconds = ms / speed / 1000;
@@ -50,7 +64,7 @@ export function PlaybackControls({ state, descriptor, cursor, onPlay, onPause, o
   clock?: { now: string; end: string };
 }) {
   const t = usePlayerText(), { locale, t: app } = useLanguage(), x = TEXT[locale === 'es' ? 'es' : 'en'];
-  const duration = descriptor.durationMs, current = state.pendingSeekMs ?? state.elapsedMs;
+  const duration = descriptor.durationMs, current = state.pendingSeekMs ?? state.elapsedMs, halves = Math.max(1, descriptor.periods.length);
   const pct = (ms: number) => duration ? Math.max(0, Math.min(100, ms / duration * 100)) : 0;
   const at = (ms: number) => ({ '--pbk-at': `${pct(ms)}%` }) as CSSProperties;
   const targets = transportTargets(marks ?? [], current);
@@ -78,12 +92,12 @@ export function PlaybackControls({ state, descriptor, cursor, onPlay, onPause, o
         <input className="pbk-range" type="range" aria-label={t.position} min="0" max={duration ?? 0} step="1" value={current} disabled={duration === null} onChange={e => onSeek(Number(e.target.value))} />
         <div className="pbk-lbls" aria-hidden="true"><span>{x.start}</span>{ht !== null && <span className="pbk-lbl-ht" style={at(ht)}>{x.halftime}</span>}<span>{clock ? clock.end : matchTime(duration)}</span></div>
       </div>
-      <div className="pbk-speed" role="group" aria-label={t.speed}>
-        {clock && duration
-          ? PLAYBACK_SPEEDS.map(speed => { const total = realDuration(duration, speed), name = x.lasts(speed.toLocaleString(locale), total);
-            return <button key={speed} type="button" aria-pressed={state.speed === speed} aria-label={name} title={name} onClick={() => onSpeed(speed)}>{total}</button>; })
-          : PLAYBACK_SPEEDS.map(speed => <button key={speed} type="button" aria-pressed={state.speed === speed} onClick={() => onSpeed(speed)}>{speed.toLocaleString(locale)}×</button>)}
-      </div>
+      {clock && duration
+        ? <div className="pbk-speed pbk-halves" role="group" aria-label={x.halfLength}><span className="pbk-speed-label" aria-hidden="true">{x.halfLength}</span>
+          {halfOptions(duration, halves).map(o => { const min = o.minutes.toLocaleString(locale), name = x.half(min, (o.minutes * halves).toLocaleString(locale));
+            return <button key={o.minutes} type="button" aria-pressed={Math.abs(state.speed - o.speed) < 1e-6} aria-label={name} title={name} onClick={() => onSpeed(o.speed)}>{min} min</button>; })}</div>
+        : <div className="pbk-speed" role="group" aria-label={t.speed}>
+          {PLAYBACK_SPEEDS.map(speed => <button key={speed} type="button" aria-pressed={state.speed === speed} onClick={() => onSpeed(speed)}>{speed.toLocaleString(locale)}×</button>)}</div>}
     </div>
     <div className="pbk-meta">
       {clock && duration

@@ -155,7 +155,8 @@ RULES = {
                              ['write the full recorded name with its recorded capitals',
                               'or remove that name from this sentence']),
     'unsupported_score': ('A score appears in a sentence that does not cite result, or it is not the final '
-                          'recorded score.', ['remove the score from this sentence',
+                          'recorded score in home–away order.', ['remove the score from this sentence',
+                                              'or write it home first, as recorded (0–3 when the away side won 3–0)',
                                               'or cite fact result, if it is the final recorded score']),
     'unsupported_clock': ('A clock does not match a goal cited by this sentence.',
                           ['use the mm:ss time of a cited goal', 'or cite the goal fact with that time',

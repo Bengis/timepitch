@@ -113,6 +113,11 @@ def _number_checks(text, pack, facts, locale):
     percentages = set()
     clocks = set()
     pairs = {tuple(pack.score)} if result else set()
+    if result and pack.score[0] != pack.score[1]:
+        # TP253: «Manchester City 3–0 Arsenal» (visitante y su marcador primero, con los dos nombres completos en su sitio)
+        # dice lo mismo que «Arsenal 0–3 Manchester City»; el modelo lo escribe así cuando gana el visitante.
+        h, a = pack.score
+        text = text.replace(f'{pack.away_name} {a}–{h} {pack.home_name}', f'{pack.away_name} {pack.home_name}')
     for fact in facts:
         if fact.kind == 'coverage':
             counts.add(Decimal(pack.coverage.omitted_events))

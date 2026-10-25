@@ -342,3 +342,8 @@ body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
 .tp-map-legend .tp-map-key { color: var(--tp-ink3, #8792a8); font-size: 11.5px; }
 .tp-map-legend .tp-key-goal { background: var(--tp-ink2, #aab4c6); }
 .tp-map-legend .tp-key-shot { border: 2px solid var(--tp-ink2, #aab4c6); width: 9px; height: 9px; background: transparent; }
+/* TP253: crónica IA en vivo, mientras los agentes escriben. */
+.crew-live-pending { display: flex; align-items: center; gap: 8px; }
+.crew-live-spinner { width: 14px; height: 14px; flex: none; border-radius: 50%; border: 2px solid rgba(185, 166, 255, .35); border-top-color: #b9a6ff; animation: crew-spin 1s linear infinite; }
+@keyframes crew-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .crew-live-spinner { animation: none; } }

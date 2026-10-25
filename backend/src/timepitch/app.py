@@ -73,6 +73,10 @@ def create_app(dataset_path: Path | None = None, runtime_dir: Path | None = None
             app.state.grf = grf
             touchlines = TouchLinesService(catalog, TouchLinesRepository(runtime / 'touchlines.sqlite'), config.TOUCHLINES_DIR, default_node())
             app.state.touchlines = touchlines
+            # TP253: crónica IA en vivo al final de los partidos simulados (crew en Azure); apagada sin su modo y ficheros.
+            from .chronicles.live_facts import live_source
+            from .crew.live import LiveCrew, LiveCrewSettings
+            app.state.live_crew = LiveCrew(live_source(grf, touchlines), LiveCrewSettings.from_env(), runtime / 'live-crew')
             def runner_factory():
                 if model != 'qwen2.5-1.5b': raise RuntimeError('Explicit local model activation required')
                 runner = LocalAgentRunner(model)
@@ -129,6 +133,8 @@ def create_app(dataset_path: Path | None = None, runtime_dir: Path | None = None
     app.include_router(statistics_router())
     app.include_router(grf_router())
     app.include_router(touchlines_router())
+    from .api.live_crew import live_crew_router
+    app.include_router(live_crew_router())
     app.state.chronicles_settings=chronicles_settings
     app.state.azure_chronicles_settings=azure_settings
     app.state.azure_chronicles_config_error=azure_config_error

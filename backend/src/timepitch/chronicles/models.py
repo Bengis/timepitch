@@ -9,7 +9,7 @@ FACT_VERSION = 'chronicle-facts-1'
 PROMPT_VERSION = 'chronicle-1'
 PROFILE = 'foundry-qwen2.5-1.5b-gpu4'
 MODEL = 'qwen2.5-1.5b-instruct-generic-gpu:4@4'
-Engine = Literal['timepitch', 'grf']
+Engine = Literal['timepitch', 'grf', 'touchlines']  # TP253: TouchLines, para la crónica en vivo
 Locale = Literal['en', 'es']
 Side = Literal['home', 'away']
 Digest = Annotated[str, Field(pattern=r'^[a-f0-9]{64}$')]

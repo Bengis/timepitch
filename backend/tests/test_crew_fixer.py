@@ -109,7 +109,7 @@ def test_names_must_be_written_as_recorded(text, bad):
 def test_versions_and_writer_three_rules():
     versions = crew_versions()
     assert (versions['writer_prompt'], versions['verifier'], versions['fixer'], versions['analyst_prompt']) == (
-        'crew-writer-4', 'crew-verifier-4', 'crew-fixer-1', 'crew-analyst-2')
+        'crew-writer-6', 'crew-verifier-4', 'crew-fixer-1', 'crew-analyst-2')
     assert versions['validator'] == 'azure-prose-checks-1'
     text = writer_instructions('en')
     assert 'recorded capitals' in text and 'Never write a whole sentence in lowercase' in text

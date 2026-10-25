@@ -108,7 +108,14 @@ const EFFORT_METRIC = /distance|hsr|sprint|speed|accel|decel|metres_per_minute/;
 export const AUTOPLAY_SPEED = 10;
 /** TP237: con Capitán Hane, 5× (por encima solo hay escenas de gol; ver `allowedKinds`). */
 export const ANIME_AUTOPLAY_SPEED = 5;
-const autoplaySpeed = () => readPitchPreferences(pitchStorage()).renderer === 'anime-1' ? ANIME_AUTOPLAY_SPEED : AUTOPLAY_SPEED;
+/** TP252 (25-oct: «que duren 5 min»): el arranque elige la velocidad que deja el partido entero más cerca de
+ *  5 minutos reales, sea cual sea el motor (TouchLines graba 5:00 para 90'; la demo GRF, 96:51). Sin duración, lo de antes. */
+export const TARGET_MATCH_MS = 5 * 60_000;
+export function autoplaySpeedFor(durationMs: number | null): number {
+  if (!durationMs || durationMs <= 0) return readPitchPreferences(pitchStorage()).renderer === 'anime-1' ? ANIME_AUTOPLAY_SPEED : AUTOPLAY_SPEED;
+  // TP254: la velocidad ya es libre; exactamente 5 minutos (partes de 2,5), sin bajar de 1× (sin cámara lenta).
+  return Math.min(120, Math.max(1, durationMs / TARGET_MATCH_MS));
+}
 /** Nombre del botón grande (distinto de «Reproducir» de la barra, que sigue presente). */
 const BIG_PLAY = { en: 'Play the match', es: 'Reproducir el partido' } as const;
 const prefersReducedMotion = () => typeof window !== 'undefined' && (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false);
@@ -168,7 +175,7 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
   const autoplayReady = visible && snapshot.descriptor.durationMs !== null && state.status !== 'unavailable';
   useEffect(() => {
     if (!autoplay || reducedMotion || autoplayed.current || !autoplayReady) return;
-    autoplayed.current = true; playback.setSpeed(autoplaySpeed()); playback.play();
+    autoplayed.current = true; playback.setSpeed(autoplaySpeedFor(snapshot.descriptor.durationMs)); playback.play();
   }, [autoplay, reducedMotion, autoplayReady]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (state.wantsPlay) setBigPlay(false); }, [state.wantsPlay]);
   const chooseSection = (next: MatchSection) => { setSection(next); onSectionChange?.(next); };
@@ -397,7 +404,7 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
       /* 25-oct: «veo términos repetidos». TP250: sobre el campo, solo las cámaras; la procedencia va en la cabecera. */
       {...(shell&&hudEngine?{cameraTabs:true}:{})}
       overlay={phaseOverlay??(bigPlay&&!state.wantsPlay&&!sequence?<button type="button" className="tp-big-play" data-big-play aria-label={BIG_PLAY[locale === 'es' ? 'es' : 'en']} title={BIG_PLAY[locale === 'es' ? 'es' : 'en']}
-        disabled={!autoplayReady} onClick={()=>{playback.setSpeed(autoplaySpeed());playback.play();setBigPlay(false);}}>
+        disabled={!autoplayReady} onClick={()=>{playback.setSpeed(autoplaySpeedFor(snapshot.descriptor.durationMs));playback.play();setBigPlay(false);}}>
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M7 4.5v15a1 1 0 001.5.86l12-7.5a1 1 0 000-1.72l-12-7.5A1 1 0 007 4.5z"/></svg><span>{t.play}</span></button>:undefined)} />
     {sequence&&!motionReady&&<p className="sequence-unavailable" role="status">{state.status==='buffering'?q.loading:q.unavailable}</p>}
     {!sequence&&bannerBelow&&section==='match'&&banner('below')}
@@ -430,6 +437,8 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
           <details className="tpa-log"><summary>{ta.events}</summary>{explorer}</details>
           {technical}
         </aside>:shell?<aside className="tpa-side tp-sim-side" data-simulated-side>{scoreInSide&&scoreboard}
+          {/* TP253: crónica IA en vivo (crew en Azure) al acabar el partido simulado. */}
+          {sideReport?.({ revealed, reveal: () => { setReveal(true); setAnalysisScope('final'); } })}
           {/* TP241 («la acción debería verla narrada»): narración en frases llanas en vez de la cronología de TP239;
               el registro sigue plegado. */}
           {timelineCtx&&<NarrationPanel ctx={timelineCtx} events={narrationEvents} keepers={keeperIds} untilMs={finalRequested?d.durationMs??elapsed:elapsed} onSeek={seek}/>}

@@ -2,6 +2,9 @@ import type { LoadState } from './session';
 import type { PlaybackPolicy, PlaybackStop } from './sequence/types';
 
 export const PLAYBACK_SPEEDS = [1, 5, 10, 20, 60, 120] as const;
+/** TP254: sin política (secuencias), la velocidad es libre entre 1× y 120×: la barra la calcula a partir de la duración
+ *  de cada parte que elige el usuario, como en FIFA, y no siempre cae en un valor de la lista. */
+export const freeSpeed = (speed: number) => Number.isFinite(speed) && speed >= 1 && speed <= 120;
 export type PlaybackState = {
   elapsedMs: number; pendingSeekMs: number | null; speed: number; wantsPlay: boolean; isPlaying: boolean;
   status: 'paused' | 'playing' | 'buffering' | 'ended' | 'unavailable';
@@ -40,7 +43,7 @@ export class MatchPlaybackController {
     this.policy = canonical;
     this.stop = null;
     if (policy) { this.intent = false; this.rate = 1; this.seek(policy.fromMs); }
-    else if (!(PLAYBACK_SPEEDS as readonly number[]).includes(this.rate)) this.rate = 1;
+    else if (!freeSpeed(this.rate)) this.rate = 1;
   }
   continueAfterStop() {
     if (this.stop?.kind !== 'halftime') return;
@@ -87,7 +90,7 @@ export class MatchPlaybackController {
     if (this.duration !== null && this.elapsed >= this.duration && this.pending === null) this.intent = false;
   }
   setSpeed(speed: number) {
-    if (!(this.policy?.speeds ?? PLAYBACK_SPEEDS).includes(speed)) throw new RangeError('Unsupported playback speed');
+    if (this.policy ? !this.policy.speeds.includes(speed) : !freeSpeed(speed)) throw new RangeError('Unsupported playback speed');
     this.sync(); this.rate = speed;
   }
   setDuration(ms: number | null) {

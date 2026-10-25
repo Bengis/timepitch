@@ -16,7 +16,7 @@ from ..chronicles.models import FACT_VERSION, Digest, Identifier, Locale, Strict
 
 CREW_VERSION = 'crew-1'
 ANALYST_PROMPT_VERSION = 'crew-analyst-2'
-WRITER_PROMPT_VERSION = 'crew-writer-4'
+WRITER_PROMPT_VERSION = 'crew-writer-6'  # TP253: marcador solo en el titular, local–visitante también si gana el visitante
 VERIFIER_VERSION = 'crew-verifier-4'
 FIXER_VERSION = 'crew-fixer-1'
 EVALUATION_VERSION = 'crew-eval-1'

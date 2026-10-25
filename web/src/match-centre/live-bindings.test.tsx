@@ -69,9 +69,9 @@ it.each(['timepitch', 'grf'] as const)('opens saved %s through the common screen
   const library = view.container.querySelector('.library-view') as HTMLElement;
   fireEvent.click(await within(library).findByRole('button', { name: new RegExp(`${config.home_key}.*${config.away_key}`) }));
   await waitFor(() => expect(view.container.querySelector(`[data-unified-match-centre][data-source=${engine}]`)).toBeVisible());
-  // TP226: al abrir un partido simulado la reproducción arranca sola a 10× (con una grabación corta puede acabar enseguida,
-  // así que se comprueba la velocidad elegida por el arranque y que el reloj ha avanzado).
-  await waitFor(() => expect(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^10×/ })).toHaveAttribute('aria-pressed', 'true'));
+  // TP226/TP252: al abrir un partido simulado la reproducción arranca sola a la velocidad que deja el partido en unos
+  // 5 minutos (depende de lo que dure cada grabación de prueba); se comprueba que hay una elegida y que el reloj avanza.
+  await waitFor(() => expect(within(screen.getByRole('group', { name: 'Each half' })).getAllByRole('button').filter(b => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1));
   await waitFor(() => expect(Number((screen.getByRole('slider') as HTMLInputElement).value)).toBeGreaterThan(0));
   expect(historical.readMatch).not.toHaveBeenCalled(); expect(historical.readManifest).not.toHaveBeenCalled();
   expect(api.createMatch).not.toHaveBeenCalled(); expect(api.createGrfMatch).not.toHaveBeenCalled(); expect(api.createExplanation).not.toHaveBeenCalled(); expect(api.importReplay).not.toHaveBeenCalled();

@@ -3,6 +3,8 @@
 import { useMemo } from 'react';
 import type { TouchLinesRecord } from '../api';
 import { MatchCentre } from '../match-centre/MatchCentre';
+import { LiveCrewPanel } from '../match-centre/LiveCrewPanel';
+import { useLanguage } from '../i18n';
 import { createRecordedSession } from '../match-centre/adapters/recorded-session';
 import { normalizeRecording } from '../match-centre/adapters/recorded-track';
 import { parseRecordedEvents } from '../match-centre/adapters/recorded-events';
@@ -22,6 +24,8 @@ export function touchLinesSession(id: string, record: TouchLinesRecord) {
 export function TouchLinesMatchView({ id, record, onBack, visible = true, tab, onSectionChange, autoplay = false }: { id: string; record: TouchLinesRecord;
   onBack: () => void; visible?: boolean; tab?: MatchSection; onSectionChange?: (section: MatchSection) => void; autoplay?: boolean }) {
   const adapter = useMemo(() => touchLinesSession(id, record), [id, record]);
+  const { locale } = useLanguage();
   return <div data-match-id={id} data-engine-version="touchlines-5c5c71a-native"><MatchCentre adapter={adapter} visible={visible} onBack={onBack}
-    initialSection={tab} onSectionChange={onSectionChange} autoplay={autoplay} rendererLocked liveSimulation /></div>;
+    initialSection={tab} onSectionChange={onSectionChange} autoplay={autoplay} rendererLocked liveSimulation
+    sideReport={({ revealed }) => <LiveCrewPanel engine="touchlines" matchId={id} locale={locale === 'es' ? 'es' : 'en'} ended={revealed} />} /></div>;
 }

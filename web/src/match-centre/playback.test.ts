@@ -54,10 +54,10 @@ describe('one monotonic match clock', () => {
     advance(137); expect(player.currentTime()).toBe(822);
     player.pause(); advance(500); expect(player.currentTime()).toBe(822);
   });
-  it('accepts precisely the six common speeds', () => {
+  it('accepts any speed from 1× to 120× (TP254: FIFA-style half lengths) and rejects the rest', () => {
     const { player } = clock();
-    for (const speed of [1, 5, 10, 20, 60, 120]) { player.setSpeed(speed); expect(player.snapshot().speed).toBe(speed); }
-    for (const speed of [3, NaN, Infinity, 0, -1]) expect(() => player.setSpeed(speed)).toThrow();
+    for (const speed of [1, 5, 10, 20, 60, 120, 1.25, 19.37]) { player.setSpeed(speed); expect(player.snapshot().speed).toBe(speed); }
+    for (const speed of [0.5, 121, NaN, Infinity, 0, -1]) expect(() => player.setSpeed(speed)).toThrow();
   });
   it('clamps seeks including nonfinite input and rebases playing seeks', () => {
     const { player, advance } = clock();

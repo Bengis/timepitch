@@ -141,7 +141,8 @@ it.each(['historical', 'grf', 'timepitch'] as const)('switch_preserves_controlle
   const shell = source !== 'historical';
   fireEvent.change(screen.getByRole('combobox', { name: 'Inspect player' }), { target: { value: 'test:home:1' } });
   if (shell) fireEvent.click(screen.getByRole('tab', { name: 'Live broadcast' }));
-  fireEvent.click(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^20×/ }));
+  // TP254: en la emisión no hay velocidades sueltas (se elige la duración de cada parte); se comprueba en el histórico.
+  if (!shell) fireEvent.click(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^20×/ }));
   if (shell) fireEvent.click(screen.getByRole('button', { name: 'Tactical' }));
   else fireEvent.change(screen.getByRole('combobox', { name: 'Camera' }), { target: { value: 'overview' } });
   await act(async () => {});
@@ -149,7 +150,7 @@ it.each(['historical', 'grf', 'timepitch'] as const)('switch_preserves_controlle
   const readers = [f.adapter.ensure, f.adapter.loadPanel, f.adapter.loadEvents, f.adapter.loadPlayer].map(fn => vi.mocked(fn).mock.calls.length);
   await waitFor(() => expect(view.container.querySelector('[data-renderer-status="ready"]')).toHaveAttribute('data-effective-renderer', 'stylized-3d-1'));
   expect(screen.getByRole('slider')).toBe(slider); expect(slider).toHaveValue('0'); expect(screen.getByRole('button', { name: 'Play' })).toBe(play);
-  expect(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^20×/ })).toHaveAttribute('aria-pressed', 'true');
+  if (!shell) expect(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^20×/ })).toHaveAttribute('aria-pressed', 'true');
   if (shell) expect(screen.getByRole('button', { name: 'Tactical' })).toHaveAttribute('aria-pressed', 'true');
   else expect(screen.getByRole('combobox', { name: 'Camera' })).toHaveValue('overview');
   expect(screen.getByRole('combobox', { name: 'Inspect player' })).toHaveValue('test:home:1');

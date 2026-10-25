@@ -273,7 +273,18 @@ def _mark_failed(reports, key: str, code: str, dequeue_count: int, now) -> None:
                                                 sort_keys=True).encode())
 
 
-def run_job_once(*, queue, reports, binding: CrewBinding, crew_runner: Callable, now=time.time) -> dict:
+ALLOWED_ENVELOPES_ENV = 'TIMEPITCH_CREW_ALLOWED_ENVELOPES'
+
+
+def allowed_envelopes() -> frozenset[str] | None:
+    """TP253: with live requests from the public server, whoever holds the add-only SAS could queue an envelope of
+    their own. The job then only accepts the envelope sha256s listed here (comma-separated); unset = any valid one."""
+    raw = os.environ.get(ALLOWED_ENVELOPES_ENV)
+    return None if raw is None else frozenset(x.strip() for x in raw.split(',') if x.strip())
+
+
+def run_job_once(*, queue, reports, binding: CrewBinding, crew_runner: Callable, now=time.time,
+                 allowed: frozenset[str] | None = None) -> dict:
     """Process at most one message. Returns an app-owned status; raises only on an unexpected failure
     (the message then stays and its next delivery resumes from the ledger)."""
     message = queue.receive(VISIBILITY_TIMEOUT)
@@ -296,6 +307,8 @@ def run_job_once(*, queue, reports, binding: CrewBinding, crew_runner: Callable,
         return {'status': 'poison', 'request_hash': rh}
     try:
         grant, grant_sha256 = check_envelope(request, binding, now=now)
+        if allowed is not None and grant_sha256 not in allowed:
+            raise EnvelopeRefused('envelope_not_allowed')
     except EnvelopeRefused as exc:
         _mark_failed(reports, rh, exc.code, message.dequeue_count, now)
         queue.delete(message)
@@ -353,7 +366,7 @@ def job_main(account: str) -> int:
         return asyncio.run(run_cloud_crew(request, grant, grant_sha256, binding=binding, ledger_store=ledger_store,
                                           token=lambda: entra_token(credential)))
     try:
-        status = run_job_once(queue=queue, reports=reports, binding=binding, crew_runner=runner)
+        status = run_job_once(queue=queue, reports=reports, binding=binding, crew_runner=runner, allowed=allowed_envelopes())
     except Exception as exc:
         print(json.dumps({'status': 'stopped', 'error': type(exc).__name__}), flush=True)
         return 1

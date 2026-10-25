@@ -94,7 +94,7 @@ def test_avoided_terms_come_from_the_validator(locale):
 @pytest.mark.parametrize('locale', ['en', 'es'])
 def test_writer_two_states_the_checker_rules(locale):
     text = writer_instructions(locale)
-    assert WRITER_PROMPT_VERSION == 'crew-writer-4'
+    assert WRITER_PROMPT_VERSION == 'crew-writer-6'
     for needle in ('possessive', 'sentence case', 'en dash', 'mm:ss', 'Every proper noun must cite a fact that names it.',
                    ALLOWED_VERBS[locale][0], AVOIDED_TERMS[locale][0]):
         assert needle in text, needle

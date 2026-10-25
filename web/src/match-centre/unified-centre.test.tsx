@@ -27,9 +27,10 @@ describe('one complete Match Centre', () => {
     expect(container.querySelectorAll('[data-unified-events]')).toHaveLength(1);
     expect(screen.getAllByRole('tab').map(t => t.id.split('-').at(-1))).toEqual(source === 'historical' ? ['match', 'summary', 'players', 'maps', 'effort', 'data'] : ['broadcast', 'card', 'lineups', 'summary', 'maps', 'effort']);
     expect(screen.getByRole('button', { name: 'Play' })).toBeEnabled();
-    expect(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^1×/ })).toHaveAttribute('aria-pressed', 'true');
-    // TP251: en la emisión el botón dice cuánto dura el partido; su nombre accesible empieza por la velocidad.
-    expect(within(screen.getByRole('group', { name: 'Speed' })).getAllByRole('button').map(o => (o.getAttribute('aria-label') ?? o.textContent ?? '').split(':')[0])).toEqual(['1×', '5×', '10×', '20×', '60×', '120×']);
+    // TP254: en la emisión se elige la duración de cada parte (como en FIFA); el histórico conserva las velocidades.
+    const speeds = screen.getByRole('group', { name: source === 'historical' ? 'Speed' : 'Each half' });
+    expect(within(speeds).getAllByRole('button').filter(b => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1);
+    if (source === 'historical') expect(within(speeds).getAllByRole('button').map(o => o.textContent)).toEqual(['1×', '5×', '10×', '20×', '60×', '120×']);
     expect(container.querySelector('[data-unified-transport]')!.compareDocumentPosition(container.querySelector('canvas')!) & (source === 'historical' ? Node.DOCUMENT_POSITION_FOLLOWING : Node.DOCUMENT_POSITION_PRECEDING)).toBeTruthy();
     expect(screen.getByRole('slider', { name: 'Match position' })).toHaveValue('0');
     await waitFor(() => expect(f.adapter.loadPanel).toHaveBeenCalled());
@@ -178,11 +179,11 @@ describe('TP226: simulated matches open in the broadcast shell and start by them
     const f = screenFixture('historical'); const { container } = render(<MatchCentre adapter={f.adapter} visible onBack={() => {}} autoplay={false} />);
     expect(container.querySelector('.tp-shell')).toBeNull(); expect(screen.getAllByRole('tab')).toHaveLength(6);
   });
-  it('autoplay starts once at 10× and does not restart after a pause', async () => {
+  it('autoplay starts once at the 5-minute speed (1× for this short fixture) and does not restart after a pause (TP252)', async () => {
     reduceMotion(false);
     const f = screenFixture('timepitch'); render(<MatchCentre adapter={f.adapter} visible onBack={() => {}} autoplay />);
     const pause = await screen.findByRole('button', { name: 'Pause' });
-    expect(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^10×/ })).toHaveAttribute('aria-pressed', 'true');
+    expect(within(screen.getByRole('group', { name: 'Each half' })).getAllByRole('button').filter(b => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1);
     fireEvent.click(pause); await act(async () => {});
     expect(screen.getByRole('button', { name: 'Play' })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Play the match' })).not.toBeInTheDocument();
@@ -190,7 +191,7 @@ describe('TP226: simulated matches open in the broadcast shell and start by them
   it('without autoplay the match opens paused at 1×', () => {
     const f = screenFixture('timepitch'); render(<MatchCentre adapter={f.adapter} visible onBack={() => {}} />);
     expect(screen.getByRole('button', { name: 'Play' })).toBeEnabled();
-    expect(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^1×/ })).toHaveAttribute('aria-pressed', 'true');
+    expect(within(screen.getByRole('group', { name: 'Each half' })).getAllByRole('button').filter(b => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1);
   });
   it('with reduced motion it does not start and offers a big play button over the pitch', async () => {
     reduceMotion(true);
@@ -201,6 +202,6 @@ describe('TP226: simulated matches open in the broadcast shell and start by them
     fireEvent.click(big);
     expect(await screen.findByRole('button', { name: 'Pause' })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Play the match' })).not.toBeInTheDocument();
-    expect(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^10×/ })).toHaveAttribute('aria-pressed', 'true');
+    expect(within(screen.getByRole('group', { name: 'Each half' })).getAllByRole('button').filter(b => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1);
   });
 });

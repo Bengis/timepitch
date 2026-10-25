@@ -1,4 +1,4 @@
-"""crew-writer-4 / crew-verifier-4 / crew-analyst-2: no judgement verbs, coverage is server-owned, no possessives
+"""crew-writer-6 / crew-verifier-4 / crew-analyst-2: no judgement verbs, coverage is server-owned, no possessives
 on names, a pack-built capitalisation example; and the twelve real drafts replayed offline."""
 from hashlib import sha256
 import json
