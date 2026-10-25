@@ -213,7 +213,7 @@ export default function App() {
           // TP237: a la vista, las dos elecciones que definen el partido: motor y modo gráfico.
           playControls={<div className="vs-choices"><EngineSelector value={engine} capabilities={capabilities} disabled={busy||capabilities===null} onChange={setEngine}/>
             <label className="vs-graphics">{gt.graphics}<select value={graphics} disabled={busy} onChange={e=>setGraphics(e.target.value as SelectableRendererId)}>
-            <option value="stylized-3d-1">{gt.style3d}</option></select></label></div>}
+            <option value="retro16-1">{gt.styleRetro16}</option><option value="stylized-3d-1">{gt.style3d}</option></select></label></div>}
           playStatus={page==='setup'&&(busy||error)?<>{busy && <p className="panel-message start-status" role="status">{m.working} {status && m[status]}</p>}
             {error && <p className="panel-message start-status" role="alert">{error==='physicalUnavailable'?g.physicalUnavailable:m[error]}</p>}</>:undefined}
           moreDetails={<section className="advanced-options" id="prepare-match" aria-labelledby="prepare-match-h"><h2 id="prepare-match-h">{v.prepare}</h2>

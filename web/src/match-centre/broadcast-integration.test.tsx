@@ -156,16 +156,16 @@ describe('demo match', () => {
     expect(document.querySelector('.unified-card-drawer')).toBeNull();
   });
 
-  it.each(['retro-1', 'stylized-3d-1'])('opens the demo in 3D and migrates an implicit v1 %s preference', async renderer => {
+  it.each(['retro-1', 'stylized-3d-1'])('opens the demo in Retro 16-bit and migrates an implicit v1 %s preference (TP223)', async renderer => {
     vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('offline'));
     localStorage.setItem('timepitch.pitch.v1', JSON.stringify({ version: 1, renderer, appearance: 'daylight', camera: 'follow', detail: 'standard' }));
     try {
       const { index, read } = await demoIndex();
       render(<DemoMatch visible onBack={() => {}} index={index} read={read} />);
       await screen.findByText(/Movement: TouchLines/);
-      expect(document.querySelector('.pitch-section')).toHaveAttribute('data-requested-renderer', 'stylized-3d-1');
-      expect(JSON.parse(localStorage.getItem('timepitch.pitch.v1')!)).toMatchObject({ version: 2, renderer: 'stylized-3d-1', rendererChosen: false });
-      expect(screen.getByRole('combobox', { name: 'Graphics', hidden: true })).toHaveValue('stylized-3d-1');
+      expect(document.querySelector('.pitch-section')).toHaveAttribute('data-requested-renderer', 'retro16-1');
+      expect(JSON.parse(localStorage.getItem('timepitch.pitch.v1')!)).toMatchObject({ version: 2, renderer: 'retro16-1', rendererChosen: false });
+      expect(screen.getByRole('combobox', { name: 'Graphics', hidden: true })).toHaveValue('retro16-1');
     } finally { localStorage.removeItem('timepitch.pitch.v1'); }
   });
 

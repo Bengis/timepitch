@@ -82,7 +82,7 @@ export function Pitch({ frame, previous = frame, cue, restarting = false, home, 
     </select></label>;
   const toolbar=<div className="pitch-toolbar"><span className="retro-label">TIMEPITCH</span>
       {!rendererLocked && <label>{g.graphics}<select value={requested} onChange={e => { const next = e.target.value as SelectableRendererId; change({ renderer: next, rendererChosen: true }); }}>
-        <option value="stylized-3d-1">{g.style3d}</option>
+        <option value="retro16-1">{g.styleRetro16}</option><option value="stylized-3d-1">{g.style3d}</option>
       </select></label>}
       {anime && <span className="hane-mode-label" data-anime-fictional>{g.animeFictional}</span>}
       {anime && <label>{g.animeScenes}<select value={animeScenes} onChange={e => chooseScenes(e.target.value as AnimeScenesSetting)}>

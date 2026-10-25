@@ -132,5 +132,6 @@ export function attributionsFor(input: AttributionInput, locale: Locale = 'es'):
   add({ id: 'quaternius', text: t.quaternius, licence: 'CC0-1.0', url: '/licenses/quaternius.txt' });
   add({ id: 'trademarks', text: t.trademarks, licence: t.trademarksLicence, url: null });
   add({ id: 'own-art', text: t.ownArt, licence: t.ownArtLicence, url: null });
+  add({ id: 'own-art-retro16', text: t.retro16Art, licence: t.ownArtLicence, url: null });
   return [...out.values()];
 }

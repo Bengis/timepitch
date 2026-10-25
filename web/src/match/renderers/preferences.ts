@@ -2,21 +2,28 @@ import type { CameraMode } from '../retroScene';
 import type { Appearance, DetailLevel, SelectableRendererId } from './types';
 
 /**
- * Gráficos: el 3D (`stylized-3d-1`) es el único elegible. `rendererChosen` dice si el gráfico lo eligió el usuario en
- * «Gráficos»: solo entonces se respeta el guardado; cualquier otro valor guardado vuelve al 3D.
+ * «Retro 16 bits» (`retro16-1`) de serie desde TP223; el 3D (`stylized-3d-1`, de serie en TP205–TP222) sigue elegible.
+ * `rendererChosen` dice si el gráfico lo eligió el usuario en «Gráficos»: solo entonces se respeta el guardado.
+ *
+ * Migración del registro v1 (TP223). `Pitch` guardaba las preferencias al montarse, así que un v1 con 3D no distingue
+ * a quien eligió 3D de quien nunca tocó «Gráficos» (era el valor de serie). Regla:
+ * - v1 con `retro16-1`: elección explícita (no era el de serie) → se conserva;
+ * - v1 con `stylized-3d-1` o con un 2D retirado (`retro-1`, `fc-broadcast-1`, `sensible-1`): implícito → Retro 16 bits.
+ *   Quien quiera 3D lo elige una vez y desde entonces queda guardado como elección (v2).
  * Iluminación, cámara y detalle se conservan siempre.
  */
 export type PitchPreferences = Readonly<{
   version: 2; renderer: SelectableRendererId; rendererChosen: boolean; appearance: Appearance; camera: CameraMode; detail: DetailLevel;
 }>;
 const KEY = 'timepitch.pitch.v1';
-export const DEFAULT_RENDERER: SelectableRendererId = 'stylized-3d-1';
+export const DEFAULT_RENDERER: SelectableRendererId = 'retro16-1';
 const defaults: PitchPreferences = { version: 2, renderer: DEFAULT_RENDERER, rendererChosen: false, appearance: 'daylight', camera: 'follow', detail: 'standard' };
-const selectable = (value: unknown): value is SelectableRendererId => value === 'stylized-3d-1';
+// TP240 («quita la UI de Hane»): Capitán Hane ya no se ofrece; un `anime-1` guardado vuelve a Retro 16 bits.
+const selectable = (value: unknown): value is SelectableRendererId => value === 'retro16-1' || value === 'stylized-3d-1';
 function normalize(raw: unknown, defaultCamera:CameraMode=defaults.camera): PitchPreferences {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw) || !('version' in raw) || (raw.version !== 1 && raw.version !== 2)) return { ...defaults,camera:defaultCamera };
   const value = raw as Record<string, unknown>;
-  const chosen = value.version === 2 && value.rendererChosen === true && selectable(value.renderer);
+  const chosen = value.version === 2 ? value.rendererChosen === true && selectable(value.renderer) : value.renderer === 'retro16-1';
   return { version: 2, renderer: chosen ? value.renderer as SelectableRendererId : DEFAULT_RENDERER, rendererChosen: chosen,
     appearance: value.appearance === 'floodlights' ? 'floodlights' : 'daylight',
     camera: value.camera === 'overview'||value.camera==='follow' ? value.camera : defaultCamera, detail: value.detail === 'low' ? 'low' : 'standard' };
