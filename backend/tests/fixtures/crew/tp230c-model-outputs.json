@@ -1,0 +1,298 @@
+[
+ {
+  "request_hash": "c728e09bd082cdfaba7ba91c26a01c373058a0e55715d9b24257cb654cd246dc",
+  "analyst": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "116e52a5-50b5-4172-b575-823c38277184",
+   "output": {
+    "angle": "narrow_win",
+    "paragraphs": [
+     [
+      "result",
+      "goal:grf:134"
+     ],
+     [
+      "leader:goals",
+      "leader:pass_received",
+      "leader:recoveries"
+     ],
+     [
+      "comparison:shots",
+      "comparison:pass_received",
+      "comparison:recoveries",
+      "comparison:team_possession_pct"
+     ]
+    ]
+   }
+  },
+  "writer": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "6ea0de21-4c68-4e4c-965e-043b7ac3e121",
+   "output": {
+    "headline": {
+     "text": "steven n'zonzi fires blackburn rovers to 1–0 win over manchester united",
+     "fact_ids": [
+      "goal:grf:134",
+      "result"
+     ]
+    },
+    "paragraphs": [
+     {
+      "sentences": [
+       {
+        "text": "steven n'zonzi scores the only goal at 27:14 to give blackburn rovers a 1–0 victory against manchester united.",
+        "fact_ids": [
+         "goal:grf:134"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "n'zonzi leads with one goal, while paul scholes, david dunn, and mauro formica top pass receptions with six each.",
+        "fact_ids": [
+         "leader:goals",
+         "leader:pass_received"
+        ]
+       },
+       {
+        "text": "david dunn and gael givet share the highest recoveries at five each.",
+        "fact_ids": [
+         "leader:recoveries"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "blackburn rovers take seven shots compared to manchester united's five and receive 31 passes versus 27 for their opponents.",
+        "fact_ids": [
+         "comparison:shots",
+         "comparison:pass_received"
+        ]
+       },
+       {
+        "text": "they also make 23 recoveries and hold 51.2% possession during the match.",
+        "fact_ids": [
+         "comparison:recoveries",
+         "comparison:team_possession_pct"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "writer_revision": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "fc2ab449-1e82-4f1c-9878-313af9070e10",
+   "output": {
+    "headline": {
+     "text": "steven n'zonzi fires blackburn rovers to 1–0 win over manchester united",
+     "fact_ids": [
+      "goal:grf:134",
+      "result"
+     ]
+    },
+    "paragraphs": [
+     {
+      "sentences": [
+       {
+        "text": "steven n'zonzi scores the only goal at 27:14 to secure a 1–0 win for blackburn rovers against manchester united.",
+        "fact_ids": [
+         "goal:grf:134"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "n'zonzi leads with one goal, while paul scholes, david dunn, and mauro formica top pass receptions with six each.",
+        "fact_ids": [
+         "leader:goals",
+         "leader:pass_received"
+        ]
+       },
+       {
+        "text": "david dunn and gael givet share the highest recoveries at five each.",
+        "fact_ids": [
+         "leader:recoveries"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "blackburn rovers take seven shots compared to manchester united's five and receive 31 passes versus 27 for their opponents.",
+        "fact_ids": [
+         "comparison:shots",
+         "comparison:pass_received"
+        ]
+       },
+       {
+        "text": "they also make 23 recoveries and hold 51.2% possession during the match.",
+        "fact_ids": [
+         "comparison:recoveries",
+         "comparison:team_possession_pct"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "request_hash": "554ca5aaa2e68c5128ec6e17218bd0bab3eafc7ab990c30d0ee9391672e47d3d",
+  "analyst": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "7babc882-026c-46fc-b423-0157381c5a55",
+   "output": {
+    "angle": "dominant_display",
+    "paragraphs": [
+     [
+      "coverage"
+     ],
+     [
+      "goal:grf:4095",
+      "goal:grf:9254",
+      "goal:grf:14036",
+      "goal:grf:15691"
+     ],
+     [
+      "goal:grf:33003",
+      "goal:grf:47428",
+      "goal:grf:52641",
+      "leader:goals"
+     ]
+    ]
+   }
+  },
+  "writer": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "6f680a2b-862f-499e-8f29-8c4d1240de7a",
+   "output": {
+    "headline": {
+     "text": "arsenal fires six goals to seal a 6–1 win over manchester city",
+     "fact_ids": [
+      "result"
+     ]
+    },
+    "paragraphs": [
+     {
+      "sentences": [
+       {
+        "text": "this simulation coverage is incomplete, with physical goal recording confirmed but no pass or possession data exported.",
+        "fact_ids": [
+         "coverage"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "gilberto silva opens the scoring for arsenal at 06:49 before ilkay gündogan pulls one back for manchester city at 15:25.",
+        "fact_ids": [
+         "goal:grf:4095",
+         "goal:grf:9254"
+        ]
+       },
+       {
+        "text": "arsenal answers quickly as lauren fires in a goal at 23:23, followed by thierry henry finishing at 26:09 to extend the lead.",
+        "fact_ids": [
+         "goal:grf:14036",
+         "goal:grf:15691"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "thierry henry doubles his tally with a goal at 51:14, robert pires adds another at 75:16, and gilberto silva finishes the scoring at 83:58.",
+        "fact_ids": [
+         "goal:grf:33003",
+         "goal:grf:47428",
+         "goal:grf:52641"
+        ]
+       },
+       {
+        "text": "henry and silva lead arsenal's scoring with two goals each in this 6–1 victory over manchester city.",
+        "fact_ids": [
+         "leader:goals",
+         "result"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "writer_revision": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "e88b72a9-8540-4245-a799-1b3439e0d5e0",
+   "output": {
+    "headline": {
+     "text": "arsenal fires six goals to seal a 6–1 win over manchester city",
+     "fact_ids": [
+      "result"
+     ]
+    },
+    "paragraphs": [
+     {
+      "sentences": [
+       {
+        "text": "this simulation coverage is incomplete, with physical goal recording confirmed but no pass or possession data exported.",
+        "fact_ids": [
+         "coverage"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "gilberto silva opens the scoring for arsenal at 06:49 before ilkay gündogan pulls one back for manchester city at 15:25.",
+        "fact_ids": [
+         "goal:grf:4095",
+         "goal:grf:9254"
+        ]
+       },
+       {
+        "text": "arsenal answers quickly as lauren fires in a goal at 23:23, followed by thierry henry finishing at 26:09 to extend the lead.",
+        "fact_ids": [
+         "goal:grf:14036",
+         "goal:grf:15691"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "thierry henry doubles his tally with a goal at 51:14, robert pires adds another at 75:16, and gilberto silva finishes the scoring at 83:58.",
+        "fact_ids": [
+         "goal:grf:33003",
+         "goal:grf:47428",
+         "goal:grf:52641"
+        ]
+       },
+       {
+        "text": "henry and silva lead arsenal's scoring with two goals each in this 6–1 victory over manchester city.",
+        "fact_ids": [
+         "leader:goals",
+         "result"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ }
+]

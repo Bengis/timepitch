@@ -1,0 +1,17 @@
+/* TP241: narración junto al campo. La última frase, grande; las anteriores, más pequeñas y apagadas. */
+.tp-narr { list-style: none; margin: 0; padding: 6px 6px 8px; overflow-y: auto; max-height: 460px; scrollbar-width: thin; scrollbar-color: #2a3550 transparent; }
+.tp-narr li { margin: 0; }
+.unified-centre .tp-narr button { display: grid; grid-template-columns: 4px 38px minmax(0, 1fr); gap: 8px; align-items: start; width: 100%; min-height: 0;
+  padding: 6px 8px 6px 0; border: 0; border-radius: 6px; background: transparent; color: var(--tp-ink2, #c6cede); text-align: left; font: inherit; font-size: 13px; line-height: 1.35; cursor: pointer; }
+.unified-centre .tp-narr button:hover, .unified-centre .tp-narr button:focus-visible { background: rgba(255, 255, 255, .05); }
+.tp-narr-side { align-self: stretch; border-radius: 2px; }
+.tp-narr-min { font-variant-numeric: tabular-nums; color: var(--tp-ink3, #8b95a8); font-size: 12px; padding-top: 1px; }
+.tp-narr-tx { overflow-wrap: anywhere; }
+.tp-narr-line.is-now button { padding-top: 10px; padding-bottom: 10px; color: var(--tp-ink, #f2f5fa); font-size: 16px; font-weight: 600; }
+.tp-narr-line.is-now { border-bottom: 1px solid var(--tp-line2, #263048); margin-bottom: 4px; }
+.tp-narr-line[data-kind='goal'] .tp-narr-tx, .tp-narr-line[data-kind='own_goal'] .tp-narr-tx { color: #ffd84a; font-weight: 800; }
+.tp-narr-line[data-kind='mark'] .tp-narr-tx { color: var(--tp-ink, #f2f5fa); font-weight: 700; }
+@media (prefers-reduced-motion: no-preference) {
+  .tp-narr-line.is-now { animation: tp-narr-in .35s ease-out; }
+  @keyframes tp-narr-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+}

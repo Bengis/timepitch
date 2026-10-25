@@ -1,0 +1,823 @@
+{
+  "version": "crests-hd-1",
+  "reviewed": "2026-10-22",
+  "decision": "D6 (2026-10-22): only the eras accepted in the HFK-vs-SVG contact sheet. Reserved, rejected and no-candidate eras (including all of Chelsea) stay on the HFK image.",
+  "policy": "Files are the sanitised copies (no script, foreignObject, on* handlers, external href/url(), DOCTYPE). sha256/bytes describe the served file; original.* describes the Wikipedia upload before sanitising. Served only through <img>.",
+  "rights": "Club crests are trademarks of their clubs. Licence is copied as stated on each file page (enwiki non-free logos: Fair use; PD-ineligible: PD). TimePitch is not endorsed by the clubs.",
+  "held_back": {
+    "arsenal-1990": "con reserva: SVG with square red background; user recreation with doubtful PD-self.",
+    "swindon-1991": "con reserva: SVG lacks the \"Swindon Town F.C.\" shirt lettering.",
+    "wimbledon-1981": "con reserva: SVG lacks the \"WIMBLEDON F.C.\" shirt lettering.",
+    "arsenal-1994": "rejected: black outer border, HFK is navy.",
+    "arsenal-1998": "rejected: different era design.",
+    "burnley-2010": "rejected: later redesign.",
+    "derby-2007": "rejected: ram only, HFK is the round crest.",
+    "ipswich-2016": "rejected: redesign without stars.",
+    "middlesbrough-1987": "rejected: PNG, not SVG.",
+    "portsmouth-2008": "rejected: later simplified version.",
+    "tottenham-2006": "rejected: adds wordmark not on the shirt.",
+    "watford-1979": "rejected: later redraw.",
+    "chelsea": "no candidate: every Chelsea era stays on HFK."
+  },
+  "eras": {
+    "arsenal-2002": {
+      "eraId": "arsenal-2002",
+      "file": "arsenal-2002.svg",
+      "reviewed": true,
+      "sha256": "396102984ec946248ae1df92fe31b89d8475f9abfe6f687bf59820662b435c9c",
+      "bytes": 14086,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Arsenal FC.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Arsenal_FC.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+      "original": {
+        "sha256": "8aa5a6411d270756a4c49343d748a98ac13bb7a592841a4ef8ebe14f50c384f1",
+        "sha1": "09e65bddd9f666961f88857d91bfb700ce5eb208",
+        "bytes": 14267,
+        "uploader": "Ronhjones",
+        "version": "2018-02-23T22:41:14Z"
+      }
+    },
+    "astonvilla-2023": {
+      "eraId": "astonvilla-2023",
+      "file": "astonvilla-2023.svg",
+      "reviewed": true,
+      "sha256": "4e6559ce4dc63fcddfa1303eee0faead10a4112e0f1374a8cbb4c4d7f25bd82c",
+      "bytes": 46682,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Aston Villa F.C. logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Aston_Villa_F.C._logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/8/86/Aston_Villa_F.C._logo.svg",
+      "original": {
+        "sha256": "3eb0fe92af13defc032db593e3eaca21cf4c9cbb3d8bd4f38bafb253cc5194f7",
+        "sha1": "cc8606f144d6f896c3383dfc5f5cad88102a1816",
+        "bytes": 46664,
+        "uploader": "Minorax",
+        "version": "2023-11-07T13:25:20Z"
+      }
+    },
+    "astonvilla-2024": {
+      "eraId": "astonvilla-2024",
+      "file": "astonvilla-2024.svg",
+      "reviewed": true,
+      "sha256": "60094ddce66b6b3661bbeafe69a1397030417ead4d9e07e6daa9464141f68daf",
+      "bytes": 25449,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Aston Villa FC new crest.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Aston_Villa_FC_new_crest.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/9/9a/Aston_Villa_FC_new_crest.svg",
+      "original": {
+        "sha256": "bfd8aa80a5f31d3b45778679776b2aeeaf63372295860c0e814a67df186fe55f",
+        "sha1": "9bf17e33a4402edfd5b173122938c88c8f780985",
+        "bytes": 25444,
+        "uploader": "DatBot",
+        "version": "2026-02-23T00:04:15Z"
+      }
+    },
+    "birmingham-1976": {
+      "eraId": "birmingham-1976",
+      "file": "birmingham-1976.svg",
+      "reviewed": true,
+      "sha256": "e03d4cc93e8442faed30ee6830f9309c3777d040d21a9a73f8cb8c5726db925a",
+      "bytes": 20004,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Birmingham City FC logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Birmingham_City_FC_logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/6/68/Birmingham_City_FC_logo.svg",
+      "original": {
+        "sha256": "d1d10d67273c752a60dcbb5489b66b06cfbf38dcc13ae8d20938e3d5b77580ab",
+        "sha1": "038ece35d03173bc0a653f51b0268b22711b87a2",
+        "bytes": 19993,
+        "uploader": "DatBot",
+        "version": "2023-07-26T00:05:14Z"
+      }
+    },
+    "blackburn-1989": {
+      "eraId": "blackburn-1989",
+      "file": "blackburn-1989.svg",
+      "reviewed": true,
+      "sha256": "7610179d204334cd10159cc4ba29d47592183401fef2d5433eb81cff14f7ade0",
+      "bytes": 44280,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Blackburn Rovers.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Blackburn_Rovers.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/0/0f/Blackburn_Rovers.svg",
+      "original": {
+        "sha256": "fe3dc5f27892da2bdf023f709b0aa15b0f4c89402023a7b6972ed0c90a8afe66",
+        "sha1": "53a9d5dc0da3ef011af05a4cd68cd75264ac6083",
+        "bytes": 44422,
+        "uploader": "Ronhjones",
+        "version": "2018-03-04T22:23:21Z"
+      }
+    },
+    "blackpool-2005": {
+      "eraId": "blackpool-2005",
+      "file": "blackpool-2005.svg",
+      "reviewed": true,
+      "sha256": "59427f715022ea60d9cd3e15d1f4b7294df31cb97a09be23dc76868de002654d",
+      "bytes": 178620,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Blackpool FC logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Blackpool_FC_logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/d/df/Blackpool_FC_logo.svg",
+      "original": {
+        "sha256": "f138e090136d2ffc394c5cc5511914e4c9f73f88f6ad74f7dc9161bffc531da3",
+        "sha1": "86e64fde5675b3b5a2eef60b72f118757e181630",
+        "bytes": 195180,
+        "uploader": "Minorax",
+        "version": "2023-11-25T15:08:06Z"
+      }
+    },
+    "bournemouth-2013": {
+      "eraId": "bournemouth-2013",
+      "file": "bournemouth-2013.svg",
+      "reviewed": true,
+      "sha256": "820ba11503b9a5a11aec4c0eec1410518bee3676a334d52109e3ea4c044be6da",
+      "bytes": 73818,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:AFC Bournemouth (2013).svg",
+        "url": "https://en.wikipedia.org/wiki/File:AFC_Bournemouth_(2013).svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/e/e5/AFC_Bournemouth_%282013%29.svg",
+      "original": {
+        "sha256": "c11e143e2eedcb02f1c32ebe7a7b2db0239b5fa3d8b54acb32ff159e0c620d69",
+        "sha1": "dd4df9ca359a0bba20456f6fa40f56a094a21669",
+        "bytes": 73788,
+        "uploader": "RandyFitz",
+        "version": "2021-01-17T15:57:48Z"
+      }
+    },
+    "brentford-2017": {
+      "eraId": "brentford-2017",
+      "file": "brentford-2017.svg",
+      "reviewed": true,
+      "sha256": "fec0eb1eba1ba5c28a11eafd8d74991ce7166d642b8f83ca480e6aa2a6f3c01c",
+      "bytes": 23684,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Brentford FC crest.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Brentford_FC_crest.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/2/2a/Brentford_FC_crest.svg",
+      "original": {
+        "sha256": "54f5c3a4f596ce939b8fbcff95ccaae37403478645aa59627b0b180d531a999a",
+        "sha1": "9c94afc0210096558435e9dc108f4075dbf758d8",
+        "bytes": 23612,
+        "uploader": "Minorax",
+        "version": "2025-08-18T02:17:54Z"
+      }
+    },
+    "cardiff-2015": {
+      "eraId": "cardiff-2015",
+      "file": "cardiff-2015.svg",
+      "reviewed": true,
+      "sha256": "601fc8a2577951c42fda99579422f8689c1ae68d4d2a8535fcf47acebc7df1c3",
+      "bytes": 20993,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Cardiff City crest.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Cardiff_City_crest.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/3/3c/Cardiff_City_crest.svg",
+      "original": {
+        "sha256": "74b2f5f8cb08fc5c3d6a566f47188b6ce694cd619f894c807491227fe1a8cb97",
+        "sha1": "a6190be97e98c660790ee1efcb1224f0fedbdc38",
+        "bytes": 20956,
+        "uploader": "DatBot",
+        "version": "2021-11-09T00:10:02Z"
+      }
+    },
+    "charlton-1983": {
+      "eraId": "charlton-1983",
+      "file": "charlton-1983.svg",
+      "reviewed": true,
+      "sha256": "cddcfdf6f47c40a6aa0038296dd1d29f26b7b6fcdf929e3d535f517f4f229f97",
+      "bytes": 6074,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Charlton Athletic.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Charlton_Athletic.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/5/5b/Charlton_Athletic.svg",
+      "original": {
+        "sha256": "724de97278dc196ed86e4b073bd5e7f3350674372f36412a654ec737fd8620ff",
+        "sha1": "335cdd1e0eb832da995a636ead0867573f3c9d42",
+        "bytes": 6249,
+        "uploader": "Sbaio",
+        "version": "2017-09-24T18:48:17Z"
+      }
+    },
+    "crystalpalace-2022": {
+      "eraId": "crystalpalace-2022",
+      "file": "crystalpalace-2022.svg",
+      "reviewed": true,
+      "sha256": "1b031aec040989c9859226e86c09c6f1fb797beb145ab20f02f576b0813f8caf",
+      "bytes": 50238,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Crystal Palace FC logo (2022).svg",
+        "url": "https://en.wikipedia.org/wiki/File:Crystal_Palace_FC_logo_(2022).svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/a/a2/Crystal_Palace_FC_logo_%282022%29.svg",
+      "original": {
+        "sha256": "ec2bfeed71ebf287f6b1807c376b06162ab861c7d4ee2c75311b56eb06acdedc",
+        "sha1": "5c917494ce622079c597c8ec87b6e03d89dcb19c",
+        "bytes": 50821,
+        "uploader": "Hashim-afc",
+        "version": "2022-07-08T20:54:57Z"
+      }
+    },
+    "everton-2000": {
+      "eraId": "everton-2000",
+      "file": "everton-2000.svg",
+      "reviewed": true,
+      "sha256": "2c974c396e5e95f841a3d6e40e0f2b1fd1a86e5284110653ca38767ac95c8c29",
+      "bytes": 52171,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Everton FC Crest (2000–13).svg",
+        "url": "https://en.wikipedia.org/wiki/File:Everton_FC_Crest_(2000%E2%80%9313).svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/8/82/Everton_FC_Crest_%282000%E2%80%9313%29.svg",
+      "original": {
+        "sha256": "b72fada6014c930cd05274ec723840b919ad1efcc8a9f048736aacaca41fa840",
+        "sha1": "19b8ccb8faf43430ba8d8888d8bae8d60ee4db20",
+        "bytes": 53924,
+        "uploader": "Theodor Langhorne Franklin",
+        "version": "2009-11-23T23:26:16Z"
+      }
+    },
+    "everton-2013": {
+      "eraId": "everton-2013",
+      "file": "everton-2013.svg",
+      "reviewed": true,
+      "sha256": "540c95dc4dadc2283e1aefd1837833d976f4e72509022bb6e63c3c4442e73c4a",
+      "bytes": 18258,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Everton FC Crest (2013–14).svg",
+        "url": "https://en.wikipedia.org/wiki/File:Everton_FC_Crest_(2013%E2%80%9314).svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/0/03/Everton_FC_Crest_%282013%E2%80%9314%29.svg",
+      "original": {
+        "sha256": "f438236b6d09533e3d124a32682359ca0b553750f0e2b1f389a6f959c138897b",
+        "sha1": "39998475f0c8a56aa6f0e2dd46fd128f8db85186",
+        "bytes": 19059,
+        "uploader": "TheBigJagielka",
+        "version": "2013-07-12T09:47:37Z"
+      }
+    },
+    "everton-2014": {
+      "eraId": "everton-2014",
+      "file": "everton-2014.svg",
+      "reviewed": true,
+      "sha256": "fb360aa1bb471dd910d9464729ccc199234e261bd3d58d86f0259c3f8b8ffc89",
+      "bytes": 65991,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Everton FC logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Everton_FC_logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg",
+      "original": {
+        "sha256": "661b0af52a711764467f1dff7a6e2eb04e062874ab7b627f1e3113e4e5b440de",
+        "sha1": "65a1df80312c07e34862e22b637f8205376f2e71",
+        "bytes": 65989,
+        "uploader": "DatBot",
+        "version": "2022-10-21T00:05:47Z"
+      }
+    },
+    "fulham-2001": {
+      "eraId": "fulham-2001",
+      "file": "fulham-2001.svg",
+      "reviewed": true,
+      "sha256": "aecceb7cbb4a7db825b52a76e2f37f29ca86f2e9bbdb35e7ee0ddaff32b7f34a",
+      "bytes": 5526,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Fulham FC (shield).svg",
+        "url": "https://en.wikipedia.org/wiki/File:Fulham_FC_(shield).svg",
+        "licence": "PD"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/e/eb/Fulham_FC_%28shield%29.svg",
+      "original": {
+        "sha256": "76c47cc34feadfbd0e5c99eed4f515906252654533e6e1822cfed2fd8b6444aa",
+        "sha1": "f58cbdb4cff957a690f28a92f03cd5351e60c202",
+        "bytes": 5854,
+        "uploader": "RonBot",
+        "version": "2018-05-27T19:40:31Z"
+      }
+    },
+    "hull-2014": {
+      "eraId": "hull-2014",
+      "file": "hull-2014.svg",
+      "reviewed": true,
+      "sha256": "fdbb683edad910a921acb83188b2f3ef44681b3c16314dd2f3658f9ef0956675",
+      "bytes": 157336,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Hull City Crest 2014.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Hull_City_Crest_2014.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/2/20/Hull_City_Crest_2014.svg",
+      "original": {
+        "sha256": "d5ca0982f94f2387f0590298c83b9fd2341b5841ec84a08489e534478388223b",
+        "sha1": "15b3437d5f397f9d7c968b1c7f9eff2ecc7de692",
+        "bytes": 172450,
+        "uploader": "AntiCompositeNumber",
+        "version": "2017-03-03T13:00:21Z"
+      }
+    },
+    "leeds-1999": {
+      "eraId": "leeds-1999",
+      "file": "leeds-1999.svg",
+      "reviewed": true,
+      "sha256": "b4559a8978166c78620ac96c0cb37c00eb1c408302a24d69894131df6866ba22",
+      "bytes": 18597,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Leeds United F.C. logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Leeds_United_F.C._logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/5/54/Leeds_United_F.C._logo.svg",
+      "original": {
+        "sha256": "7291e34edde2515cadb47fb1dc3b899f5b3b527356c5ebc32d2870ea3c39737f",
+        "sha1": "5a36cbd23cb7fda497a3d72d76bacdc96076d683",
+        "bytes": 18562,
+        "uploader": "DatBot",
+        "version": "2025-07-02T01:40:39Z"
+      }
+    },
+    "leicester-2010": {
+      "eraId": "leicester-2010",
+      "file": "leicester-2010.svg",
+      "reviewed": true,
+      "sha256": "865d58c0449c10eb71a8e5751ef8c0c359deb3da994992f042ab7833297461de",
+      "bytes": 37841,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Leicester City crest.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Leicester_City_crest.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/2/2d/Leicester_City_crest.svg",
+      "original": {
+        "sha256": "69e478bcd070e67b2de84709cf1f038b823dd62ffad90333127bd458f1c79a01",
+        "sha1": "d9b6f69c99ca1e1ccecee53d9b95990e18bf8269",
+        "bytes": 37868,
+        "uploader": "Ronhjones",
+        "version": "2018-02-05T22:45:38Z"
+      }
+    },
+    "liverpool-1999": {
+      "eraId": "liverpool-1999",
+      "file": "liverpool-1999.svg",
+      "reviewed": true,
+      "sha256": "d1dccf4a9c29535c14bcbf9ea44542627a84389b82be21ffdb9074957951f42e",
+      "bytes": 819908,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Liverpool FC.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Liverpool_FC.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
+      "original": {
+        "sha256": "bc58f0a712b8be0c8596d8e573fcf985ddacb7dfa0a2cfdd36c2af085fee7d89",
+        "sha1": "33407712766b75ea9893a8dfcec8f7a07ee0eb1c",
+        "bytes": 864355,
+        "uploader": "Ashokalex07",
+        "version": "2025-08-30T07:40:01Z"
+      }
+    },
+    "luton-2009": {
+      "eraId": "luton-2009",
+      "file": "luton-2009.svg",
+      "reviewed": true,
+      "sha256": "8f93064e42ea263bed6ad1f51e4e1a0d0b1c6e7a83e8b1990a36fddb5ba44b17",
+      "bytes": 57917,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Luton Town logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Luton_Town_logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/9/9d/Luton_Town_logo.svg",
+      "original": {
+        "sha256": "70727bc59ffef72c96c07b83d0ec99106d35b34f62fc8f141b5cbe1fe3b43207",
+        "sha1": "58e369675277996b302f7b76feecb6bfb081ac74",
+        "bytes": 57514,
+        "uploader": "RandyFitz",
+        "version": "2023-08-12T19:49:13Z"
+      }
+    },
+    "mancity-2016": {
+      "eraId": "mancity-2016",
+      "file": "mancity-2016.svg",
+      "reviewed": true,
+      "sha256": "6ca73bfa595a0e4f366c20bddc2e20c5577562ccdf334a7b6cfcf7c92a87f8aa",
+      "bytes": 18571,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Manchester City FC badge.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Manchester_City_FC_badge.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
+      "original": {
+        "sha256": "1cb3e1cfde2c41955e808e783576519518998f9cdbc052b94eaa258af9c905ba",
+        "sha1": "3970a73def7a4b21ed3e45e1874caaff9d1b34af",
+        "bytes": 18604,
+        "uploader": "Ronhjones",
+        "version": "2018-02-05T23:55:25Z"
+      }
+    },
+    "manunited-1998": {
+      "eraId": "manunited-1998",
+      "file": "manunited-1998.svg",
+      "reviewed": true,
+      "sha256": "ffdcff7a6e2d5f5847400d67b418245ae94d8eddc64b234079fdce18c4787129",
+      "bytes": 37604,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Manchester United FC crest.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Manchester_United_FC_crest.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg",
+      "original": {
+        "sha256": "6020438ef2b47362e30fab77432b0fa2d2b54ab50d9c5a9ca9c8941b2ef04bf7",
+        "sha1": "e4186a3ea1d21d8656d1a0dd4a02ff5fdf8cbffd",
+        "bytes": 39830,
+        "uploader": "Minorax",
+        "version": "2025-10-07T02:01:09Z"
+      }
+    },
+    "manunited-2010": {
+      "eraId": "manunited-2010",
+      "file": "manunited-1998.svg",
+      "reviewed": true,
+      "shares_file_with": "manunited-1998",
+      "sha256": "ffdcff7a6e2d5f5847400d67b418245ae94d8eddc64b234079fdce18c4787129",
+      "bytes": 37604,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Manchester United FC crest.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Manchester_United_FC_crest.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg",
+      "original": {
+        "sha256": "6020438ef2b47362e30fab77432b0fa2d2b54ab50d9c5a9ca9c8941b2ef04bf7",
+        "sha1": "e4186a3ea1d21d8656d1a0dd4a02ff5fdf8cbffd",
+        "bytes": 39830,
+        "uploader": "Minorax",
+        "version": "2025-10-07T02:01:09Z"
+      }
+    },
+    "newcastle-1988": {
+      "eraId": "newcastle-1988",
+      "file": "newcastle-1988.svg",
+      "reviewed": true,
+      "sha256": "e017162dd744d921338c4bfce79bd4e34c9d3a2ab8d10fe592807b77fb8edd99",
+      "bytes": 97948,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Newcastle United Logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Newcastle_United_Logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg",
+      "original": {
+        "sha256": "a16afb1532a6d52c21ba81eb2c755e16b13a3298306bbaeef206977e4c955074",
+        "sha1": "d6747a660f2078c9e3ff6eb5e216c10ccde7b269",
+        "bytes": 106084,
+        "uploader": "Ronhjones",
+        "version": "2016-03-18T23:56:42Z"
+      }
+    },
+    "nottmforest-2010": {
+      "eraId": "nottmforest-2010",
+      "file": "nottmforest-2010.svg",
+      "reviewed": true,
+      "sha256": "5e0977f26b8269743155324367f13f05783984e4b21651c801020face987d498",
+      "bytes": 36065,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Nottingham Forest F.C. logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Nottingham_Forest_F.C._logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/e/e5/Nottingham_Forest_F.C._logo.svg",
+      "original": {
+        "sha256": "4dccdaa94b7ca7894b21d7eae42ea4c890e069c3c6f0dafa83394a806a99cda9",
+        "sha1": "6d4199f909fb018caca42e1278492cc6da6c6f01",
+        "bytes": 36059,
+        "uploader": "RandyFitz",
+        "version": "2020-07-13T17:50:59Z"
+      }
+    },
+    "reading-1998": {
+      "eraId": "reading-1998",
+      "file": "reading-1998.svg",
+      "reviewed": true,
+      "sha256": "eba57fa894bd959519ddb55e0c58fa8ddec93988f159dfa9d82e02ee13765bab",
+      "bytes": 44142,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Reading FC.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Reading_FC.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/1/11/Reading_FC.svg",
+      "original": {
+        "sha256": "d06455c9753b775962c124e35cb8d73186283229149ac16027a83b73e96c1004",
+        "sha1": "6db7055e2f38a6f9bfd1ed8c9061afaa74b1a05d",
+        "bytes": 45406,
+        "uploader": "Sreejithk2000",
+        "version": "2010-04-30T07:30:12Z"
+      }
+    },
+    "sheffieldutd-1999": {
+      "eraId": "sheffieldutd-1999",
+      "file": "sheffieldutd-1999.svg",
+      "reviewed": true,
+      "sha256": "f099a8e8c1b8b4064891bae0d6f861d0c475af4510109e3b412b8a1d43242da8",
+      "bytes": 17292,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Sheffield United FC logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Sheffield_United_FC_logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/9/9c/Sheffield_United_FC_logo.svg",
+      "original": {
+        "sha256": "019e0c15e2b6d300d8b71e47abf9892f7558c06f185cccc6494a1b6d64ce997f",
+        "sha1": "37524c2227ba0c2c57b703a0900f3306df041443",
+        "bytes": 17548,
+        "uploader": "RonBot",
+        "version": "2018-10-05T01:00:08Z"
+      }
+    },
+    "sheffieldwed-1999": {
+      "eraId": "sheffieldwed-1999",
+      "file": "sheffieldwed-1999.svg",
+      "reviewed": true,
+      "sha256": "532f0e7391bf55e926ab3af4ad14abad778d87fe204f6cd63cab6a15349e3f70",
+      "bytes": 21610,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Sheffield Wednesday.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Sheffield_Wednesday.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/a/a5/Sheffield_Wednesday.svg",
+      "original": {
+        "sha256": "ba2525ab418b9118293d931134164323c91cc475fe2137d689e099bc60357701",
+        "sha1": "f5c4c7658673ff9c990924b5516cb85e8b273a74",
+        "bytes": 21892,
+        "uploader": "RonBot",
+        "version": "2018-05-27T21:34:21Z"
+      }
+    },
+    "southampton-1995": {
+      "eraId": "southampton-1995",
+      "file": "southampton-1995.svg",
+      "reviewed": true,
+      "sha256": "9137bc80c8842509400a3b585cf8e281d66d3b3cf7f0b4ab2e0450925ea88bf5",
+      "bytes": 30861,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:FC Southampton.svg",
+        "url": "https://en.wikipedia.org/wiki/File:FC_Southampton.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/c/c9/FC_Southampton.svg",
+      "original": {
+        "sha256": "1f45f43b62da5eb7208eb1bcccb811f0eda174175a2f2d3948d331e65c779f88",
+        "sha1": "f25d0afe06301938f84eca48e67cff03d21b76a5",
+        "bytes": 31166,
+        "uploader": "RonBot",
+        "version": "2018-05-27T20:28:07Z"
+      }
+    },
+    "stoke-2001": {
+      "eraId": "stoke-2001",
+      "file": "stoke-2001.svg",
+      "reviewed": true,
+      "sha256": "7a5bc5e561748ca831e677d270878047890690889b864d8d6a9ca36d7ae65ae0",
+      "bytes": 21423,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Stoke City FC crest 2001.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Stoke_City_FC_crest_2001.svg",
+        "licence": "PD"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/5/5e/Stoke_City_FC_crest_2001.svg",
+      "original": {
+        "sha256": "eccaa2122c9e454c9423ed81e809e571655ea3b3fa7624cbf82514f060a2e40b",
+        "sha1": "638ccda8afa84d23a21fce81aa214b72a8c7017b",
+        "bytes": 21400,
+        "uploader": "DatBot",
+        "version": "2024-05-13T00:05:28Z"
+      }
+    },
+    "sunderland-1997": {
+      "eraId": "sunderland-1997",
+      "file": "sunderland-1997.svg",
+      "reviewed": true,
+      "sha256": "d6a2240e976056611ed66896ef31fde0085dbfc1483f8c19561b73841772915d",
+      "bytes": 166273,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Logo Sunderland.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Logo_Sunderland.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/7/77/Logo_Sunderland.svg",
+      "original": {
+        "sha256": "bab774d4af7488876c458fdb3776fa2f24029df08860f92f1a1719d1efd644df",
+        "sha1": "4391db1ccb4233ca26534fcb88a4c8b21587f02d",
+        "bytes": 165960,
+        "uploader": "AJCham",
+        "version": "2011-01-02T03:17:29Z"
+      }
+    },
+    "swansea-1998": {
+      "eraId": "swansea-1998",
+      "file": "swansea-1998.svg",
+      "reviewed": true,
+      "sha256": "9e9ffab4efc0c112fe3675ee05401a699d19223e1e5a07408e7591806755ca88",
+      "bytes": 9014,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Swansea City AFC logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Swansea_City_AFC_logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/f/f9/Swansea_City_AFC_logo.svg",
+      "original": {
+        "sha256": "beb86693f418cf88f270f7ca687365e4fa2452cef43dffd00de6d7e6cc557987",
+        "sha1": "2e1e098570a69c43e227120292f637e304723e69",
+        "bytes": 9816,
+        "uploader": "Doogooder",
+        "version": "2021-07-05T07:25:02Z"
+      }
+    },
+    "swansea-2012-centenary": {
+      "eraId": "swansea-2012-centenary",
+      "file": "swansea-2012-centenary.svg",
+      "reviewed": true,
+      "sha256": "4f5b996d878be01405d1543d65e03117f370600b81e45d6ad0962523842a7e24",
+      "bytes": 26881,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Swansea City AFC logo (100th anniversary).svg",
+        "url": "https://en.wikipedia.org/wiki/File:Swansea_City_AFC_logo_(100th_anniversary).svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/7/72/Swansea_City_AFC_logo_%28100th_anniversary%29.svg",
+      "original": {
+        "sha256": "7ee8542739d858f0c07bd8b962d16d4345659e2d7bca945b2e38ffbf279bab9f",
+        "sha1": "d7c34a83287973fb37600b47aba5ced08f3654a9",
+        "bytes": 26809,
+        "uploader": "DatBot",
+        "version": "2020-12-29T16:20:37Z"
+      }
+    },
+    "westbrom-2008": {
+      "eraId": "westbrom-2008",
+      "file": "westbrom-2008.svg",
+      "reviewed": true,
+      "sha256": "de0090630b352b83b75fb5db18f8c6315758e2322ab1c9afb4f57d176fe468b0",
+      "bytes": 61700,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:West Bromwich Albion.svg",
+        "url": "https://en.wikipedia.org/wiki/File:West_Bromwich_Albion.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/8/8b/West_Bromwich_Albion.svg",
+      "original": {
+        "sha256": "bb6d90363394ee1f35f27ccb39418fe2f3a91c6e7d70a418912792cd6ba93fe3",
+        "sha1": "17fa40dd676d43777e7b19943a48fddeb6167006",
+        "bytes": 62942,
+        "uploader": "RonBot",
+        "version": "2018-05-28T00:05:45Z"
+      }
+    },
+    "westham-1999": {
+      "eraId": "westham-1999",
+      "file": "westham-1999.svg",
+      "reviewed": true,
+      "sha256": "02ddc66131d3aa6a294cfd4423503ffd4ecfa8d7d6679a88a570541a71a9b548",
+      "bytes": 12227,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:West Ham United FC.svg",
+        "url": "https://en.wikipedia.org/wiki/File:West_Ham_United_FC.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/e/e0/West_Ham_United_FC.svg",
+      "original": {
+        "sha256": "52c60db68c2fec424e32ba02d4da2f43c3451bb0894f15085ef15180d38ab96f",
+        "sha1": "4b83b74900d67795c3a5e1778042c3cbebada32c",
+        "bytes": 12897,
+        "uploader": "RonBot",
+        "version": "2018-05-27T23:16:45Z"
+      }
+    },
+    "westham-2016": {
+      "eraId": "westham-2016",
+      "file": "westham-2016.svg",
+      "reviewed": true,
+      "sha256": "22a2c763129aaf5b88f14ed95832b4a628248e341e10a865182b6c5d8eb30439",
+      "bytes": 19181,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:West Ham United FC logo.svg",
+        "url": "https://en.wikipedia.org/wiki/File:West_Ham_United_FC_logo.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg",
+      "original": {
+        "sha256": "0caca477b5b4bafac0bc65832359132bc5a7c6452880d60776cbac814db73920",
+        "sha1": "f5a80b5707079cd7cde2c329df1ad7dc831bdd67",
+        "bytes": 19322,
+        "uploader": "Sbaio",
+        "version": "2017-09-24T18:55:52Z"
+      }
+    },
+    "wigan-2008": {
+      "eraId": "wigan-2008",
+      "file": "wigan-2008.svg",
+      "reviewed": true,
+      "sha256": "12fb5fc16a10ba17bc8192a2fd7f22140a55a4763f55a5df680bc8f180809838",
+      "bytes": 39723,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Wigan Athletic.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Wigan_Athletic.svg",
+        "licence": "Fair use"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/4/43/Wigan_Athletic.svg",
+      "original": {
+        "sha256": "0546c1a9586c881ca3b529bb7b9a9b7bdc157088e18143a7c857f9d81d77af1e",
+        "sha1": "e9da769f6ef4af27590c8ded51ab7035cb5e8d2c",
+        "bytes": 40391,
+        "uploader": "Ronhjones",
+        "version": "2018-02-12T23:52:02Z"
+      }
+    },
+    "wolves-2002": {
+      "eraId": "wolves-2002",
+      "file": "wolves-2002.svg",
+      "reviewed": true,
+      "sha256": "ae0017877b7d647bffda2d2baa50d4456594bbeccdd6e05cc98d74e8e78bd7ec",
+      "bytes": 616,
+      "source": {
+        "kind": "wikipedia",
+        "title": "File:Wolverhampton Wanderers FC crest.svg",
+        "url": "https://en.wikipedia.org/wiki/File:Wolverhampton_Wanderers_FC_crest.svg",
+        "licence": "PD"
+      },
+      "upload_url": "https://upload.wikimedia.org/wikipedia/en/c/c9/Wolverhampton_Wanderers_FC_crest.svg",
+      "original": {
+        "sha256": "1d274e52ef9e718cbe9999849f23e848eb694bf7d5827318615de97f0843ad3c",
+        "sha1": "0be43c5c59c209a6c367357c185ef83f2453b6af",
+        "bytes": 611,
+        "uploader": "DatBot",
+        "version": "2024-05-14T00:06:50Z"
+      }
+    }
+  }
+}

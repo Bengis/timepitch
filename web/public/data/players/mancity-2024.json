@@ -1,0 +1,2990 @@
+{
+ "_meta": {
+  "schema": "timepitch-player-cards-1",
+  "teamKey": "mancity:2024",
+  "seasonLabel": "2024/25",
+  "generated": "2026-10-22",
+  "sources": {
+   "wikidata": {
+    "kind": "wikidata",
+    "licence": "CC0 1.0",
+    "fields": "display (label), dob (P569), heightCm (P2048), nation (P1532, else P27), citizenship (P27), wikidataPositions (P413)",
+    "revision": "per field: qid + revision"
+   },
+   "wikipedia": {
+    "kind": "wikipedia",
+    "title": "2024–25 Manchester City F.C. season",
+    "revid": 1378094405,
+    "licence": "CC BY-SA 4.0",
+    "fields": "numbers (shirt number, position code, nationality flag) from the season article"
+   }
+  },
+  "rules": "Identity by QID only (no name matching). Public subset: no Transfermarkt, FPL, epldata or StatsBomb fields. Nationality = Wikidata P1532 (sporting), else P27; manual corrections only for reviewed cases, cited to the season article.",
+  "derivedFrom": {
+   "path": ".local/player-data/cards.json",
+   "sha256": "8a1f20090bd94ef773ff3181ab565461a8d1fcd13636aa2ac3ce3bcc17f16fc4"
+  }
+ },
+ "players": [
+  {
+   "qid": "Q21621168",
+   "number": "3",
+   "display": "Rúben Dias",
+   "position": "DF",
+   "nation": "Portugal",
+   "dob": "1997-05-14",
+   "heightCm": 186,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q21621168",
+     "revision": 2559503007,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q21621168",
+     "revision": 2559503007,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q21621168",
+     "revision": 2559503007,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q21621168",
+     "revision": 2559503007,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q21621168",
+     "revision": 2559503007,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "3",
+     "position": "DF",
+     "nationFlag": "POR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Portugal"
+   ],
+   "citizenship": [
+    "Portugal"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q39500352",
+   "number": "4",
+   "display": "Tijjani Reijnders",
+   "position": "MF",
+   "nation": "Netherlands",
+   "dob": "1998-07-29",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q39500352",
+     "revision": 2559293382,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q39500352",
+     "revision": 2559293382,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q39500352",
+     "revision": 2559293382,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q39500352",
+     "revision": 2559293382,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q39500352",
+     "revision": 2559293382,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "4",
+     "position": "MF",
+     "nationFlag": "NED"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Netherlands"
+   ],
+   "citizenship": [
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q2025900",
+   "number": "5",
+   "display": "John Stones",
+   "position": "DF",
+   "nation": "England",
+   "dob": "1994-05-28",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q2025900",
+     "revision": 2557045166,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q2025900",
+     "revision": 2557045166,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q2025900",
+     "revision": 2557045166,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q2025900",
+     "revision": 2557045166,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q2025900",
+     "revision": 2557045166,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "5",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back",
+    "defensive midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1755683",
+   "number": "6",
+   "display": "Nathan Aké",
+   "position": "DF",
+   "nation": "Netherlands",
+   "dob": "1995-02-18",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "6",
+     "position": "DF",
+     "nationFlag": "NED"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Netherlands"
+   ],
+   "citizenship": [
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q28065104",
+   "number": "7",
+   "display": "Omar Marmoush",
+   "position": "FW",
+   "nation": "Egypt",
+   "dob": "1999-02-07",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q28065104",
+     "revision": 2556898976,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q28065104",
+     "revision": 2556898976,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q28065104",
+     "revision": 2556898976,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q28065104",
+     "revision": 2556898976,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q28065104",
+     "revision": 2556898976,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "7",
+     "position": "FW",
+     "nationFlag": "EGY"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Egypt"
+   ],
+   "citizenship": [
+    "Egypt",
+    "Canada"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q701297",
+   "number": "8",
+   "display": "Mateo Kovačić",
+   "position": "MF",
+   "nation": "Croatia",
+   "dob": "1994-05-06",
+   "heightCm": 177,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q701297",
+     "revision": 2556679150,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q701297",
+     "revision": 2556679150,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q701297",
+     "revision": 2556679150,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q701297",
+     "revision": 2556679150,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q701297",
+     "revision": 2556679150,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "8",
+     "position": "MF",
+     "nationFlag": "CRO"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Croatia"
+   ],
+   "citizenship": [
+    "Croatia"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q28967995",
+   "number": "9",
+   "display": "Erling Haaland",
+   "position": "FW",
+   "nation": "Norway",
+   "dob": "2000-07-21",
+   "heightCm": 195,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q28967995",
+     "revision": 2558715863,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q28967995",
+     "revision": 2558715863,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q28967995",
+     "revision": 2558715863,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q28967995",
+     "revision": 2558715863,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q28967995",
+     "revision": 2558715863,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "9",
+     "position": "FW",
+     "nationFlag": "NOR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Norway"
+   ],
+   "citizenship": [
+    "Norway"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q16056053",
+   "number": "10",
+   "display": "Jack Grealish",
+   "position": "MF",
+   "nation": "England",
+   "dob": "1995-09-10",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q16056053",
+     "revision": 2556683035,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q16056053",
+     "revision": 2556683035,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q16056053",
+     "revision": 2556683035,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q16056053",
+     "revision": 2556683035,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q16056053",
+     "revision": 2556683035,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "10",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "attacking midfielder",
+    "winger"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q59209505",
+   "number": "11",
+   "display": "Jérémy Doku",
+   "position": "MF",
+   "nation": "Belgium",
+   "dob": "2002-05-27",
+   "heightCm": 173,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q59209505",
+     "revision": 2548298947,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q59209505",
+     "revision": 2548298947,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q59209505",
+     "revision": 2548298947,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q59209505",
+     "revision": 2548298947,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q59209505",
+     "revision": 2548298947,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "11",
+     "position": "MF",
+     "nationFlag": "BEL"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Belgium"
+   ],
+   "citizenship": [
+    "Belgium"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q16200385",
+   "number": "13",
+   "display": "Marcus Bettinelli",
+   "position": "GK",
+   "nation": "England",
+   "dob": "1992-05-24",
+   "heightCm": 194,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q16200385",
+     "revision": 2546088960,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q16200385",
+     "revision": 2546088960,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q16200385",
+     "revision": 2546088960,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q16200385",
+     "revision": 2546088960,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q16200385",
+     "revision": 2546088960,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "13",
+     "position": "GK",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q106625792",
+   "number": "14",
+   "display": "Nicolás González Iglesias",
+   "position": "MF",
+   "nation": "Spain",
+   "dob": "2002-01-03",
+   "heightCm": 191,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q106625792",
+     "revision": 2554251653,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q106625792",
+     "revision": 2554251653,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q106625792",
+     "revision": 2554251653,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q106625792",
+     "revision": 2554251653,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q106625792",
+     "revision": 2554251653,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "14",
+     "position": "MF",
+     "nationFlag": "ESP"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Spain"
+   ],
+   "citizenship": [
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q20994118",
+   "number": "16",
+   "display": "Rodri",
+   "position": "MF",
+   "nation": "Spain",
+   "dob": "1996-06-22",
+   "heightCm": 190,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q20994118",
+     "revision": 2557272400,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q20994118",
+     "revision": 2557272400,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q20994118",
+     "revision": 2557272400,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q20994118",
+     "revision": 2557272400,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q20994118",
+     "revision": 2557272400,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "16",
+     "position": "MF",
+     "nationFlag": "ESP"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Spain"
+   ],
+   "citizenship": [
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "defensive midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q357984",
+   "number": "17",
+   "display": "Kevin De Bruyne",
+   "position": "MF",
+   "nation": "Belgium",
+   "dob": "1991-06-28",
+   "heightCm": 181,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q357984",
+     "revision": 2558082782,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q357984",
+     "revision": 2558082782,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q357984",
+     "revision": 2558082782,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q357984",
+     "revision": 2558082782,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q357984",
+     "revision": 2558082782,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "17",
+     "position": "MF",
+     "nationFlag": "BEL"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Belgium"
+   ],
+   "citizenship": [
+    "Belgium"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q821646",
+   "number": "18",
+   "display": "Stefan Ortega",
+   "position": "GK",
+   "nation": "Germany",
+   "dob": "1992-11-06",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q821646",
+     "revision": 2546064714,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q821646",
+     "revision": 2546064714,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q821646",
+     "revision": 2546064714,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q821646",
+     "revision": 2546064714,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q821646",
+     "revision": 2546064714,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "18",
+     "position": "GK",
+     "nationFlag": "GER"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Germany"
+   ],
+   "citizenship": [
+    "Germany"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q161089",
+   "number": "19",
+   "display": "İlkay Gündoğan",
+   "position": "MF",
+   "nation": "Germany",
+   "dob": "1990-10-24",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q161089",
+     "revision": 2546370634,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q161089",
+     "revision": 2546370634,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q161089",
+     "revision": 2546370634,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q161089",
+     "revision": 2546370634,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q161089",
+     "revision": 2546370634,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "19",
+     "position": "MF",
+     "nationFlag": "GER"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Germany"
+   ],
+   "citizenship": [
+    "Germany"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q15521306",
+   "number": "20",
+   "display": "Bernardo Silva",
+   "position": "MF",
+   "nation": "Portugal",
+   "dob": "1994-08-10",
+   "heightCm": 173,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q15521306",
+     "revision": 2557810820,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q15521306",
+     "revision": 2557810820,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q15521306",
+     "revision": 2557810820,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q15521306",
+     "revision": 2557810820,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q15521306",
+     "revision": 2557810820,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "20",
+     "position": "MF",
+     "nationFlag": "POR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Portugal"
+   ],
+   "citizenship": [
+    "Portugal"
+   ],
+   "wikidataPositions": [
+    "midfielder",
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q50825738",
+   "number": "21",
+   "display": "Rayan Aït-Nouri",
+   "position": "DF",
+   "nation": "Algeria",
+   "dob": "2001-06-06",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q50825738",
+     "revision": 2546489847,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q50825738",
+     "revision": 2546489847,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q50825738",
+     "revision": 2546489847,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q50825738",
+     "revision": 2546489847,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q50825738",
+     "revision": 2546489847,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "21",
+     "position": "DF",
+     "nationFlag": "ALG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Algeria"
+   ],
+   "citizenship": [
+    "Algeria",
+    "France"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q120277811",
+   "number": "22",
+   "display": "Vitor Reis",
+   "position": "DF",
+   "nation": "Brazil",
+   "dob": "2006-01-12",
+   "heightCm": 186,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q120277811",
+     "revision": 2545768591,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q120277811",
+     "revision": 2545768591,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q120277811",
+     "revision": 2545768591,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q120277811",
+     "revision": 2545768591,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q120277811",
+     "revision": 2545768591,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "22",
+     "position": "DF",
+     "nationFlag": "BRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q73400656",
+   "number": "24",
+   "display": "Joško Gvardiol",
+   "position": "DF",
+   "nation": "Croatia",
+   "dob": "2002-01-23",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q73400656",
+     "revision": 2556679744,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q73400656",
+     "revision": 2556679744,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q73400656",
+     "revision": 2556679744,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q73400656",
+     "revision": 2556679744,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q73400656",
+     "revision": 2556679744,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "24",
+     "position": "DF",
+     "nationFlag": "CRO"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Croatia"
+   ],
+   "citizenship": [
+    "Croatia"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q19938984",
+   "number": "25",
+   "display": "Manuel Akanji",
+   "position": "DF",
+   "nation": "Switzerland",
+   "dob": "1995-07-19",
+   "heightCm": 186,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q19938984",
+     "revision": 2547622697,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q19938984",
+     "revision": 2547622697,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q19938984",
+     "revision": 2547622697,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q19938984",
+     "revision": 2547622697,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q19938984",
+     "revision": 2547622697,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "25",
+     "position": "DF",
+     "nationFlag": "SUI"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Switzerland"
+   ],
+   "citizenship": [
+    "Nigeria",
+    "Switzerland"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q99485542",
+   "number": "26",
+   "display": "Savinho",
+   "position": "MF",
+   "nation": "Brazil",
+   "dob": "2004-04-10",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q99485542",
+     "revision": 2547757303,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q99485542",
+     "revision": 2547757303,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q99485542",
+     "revision": 2547757303,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q99485542",
+     "revision": 2547757303,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q99485542",
+     "revision": 2547757303,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "26",
+     "position": "MF",
+     "nationFlag": "BRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q96211488",
+   "number": "27",
+   "display": "Matheus Nunes",
+   "position": "MF",
+   "nation": "Portugal",
+   "dob": "1998-08-27",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q96211488",
+     "revision": 2545918585,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q96211488",
+     "revision": 2545918585,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q96211488",
+     "revision": 2545918585,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q96211488",
+     "revision": 2545918585,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q96211488",
+     "revision": 2545918585,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "27",
+     "position": "MF",
+     "nationFlag": "POR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Portugal"
+   ],
+   "citizenship": [
+    "Brazil",
+    "Portugal"
+   ],
+   "wikidataPositions": [
+    "full-back",
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q64736321",
+   "number": "29",
+   "display": "Rayan Cherki",
+   "position": "MF",
+   "nation": "France",
+   "dob": "2003-08-17",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q64736321",
+     "revision": 2557032278,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q64736321",
+     "revision": 2557032278,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q64736321",
+     "revision": 2557032278,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q64736321",
+     "revision": 2557032278,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q64736321",
+     "revision": 2557032278,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "29",
+     "position": "MF",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q116463164",
+   "number": "30",
+   "display": "Claudio Echeverri",
+   "position": "MF",
+   "nation": "Argentina",
+   "dob": "2006-01-02",
+   "heightCm": 171,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q116463164",
+     "revision": 2546518880,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q116463164",
+     "revision": 2546518880,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q116463164",
+     "revision": 2546518880,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q116463164",
+     "revision": 2546518880,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q116463164",
+     "revision": 2546518880,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "30",
+     "position": "MF",
+     "nationFlag": "ARG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Argentina"
+   ],
+   "citizenship": [
+    "Argentina"
+   ],
+   "wikidataPositions": [
+    "attacking midfielder",
+    "winger"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q17074511",
+   "number": "31",
+   "display": "Ederson",
+   "position": "GK",
+   "nation": "Brazil",
+   "dob": "1993-08-17",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q17074511",
+     "revision": 2546029517,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q17074511",
+     "revision": 2546029517,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q17074511",
+     "revision": 2546029517,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q17074511",
+     "revision": 2546029517,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q17074511",
+     "revision": 2546029517,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "31",
+     "position": "GK",
+     "nationFlag": "BRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil",
+    "Portugal"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q295627",
+   "number": "33",
+   "display": "Scott Carson",
+   "position": "GK",
+   "nation": "England",
+   "dob": "1985-09-03",
+   "heightCm": 190,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q295627",
+     "revision": 2546280417,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q295627",
+     "revision": 2546280417,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q295627",
+     "revision": 2546280417,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q295627",
+     "revision": 2546280417,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q295627",
+     "revision": 2546280417,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "33",
+     "position": "GK",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q111479885",
+   "number": "45",
+   "display": "Abdukodir Khusanov",
+   "position": "DF",
+   "nation": "Uzbekistan",
+   "dob": "2004-02-29",
+   "heightCm": 186,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q111479885",
+     "revision": 2559537297,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q111479885",
+     "revision": 2559537297,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q111479885",
+     "revision": 2559537297,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q111479885",
+     "revision": 2559537297,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q111479885",
+     "revision": 2559537297,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "45",
+     "position": "DF",
+     "nationFlag": "UZB"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Uzbekistan"
+   ],
+   "citizenship": [
+    "Uzbekistan"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q30729096",
+   "number": "47",
+   "display": "Phil Foden",
+   "position": "MF",
+   "nation": "England",
+   "dob": "2000-05-28",
+   "heightCm": 171,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q30729096",
+     "revision": 2559335020,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q30729096",
+     "revision": 2559335020,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q30729096",
+     "revision": 2559335020,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q30729096",
+     "revision": 2559335020,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q30729096",
+     "revision": 2559335020,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "47",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q110466658",
+   "number": "52",
+   "display": "Oscar Bobb",
+   "position": "MF",
+   "nation": "Norway",
+   "dob": "2003-07-12",
+   "heightCm": 169,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q110466658",
+     "revision": 2558201532,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q110466658",
+     "revision": 2558201532,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q110466658",
+     "revision": 2558201532,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q110466658",
+     "revision": 2558201532,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q110466658",
+     "revision": 2558201532,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "52",
+     "position": "MF",
+     "nationFlag": "NOR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Norway"
+   ],
+   "citizenship": [
+    "Norway"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q124218890",
+   "number": "56",
+   "display": "Jacob Wright",
+   "position": "MF",
+   "nation": "England",
+   "dob": "2005-09-21",
+   "heightCm": null,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q124218890",
+     "revision": 2545781300,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q124218890",
+     "revision": 2545781300,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q124218890",
+     "revision": 2545781300,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q124218890",
+     "revision": 2545781300,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    }
+   },
+   "numbers": [
+    {
+     "value": "56",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [],
+   "flags": []
+  },
+  {
+   "qid": "Q130360009",
+   "number": "61",
+   "display": "Kaden Braithwaite",
+   "position": "DF",
+   "nation": "England",
+   "dob": "2008-02-08",
+   "heightCm": 194,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q130360009",
+     "revision": 2559368637,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q130360009",
+     "revision": 2559368637,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q130360009",
+     "revision": 2559368637,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q130360009",
+     "revision": 2559368637,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q130360009",
+     "revision": 2559368637,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "61",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q130740691",
+   "number": "66",
+   "display": "Jahmai Simpson-Pusey",
+   "position": "DF",
+   "nation": "England",
+   "dob": "2005-11-04",
+   "heightCm": 187,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q130740691",
+     "revision": 2546544153,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q130740691",
+     "revision": 2546544153,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q130740691",
+     "revision": 2546544153,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q130740691",
+     "revision": 2546544153,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q130740691",
+     "revision": 2546544153,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "66",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [],
+   "flags": []
+  },
+  {
+   "qid": "Q115044761",
+   "number": "67",
+   "display": "Divin Mubama",
+   "position": "FW",
+   "nation": "England",
+   "dob": "2004-10-25",
+   "heightCm": 182,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q115044761",
+     "revision": 2556016328,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q115044761",
+     "revision": 2556016328,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q115044761",
+     "revision": 2556016328,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q115044761",
+     "revision": 2556016328,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q115044761",
+     "revision": 2556016328,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "67",
+     "position": "FW",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [],
+   "flags": []
+  },
+  {
+   "qid": "Q118645253",
+   "number": "75",
+   "display": "Nico O'Reilly",
+   "position": "MF",
+   "nation": "England",
+   "dob": "2005-03-21",
+   "heightCm": 193,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q118645253",
+     "revision": 2556679798,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q118645253",
+     "revision": 2556679798,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q118645253",
+     "revision": 2556679798,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q118645253",
+     "revision": 2556679798,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q118645253",
+     "revision": 2556679798,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "75",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [],
+   "flags": []
+  },
+  {
+   "qid": "Q113509374",
+   "number": "82",
+   "display": "Rico Lewis",
+   "position": "DF",
+   "nation": "England",
+   "dob": "2004-11-21",
+   "heightCm": 169,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q113509374",
+     "revision": 2545791948,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q113509374",
+     "revision": 2545791948,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q113509374",
+     "revision": 2545791948,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q113509374",
+     "revision": 2545791948,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q113509374",
+     "revision": 2545791948,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "82",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defensive midfielder",
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q108653498",
+   "number": "87",
+   "display": "James McAtee",
+   "position": "MF",
+   "nation": "England",
+   "dob": "2002-10-18",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q108653498",
+     "revision": 2553256716,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2024–25 Manchester City F.C. season",
+     "revid": 1378094405,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q108653498",
+     "revision": 2553256716,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q108653498",
+     "revision": 2553256716,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q108653498",
+     "revision": 2553256716,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q108653498",
+     "revision": 2553256716,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "87",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q67175861",
+   "number": null,
+   "display": "Issa Kaboré",
+   "position": "full-back",
+   "nation": "Burkina Faso",
+   "dob": "2001-05-12",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q67175861",
+     "revision": 2553728691,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q67175861",
+     "revision": 2553728691,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q67175861",
+     "revision": 2553728691,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q67175861",
+     "revision": 2553728691,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q67175861",
+     "revision": 2553728691,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q67175861",
+     "revision": 2553728691,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Burkina Faso"
+   ],
+   "citizenship": [
+    "Burkina Faso"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q105477902",
+   "number": null,
+   "display": "Josh Wilson-Esbrand",
+   "position": "full-back",
+   "nation": "England",
+   "dob": "2002-12-26",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q105477902",
+     "revision": 2546521151,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q105477902",
+     "revision": 2546521151,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q105477902",
+     "revision": 2546521151,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q105477902",
+     "revision": 2546521151,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q105477902",
+     "revision": 2546521151,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q105477902",
+     "revision": 2546521151,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q20641319",
+   "number": null,
+   "display": "Kalvin Phillips",
+   "position": "midfielder",
+   "nation": "England",
+   "dob": "1995-12-02",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q20641319",
+     "revision": 2545988323,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q20641319",
+     "revision": 2545988323,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q20641319",
+     "revision": 2545988323,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q20641319",
+     "revision": 2545988323,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q20641319",
+     "revision": 2545988323,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q20641319",
+     "revision": 2545988323,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q123789134",
+   "number": null,
+   "display": "Max Alleyne",
+   "position": "centre-back",
+   "nation": "England",
+   "dob": "2005-07-21",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q123789134",
+     "revision": 2556401589,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q123789134",
+     "revision": 2556401589,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q123789134",
+     "revision": 2556401589,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q123789134",
+     "revision": 2556401589,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q123789134",
+     "revision": 2556401589,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q123789134",
+     "revision": 2556401589,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  }
+ ]
+}

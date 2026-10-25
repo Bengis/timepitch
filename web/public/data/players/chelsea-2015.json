@@ -1,0 +1,3312 @@
+{
+ "_meta": {
+  "schema": "timepitch-player-cards-1",
+  "teamKey": "chelsea:2015",
+  "seasonLabel": "2015/16",
+  "generated": "2026-10-22",
+  "sources": {
+   "wikidata": {
+    "kind": "wikidata",
+    "licence": "CC0 1.0",
+    "fields": "display (label), dob (P569), heightCm (P2048), nation (P1532, else P27), citizenship (P27), wikidataPositions (P413)",
+    "revision": "per field: qid + revision"
+   },
+   "wikipedia": {
+    "kind": "wikipedia",
+    "title": "2015–16 Chelsea F.C. season",
+    "revid": 1376278286,
+    "licence": "CC BY-SA 4.0",
+    "fields": "numbers (shirt number, position code, nationality flag) from the season article"
+   }
+  },
+  "rules": "Identity by QID only (no name matching). Public subset: no Transfermarkt, FPL, epldata or StatsBomb fields. Nationality = Wikidata P1532 (sporting), else P27; manual corrections only for reviewed cases, cited to the season article.",
+  "derivedFrom": {
+   "path": ".local/player-data/cards.json",
+   "sha256": "8a1f20090bd94ef773ff3181ab565461a8d1fcd13636aa2ac3ce3bcc17f16fc4"
+  }
+ },
+ "players": [
+  {
+   "qid": "Q431368",
+   "number": "1",
+   "display": "Asmir Begović",
+   "position": "goalkeeper",
+   "nation": "Bosnia and Herzegovina",
+   "dob": "1987-06-20",
+   "heightCm": 198,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q431368",
+     "revision": 2546360206,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q431368",
+     "revision": 2546360206,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q431368",
+     "revision": 2546360206,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q431368",
+     "revision": 2546360206,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q431368",
+     "revision": 2546360206,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q431368",
+     "revision": 2546360206,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "1",
+     "position": null,
+     "nationFlag": "Bosnia"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Bosnia and Herzegovina"
+   ],
+   "citizenship": [
+    "Bosnia and Herzegovina",
+    "Canada"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q181921",
+   "number": "2",
+   "display": "Branislav Ivanović",
+   "position": "full-back",
+   "nation": "Serbia and Montenegro / Serbia",
+   "dob": "1984-02-22",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q181921",
+     "revision": 2554026839,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q181921",
+     "revision": 2554026839,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q181921",
+     "revision": 2554026839,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q181921",
+     "revision": 2554026839,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q181921",
+     "revision": 2554026839,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q181921",
+     "revision": 2554026839,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "2",
+     "position": null,
+     "nationFlag": "Serbia"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Serbia and Montenegro",
+    "Serbia"
+   ],
+   "citizenship": [
+    "Serbia"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q350547",
+   "number": "3",
+   "display": "Filipe Luís",
+   "position": "full-back",
+   "nation": "Brazil",
+   "dob": "1985-08-09",
+   "heightCm": 182,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q350547",
+     "revision": 2554333470,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q350547",
+     "revision": 2554333470,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q350547",
+     "revision": 2554333470,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q350547",
+     "revision": 2554333470,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q350547",
+     "revision": 2554333470,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q350547",
+     "revision": 2554333470,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "3",
+     "position": null,
+     "nationFlag": "BRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q17499",
+   "number": "4",
+   "display": "Cesc Fàbregas",
+   "position": "midfielder",
+   "nation": "Spain",
+   "dob": "1987-05-04",
+   "heightCm": 179,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "4",
+     "position": null,
+     "nationFlag": "Spain"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Spain"
+   ],
+   "citizenship": [
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q211271",
+   "number": "5",
+   "display": "Kurt Zouma",
+   "position": "centre-back",
+   "nation": "France",
+   "dob": "1994-10-27",
+   "heightCm": 190,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q211271",
+     "revision": 2546555154,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q211271",
+     "revision": 2546555154,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q211271",
+     "revision": 2546555154,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q211271",
+     "revision": 2546555154,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q211271",
+     "revision": 2546555154,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q211271",
+     "revision": 2546555154,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "5",
+     "position": null,
+     "nationFlag": "France"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France",
+    "Central African Republic"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q317389",
+   "number": "6",
+   "display": "Baba Rahman",
+   "position": "centre-back",
+   "nation": "Ghana",
+   "dob": "1994-07-02",
+   "heightCm": 179,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q317389",
+     "revision": 2546555088,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q317389",
+     "revision": 2546555088,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q317389",
+     "revision": 2546555088,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q317389",
+     "revision": 2546555088,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q317389",
+     "revision": 2546555088,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q317389",
+     "revision": 2546555088,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "6",
+     "position": null,
+     "nationFlag": "Ghana"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Ghana"
+   ],
+   "citizenship": [
+    "Ghana"
+   ],
+   "wikidataPositions": [
+    "centre-back",
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q204407",
+   "number": "7",
+   "display": "Ramires",
+   "position": "midfielder",
+   "nation": "Brazil",
+   "dob": "1987-03-24",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q204407",
+     "revision": 2546534660,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q204407",
+     "revision": 2546534660,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q204407",
+     "revision": 2546534660,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q204407",
+     "revision": 2546534660,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q204407",
+     "revision": 2546534660,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q204407",
+     "revision": 2546534660,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "7",
+     "position": null,
+     "nationFlag": "BRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q19497",
+   "number": "8",
+   "display": "Oscar",
+   "position": "midfielder",
+   "nation": "Brazil",
+   "dob": "1991-09-09",
+   "heightCm": 179,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q19497",
+     "revision": 2546083666,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q19497",
+     "revision": 2546083666,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q19497",
+     "revision": 2546083666,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q19497",
+     "revision": 2546083666,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q19497",
+     "revision": 2546083666,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q19497",
+     "revision": 2546083666,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "8",
+     "position": null,
+     "nationFlag": "Brazil"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q138172",
+   "number": "9",
+   "display": "Radamel Falcao",
+   "position": "forward",
+   "nation": "Colombia",
+   "dob": "1986-02-10",
+   "heightCm": 177,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q138172",
+     "revision": 2558219586,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q138172",
+     "revision": 2558219586,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q138172",
+     "revision": 2558219586,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q138172",
+     "revision": 2558219586,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q138172",
+     "revision": 2558219586,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q138172",
+     "revision": 2558219586,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "9",
+     "position": null,
+     "nationFlag": "Colombia"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Colombia"
+   ],
+   "citizenship": [
+    "Colombia",
+    "Venezuela"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q214204",
+   "number": "10",
+   "display": "Eden Hazard",
+   "position": "winger",
+   "nation": "Belgium",
+   "dob": "1991-01-07",
+   "heightCm": 175,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q214204",
+     "revision": 2557859017,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q214204",
+     "revision": 2557859017,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q214204",
+     "revision": 2557859017,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q214204",
+     "revision": 2557859017,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q214204",
+     "revision": 2557859017,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q214204",
+     "revision": 2557859017,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "10",
+     "position": null,
+     "nationFlag": "Belgium"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Belgium"
+   ],
+   "citizenship": [
+    "Belgium"
+   ],
+   "wikidataPositions": [
+    "winger"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q138075",
+   "number": "11",
+   "display": "Alexandre Pato",
+   "position": "forward",
+   "nation": "Brazil",
+   "dob": "1989-09-02",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q138075",
+     "revision": 2546139512,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q138075",
+     "revision": 2546139512,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q138075",
+     "revision": 2546139512,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q138075",
+     "revision": 2546139512,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q138075",
+     "revision": 2546139512,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q138075",
+     "revision": 2546139512,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "11",
+     "position": null,
+     "nationFlag": "Brazil"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q166984",
+   "number": "12",
+   "display": "Mikel John Obi",
+   "position": "midfielder",
+   "nation": "Nigeria",
+   "dob": "1987-04-22",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q166984",
+     "revision": 2548856749,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q166984",
+     "revision": 2548856749,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q166984",
+     "revision": 2548856749,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q166984",
+     "revision": 2548856749,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q166984",
+     "revision": 2548856749,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q166984",
+     "revision": 2548856749,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "12",
+     "position": null,
+     "nationFlag": "Nigeria"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Nigeria"
+   ],
+   "citizenship": [
+    "Nigeria"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q73360",
+   "number": "13",
+   "display": "Thibaut Courtois",
+   "position": "goalkeeper",
+   "nation": "Belgium",
+   "dob": "1992-05-11",
+   "heightCm": 200,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q73360",
+     "revision": 2558255392,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q73360",
+     "revision": 2558255392,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q73360",
+     "revision": 2558255392,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q73360",
+     "revision": 2558255392,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q73360",
+     "revision": 2558255392,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q73360",
+     "revision": 2558255392,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "13",
+     "position": null,
+     "nationFlag": "Belgium"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Belgium"
+   ],
+   "citizenship": [
+    "Belgium"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q828627",
+   "number": "14",
+   "display": "Bertrand Traoré",
+   "position": "attacking midfielder",
+   "nation": "Burkina Faso",
+   "dob": "1995-09-06",
+   "heightCm": 177,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q828627",
+     "revision": 2551441106,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q828627",
+     "revision": 2551441106,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q828627",
+     "revision": 2551441106,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q828627",
+     "revision": 2551441106,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q828627",
+     "revision": 2551441106,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q828627",
+     "revision": 2551441106,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "14",
+     "position": null,
+     "nationFlag": "Burkina Faso"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Burkina Faso"
+   ],
+   "citizenship": [
+    "Burkina Faso"
+   ],
+   "wikidataPositions": [
+    "attacking midfielder",
+    "forward",
+    "inside forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q3362956",
+   "number": "15",
+   "display": "Papy Djilobodji",
+   "position": "centre-back",
+   "nation": "Senegal",
+   "dob": "1988-12-01",
+   "heightCm": 193,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q3362956",
+     "revision": 2549260712,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q3362956",
+     "revision": 2549260712,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q3362956",
+     "revision": 2549260712,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q3362956",
+     "revision": 2549260712,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q3362956",
+     "revision": 2549260712,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q3362956",
+     "revision": 2549260712,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "15",
+     "position": null,
+     "nationFlag": "SEN"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Senegal"
+   ],
+   "citizenship": [
+    "Senegal"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q14755604",
+   "number": "16",
+   "display": "Kenedy",
+   "position": "midfielder",
+   "nation": "Brazil",
+   "dob": "1996-02-08",
+   "heightCm": 182,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q14755604",
+     "revision": 2545970705,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q14755604",
+     "revision": 2545970705,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q14755604",
+     "revision": 2545970705,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q14755604",
+     "revision": 2545970705,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q14755604",
+     "revision": 2545970705,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q14755604",
+     "revision": 2545970705,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "16",
+     "position": null,
+     "nationFlag": "Brazil"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "midfielder",
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q179773",
+   "number": "17",
+   "display": "Pedro",
+   "position": "forward",
+   "nation": "Spain",
+   "dob": "1987-07-28",
+   "heightCm": 169,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q179773",
+     "revision": 2553283681,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q179773",
+     "revision": 2553283681,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q179773",
+     "revision": 2553283681,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q179773",
+     "revision": 2553283681,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q179773",
+     "revision": 2553283681,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q179773",
+     "revision": 2553283681,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "17",
+     "position": null,
+     "nationFlag": "Spain"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Spain"
+   ],
+   "citizenship": [
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q114859",
+   "number": "18",
+   "display": "Loïc Rémy",
+   "position": "forward",
+   "nation": "France",
+   "dob": "1987-01-02",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q114859",
+     "revision": 2546182136,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q114859",
+     "revision": 2546182136,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q114859",
+     "revision": 2546182136,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q114859",
+     "revision": 2546182136,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q114859",
+     "revision": 2546182136,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q114859",
+     "revision": 2546182136,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "18",
+     "position": null,
+     "nationFlag": "France"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q459707",
+   "number": "19",
+   "display": "Diego Costa",
+   "position": "forward",
+   "nation": "Brazil / Spain",
+   "dob": "1988-10-07",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q459707",
+     "revision": 2546170790,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q459707",
+     "revision": 2546170790,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q459707",
+     "revision": 2546170790,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q459707",
+     "revision": 2546170790,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q459707",
+     "revision": 2546170790,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q459707",
+     "revision": 2546170790,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "19",
+     "position": null,
+     "nationFlag": "Spain"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil",
+    "Spain"
+   ],
+   "citizenship": [
+    "Brazil",
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q16236909",
+   "number": "20",
+   "display": "Matt Miazga",
+   "position": "defender",
+   "nation": "United States",
+   "dob": "1995-07-19",
+   "heightCm": 191,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q16236909",
+     "revision": 2545988596,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q16236909",
+     "revision": 2545988596,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q16236909",
+     "revision": 2545988596,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q16236909",
+     "revision": 2545988596,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q16236909",
+     "revision": 2545988596,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q16236909",
+     "revision": 2545988596,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "20",
+     "position": null,
+     "nationFlag": "United States"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "United States"
+   ],
+   "citizenship": [
+    "United States"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q297603",
+   "number": "21",
+   "display": "Nemanja Matić",
+   "position": "defensive midfielder",
+   "nation": "Serbia",
+   "dob": "1988-08-01",
+   "heightCm": 194,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q297603",
+     "revision": 2557047112,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q297603",
+     "revision": 2557047112,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q297603",
+     "revision": 2557047112,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q297603",
+     "revision": 2557047112,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q297603",
+     "revision": 2557047112,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q297603",
+     "revision": 2557047112,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "21",
+     "position": null,
+     "nationFlag": "Serbia"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Serbia"
+   ],
+   "citizenship": [
+    "Serbia"
+   ],
+   "wikidataPositions": [
+    "defensive midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q73480",
+   "number": "22",
+   "display": "Willian",
+   "position": "wing half",
+   "nation": "Brazil",
+   "dob": "1988-08-09",
+   "heightCm": 175,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q73480",
+     "revision": 2546167885,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q73480",
+     "revision": 2546167885,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q73480",
+     "revision": 2546167885,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q73480",
+     "revision": 2546167885,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q73480",
+     "revision": 2546167885,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q73480",
+     "revision": 2546167885,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "22",
+     "position": null,
+     "nationFlag": "Brazil"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q223827",
+   "number": "24",
+   "display": "Gary Cahill",
+   "position": "centre-back",
+   "nation": "England",
+   "dob": "1985-12-19",
+   "heightCm": 193,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q223827",
+     "revision": 2557889604,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q223827",
+     "revision": 2557889604,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q223827",
+     "revision": 2557889604,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q223827",
+     "revision": 2557889604,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q223827",
+     "revision": 2557889604,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q223827",
+     "revision": 2557889604,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "24",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q83456",
+   "number": "26",
+   "display": "John Terry",
+   "position": "centre-back",
+   "nation": "England",
+   "dob": "1980-12-07",
+   "heightCm": 187,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q83456",
+     "revision": 2558015417,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q83456",
+     "revision": 2558015417,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q83456",
+     "revision": 2558015417,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q83456",
+     "revision": 2558015417,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q83456",
+     "revision": 2558015417,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q83456",
+     "revision": 2558015417,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "26",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q5651446",
+   "number": "27",
+   "display": "Jamal Blackman",
+   "position": "goalkeeper",
+   "nation": "England",
+   "dob": "1993-10-27",
+   "heightCm": 196,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q5651446",
+     "revision": 2552342171,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q5651446",
+     "revision": 2552342171,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q5651446",
+     "revision": 2552342171,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q5651446",
+     "revision": 2552342171,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q5651446",
+     "revision": 2552342171,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q5651446",
+     "revision": 2552342171,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "27",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q294806",
+   "number": "28",
+   "display": "César Azpilicueta",
+   "position": "centre-back",
+   "nation": "Spain",
+   "dob": "1989-08-28",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q294806",
+     "revision": 2559626884,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q294806",
+     "revision": 2559626884,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0",
+     "note": "Wikidata P1532 = Euskal-Erria (not a FIFA national team); season article flag: Spain"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q294806",
+     "revision": 2559626884,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q294806",
+     "revision": 2559626884,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q294806",
+     "revision": 2559626884,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "28",
+     "position": null,
+     "nationFlag": "Spain"
+    }
+   ],
+   "nationBasis": "manual",
+   "sportNationalities": [
+    "Euskal-Erria"
+   ],
+   "citizenship": [
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "centre-back",
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q234866",
+   "number": "32",
+   "display": "Marco Amelia",
+   "position": "goalkeeper",
+   "nation": "Italy",
+   "dob": "1982-04-02",
+   "heightCm": 190,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q234866",
+     "revision": 2555130307,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q234866",
+     "revision": 2555130307,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q234866",
+     "revision": 2555130307,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q234866",
+     "revision": 2555130307,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q234866",
+     "revision": 2555130307,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q234866",
+     "revision": 2555130307,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "32",
+     "position": null,
+     "nationFlag": "Italy"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Italy"
+   ],
+   "citizenship": [
+    "Italy"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q22098250",
+   "number": "33",
+   "display": "Mitchell Beeney",
+   "position": "goalkeeper",
+   "nation": "England",
+   "dob": "1995-10-03",
+   "heightCm": null,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q22098250",
+     "revision": 2546017509,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q22098250",
+     "revision": 2546017509,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q22098250",
+     "revision": 2546017509,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q22098250",
+     "revision": 2546017509,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q22098250",
+     "revision": 2546017509,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    }
+   },
+   "numbers": [
+    {
+     "value": "33",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q20730338",
+   "number": "34",
+   "display": "Ola Aina",
+   "position": "defender",
+   "nation": "Nigeria",
+   "dob": "1996-10-08",
+   "heightCm": 179,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q20730338",
+     "revision": 2550627088,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q20730338",
+     "revision": 2550627088,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q20730338",
+     "revision": 2550627088,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q20730338",
+     "revision": 2550627088,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q20730338",
+     "revision": 2550627088,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q20730338",
+     "revision": 2550627088,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "34",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Nigeria"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q18616995",
+   "number": "36",
+   "display": "Ruben Loftus-Cheek",
+   "position": "midfielder",
+   "nation": "England",
+   "dob": "1996-01-23",
+   "heightCm": 191,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q18616995",
+     "revision": 2546453667,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q18616995",
+     "revision": 2546453667,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q18616995",
+     "revision": 2546453667,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q18616995",
+     "revision": 2546453667,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q18616995",
+     "revision": 2546453667,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q18616995",
+     "revision": 2546453667,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "36",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q23688811",
+   "number": "37",
+   "display": "Jake Clarke-Salter",
+   "position": "defender",
+   "nation": "England",
+   "dob": "1997-09-22",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q23688811",
+     "revision": 2555407441,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q23688811",
+     "revision": 2555407441,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q23688811",
+     "revision": 2555407441,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q23688811",
+     "revision": 2555407441,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q23688811",
+     "revision": 2555407441,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q23688811",
+     "revision": 2555407441,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "37",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q25389532",
+   "number": "38",
+   "display": "Kasey Palmer",
+   "position": "midfielder",
+   "nation": "England / Jamaica",
+   "dob": "1996-11-09",
+   "heightCm": 175,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q25389532",
+     "revision": 2547057640,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q25389532",
+     "revision": 2547057640,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q25389532",
+     "revision": 2547057640,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q25389532",
+     "revision": 2547057640,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q25389532",
+     "revision": 2547057640,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q25389532",
+     "revision": 2547057640,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "38",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England",
+    "Jamaica"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q28325017",
+   "number": "39",
+   "display": "Fankaty Dabo",
+   "position": "defender",
+   "nation": "England",
+   "dob": "1995-10-11",
+   "heightCm": 181,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q28325017",
+     "revision": 2545999339,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q28325017",
+     "revision": 2545999339,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q28325017",
+     "revision": 2545999339,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q28325017",
+     "revision": 2545999339,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q28325017",
+     "revision": 2545999339,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q28325017",
+     "revision": 2545999339,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "39",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q34637598",
+   "number": "40",
+   "display": "Bradley Collins",
+   "position": "goalkeeper",
+   "nation": "England",
+   "dob": "1997-02-18",
+   "heightCm": 184,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q34637598",
+     "revision": 2546459960,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q34637598",
+     "revision": 2546459960,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q34637598",
+     "revision": 2546459960,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q34637598",
+     "revision": 2546459960,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q34637598",
+     "revision": 2546459960,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q34637598",
+     "revision": 2546459960,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "40",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q26923898",
+   "number": "41",
+   "display": "Charlie Colkett",
+   "position": "midfielder",
+   "nation": "England",
+   "dob": "1996-09-04",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q26923898",
+     "revision": 2545990328,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q26923898",
+     "revision": 2545990328,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q26923898",
+     "revision": 2545990328,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q26923898",
+     "revision": 2545990328,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q26923898",
+     "revision": 2545990328,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q26923898",
+     "revision": 2545990328,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "41",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q24050378",
+   "number": "42",
+   "display": "Tammy Abraham",
+   "position": "forward",
+   "nation": "England",
+   "dob": "1997-10-02",
+   "heightCm": 190,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q24050378",
+     "revision": 2550556138,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q24050378",
+     "revision": 2550556138,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q24050378",
+     "revision": 2550556138,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q24050378",
+     "revision": 2550556138,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q24050378",
+     "revision": 2550556138,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q24050378",
+     "revision": 2550556138,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "42",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q24068577",
+   "number": "43",
+   "display": "Fikayo Tomori",
+   "position": "centre-back",
+   "nation": "England",
+   "dob": "1997-12-19",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q24068577",
+     "revision": 2545942241,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Chelsea F.C. season",
+     "revid": 1376278286,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q24068577",
+     "revision": 2545942241,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q24068577",
+     "revision": 2545942241,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q24068577",
+     "revision": 2545942241,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q24068577",
+     "revision": 2545942241,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q24068577",
+     "revision": 2545942241,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "43",
+     "position": null,
+     "nationFlag": "England"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q509374",
+   "number": null,
+   "display": "Juan Cuadrado",
+   "position": "full-back",
+   "nation": "Colombia",
+   "dob": "1988-05-26",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q509374",
+     "revision": 2547964552,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q509374",
+     "revision": 2547964552,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q509374",
+     "revision": 2547964552,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q509374",
+     "revision": 2547964552,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q509374",
+     "revision": 2547964552,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q509374",
+     "revision": 2547964552,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Colombia"
+   ],
+   "citizenship": [
+    "Colombia"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q126903",
+   "number": null,
+   "display": "Lucas Piazon",
+   "position": "forward",
+   "nation": "Brazil",
+   "dob": "1994-01-20",
+   "heightCm": 182,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q126903",
+     "revision": 2555694272,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q126903",
+     "revision": 2555694272,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q126903",
+     "revision": 2555694272,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q126903",
+     "revision": 2555694272,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q126903",
+     "revision": 2555694272,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q126903",
+     "revision": 2555694272,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil",
+    "Italy"
+   ],
+   "wikidataPositions": [
+    "forward",
+    "midfielder"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q10514868",
+   "number": null,
+   "display": "Michael Hector",
+   "position": "defender",
+   "nation": "Jamaica",
+   "dob": "1992-07-19",
+   "heightCm": 193,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q10514868",
+     "revision": 2547442197,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q10514868",
+     "revision": 2547442197,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q10514868",
+     "revision": 2547442197,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q10514868",
+     "revision": 2547442197,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q10514868",
+     "revision": 2547442197,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q10514868",
+     "revision": 2547442197,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Jamaica"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q1755683",
+   "number": null,
+   "display": "Nathan Aké",
+   "position": "defender",
+   "nation": "Netherlands",
+   "dob": "1995-02-18",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1755683",
+     "revision": 2545985724,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Netherlands"
+   ],
+   "citizenship": [
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q326181",
+   "number": null,
+   "display": "Patrick Bamford",
+   "position": "forward",
+   "nation": "England",
+   "dob": "1993-09-05",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q326181",
+     "revision": 2546037097,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q326181",
+     "revision": 2546037097,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q326181",
+     "revision": 2546037097,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q326181",
+     "revision": 2546037097,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q326181",
+     "revision": 2546037097,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q326181",
+     "revision": 2546037097,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q862539",
+   "number": null,
+   "display": "Tomáš Kalas",
+   "position": "defender",
+   "nation": "Czech Republic",
+   "dob": "1993-05-15",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q862539",
+     "revision": 2546079866,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q862539",
+     "revision": 2546079866,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q862539",
+     "revision": 2546079866,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q862539",
+     "revision": 2546079866,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q862539",
+     "revision": 2546079866,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q862539",
+     "revision": 2546079866,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Czech Republic"
+   ],
+   "citizenship": [
+    "Czech Republic"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q295637",
+   "number": null,
+   "display": "Victor Moses",
+   "position": "wing half",
+   "nation": "Nigeria",
+   "dob": "1990-12-12",
+   "heightCm": 177,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q295637",
+     "revision": 2546389132,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q295637",
+     "revision": 2546389132,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q295637",
+     "revision": 2546389132,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q295637",
+     "revision": 2546389132,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q295637",
+     "revision": 2546389132,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q295637",
+     "revision": 2546389132,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Nigeria"
+   ],
+   "citizenship": [
+    "Nigeria",
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  }
+ ]
+}

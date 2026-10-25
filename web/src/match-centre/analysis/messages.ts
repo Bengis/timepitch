@@ -1,0 +1,58 @@
+// Textos del análisis de partidos grabados (TP203), en inglés y español.
+import { useLanguage } from '../../i18n';
+
+const es = {
+  timeline: 'Cronología', summary: 'Resumen', analysis: 'Análisis', simulated: 'Simulado', notRecorded: 'No grabado',
+  notRecordedBy: (engine: string) => `${engine} no lo graba`,
+  goals: 'Goles', possession: 'Posesión', shots: 'Tiros', onTarget: 'A puerta', saves: 'Paradas', xg: 'xG del motor', fouls: 'Faltas',
+  corners: 'Córners', offsides: 'Fueras de juego', cards: 'Tarjetas', passes: 'Pases', distance: 'Distancia', hsr: 'Alta intensidad',
+  territory: 'Territorio', tilt: 'Inclinación', width: 'Ancho del bloque', depth: 'Profundidad del bloque', withBall: 'con balón', withoutBall: 'sin balón',
+  filterKey: 'Clave', filterChances: 'Ocasiones', filterAll: 'Todo', emptyTimeline: 'Todavía no ha pasado nada en esta grabación.',
+  kinds: { goal: 'Gol', own_goal: 'Gol en propia', shot: 'Tiro', save: 'Parada', foul: 'Falta', offside: 'Fuera de juego', corner: 'Córner',
+    penalty: 'Penalti', card_yellow: 'Amarilla', card_red: 'Roja', substitution: 'Cambio', halftime: 'Descanso', fulltime: 'Final', kickoff: 'Saque inicial' } as Record<string, string>,
+  outcomes: { goal: 'gol', saved: 'parado', off_target: 'fuera' } as Record<string, string>,
+  seekTo: (what: string, minute: string) => `Ir a ${what}, ${minute}`,
+  openPlayer: (name: string) => `Ver la ficha de ${name}`,
+  upTo: (minute: string) => `Hasta el ${minute}`, final: 'Partido completo',
+  possessionBasis: { recorded_owner: 'Posesión: dueño del balón que grabó el motor (balón suelto = último dueño).',
+    nearest_player: 'Posesión: el motor no graba dueño; jugador más cercano a ≤ 2 m del balón (balón suelto = último dueño).' } as Record<string, string>,
+  momentum: 'Dominio por tramos de 5 minutos', momentumNote: 'Barra: posesión del tramo (arriba local, abajo visitante; llena = 75 %). Puntos: tiros grabados. Círculo amarillo: gol.',
+  shotMap: 'Mapa de tiros', shotMapNote: 'Cada equipo ataca hacia la derecha. Posición del tirador al tirar.',
+  heatMap: 'Mapa de calor', heatNote: 'Segundos por zona; el equipo ataca hacia la derecha.', player: 'Jugador',
+  averagePositions: 'Posiciones medias y forma', passNetwork: 'Red de pases', passNetworkNote: 'Pases con receptor grabado; grosor = número de pases (≥ 2).',
+  noPassNetwork: (engine: string) => `${engine} no graba el receptor de los pases: no hay red de pases.`,
+  effort: 'Esfuerzo físico', effortNote: 'Desplazamientos por segundo con las posiciones grabadas; alta intensidad ≥ 19,8 km/h; saltos > 12 m en 1 s (recolocaciones) no cuentan.',
+  minutes: 'Min', team: 'Equipo', km: 'km', m: 'm', teamStats: 'Estadísticas del equipo',
+  territoryNote: 'Territorio: tiempo con el balón en campo rival. Inclinación: con posesión, tiempo en el último tercio rival sobre el de ambos.',
+  noShots: 'Sin tiros grabados hasta aquí.', events: 'Registro técnico de eventos',
+  onTargetNote: '*A puerta: goles y tiros parados que grabó el motor.', timelineFilter: 'Filtro de la cronología',
+};
+type Text = typeof es;
+const en: Text = {
+  timeline: 'Timeline', summary: 'Summary', analysis: 'Analysis', simulated: 'Simulated', notRecorded: 'Not recorded',
+  notRecordedBy: (engine: string) => `${engine} does not record it`,
+  goals: 'Goals', possession: 'Possession', shots: 'Shots', onTarget: 'On target', saves: 'Saves', xg: 'Engine xG', fouls: 'Fouls',
+  corners: 'Corners', offsides: 'Offsides', cards: 'Cards', passes: 'Passes', distance: 'Distance', hsr: 'High intensity',
+  territory: 'Territory', tilt: 'Field tilt', width: 'Block width', depth: 'Block depth', withBall: 'with ball', withoutBall: 'without ball',
+  filterKey: 'Key', filterChances: 'Chances', filterAll: 'All', emptyTimeline: 'Nothing has happened yet in this recording.',
+  kinds: { goal: 'Goal', own_goal: 'Own goal', shot: 'Shot', save: 'Save', foul: 'Foul', offside: 'Offside', corner: 'Corner',
+    penalty: 'Penalty', card_yellow: 'Yellow', card_red: 'Red', substitution: 'Substitution', halftime: 'Half time', fulltime: 'Full time', kickoff: 'Kick-off' },
+  outcomes: { goal: 'goal', saved: 'saved', off_target: 'off target' },
+  seekTo: (what: string, minute: string) => `Go to ${what}, ${minute}`,
+  openPlayer: (name: string) => `Open ${name}'s player card`,
+  upTo: (minute: string) => `Up to ${minute}`, final: 'Full match',
+  possessionBasis: { recorded_owner: 'Possession: ball owner recorded by the engine (loose ball = last owner).',
+    nearest_player: 'Possession: the engine records no owner; nearest player within 2 m of the ball (loose ball = last owner).' },
+  momentum: 'Control in 5-minute spells', momentumNote: 'Bar: possession in the spell (up home, down away; full = 75%). Dots: recorded shots. Yellow circle: goal.',
+  shotMap: 'Shot map', shotMapNote: 'Each team attacks to the right. Shooter position at the shot.',
+  heatMap: 'Heat map', heatNote: 'Seconds per zone; the team attacks to the right.', player: 'Player',
+  averagePositions: 'Average positions and shape', passNetwork: 'Pass network', passNetworkNote: 'Passes with a recorded receiver; width = number of passes (≥ 2).',
+  noPassNetwork: (engine: string) => `${engine} does not record pass receivers: no pass network.`,
+  effort: 'Physical output', effortNote: 'Per-second displacement from recorded positions; high intensity ≥ 19.8 km/h; jumps > 12 m in 1 s (relocations) are not counted.',
+  minutes: 'Min', team: 'Team', km: 'km', m: 'm', teamStats: 'Team statistics',
+  territoryNote: 'Territory: time with the ball in the opponent half. Field tilt: in possession, time in the opponent final third over both teams’.',
+  noShots: 'No recorded shots up to here.', events: 'Technical event log',
+  onTargetNote: '*On target: goals and saved shots recorded by the engine.', timelineFilter: 'Timeline filter',
+};
+export const useAnalysisText = (): Text => useLanguage().locale === 'es' ? es : en;
+export type AnalysisText = Text;

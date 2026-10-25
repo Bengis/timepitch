@@ -1,0 +1,98 @@
+{
+  "version": "directed-grf-patch-1",
+  "case": "TP186",
+  "revision": "directed-grf-native-1",
+  "patchFile": "0001-directed-native-control.patch",
+  "patchSha256": "ca83673b8332bb160e95c4ac9f1d35977b6740914bb478f5561b56c9ed1d4dfb",
+  "executed": false,
+  "compiledBinary": false,
+  "sourceSyntaxChecked": true,
+  "defaultEnabled": false,
+  "files": {
+    "src/game_env.hpp": {
+      "baseSha256": "69ae17ef20a6444d85b73aa5a89f2cb02552f2c7fa7de9b59e35e168bc6545c7",
+      "outputSha256": "93d9b89baf486a33f0eb1807b69d5667e3beb99bf7c01e2b3cdff1540061a480"
+    },
+    "src/gamedefines.hpp": {
+      "baseSha256": "1ac40120b93c6c986e7eaf6e33b7ddc6aae24707aca2ada199f82a60ce10d7b5",
+      "outputSha256": "5d73b7f57334d80da1fa58d1e2df8e236dcf760620b29aa0256ba8c3ea6db4bf"
+    },
+    "src/onthepitch/player/playerbase.hpp": {
+      "baseSha256": "081a09f49d4eb87a0fe85c9d7a3171bf3703274a26a4f6cdc7b68a6083e45021",
+      "outputSha256": "57b4d038e35a7496834e9f6ec98ad17819c332c6c8b18d6f7e63c7f90a5080b7"
+    },
+    "src/onthepitch/player/humanoid/humanoidbase.hpp": {
+      "baseSha256": "dfbad125cce6299b0c27c110ec7e734a4fc530c3264eb8344f6840456f76bad2",
+      "outputSha256": "bb30143b958fb72ba9b3ae11ba754204358e7e844f59b39eaa9f29d1f3e130dc"
+    },
+    "src/onthepitch/player/humanoid/humanoidbase.cpp": {
+      "baseSha256": "2994339c55091432d1617599d2175f161076d3ebc9f5ef2952329c93fbd14b84",
+      "outputSha256": "0ad6d801572b2e51652e6bcb3abed624c91fab06cdc2dbe4637832b286c28c4c"
+    },
+    "src/onthepitch/player/humanoid/humanoid.hpp": {
+      "baseSha256": "03cf83d565bf490c087acd79da941a35d61b5d00636f6654e4cca1db778eef13",
+      "outputSha256": "3f8ddcdf17e4ef2cb4dbc2fa740053a279fe48a48cf162bd6fbaa0c08625559e"
+    },
+    "src/onthepitch/player/humanoid/humanoid.cpp": {
+      "baseSha256": "dd583165d351d3fdeec168224f33874a471a99957601e775d94f10ef00f80304",
+      "outputSha256": "0ed2639de7d0772a115c4093ace85cc42f67a17679e301a48b53bafe0fbdeed6"
+    },
+    "src/onthepitch/player/controller/elizacontroller.cpp": {
+      "baseSha256": "2d56a815e260d017c79d77068edb2b8d5aa60a721bec83f4b1fd7ac9d6771240",
+      "outputSha256": "bf6403ceaf8622348fd45941480a83b64be2f5cd16d21f129c77e0ad1415a890"
+    },
+    "src/game_env.cpp": {
+      "baseSha256": "b6ce66ce6ecd17c2a7e1dd330f08bc0b6a896ee389af251f565263e5c8b9bbab",
+      "outputSha256": "d30f6990b22404c66a4cdf1f4b696252ed9c47dc7790e8bb4ff41441b5107dd5"
+    },
+    "src/onthepitch/ball.cpp": {
+      "baseSha256": "ab5c67794422601756b2d77b032dfc65f2df949df53b1df0dca66f60355af9b1",
+      "outputSha256": "0a6c5e7c3b5fee8485b9f5cb35fa4fef8fcc2cdd7318b612915f6cd8072d0f75"
+    },
+    "src/onthepitch/match.hpp": {
+      "baseSha256": "3f969237e9926fab9f5c35e8da94c4e44485ecfc0d3ada0f0882799eb0a9addc",
+      "outputSha256": "ae66534415a07d318efa2b9e04e47bef38c32fc23efcbeaa3e46bb8592ab3b45"
+    },
+    "src/onthepitch/match.cpp": {
+      "baseSha256": "2f45803170ba5c1fe2835486fd3d41b0366c37825e73ecae147e1ca2ffa31894",
+      "outputSha256": "1833d0f81f6f240eaa8a7f3809a80435ed6601ad27fd9fdfa86f6e176c079494"
+    },
+    "ai.cpp": {
+      "baseSha256": "d9b567d829f01e6f54396af1e108bd5c91e116a574dd317bd7218ba7e7572fae",
+      "outputSha256": "2203c6eb10d2b3481525286ee72193210eb6f34ed650cd659f8121538b3d0d56"
+    },
+    "CMakeLists.txt": {
+      "baseSha256": "26af73334f0f7dcb69e6a1505fce0510f3706d174c3417d8848e38407182b3ab",
+      "outputSha256": "98fbcac631d3e9628d52155f894d4a7fc95384225a8538658402cf86bc9feb01"
+    },
+    "src/directed_reconstruction.hpp": {
+      "baseSha256": null,
+      "outputSha256": "ef4f18fe8be1caba1b24ec8b5417eaef5d27f3e5f92832cf6f8a8fc915cc2f85"
+    },
+    "src/directed_reconstruction.cpp": {
+      "baseSha256": null,
+      "outputSha256": "6dd22fea02e5086f43f3550c62660f0863b1b98710081d1c2aae310eaf814623"
+    }
+  },
+  "controlsImplementedInSource": [
+    "inferred_open_play_cold_start",
+    "forced_receiver_pass",
+    "shot",
+    "trap",
+    "interfere",
+    "deflect",
+    "native_contact_callback",
+    "physical_tick_capture"
+  ],
+  "notCertified": [
+    "fractional_contact",
+    "body_surfaces_or_intervals",
+    "arbitrary_retained_or_saved_animation_state",
+    "runtime_feasibility",
+    "native_artifact_equivalence"
+  ],
+  "nativeRuntimeAdmissions": 0,
+  "syntaxUnits": 8,
+  "binaryLinked": false,
+  "sourceSyntaxCompiler": "MSVC19.16 x64 /Zs /std:c++14"
+}

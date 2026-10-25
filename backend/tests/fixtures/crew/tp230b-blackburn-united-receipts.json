@@ -1,0 +1,134 @@
+{
+ "analyst": {
+  "angle": "narrow_win",
+  "paragraphs": [
+   [
+    "result",
+    "goal:grf:134"
+   ],
+   [
+    "leader:goals",
+    "leader:pass_received",
+    "leader:recoveries"
+   ],
+   [
+    "comparison:shots",
+    "comparison:pass_received",
+    "comparison:recoveries",
+    "comparison:team_possession_pct"
+   ]
+  ]
+ },
+ "writer": {
+  "headline": {
+   "text": "Steven N'Zonzi's decisive goal secures Blackburn Rovers a narrow 1-0 victory over Manchester United",
+   "fact_ids": [
+    "goal:grf:134",
+    "result"
+   ]
+  },
+  "paragraphs": [
+   {
+    "sentences": [
+     {
+      "text": "Blackburn Rovers edged out Manchester United with a solitary goal scored by Steven N'Zonzi at 27:14 on the match clock.",
+      "fact_ids": [
+       "goal:grf:134"
+      ]
+     }
+    ]
+   },
+   {
+    "sentences": [
+     {
+      "text": "Steven N'Zonzi led the scoring with his single goal, while Paul Scholes, David Dunn, and Mauro Formica each received six passes, highlighting their involvement in play.",
+      "fact_ids": [
+       "leader:goals",
+       "leader:pass_received"
+      ]
+     },
+     {
+      "text": "David Dunn and Gael Givet topped the recoveries chart with five each, showcasing Blackburn's defensive efforts.",
+      "fact_ids": [
+       "leader:recoveries"
+      ]
+     }
+    ]
+   },
+   {
+    "sentences": [
+     {
+      "text": "Blackburn Rovers outshot Manchester United 7 to 5 and received 31 passes compared to United's 27, reflecting their slight edge in offensive activity.",
+      "fact_ids": [
+       "comparison:shots",
+       "comparison:pass_received"
+      ]
+     },
+     {
+      "text": "They also led in recoveries 23 to 21 and held 51.2% possession, underscoring their overall control in the match.",
+      "fact_ids": [
+       "comparison:recoveries",
+       "comparison:team_possession_pct"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "writer_revision": {
+  "headline": {
+   "text": "Steven N'Zonzi's decisive goal secures Blackburn Rovers a narrow 1-0 victory over Manchester United",
+   "fact_ids": [
+    "goal:grf:134",
+    "result"
+   ]
+  },
+  "paragraphs": [
+   {
+    "sentences": [
+     {
+      "text": "Blackburn Rovers edged out Manchester United with a solitary goal scored by Steven N'Zonzi at 27:14 on the match clock.",
+      "fact_ids": [
+       "goal:grf:134"
+      ]
+     }
+    ]
+   },
+   {
+    "sentences": [
+     {
+      "text": "Steven N'Zonzi led the scoring with his single goal, while Paul Scholes, David Dunn, and Mauro Formica each received six passes, highlighting their involvement in play.",
+      "fact_ids": [
+       "leader:goals",
+       "leader:pass_received"
+      ]
+     },
+     {
+      "text": "David Dunn and Gael Givet topped the recoveries chart with five each, demonstrating Blackburn Rovers' defensive efforts.",
+      "fact_ids": [
+       "leader:recoveries"
+      ]
+     }
+    ]
+   },
+   {
+    "sentences": [
+     {
+      "text": "Blackburn Rovers outshot Manchester United 7 to 5 and received 31 passes compared to United's 27, reflecting their slight edge in offensive activity.",
+      "fact_ids": [
+       "comparison:shots",
+       "comparison:pass_received"
+      ]
+     },
+     {
+      "text": "They also led in recoveries 23 to 21 and held 51.2% possession, underscoring their overall control in the match.",
+      "fact_ids": [
+       "comparison:recoveries",
+       "comparison:team_possession_pct"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

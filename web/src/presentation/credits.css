@@ -1,0 +1,46 @@
+/* TP221 · Créditos y licencias con el estilo oscuro de emisión (tokens.css, como la ficha de jugador). */
+.tp-credits { display: flex; justify-content: center; font-family: var(--tp-ui); }
+.tp-credits-link {
+  border: 1px solid var(--tp-line2); background: var(--tp-panel); color: var(--tp-ink2); border-radius: 999px;
+  padding: 6px 14px; font: 600 12px var(--tp-ui); letter-spacing: .02em; cursor: pointer;
+}
+.tp-credits-link:hover { color: var(--tp-ink); background: var(--tp-panel2); }
+
+.tp-credits-backdrop {
+  position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px;
+  background: rgba(3, 5, 10, .72);
+}
+.tp-credits-dialog {
+  display: grid; gap: 14px; width: min(680px, 100%); max-height: calc(100vh - 32px); overflow: auto;
+  padding: 18px 20px; border-radius: 18px; border: 1px solid var(--tp-line2); box-shadow: 0 12px 60px #0008;
+  background: var(--tp-bg2); color: var(--tp-ink); font: 13px/1.5 var(--tp-ui); color-scheme: dark;
+}
+.tp-credits-dialog h2 {
+  margin: 0; color: var(--tp-ink); font: 700 20px/1.2 var(--tp-display); letter-spacing: .04em; text-transform: uppercase;
+}
+.tp-credits-dialog ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.tp-credits-dialog li {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 12px;
+  background: var(--tp-panel); border: 1px solid var(--tp-line); overflow-wrap: anywhere;
+}
+.tp-credits-dialog li img { flex: none; border-radius: 4px; }
+.tp-credits-text { color: var(--tp-ink2); }
+.tp-credits-dialog a { color: var(--tp-ink); text-decoration-color: var(--tp-line2); text-underline-offset: 2px; }
+.tp-credits-dialog a:hover { text-decoration-color: currentColor; }
+.tp-credits-licence { color: var(--tp-ink3); font-size: 12px; }
+a.tp-credits-licence { color: var(--tp-hist); }
+.tp-credits-close {
+  justify-self: end; min-height: 36px; padding: 6px 16px; border-radius: 999px; border: 1px solid var(--tp-line2);
+  background: #101a2c; color: var(--tp-ink); font: 600 13px var(--tp-ui); cursor: pointer;
+}
+.tp-credits-close:hover { background: #16223a; }
+.tp-credits-link:focus-visible, .tp-credits-close:focus-visible, .tp-credits-dialog a:focus-visible {
+  outline: 2px solid var(--tp-goal); outline-offset: 2px;
+}
+@media (max-width: 600px) {
+  .tp-credits-backdrop { padding: 0; place-items: end stretch; }
+  .tp-credits-dialog { width: 100%; max-height: 85vh; border-radius: 18px 18px 0 0; padding: 16px; }
+}
+.tp-credits-inspiration { margin: 12px 0 0; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, .12); }
+.tp-credits-inspiration h3 { margin: 0 0 4px; font-size: 13px; }
+.tp-credits-inspiration p { margin: 0; font-size: 12.5px; line-height: 1.45; }

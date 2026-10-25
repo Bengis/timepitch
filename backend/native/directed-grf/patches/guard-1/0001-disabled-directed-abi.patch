@@ -1,0 +1,111 @@
+--- a/ai.cpp
++++ b/ai.cpp
+@@ -23,6 +23,10 @@
+ #include <cmath>
+ #include <stdexcept>
+ 
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++#include "src/directed_reconstruction.hpp"
++#endif
++
+ #ifdef WIN32
+ #define BOOST_USE_WINDOWS_H
+ #endif
+@@ -38,6 +42,14 @@
+ 
+ class GameEnv_Python : public GameEnv {
+  public:
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  // No ContextHolder: these refuse without inspecting or initializing a world.
++  timepitch_directed::UnavailableDirector directed_guard_;
++  std::string directed_prepare_v1(const std::string& payload) { return directed_guard_.prepare(payload); }
++  std::string directed_queue_v1(const std::string& payload) { return directed_guard_.queue(payload); }
++  std::string directed_step_v1(int ticks) { return directed_guard_.step(ticks); }
++  std::string directed_export_v1() { return directed_guard_.export_evidence(); }
++#endif
+   // Experimental diagnostics. No product contract or compatibility promise.
+   Player* probe_player(int side, int index) {
+     if (side < 0 || side > 1) throw std::invalid_argument("Invalid team");
+@@ -370,6 +382,9 @@
+ };
+ 
+ BOOST_PYTHON_MODULE(_gameplayfootball) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  def("directed_capabilities_v1", &timepitch_directed::capabilities);
++#endif
+   class_<std::vector<float> >("FloatVec")
+       .def(vector_indexing_suite<std::vector<float> >());
+ 
+@@ -424,6 +439,12 @@
+       .value("game_done", GameState::game_done);
+ 
+   class_<GameEnv_Python>("GameEnv")
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++      .def("directed_prepare_v1", &GameEnv_Python::directed_prepare_v1)
++      .def("directed_queue_v1", &GameEnv_Python::directed_queue_v1)
++      .def("directed_step_v1", &GameEnv_Python::directed_step_v1)
++      .def("directed_export_v1", &GameEnv_Python::directed_export_v1)
++#endif
+       .def("probe_set_stat", &GameEnv_Python::probe_set_stat)
+       .def("probe_get_stat", &GameEnv_Python::probe_get_stat)
+       .def("probe_enable_stats", &GameEnv_Python::probe_enable_stats, (bp::arg("capacity")=20000))
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -171,6 +171,12 @@
+ add_library(${LIB_NAME} SHARED ${CORE_SOURCES} ${CORE_HEADERS} ${AI_HEADERS} ${AI_SOURCES})
+ target_link_libraries(${LIB_NAME} ${LIBRARIES})
+ 
++option(TIMEPITCH_DIRECTED_RECONSTRUCTION "Build disabled directed ABI guard" OFF)
++if(TIMEPITCH_DIRECTED_RECONSTRUCTION)
++  target_sources(${LIB_NAME} PRIVATE src/directed_reconstruction.cpp)
++  target_compile_definitions(${LIB_NAME} PRIVATE TIMEPITCH_DIRECTED_RECONSTRUCTION=1)
++endif()
++
+ if(WIN32)
+   set_target_properties(${LIB_NAME} PROPERTIES SUFFIX ".pyd")
+ endif()
+--- /dev/null
++++ b/src/directed_reconstruction.hpp
+@@ -0,0 +1,17 @@
++// TimePitch directed reconstruction guard, opt-in and disabled.
++#ifndef TIMEPITCH_DIRECTED_RECONSTRUCTION_HPP
++#define TIMEPITCH_DIRECTED_RECONSTRUCTION_HPP
++#include <string>
++namespace timepitch_directed {
++std::string capabilities();
++class UnavailableDirector {
++ public:
++  std::string prepare(const std::string& payload);
++  std::string queue(const std::string& payload) const;
++  std::string step(int ticks) const;
++  std::string export_evidence() const;
++ private:
++  bool prepare_attempted_ = false;
++};
++}  // namespace timepitch_directed
++#endif
+--- /dev/null
++++ b/src/directed_reconstruction.cpp
+@@ -0,0 +1,22 @@
++// TimePitch directed reconstruction guard. No world access or physics.
++#include "directed_reconstruction.hpp"
++namespace timepitch_directed {
++std::string capabilities() {
++  return R"json({"version":"grf-directed-port-1","mode":"native_disabled","executionMode":"disabled","patchRevision":"directed-grf-guard-1","status":"unsupported","physicalTickMs":10,"subTickContact":false,"controls":[],"availableChannels":[],"measured":false,"reasons":["initial_state_provider_unavailable","directed_command_path_unavailable","body_contact_evidence_unavailable"]})json";
++}
++std::string UnavailableDirector::prepare(const std::string&) {
++  if (prepare_attempted_) return R"json({"status":"unsupported","reason":"prepare_already_attempted"})json";
++  prepare_attempted_ = true;
++  return R"json({"status":"unsupported","reason":"initial_state_provider_unavailable"})json";
++}
++std::string UnavailableDirector::queue(const std::string&) const {
++  return R"json({"status":"unsupported","reason":"directed_command_path_unavailable"})json";
++}
++std::string UnavailableDirector::step(int ticks) const {
++  if (ticks < 1 || ticks > 100) return R"json({"status":"unsupported","reason":"invalid_tick_count"})json";
++  return R"json({"status":"unsupported","reason":"directed_capture_not_prepared"})json";
++}
++std::string UnavailableDirector::export_evidence() const {
++  return R"json({"status":"unsupported","reason":"directed_capture_not_prepared","measured":false,"samples":null,"events":null,"contacts":null,"clock":null})json";
++}
++}  // namespace timepitch_directed

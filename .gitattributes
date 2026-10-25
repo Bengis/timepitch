@@ -1,0 +1,28 @@
+* text=auto
+.gitattributes text eol=lf
+.gitignore text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+# Pure M1 build provenance hashes these exact new source bytes.
+backend/tests/fixtures/grf/marking_continuity_fixture.cpp text eol=lf
+backend/tests/fixtures/grf/marking_native_hook_fixture.cpp text eol=lf
+backend/tests/fixtures/grf/m1_worker_fixture.cpp text eol=lf
+*.ps1 text eol=crlf
+# Preserve captured bytes: the audit hashes refer to original source files.
+assets/art/** -text
+*.sqlite binary
+*.zip binary
+*.rda binary
+*.mp4 binary
+
+# Preserve exact test bytes bound by the exclusive resource profile.
+backend/tests/test_grf_m1_resource_profile.py -text whitespace=cr-at-eol
+# HD crest registry hashes the exact sanitised SVG bytes (crests-hd.json).
+web/public/assets/crests-hd/*.svg -text
+# TouchLines bundles: the server checks their SHA-256 (LF bytes).
+engines/touchlines/build/*.mjs text eol=lf
+# Patches are applied byte for byte.
+*.patch -text

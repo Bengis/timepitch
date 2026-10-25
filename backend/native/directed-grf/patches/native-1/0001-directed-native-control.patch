@@ -1,0 +1,691 @@
+--- a/src/game_env.hpp
++++ b/src/game_env.hpp
+@@ -21,6 +21,9 @@
+ #include "gfootball_actions.h"
+ #include "main.hpp"
+ #include "onthepitch/player/player.hpp"
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++#include "directed_reconstruction.hpp"
++#endif
+ 
+ class AIControlledKeyboard;
+ class GameTask;
+@@ -79,6 +82,10 @@
+   GameConfig game_config;
+   GameContext* context = nullptr;
+   GameState state = game_created;
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  timepitch_directed::Director directed;
++  void directed_physical_tick() { do_step(1); }
++#endif
+   int waiting_for_game_count = 0;
+   // Throwaway native contact telemetry, drained after each Python step.
+   struct ProbeTouch {
+--- a/src/gamedefines.hpp
++++ b/src/gamedefines.hpp
+@@ -187,6 +187,9 @@
+   }
+ 
+   e_FunctionType desiredFunctionType;
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  std::string directedEventId;
++#endif
+ 
+   bool           useDesiredMovement;
+   Vector3        desiredDirection;
+@@ -216,6 +219,9 @@
+   int            modifier;
+   void ProcessState(EnvState* state) { DO_VALIDATION;
+     state->process(desiredFunctionType);
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++    state->process(directedEventId);
++#endif
+     state->process(useDesiredMovement);
+     state->process(desiredDirection);
+     state->process(strictMovement);
+--- a/src/onthepitch/player/playerbase.hpp
++++ b/src/onthepitch/player/playerbase.hpp
+@@ -99,6 +99,9 @@
+     const NodeMap &GetNodeMap() { DO_VALIDATION; return humanoid->GetNodeMap(); }
+ 
+     float GetFatigueFactorInv() const { return fatigueFactorInv; }
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++    void DirectedEnergy(float value) { fatigueFactorInv=value; }
++#endif
+     void RelaxFatigue(float howMuch) { DO_VALIDATION;
+       fatigueFactorInv += howMuch;
+       fatigueFactorInv = clamp(fatigueFactorInv, 0.01f, 1.0f);
+--- a/src/onthepitch/player/humanoid/humanoidbase.hpp
++++ b/src/onthepitch/player/humanoid/humanoidbase.hpp
+@@ -260,6 +260,9 @@
+ 
+     int GetIdleMovementAnimID();
+     void ResetPosition(const Vector3 &newPos, const Vector3 &focusPos);
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++    void DirectedInitialise(const Vector3 &velocity);
++#endif
+     void OffsetPosition(const Vector3 &offset);
+     void TripMe(const Vector3 &tripVector, int tripType);
+ 
+--- a/src/onthepitch/player/humanoid/humanoidbase.cpp
++++ b/src/onthepitch/player/humanoid/humanoidbase.cpp
+@@ -24,6 +24,9 @@
+ #include "../../match.hpp"
+ 
+ #include "../../../main.hpp"
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++#include "../../../game_env.hpp"
++#endif
+ 
+ #include "../../AIsupport/AIfunctions.hpp"
+ 
+@@ -813,6 +816,9 @@
+ 
+ void HumanoidBase::ResetPosition(const Vector3 &newPos,
+                                  const Vector3 &focusPos) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if(GetGame()->directed.Initialized()) {GetGame()->directed.Discontinuity();return;}
++#endif
+   DO_VALIDATION;
+ 
+   startPos = newPos;
+@@ -893,6 +899,16 @@
+   }
+ }
+ 
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++void HumanoidBase::DirectedInitialise(const Vector3 &velocity) {
++  spatialState.actualMovement=velocity; spatialState.physicsMovement=velocity;
++  spatialState.animMovement=velocity; spatialState.movement=velocity;
++  spatialState.floatVelocity=velocity.GetLength();
++  spatialState.enumVelocity=FloatToEnumVelocity(spatialState.floatVelocity);
++  currentAnim.incomingMovement=velocity; currentAnim.outgoingMovement=velocity;
++  currentAnim.frameNum=0;
++}
++#endif
+ void HumanoidBase::OffsetPosition(const Vector3 &offset) {
+   DO_VALIDATION;
+ 
+--- a/src/onthepitch/player/humanoid/humanoid.hpp
++++ b/src/onthepitch/player/humanoid/humanoid.hpp
+@@ -47,6 +47,10 @@
+     unsigned int probe_animation_id = 0;
+ 
+     void SelectRetainAnim();
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++    bool DirectedSelectInitial(const Vector3 &velocity);
++    Vector3 DirectedAnimationTarget() const { return currentAnim.touchPos+currentAnim.positionOffset; }
++#endif
+ 
+     virtual void ResetSituation(const Vector3 &focusPos);
+ 
+--- a/src/onthepitch/player/humanoid/humanoid.cpp
++++ b/src/onthepitch/player/humanoid/humanoid.cpp
+@@ -213,6 +213,9 @@
+     interruptAnim = e_InterruptAnim_ReQueue;
+   }
+ 
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (GetGame()->directed.NeedsCommand(CastPlayer()) && interruptAnim==e_InterruptAnim_None) interruptAnim=e_InterruptAnim_Switch;
++#endif
+   if (interruptAnim != e_InterruptAnim_None) {
+     DO_VALIDATION;
+     PlayerCommandQueue commandQueue;
+@@ -1122,6 +1125,17 @@
+   //printf("humanoid reset\n");
+ }
+ 
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++bool Humanoid::DirectedSelectInitial(const Vector3 &velocity) {
++  PlayerCommand command;
++  command.desiredFunctionType=e_FunctionType_Movement;
++  command.useDesiredMovement=true; command.useDesiredLookAt=true;
++  command.desiredDirection=velocity.GetNormalized(spatialState.directionVec);
++  command.desiredVelocityFloat=velocity.GetLength();command.strictMovement=e_StrictMovement_True;
++  command.desiredLookAt=spatialState.position+command.desiredDirection*10;
++  return SelectAnim(command,e_InterruptAnim_Switch);
++}
++#endif
+ bool Humanoid::SelectAnim(const PlayerCommand &command,
+                           e_InterruptAnim localInterruptAnim,
+                           bool preferPassAndShot) {
+@@ -1360,6 +1374,9 @@
+ 
+   DataSet dataSet;
+   anims->CrudeSelection(dataSet, query);
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (!command.directedEventId.empty()) dataSet.erase(std::remove_if(dataSet.begin(),dataSet.end(),[&](int id){ return !GetGame()->directed.AllowsBody(command.directedEventId,anims->GetAnim(id)->GetVariable("touch_bodypart")); }),dataSet.end());
++#endif
+   if (dataSet.size() == 0) {
+     DO_VALIDATION;
+     if (command.desiredFunctionType == e_FunctionType_Movement) {
+--- a/src/onthepitch/player/controller/elizacontroller.cpp
++++ b/src/onthepitch/player/controller/elizacontroller.cpp
+@@ -38,6 +38,9 @@
+ ElizaController::~ElizaController() { DO_VALIDATION; }
+ 
+ void ElizaController::RequestCommand(PlayerCommandQueue &commandQueue) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (GetGame()->directed.RequestCommand(CastPlayer(),commandQueue)) return;
++#endif
+   DO_VALIDATION;
+   physical_target_distance=-1.0f; physical_support_requested=false;
+   if (GetGame()->activity_enabled && (!match->IsInPlay() || match->IsInSetPiece())) physical_activity.Reset();
+--- a/src/game_env.cpp
++++ b/src/game_env.cpp
+@@ -51,6 +51,9 @@
+   // Preserve the original contact call and all its gameplay effects.
+   auto previous=action_contact_role;action_contact_role=role;
+   actor->GetTeam()->SetLastTouchPlayer(actor,touch);
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  directed.ObserveContact(actor,actor->CastHumanoid()->GetCurrentAnim()->originatingCommand.directedEventId,actor->CastHumanoid()->GetCurrentAnim()->anim->GetVariable("touch_bodypart"),int(role));
++#endif
+   action_contact_role=previous;
+ }
+ 
+@@ -125,6 +128,9 @@
+ }
+ 
+ void GameEnv::start_game() {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (directed.Locked()) {directed.Discontinuity();throw std::logic_error("directed_state_mutation_forbidden");}
++#endif
+   assert(context == nullptr);
+   install_stacktrace();
+   std::cout.precision(17);
+@@ -205,6 +211,9 @@
+ }
+ 
+ void GameEnv::action(int action, bool left_team, int player) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (directed.Locked()) {directed.Discontinuity();throw std::logic_error("directed_state_mutation_forbidden");}
++#endif
+   SetGame(this);
+   GetTracker()->setDisabled(true);
+   int controller_id = player + (left_team ? 0 : 11);
+@@ -324,6 +333,9 @@
+ }
+ 
+ std::string GameEnv::set_state(const std::string& state) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (directed.Locked()) {directed.Discontinuity();throw std::logic_error("directed_state_mutation_forbidden");}
++#endif
+   SetGame(this);
+   EnvState writer(this, state);
+   string pickle;
+@@ -336,6 +348,9 @@
+ }
+ 
+ void GameEnv::step() {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (directed.Locked()) {directed.Discontinuity();throw std::logic_error("directed_state_mutation_forbidden");}
++#endif
+   DO_VALIDATION;
+   // We do 10 environment steps per second, while game does 100 frames of
+   // physics animation.
+@@ -397,6 +412,9 @@
+ }
+ 
+ void GameEnv::reset(ScenarioConfig& game_config, bool animations) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (directed.Locked()) {directed.Discontinuity();throw std::logic_error("directed_state_mutation_forbidden");}
++#endif
+   DO_VALIDATION;
+   ContextHolder c(this);
+   // Reset call disables tracker.
+--- a/src/onthepitch/ball.cpp
++++ b/src/onthepitch/ball.cpp
+@@ -16,6 +16,9 @@
+ // i do not offer support, so don't ask. to be used for inspiration :)
+ 
+ #include "ball.hpp"
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++#include "../game_env.hpp"
++#endif
+ 
+ #include <cmath>
+ 
+@@ -103,6 +106,9 @@
+ }
+ 
+ void Ball::SetPosition(const Vector3 &target) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (GetGame()->directed.Initialized()) {GetGame()->directed.Discontinuity();return;}
++#endif
+   DO_VALIDATION;
+   valid_predictions = 0;
+   positionBuffer.Set(target);
+--- a/src/onthepitch/match.hpp
++++ b/src/onthepitch/match.hpp
+@@ -74,6 +74,9 @@
+     void UpdateLatestMentalImageBallPredictions();
+ 
+     void ResetSituation(const Vector3 &focusPos);
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++    void DirectedRebuildMentalImages() { mentalImages.clear(); mentalImages.emplace_back(this); }
++#endif
+ 
+     void SetMatchPhase(e_MatchPhase newMatchPhase);
+     e_MatchPhase GetMatchPhase() const { return matchPhase; }
+--- a/src/onthepitch/match.cpp
++++ b/src/onthepitch/match.cpp
+@@ -466,6 +466,9 @@
+ }
+ 
+ void Match::ResetSituation(const Vector3 &focusPos) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  if (GetGame()->directed.Initialized()) { GetGame()->directed.Discontinuity(); return; }
++#endif
+   if (GetGame()->physical_enabled) {
+     GetGame()->physical_discontinuity=true;
+     ++GetGame()->physical_relocation_id;
+@@ -880,6 +883,9 @@
+   if (!IsInPlay() && referee->GetBuffer().prepareTime + 10 < GetActualTime_ms()) {
+     // Do not do simulation when game is on hold to save CPU.
+     BumpActualTime_ms(10);
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++    GetGame()->directed.AfterTick(this);
++#endif
+     return false;
+   }
+   Mirror(false, false, reverse);
+@@ -1035,6 +1041,9 @@
+        SetAutoUpdateIngameCamera(true);
+      }
+   }
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  GetGame()->directed.AfterTick(this);
++#endif
+   return true;
+ }
+ 
+--- a/ai.cpp
++++ b/ai.cpp
+@@ -38,6 +38,12 @@
+ 
+ class GameEnv_Python : public GameEnv {
+  public:
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  std::string directed_prepare_v1(const std::string& payload) { return directed.Prepare(*this,payload); }
++  std::string directed_queue_v1(const std::string& payload) { return directed.Queue(payload); }
++  std::string directed_step_v1(int ticks) { return directed.Step(ticks); }
++  std::string directed_export_v1() { return directed.Export(); }
++#endif
+   // Experimental diagnostics. No product contract or compatibility promise.
+   Player* probe_player(int side, int index) {
+     if (side < 0 || side > 1) throw std::invalid_argument("Invalid team");
+@@ -341,6 +347,9 @@
+   }
+ 
+   void step_python() {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++    if(directed.Locked()) {directed.Discontinuity();throw std::logic_error("directed_state_mutation_forbidden");}
++#endif
+     ContextHolder c(this);
+     PyThreadState* _save = NULL;
+     Py_UNBLOCK_THREADS;
+@@ -357,6 +366,9 @@
+   }
+ 
+   void reset_python(ScenarioConfig& game_config, bool init_animation) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++    if(directed.Locked()) {directed.Discontinuity();throw std::logic_error("directed_state_mutation_forbidden");}
++#endif
+     ContextHolder c(this);
+     context->step = -1;
+     probe_touches.clear();
+@@ -370,6 +382,9 @@
+ };
+ 
+ BOOST_PYTHON_MODULE(_gameplayfootball) {
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++  def("directed_capabilities_v1", &timepitch_directed::capabilities);
++#endif
+   class_<std::vector<float> >("FloatVec")
+       .def(vector_indexing_suite<std::vector<float> >());
+ 
+@@ -424,6 +439,12 @@
+       .value("game_done", GameState::game_done);
+ 
+   class_<GameEnv_Python>("GameEnv")
++#ifdef TIMEPITCH_DIRECTED_RECONSTRUCTION
++      .def("directed_prepare_v1", &GameEnv_Python::directed_prepare_v1)
++      .def("directed_queue_v1", &GameEnv_Python::directed_queue_v1)
++      .def("directed_step_v1", &GameEnv_Python::directed_step_v1)
++      .def("directed_export_v1", &GameEnv_Python::directed_export_v1)
++#endif
+       .def("probe_set_stat", &GameEnv_Python::probe_set_stat)
+       .def("probe_get_stat", &GameEnv_Python::probe_get_stat)
+       .def("probe_enable_stats", &GameEnv_Python::probe_enable_stats, (bp::arg("capacity")=20000))
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -171,6 +171,12 @@
+ add_library(${LIB_NAME} SHARED ${CORE_SOURCES} ${CORE_HEADERS} ${AI_HEADERS} ${AI_SOURCES})
+ target_link_libraries(${LIB_NAME} ${LIBRARIES})
+ 
++option(TIMEPITCH_DIRECTED_RECONSTRUCTION "Build isolated directed native control" OFF)
++if(TIMEPITCH_DIRECTED_RECONSTRUCTION)
++  add_definitions(-DTIMEPITCH_DIRECTED_RECONSTRUCTION=1)
++  target_sources(gamelib PRIVATE src/directed_reconstruction.cpp)
++endif()
++
+ if(WIN32)
+   set_target_properties(${LIB_NAME} PROPERTIES SUFFIX ".pyd")
+ endif()
+--- /dev/null
++++ b/src/directed_reconstruction.hpp
+@@ -0,0 +1,65 @@
++// TimePitch directed reconstruction, isolated opt-in fork. No runtime entry point.
++#ifndef TIMEPITCH_DIRECTED_RECONSTRUCTION_HPP
++#define TIMEPITCH_DIRECTED_RECONSTRUCTION_HPP
++#include "gamedefines.hpp"
++#include <string>
++#include <vector>
++class GameEnv;
++class Match;
++namespace timepitch_directed {
++std::string capabilities();
++class Director {
++ public:
++  std::string Prepare(GameEnv&, const std::string&);
++  std::string Queue(const std::string&);
++  std::string Step(int);
++  std::string Export() const;
++  bool Active() const { return prepared_ && !failed_; }
++  bool Capturing() const { return prepared_ && sealed_; }
++  bool Initialized() const { return prepared_; }
++  bool Locked() const { return attempted_; }
++  bool NeedsCommand(Player*) const;
++  bool RequestCommand(Player*, PlayerCommandQueue&);
++  bool AllowsBody(const std::string&, const std::string&) const;
++  void ObserveContact(Player*, const std::string&, const std::string&, int);
++  void AfterTick(Match*);
++  void Discontinuity();
++ private:
++  struct Actor { std::string key, id, phase; Player* player; Vector3 position, velocity; float energy; };
++  struct Command {
++    std::string id, kind, body, raw;
++    Player *actor=nullptr, *receiver=nullptr;
++    Vector3 target;
++    unsigned long tick=0, launch=0;
++    e_FunctionType function=e_FunctionType_Movement;
++    float power=0;
++    bool dispatched=false, observed=false, hasTarget=false;
++  };
++  struct Contact {
++    std::string event, actor, body;
++    unsigned long nativeMs, relativeMs;
++    int function, role;
++    Vector3 ball, velocity, animationTarget;
++  };
++  struct Sample {
++    unsigned long tick, nativeMs;
++    std::vector<Vector3> positions, velocities;
++    Vector3 ball, velocity;
++    int homeGoals, awayGoals;
++  };
++  Actor* Find(Player*);
++  Player* Resolve(const std::string&) const;
++  std::string Fail(const std::string&);
++  void Capture(Match*);
++  GameEnv* game_=nullptr;
++  bool attempted_=false, prepared_=false, sealed_=false, failed_=false;
++  unsigned long epoch_=0, ticks_=0, total_=0;
++  double sourceMs_=0;
++  std::string reason_, profileJson_, initialJson_;
++  std::vector<Actor> actors_;
++  std::vector<Command> commands_;
++  std::vector<Contact> contacts_;
++  std::vector<Sample> samples_;
++};
++} // namespace timepitch_directed
++#endif
+--- /dev/null
++++ b/src/directed_reconstruction.cpp
+@@ -0,0 +1,246 @@
++// TimePitch directed native control. Historical constraints never set a score.
++#include "directed_reconstruction.hpp"
++#include "game_env.hpp"
++#include "gametask.hpp"
++#include "onthepitch/match.hpp"
++#include "onthepitch/player/player.hpp"
++#include "onthepitch/player/humanoid/humanoid.hpp"
++#include "onthepitch/AIsupport/AIfunctions.hpp"
++#include <boost/python.hpp>
++#include <algorithm>
++#include <cmath>
++#include <set>
++#include <stdexcept>
++namespace bp = boost::python;
++namespace timepitch_directed {
++namespace {
++void Check(bool ok, const char* code) { if (!ok) throw std::invalid_argument(code); }
++bp::dict Dict(bp::object o) { Check(PyDict_Check(o.ptr()), "object_required"); return bp::extract<bp::dict>(o); }
++std::string Text(bp::object o) { Check(PyUnicode_Check(o.ptr()), "string_required"); return bp::extract<std::string>(o); }
++double Number(bp::object o) {
++  Check(!PyBool_Check(o.ptr()) && (PyLong_Check(o.ptr()) || PyFloat_Check(o.ptr())), "number_required");
++  double n=bp::extract<double>(o); Check(std::isfinite(n), "nonfinite_number"); return n;
++}
++unsigned long Integer(bp::object o, unsigned long max) {
++  double n=Number(o); Check(n>=0 && n<=max && std::floor(n)==n,"bounded_integer_required"); return static_cast<unsigned long>(n);
++}
++bp::dict Pairs(bp::list pairs) {
++  bp::dict out;
++  for(int i=0;i<bp::len(pairs);++i) { bp::object p=pairs[i]; Check(!out.has_key(p[0]),"duplicate_key");out[p[0]]=p[1]; }
++  return out;
++}
++bp::object BadConstant(std::string) { throw std::invalid_argument("nonfinite_json"); }
++void Finite(bp::object value,int depth=0) {
++  Check(depth<=64,"json_depth");
++  if(PyFloat_Check(value.ptr()) || (PyLong_Check(value.ptr()) && !PyBool_Check(value.ptr()))) {Number(value);return;}
++  if(PyDict_Check(value.ptr())) {bp::list values=Dict(value).values();for(int i=0;i<bp::len(values);++i)Finite(values[i],depth+1);}
++  else if(PyList_Check(value.ptr())) {for(int i=0;i<bp::len(value);++i)Finite(value[i],depth+1);}
++}
++bp::dict Parse(const std::string& raw) {
++  Check(raw.size()<=4194304,"packet_limit");
++  bp::dict result=Dict(bp::import("json").attr("loads")(raw,bp::arg("object_pairs_hook")=bp::make_function(&Pairs),bp::arg("parse_constant")=bp::make_function(&BadConstant)));
++  Finite(result);return result;
++}
++std::string Json(bp::object value) { return bp::extract<std::string>(bp::import("json").attr("dumps")(value,bp::arg("allow_nan")=false)); }
++bp::object Value(bp::object prior) { return Dict(prior)["value"]; }
++Vector3 Vector(bp::object obj, bool requiredZ=true) {
++  bp::dict d=Dict(obj);Check(Text(d["space"])=="grf_world_metres","world_basis");
++  Check(!requiredZ || d.has_key("z"),"physical_z_required");
++  if(d.has_key("z")) Check(Text(d["zUnit"])=="metres","physical_z_unit");
++  return Vector3(static_cast<float>(Number(d["x"])),static_cast<float>(Number(d["y"])),static_cast<float>(d.has_key("z")?Number(d["z"]):0));
++}
++Vector3 World(Vector3 v, bool mirrored) { if(mirrored) {v.coords[0]=-v.coords[0];v.coords[1]=-v.coords[1];}return v; }
++bp::dict XYZ(const Vector3& v) { bp::dict d;d["x"]=v.coords[0];d["y"]=v.coords[1];d["z"]=v.coords[2];return d; }
++void Speed(const Vector3& v, double limit) {
++  double x=v.coords[0]*105.0/110.0,y=v.coords[1]*68.0/72.0;
++  Check(std::sqrt(x*x+y*y+v.coords[2]*v.coords[2])<=limit,"initial_speed_limit");
++}
++std::string Unsupported(const char* reason) {
++  // Native callbacks also run under legacy wrappers which release the Python GIL.
++  std::string escaped;const char* hex="0123456789abcdef";
++  for(unsigned char c:std::string(reason)) {
++    if(c=='"' || c=='\\') {escaped.push_back('\\');escaped.push_back(static_cast<char>(c));}
++    else if(c<32 || c>=128) {escaped+="\\u00";escaped.push_back(hex[c>>4]);escaped.push_back(hex[c&15]);}
++    else escaped.push_back(static_cast<char>(c));
++  }
++  return "{\"status\":\"unsupported\",\"reason\":\""+escaped+"\"}";
++}
++}
++std::string capabilities() {
++  return R"json({"version":"grf-directed-native-capabilities-1","patchRevision":"directed-grf-native-1","mode":"native_opt_in_unvalidated","executionMode":"disabled","physicalTickMs":10,"subTickContact":false,"controls":["cold_start","pass","shot","trap","interfere","deflect"],"contactAuthority":"native_touch_callback_not_body_certificate","initialStatePolicy":"grf-directed-cold-start-1","measured":false})json";
++}
++std::string Director::Fail(const std::string& reason) { failed_=true;if(reason_.empty())reason_=reason;return Unsupported(reason_.c_str()); }
++Director::Actor* Director::Find(Player* p) { for(auto& a:actors_)if(a.player==p)return &a;return nullptr; }
++Player* Director::Resolve(const std::string& id) const { for(const auto& a:actors_)if(a.id==id)return a.player;throw std::invalid_argument("actor_unmapped"); }
++std::string Director::Prepare(GameEnv& game,const std::string& payload) {
++  if(attempted_) return Fail("prepare_already_attempted");
++  attempted_=true;
++  try {
++    Check(game.context && game.context->gameTask && game.state==game_running,"existing_world_required");
++    ContextHolder context(&game);
++    bp::dict p=Parse(payload),initial=Dict(p["initialState"]),options=Dict(p["nativeOptions"]),profile=Dict(p["profile"]),clock=Dict(p["clock"]);
++    Check(Text(options["version"])=="grf-directed-native-options-1" && Text(options["initialStatePolicy"])=="grf-directed-cold-start-1","initial_policy");
++    Check(Text(profile["executionMode"])=="disabled" && Text(profile["transformId"])=="grf-world-110x72-canonical-105x68-v1","profile_basis");
++    unsigned long seed=Integer(p["seed"],4294967295UL);Check(seed==Integer(profile["seed"],4294967295UL),"seed_binding");
++    Check(Integer(initial["period"],1)==1 && Text(Value(initial["phase"]))=="open_play","initial_phase");
++    Check(Value(Dict(initial["ball"])["ownerId"]).is_none(),"initial_retained_owner_unsupported");
++    bp::dict caches=Dict(Value(initial["caches"]));
++    Check(Text(caches["revision"])=="grf-directed-cold-start-1" && bp::len(Dict(caches["values"]))==0,"initial_caches");
++    total_=Integer(clock["totalTicks"],10000);Check(total_>0 && Integer(clock["tickMs"],10)==10,"physical_clock");
++    sourceMs_=Number(clock["startSourceMs"]);Check(sourceMs_>=0 && sourceMs_==Number(initial["sourceMs"]),"source_clock");
++    Match* match=game.context->gameTask->GetMatch();Check(match,"existing_match_required");
++    Check(match->GetActualTime_ms()==0 && game.context->step==-1,"fresh_unstepped_world_required");
++    bp::list native=bp::extract<bp::list>(p["nativePlayers"]),sources=bp::extract<bp::list>(initial["players"]);
++    std::set<Player*> active,seen;std::set<std::string> keys;
++    for(int side=0;side<2;++side) {std::vector<Player*> members;match->GetActiveTeamPlayers(side,members);active.insert(members.begin(),members.end());}
++    Check(bp::len(native)==int(active.size()) && bp::len(native)==bp::len(sources),"complete_active_roster");
++    for(int i=0;i<bp::len(native);++i) {
++      bp::dict a=Dict(native[i]),source=Dict(sources[i]); Actor actor;
++      actor.id=Text(a["engineId"]);actor.key=Text(a["playerKey"]);
++      Check(actor.id==Text(source["engineId"]) && actor.key==Text(source["playerKey"]) && keys.insert(actor.key).second,"source_actor_binding");
++      Check(actor.id.size()>=6 && (actor.id.substr(0,5)=="home:" || actor.id.substr(0,5)=="away:"),"engine_id");
++      std::string tail=actor.id.substr(5);Check(tail.size()<=2 && tail.find_first_not_of("0123456789")==std::string::npos,"engine_slot");
++      int slot=std::stoi(tail),side=actor.id.substr(0,4)=="home"?0:1;
++      const auto& members=match->GetTeam(side)->GetAllPlayers();
++      Check(slot<=10 && slot<int(members.size()) && std::to_string(slot)==tail,"engine_slot");actor.player=members[slot];
++      Check(active.count(actor.player) && seen.insert(actor.player).second && !actor.player->ExternalControllerActive(),"native_actor_active");
++      Check(Text(Dict(source["position"])["provenance"])=="inferred" && bp::len(Dict(Value(source["memory"])))==0,"inferred_cold_root_memory");
++      actor.position=Vector(Value(a["position"]));actor.velocity=Vector(Value(a["velocity"]));actor.phase=Text(Value(source["phase"]));actor.energy=static_cast<float>(Number(Value(source["energy"])));
++      Check(actor.position.coords[0]>=-55 && actor.position.coords[0]<=55 && actor.position.coords[1]>=-36 && actor.position.coords[1]<=36 && actor.position.coords[2]==0 && actor.velocity.coords[2]==0,"ground_initial_state");
++      Check(actor.energy>=0.01f && actor.energy<=1 && (actor.phase=="standing" || actor.phase=="moving"),"initial_energy_phase");
++      Check((actor.phase=="standing")== (actor.velocity.GetLength()==0),"initial_phase_velocity");Speed(actor.velocity,9);actors_.push_back(actor);
++    }
++    bp::dict ball=Dict(p["nativeBall"]);Vector3 ballPos=Vector(Value(ball["position"])),ballVelocity=Vector(Value(ball["velocity"]));
++    Check(ballPos.coords[2]>=0 && Value(ball["ownerId"]).is_none(),"initial_ball");Speed(ballVelocity,45);
++    // All validation precedes initialization. Rejected jobs never continue in this world.
++    game_=&game;profileJson_=Json(profile);initialJson_=payload;randomseed(static_cast<unsigned int>(seed));
++    bool m0=match->GetTeam(0)->isMirrored(),m1=match->GetTeam(1)->isMirrored(),mb=match->isBallMirrored();
++    match->Mirror(m0,m1,mb);
++    try {
++      match->ResetSituation(ballPos);match->SetMatchPhase(e_MatchPhase_1stHalf);match->StopSetPiece();match->StartPlay();
++      auto& buffer=const_cast<RefereeBuffer&>(match->GetReferee()->GetBuffer());buffer.active=false;buffer.endPhase=false;buffer.taker=nullptr;
++      for(int side=0;side<2;++side)match->GetTeam(side)->GetController()->PrepareSetPiece(e_GameMode_Normal,match->GetTeam(1-side),0,-1);
++      for(auto& a:actors_) {a.player->ResetPosition(a.position,a.position+(a.velocity.GetLength()>0?a.velocity:ballPos-a.position));a.player->DirectedEnergy(a.energy);a.player->CastHumanoid()->DirectedInitialise(a.velocity);}
++      match->GetBall()->SetPosition(ballPos);match->GetBall()->SetMomentum(ballVelocity);match->DirectedRebuildMentalImages();
++      for(auto& a:actors_) Check(a.player->CastHumanoid()->DirectedSelectInitial(a.velocity),"initial_animation_unavailable");
++    } catch(...) {match->Mirror(m0,m1,mb);throw;}
++    match->Mirror(m0,m1,mb);
++    epoch_=match->GetActualTime_ms();profileJson_=Json(profile);initialJson_=payload;
++    prepared_=true;Capture(match);
++    return R"json({"status":"ok"})json";
++  } catch(const bp::error_already_set&) {PyErr_Clear();return Fail("invalid_native_initial_json");}
++    catch(const std::exception& e) {return Fail(e.what());}
++}
++std::string Director::Queue(const std::string& payload) {
++  if(!Active() || sealed_)return Fail("queue_not_open");
++  try {
++    bp::dict p=Parse(payload),n=Dict(p["nativeControl"]);Command c;
++    c.id=Text(p["eventId"]);c.kind=Text(p["kind"]);c.raw=payload;c.actor=Resolve(Text(p["actorEngineId"]));
++    if(!bp::object(p["recipientEngineId"]).is_none())c.receiver=Resolve(Text(p["recipientEngineId"]));
++    c.body=bp::object(p["bodyPart"]).is_none()?"":Text(p["bodyPart"]);
++    bp::dict historical=Dict(Dict(p["sourceCommand"])["event"]);
++    Check(Text(historical["id"])==c.id && Text(historical["kind"])==c.kind && Text(historical["actorId"])==Find(c.actor)->key,"historical_actor_binding");
++    Check(Number(historical["elapsedMs"])==Number(p["sourceMs"]) && PyObject_RichCompareBool(bp::object(historical["bodyPart"]).ptr(),bp::object(p["bodyPart"]).ptr(),Py_EQ)==1,"historical_contact_binding");
++    Check(PyObject_RichCompareBool(bp::object(historical["outcome"]).ptr(),bp::object(p["outcomeConstraint"]).ptr(),Py_EQ)==1,"historical_outcome_binding");
++    if(c.receiver)Check(Text(historical["recipientId"])==Find(c.receiver)->key,"historical_receiver_binding");
++    else Check(bp::object(historical["recipientId"]).is_none(),"historical_receiver_binding");
++    Check(c.body.empty() || c.body=="left_foot" || c.body=="right_foot" || c.body=="head","body_constraint");
++    c.tick=Integer(p["physicalTick"],total_);c.launch=Integer(n["launchTick"],total_);
++    Check(c.launch<=c.tick && c.tick<total_ && Number(p["sourceMs"])==sourceMs_+c.tick*10.0,"fixed_grid_contact_boundary");
++    c.power=static_cast<float>(Number(n["power"]));Check(c.power>=0 && c.power<=1,"power_range");std::string function=Text(n["function"]);
++    if(c.kind=="Pass") {
++      Check(c.receiver && c.receiver!=c.actor && c.receiver->GetTeamID()==c.actor->GetTeamID(),"explicit_receiver");
++      Check(function=="short_pass" || function=="long_pass" || function=="high_pass","pass_function");
++      c.function=function=="short_pass"?e_FunctionType_ShortPass:function=="long_pass"?e_FunctionType_LongPass:e_FunctionType_HighPass;
++    } else if(c.kind=="Shot" && function=="shot") c.function=e_FunctionType_Shot;
++    else if((c.kind=="Ball Receipt*" || c.kind=="Ball Recovery") && function=="trap")c.function=e_FunctionType_Trap;
++    else if((c.kind=="Block" || c.kind=="Interception" || c.kind=="Duel") && function=="interfere")c.function=e_FunctionType_Interfere;
++    else if(c.kind=="Goal Keeper" && function=="deflect")c.function=e_FunctionType_Deflect;
++    else throw std::invalid_argument("native_control_unavailable");
++    Check(!bp::object(p["targetNative"]).is_none() || c.receiver || c.function==e_FunctionType_Trap || c.function==e_FunctionType_Interfere || c.function==e_FunctionType_Deflect,"target_required");
++    if(!bp::object(p["targetNative"]).is_none()) {c.target=Vector(p["targetNative"],false);c.hasTarget=true;}
++    Check(commands_.size()<1000,"command_limit");
++    for(const auto& old:commands_) {Check(old.id!=c.id,"event_duplicate");if(old.actor==c.actor)Check(c.launch>old.tick || old.launch>c.tick,"actor_window_overlap");}
++    commands_.push_back(c);return R"json({"status":"ok"})json";
++  } catch(const bp::error_already_set&) {PyErr_Clear();return Fail("invalid_native_command_json");}
++    catch(const std::exception& e) {return Fail(e.what());}
++}
++bool Director::NeedsCommand(Player* actor) const {
++  if(!Active())return false;
++  for(const auto& c:commands_)if(c.actor==actor && !c.dispatched && c.launch<=ticks_ && ticks_<=c.tick)return true;
++  return false;
++}
++bool Director::RequestCommand(Player* actor,PlayerCommandQueue& queue) {
++  if(!Active())return false;
++  for(auto& c:commands_)if(c.actor==actor && !c.observed && c.launch<=ticks_ && ticks_<=c.tick) {
++    PlayerCommand command;command.desiredFunctionType=c.function;command.directedEventId=c.id;
++    command.useDesiredMovement=true;command.desiredDirection=actor->GetDirectionVec();command.desiredVelocityFloat=actor->GetMovement().GetLength();
++    Match* match=game_->context->gameTask->GetMatch();
++    Vector3 nativeBallTarget=World(match->GetBall()->Predict(0),match->isBallMirrored());
++    command.useDesiredLookAt=true;Vector3 target=World(c.hasTarget?c.target:nativeBallTarget,actor->GetTeam()->isMirrored());
++    command.desiredLookAt=c.receiver?c.receiver->GetPosition():target;
++    command.useTouchInfo=true;command.touchInfo.inputDirection=(command.desiredLookAt-actor->GetPosition()).GetNormalized(actor->GetDirectionVec());
++    command.touchInfo.inputPower=c.power;command.touchInfo.desiredPower=c.power;command.touchInfo.desiredDirection=command.touchInfo.inputDirection;
++    command.touchInfo.autoDirectionBias=0;command.touchInfo.autoPowerBias=0;
++    if(c.receiver) {
++      command.touchInfo.forcedTargetPlayer=c.receiver;command.touchInfo.targetPlayer=c.receiver;
++      AI_GetPass(actor,c.function,command.touchInfo.inputDirection,c.power,1,1,command.touchInfo.desiredDirection,command.touchInfo.desiredPower,command.touchInfo.targetPlayer,c.receiver);
++    }
++    queue.clear();queue.push_back(command);c.dispatched=true;return true;
++  }
++  return false;
++}
++bool Director::AllowsBody(const std::string& id,const std::string& actual) const {
++  if(id.empty())return true;
++  for(const auto& c:commands_)if(c.id==id)return c.body.empty() || c.body==actual;
++  return false;
++}
++void Director::ObserveContact(Player* actor,const std::string& id,const std::string& body,int role) {
++  if(!Active())return;
++  if(contacts_.size()>=20000) {Fail("contact_limit");return;}
++  Match* match=game_->context->gameTask->GetMatch();Actor* a=Find(actor);if(!a){Fail("contact_actor_unmapped");return;}
++  Contact contact;contact.event=id;contact.actor=a->id;contact.body=body;contact.role=role;contact.function=int(actor->GetCurrentFunctionType());
++  contact.nativeMs=match->GetActualTime_ms();contact.relativeMs=contact.nativeMs-epoch_;
++  contact.ball=World(match->GetBall()->Predict(0),match->isBallMirrored());contact.velocity=World(match->GetBall()->GetMovement(),match->isBallMirrored());
++  contact.animationTarget=World(actor->CastHumanoid()->DirectedAnimationTarget(),actor->GetTeam()->isMirrored());contacts_.push_back(contact);
++  if(id.empty())return;
++  for(auto& c:commands_)if(c.id==id) {
++    if(c.actor!=actor || c.observed || contact.relativeMs!=c.tick*10 || contact.function!=int(c.function) || (!c.body.empty() && c.body!=body)) {Fail("actual_contact_mismatch");return;}
++    c.observed=true;return;
++  }
++  Fail("unknown_contact_command");
++}
++void Director::Capture(Match* match) {
++  Sample s;s.tick=ticks_;s.nativeMs=match->GetActualTime_ms();s.homeGoals=match->GetScore(0);s.awayGoals=match->GetScore(1);
++  for(const auto& a:actors_) {s.positions.push_back(World(a.player->GetPosition(),a.player->GetTeam()->isMirrored()));s.velocities.push_back(World(a.player->GetMovement(),a.player->GetTeam()->isMirrored()));}
++  s.ball=World(match->GetBall()->Predict(0),match->isBallMirrored());s.velocity=World(match->GetBall()->GetMovement(),match->isBallMirrored());samples_.push_back(s);
++}
++void Director::AfterTick(Match* match) {
++  if(!prepared_ || !sealed_)return;
++  ++ticks_;Capture(match);
++  if(failed_)return;
++  if(ticks_>total_ || match->GetActualTime_ms()!=epoch_+ticks_*10) {Fail("actual_clock_discontinuity");return;}
++  for(const auto& c:commands_)if(!c.observed && c.tick<ticks_) {Fail("contact_not_observed_at_source_tick");return;}
++}
++void Director::Discontinuity() {if(Active())Fail("native_reset_during_capture");}
++std::string Director::Step(int count) {
++  if(!Active())return Unsupported("capture_not_prepared_or_failed");
++  if(count<1 || count>100 || ticks_+count>total_)return Fail("tick_limit");
++  sealed_=true;
++  try {ContextHolder context(game_);for(int i=0;i<count && Active();++i){unsigned long before=ticks_;game_->directed_physical_tick();Check(ticks_==before+1,"native_tick_hook_missing");}
++    if(failed_)return Unsupported(reason_.c_str());return R"json({"status":"ok"})json";
++  }catch(const std::exception& e){return Fail(e.what());}
++}
++std::string Director::Export() const {
++  bp::dict out;out["version"]="grf-directed-native-export-1";out["patchRevision"]="directed-grf-native-1";out["status"]=failed_?"failed":prepared_?"captured":"unavailable";
++  out["reason"]=reason_;out["acceptance"]="not_assessed";out["executionMode"]="disabled";
++  out["profileJson"]=profileJson_;out["initialPacketUtf8"]=initialJson_;out["nativeEpochMs"]=epoch_;out["sourceStartMs"]=sourceMs_;out["physicalTicks"]=ticks_;
++  bp::list actors,commands,contacts,samples;
++  for(const auto& a:actors_){bp::dict d;d["playerKey"]=a.key;d["engineId"]=a.id;actors.append(d);}
++  for(const auto& c:commands_){bp::dict d;d["eventId"]=c.id;d["inputPacketUtf8"]=c.raw;d["dispatched"]=c.dispatched;d["contactObserved"]=c.observed;commands.append(d);}
++  for(const auto& c:contacts_){bp::dict d;d["eventId"]=c.event;d["actorEngineId"]=c.actor;d["nativeMs"]=c.nativeMs;d["relativeMs"]=c.relativeMs;d["bodyPart"]=c.body;d["function"]=c.function;d["role"]=c.role;d["ballNative"]=XYZ(c.ball);d["ballVelocityAfterNative"]=XYZ(c.velocity);d["animationTargetNative"]=XYZ(c.animationTarget);d["animationTargetAuthority"]="animation_target_not_body_surface";d["bodySurface"]=bp::object();contacts.append(d);}
++  for(const auto& s:samples_){bp::dict d;d["tick"]=s.tick;d["nativeMs"]=s.nativeMs;d["homeGoals"]=s.homeGoals;d["awayGoals"]=s.awayGoals;d["ballNative"]=XYZ(s.ball);d["ballVelocityNative"]=XYZ(s.velocity);bp::list players;for(size_t i=0;i<actors_.size();++i){bp::dict p;p["engineId"]=actors_[i].id;p["positionNative"]=XYZ(s.positions[i]);p["velocityNative"]=XYZ(s.velocities[i]);players.append(p);}d["players"]=players;samples.append(d);}
++  out["actors"]=actors;out["commands"]=commands;out["contacts"]=contacts;out["samples"]=samples;
++  out["bodyIntervals"]=bp::object();out["historicalTracking"]=false;return Json(out);
++}
++} // namespace timepitch_directed

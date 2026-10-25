@@ -1,0 +1,254 @@
+{
+  "GK":  {
+    "mainRole": "GK",
+    "position": { "x": 50, "y": 95 },
+    "dpWeights": { "shooting": 0.00, "passing": 0.15, "defending": 0.30, "technical": 0.25, "physical": 0.30 },
+    "attrWeights": {
+      "passing": 0.6, "vision": 0.0, "finishing": 0.0, "dribbling": 0.0,
+      "speed": 0.0, "acceleration": 0.0, "tackling": 0.0, "pressing": 0.0,
+      "stamina": 0.0, "heading": 0.0, "strength": 0.0,
+      "reflex": 1.0, "jump": 1.0
+    },
+    "engine": {
+      "ballSupportScale": 0.10, "yRange":  8, "bounds": { "minX":  2, "maxX":  16 },
+      "carryBias": 0, "offBallBias": 0,
+      "offBallCarryDeltas": { "clearance": 0, "progress": 0, "angle": 0, "crowd": 0, "dropLaneBias": 0, "widthBias": 0 },
+      "offBallIntentWeights": { "offer_support": 0.00, "hold_space": 0.00, "make_run": 0.00 },
+      "defensiveIntentWeights": { "hold_shape": 0.00, "track_mark": 0.00, "press_holder": 0.00, "step_into_carry_lane": 0.00 }
+    }
+  },
+  "CB":  {
+    "mainRole": "Defender",
+    "position": { "x": 50, "y": 78 },
+    "dpWeights": { "shooting": 0.00, "passing": 0.10, "defending": 0.45, "technical": 0.30, "physical": 0.15 },
+    "attrWeights": {
+      "passing": 0.7, "vision": 0.6, "finishing": 0.2, "dribbling": 0.3,
+      "speed": 0.7, "acceleration": 0.7, "tackling": 1.0, "pressing": 0.8,
+      "stamina": 0.7, "heading": 1.0, "strength": 1.0,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.20, "yRange": 14, "bounds": { "minX":  8, "maxX":  50 },
+      "carryBias": 0.15, "offBallBias": 0.1,
+      "offBallCarryDeltas": { "clearance": 0.18, "progress": -0.22, "angle": -0.05, "crowd": 0.12, "dropLaneBias": 0, "widthBias": 0 },
+      "offBallIntentWeights": { "offer_support": 0.30, "hold_space": 0.80, "make_run": 0.05 },
+      "defensiveIntentWeights": { "hold_shape": 0.7, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "LB":  {
+    "mainRole": "Defender",
+    "position": { "x": 15, "y": 75 },
+    "dpWeights": { "shooting": 0.05, "passing": 0.20, "defending": 0.30, "technical": 0.20, "physical": 0.25 },
+    "attrWeights": {
+      "passing": 0.8, "vision": 0.6, "finishing": 0.3, "dribbling": 0.6,
+      "speed": 0.9, "acceleration": 0.9, "tackling": 0.8, "pressing": 0.8,
+      "stamina": 0.9, "heading": 0.5, "strength": 0.6,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.10, "yRange": 50, "bounds": { "minX":  5, "maxX":  65 },
+      "carryBias": 0.4, "offBallBias": 0.15,
+      "offBallCarryDeltas": { "clearance": 0.15, "progress": -0.20, "angle": -0.05, "crowd": 0.10, "dropLaneBias": 0.05, "widthBias": 0.15 },
+      "offBallIntentWeights": { "offer_support": 0.45, "hold_space": 0.55, "make_run": 0.20 },
+      "defensiveIntentWeights": { "hold_shape": 0.7, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "RB":  {
+    "mainRole": "Defender",
+    "position": { "x": 85, "y": 75 },
+    "dpWeights": { "shooting": 0.05, "passing": 0.20, "defending": 0.30, "technical": 0.20, "physical": 0.25 },
+    "attrWeights": {
+      "passing": 0.8, "vision": 0.6, "finishing": 0.3, "dribbling": 0.6,
+      "speed": 0.9, "acceleration": 0.9, "tackling": 0.8, "pressing": 0.8,
+      "stamina": 0.9, "heading": 0.5, "strength": 0.6,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.10, "yRange": 28, "bounds": { "minX":  5, "maxX":  65 },
+      "carryBias": 0.4, "offBallBias": 0.15,
+      "offBallCarryDeltas": { "clearance": 0.15, "progress": -0.20, "angle": -0.05, "crowd": 0.10, "dropLaneBias": 0.05, "widthBias": 0.15 },
+      "offBallIntentWeights": { "offer_support": 0.45, "hold_space": 0.55, "make_run": 0.20 },
+      "defensiveIntentWeights": { "hold_shape": 0.7, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "LWB": {
+    "mainRole": "Defender",
+    "position": { "x": 12, "y": 62 },
+    "dpWeights": { "shooting": 0.05, "passing": 0.25, "defending": 0.20, "technical": 0.20, "physical": 0.30 },
+    "attrWeights": {
+      "passing": 0.8, "vision": 0.7, "finishing": 0.4, "dribbling": 0.8,
+      "speed": 1.0, "acceleration": 1.0, "tackling": 0.7, "pressing": 0.8,
+      "stamina": 1.0, "heading": 0.4, "strength": 0.5,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.20, "yRange": 32, "bounds": { "minX":  5, "maxX":  90 },
+      "carryBias": 0.6, "offBallBias": 0.25,
+      "offBallCarryDeltas": { "clearance": 0.12, "progress": -0.15, "angle": -0.05, "crowd": 0.08, "dropLaneBias": 0.05, "widthBias": 0.30 },
+      "offBallIntentWeights": { "offer_support": 0.40, "hold_space": 0.60, "make_run": 0.30 },
+      "defensiveIntentWeights": { "hold_shape": 0.7, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "RWB": {
+    "mainRole": "Defender",
+    "position": { "x": 88, "y": 62 },
+    "dpWeights": { "shooting": 0.05, "passing": 0.25, "defending": 0.20, "technical": 0.20, "physical": 0.30 },
+    "attrWeights": {
+      "passing": 0.8, "vision": 0.7, "finishing": 0.4, "dribbling": 0.8,
+      "speed": 1.0, "acceleration": 1.0, "tackling": 0.7, "pressing": 0.8,
+      "stamina": 1.0, "heading": 0.4, "strength": 0.5,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.20, "yRange": 32, "bounds": { "minX":  5, "maxX":  90 },
+      "carryBias": 0.6, "offBallBias": 0.25,
+      "offBallCarryDeltas": { "clearance": 0.12, "progress": -0.15, "angle": -0.05, "crowd": 0.08, "dropLaneBias": 0.05, "widthBias": 0.30 },
+      "offBallIntentWeights": { "offer_support": 0.40, "hold_space": 0.60, "make_run": 0.30 },
+      "defensiveIntentWeights": { "hold_shape": 0.7, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "CDM": {
+    "mainRole": "Midfielder",
+    "position": { "x": 50, "y": 62 },
+    "dpWeights": { "shooting": 0.05, "passing": 0.25, "defending": 0.40, "technical": 0.20, "physical": 0.10 },
+    "attrWeights": {
+      "passing": 0.8, "vision": 0.7, "finishing": 0.3, "dribbling": 0.5,
+      "speed": 0.6, "acceleration": 0.6, "tackling": 1.0, "pressing": 1.0,
+      "stamina": 0.9, "heading": 0.7, "strength": 0.8,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.20, "yRange": 18, "bounds": { "minX": 18, "maxX":  68 },
+      "carryBias": 0.3, "offBallBias": 0.3,
+      "offBallCarryDeltas": { "clearance": 0.15, "progress": -0.15, "angle": -0.05, "crowd": 0.10, "dropLaneBias": 0.95, "widthBias": 0 },
+      "offBallIntentWeights": { "offer_support": 0.70, "hold_space": 0.65, "make_run": 0.10 },
+      "defensiveIntentWeights": { "hold_shape": 0.5, "track_mark": 0.5, "press_holder": 0.7, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "CM":  {
+    "mainRole": "Midfielder",
+    "position": { "x": 50, "y": 52 },
+    "dpWeights": { "shooting": 0.10, "passing": 0.35, "defending": 0.15, "technical": 0.25, "physical": 0.15 },
+    "attrWeights": {
+      "passing": 0.9, "vision": 0.8, "finishing": 0.5, "dribbling": 0.6,
+      "speed": 0.7, "acceleration": 0.7, "tackling": 0.7, "pressing": 0.8,
+      "stamina": 1.0, "heading": 0.5, "strength": 0.6,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.35, "yRange": 28, "bounds": { "minX": 22, "maxX":  85 },
+      "carryBias": 0.5, "offBallBias": 0.6,
+      "offBallCarryDeltas": { "clearance": 0.12, "progress": -0.10, "angle": -0.05, "crowd": 0.05, "dropLaneBias": 0.80, "widthBias": 0 },
+      "offBallIntentWeights": { "offer_support": 0.70, "hold_space": 0.50, "make_run": 0.30 },
+      "defensiveIntentWeights": { "hold_shape": 0.5, "track_mark": 0.5, "press_holder": 0.7, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "CAM": {
+    "mainRole": "Midfielder",
+    "position": { "x": 50, "y": 40 },
+    "dpWeights": { "shooting": 0.20, "passing": 0.35, "defending": 0.05, "technical": 0.30, "physical": 0.10 },
+    "attrWeights": {
+      "passing": 1.0, "vision": 1.0, "finishing": 0.7, "dribbling": 0.8,
+      "speed": 0.6, "acceleration": 0.7, "tackling": 0.3, "pressing": 0.5,
+      "stamina": 0.7, "heading": 0.4, "strength": 0.4,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.40, "yRange": 24, "bounds": { "minX": 28, "maxX":  90 },
+      "carryBias": 0.5, "offBallBias": 0.8,
+      "offBallCarryDeltas": { "clearance": 0, "progress": 0.05, "angle": 0, "crowd": 0, "dropLaneBias": 0.50, "widthBias": 0 },
+      "offBallIntentWeights": { "offer_support": 0.55, "hold_space": 0.40, "make_run": 0.55 },
+      "defensiveIntentWeights": { "hold_shape": 0.5, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "LM":  {
+    "mainRole": "Midfielder",
+    "position": { "x": 15, "y": 48 },
+    "dpWeights": { "shooting": 0.15, "passing": 0.25, "defending": 0.10, "technical": 0.20, "physical": 0.30 },
+    "attrWeights": {
+      "passing": 0.7, "vision": 0.7, "finishing": 0.7, "dribbling": 0.9,
+      "speed": 1.0, "acceleration": 1.0, "tackling": 0.4, "pressing": 0.6,
+      "stamina": 0.8, "heading": 0.4, "strength": 0.5,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.35, "yRange": 20, "bounds": { "minX": 16, "maxX":  75 },
+      "carryBias": 0.8, "offBallBias": 0.7,
+      "offBallCarryDeltas": { "clearance": 0.10, "progress": -0.08, "angle": -0.05, "crowd": 0.05, "dropLaneBias": 0.15, "widthBias": 0.20 },
+      "offBallIntentWeights": { "offer_support": 0.55, "hold_space": 0.55, "make_run": 0.40 },
+      "defensiveIntentWeights": { "hold_shape": 0.5, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "RM":  {
+    "mainRole": "Midfielder",
+    "position": { "x": 85, "y": 48 },
+    "dpWeights": { "shooting": 0.15, "passing": 0.25, "defending": 0.10, "technical": 0.20, "physical": 0.30 },
+    "attrWeights": {
+      "passing": 0.7, "vision": 0.7, "finishing": 0.7, "dribbling": 0.9,
+      "speed": 1.0, "acceleration": 1.0, "tackling": 0.4, "pressing": 0.6,
+      "stamina": 0.9, "heading": 0.4, "strength": 0.5,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.35, "yRange": 20, "bounds": { "minX": 16, "maxX":  75 },
+      "carryBias": 0.8, "offBallBias": 0.7,
+      "offBallCarryDeltas": { "clearance": 0.10, "progress": -0.08, "angle": -0.05, "crowd": 0.05, "dropLaneBias": 0.15, "widthBias": 0.20 },
+      "offBallIntentWeights": { "offer_support": 0.55, "hold_space": 0.55, "make_run": 0.40 },
+      "defensiveIntentWeights": { "hold_shape": 0.5, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "LW":  {
+    "mainRole": "Forward",
+    "position": { "x": 15, "y": 28 },
+    "dpWeights": { "shooting": 0.30, "passing": 0.20, "defending": 0.05, "technical": 0.20, "physical": 0.25 },
+    "attrWeights": {
+      "passing": 0.7, "vision": 0.7, "finishing": 0.8, "dribbling": 1.0,
+      "speed": 1.0, "acceleration": 1.0, "tackling": 0.3, "pressing": 0.5,
+      "stamina": 0.8, "heading": 0.3, "strength": 0.4,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.10, "yRange": 22, "bounds": { "minX": 35, "maxX": 105 },
+      "carryBias": 0.9, "offBallBias": 0.9,
+      "offBallCarryDeltas": { "clearance": -0.05, "progress": 0.10, "angle": -0.05, "crowd": -0.05, "dropLaneBias": 0.05, "widthBias": 0.35 },
+      "offBallIntentWeights": { "offer_support": 0.40, "hold_space": 0.55, "make_run": 0.65 },
+      "defensiveIntentWeights": { "hold_shape": 0.5, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "RW":  {
+    "mainRole": "Forward",
+    "position": { "x": 85, "y": 28 },
+    "dpWeights": { "shooting": 0.30, "passing": 0.20, "defending": 0.05, "technical": 0.20, "physical": 0.25 },
+    "attrWeights": {
+      "passing": 0.7, "vision": 0.7, "finishing": 0.8, "dribbling": 1.0,
+      "speed": 1.0, "acceleration": 1.0, "tackling": 0.3, "pressing": 0.5,
+      "stamina": 0.8, "heading": 0.3, "strength": 0.4,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.10, "yRange": 22, "bounds": { "minX": 35, "maxX": 105 },
+      "carryBias": 0.9, "offBallBias": 0.9,
+      "offBallCarryDeltas": { "clearance": -0.05, "progress": 0.10, "angle": -0.05, "crowd": -0.05, "dropLaneBias": 0.05, "widthBias": 0.35 },
+      "offBallIntentWeights": { "offer_support": 0.40, "hold_space": 0.55, "make_run": 0.65 },
+      "defensiveIntentWeights": { "hold_shape": 0.5, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  },
+  "ST":  {
+    "mainRole": "Forward",
+    "position": { "x": 50, "y": 20 },
+    "dpWeights": { "shooting": 0.45, "passing": 0.10, "defending": 0.05, "technical": 0.25, "physical": 0.15 },
+    "attrWeights": {
+      "passing": 0.4, "vision": 0.4, "finishing": 1.0, "dribbling": 0.6,
+      "speed": 0.8, "acceleration": 0.8, "tackling": 0.2, "pressing": 0.7,
+      "stamina": 0.7, "heading": 0.8, "strength": 0.8,
+      "reflex": 0.0, "jump": 0.0
+    },
+    "engine": {
+      "ballSupportScale": 0.50, "yRange": 22, "bounds": { "minX": 40, "maxX": 110 },
+      "carryBias": 0.6, "offBallBias": 1.0,
+      "offBallCarryDeltas": { "clearance": -0.10, "progress": 0.15, "angle": 0.05, "crowd": -0.05, "dropLaneBias": 0, "widthBias": 0 },
+      "offBallIntentWeights": { "offer_support": 0.30, "hold_space": 0.40, "make_run": 0.80 },
+      "defensiveIntentWeights": { "hold_shape": 0.1, "track_mark": 0.5, "press_holder": 0.5, "step_into_carry_lane": 0.5 }
+    }
+  }
+}

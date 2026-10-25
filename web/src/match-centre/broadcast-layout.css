@@ -1,0 +1,253 @@
+/* Colocación de la capa de emisión en el Match Centre (G17, maqueta aprobada .local/mockup/index.html):
+   marcador arriba, rótulo de anuncios sobre la parte baja del campo, selector de movimiento y créditos. */
+.unified-centre { container-type: inline-size; }
+.unified-centre .unified-scoreboard { display: grid; gap: 4px; background: none; border: 0; padding: 0; }
+.unified-centre .unified-scoreboard .tp-scorebug { width: min(640px, 100%); justify-self: center; }
+.unified-score-meta { display: flex; justify-content: space-between; gap: 8px; width: min(640px, 100%); justify-self: center; color: var(--tp-ink2, #a7b2c6); font-size: 11px; }
+.unified-score-meta small:last-child { text-align: right; }
+.unified-centre .unified-score-source { justify-self: center; font-size: 12px; }
+
+.pitch-hud { position: absolute; inset: auto 0 18px 0; display: flex; justify-content: center; pointer-events: none; z-index: 2; }
+.pitch-hud .tp-banner { width: min(660px, 86%); }
+
+.unified-engine { margin-left: 8px; }
+
+.unified-centre .tp-lu-pair { margin-bottom: 16px; }
+.unified-centre .tp-credits { margin-top: 18px; }
+
+/* Partido de demostración: cabecera, rótulo de ficción y selector de movimiento. */
+.demo-match { display: grid; gap: 12px; padding: 12px 16px 24px; max-width: 1280px; margin: 0 auto; }
+.demo-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.demo-head h1 { font-size: clamp(18px, 3.2vw, 26px); margin: 0; }
+.demo-note { margin: 0; font-size: 12px; color: var(--tp-ink2, #a7b2c6); }
+.movement-selector { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; border: 0; padding: 0; margin: 0; }
+.movement-selector legend { float: left; margin-right: 6px; font-size: 13px; font-weight: 700; }
+.movement-selector button { min-height: 36px; padding: 4px 12px; border-radius: 999px; }
+.movement-selector button[aria-pressed="true"] { background: #fff; color: #0a0f1a; }
+.movement-selector button:disabled small { margin-left: 4px; opacity: .8; }
+.demo-status { margin: 0; }
+
+@container (max-width: 600px) {
+  .pitch-hud { bottom: 6px; }
+  .pitch-hud .tp-banner { width: 96%; }
+  .pitch-hud .tp-bn-foot { display: none; }
+  .pitch-hud .tp-bn-title { font-size: 22px; }
+  .pitch-hud .tp-bn-crest { width: 40px; }
+  .pitch-hud .tp-bn-body { padding: 5px 8px; }
+  .pitch-hud .tp-bn-kicker { font-size: 9px; }
+  .unified-score-meta { font-size: 10px; }
+}
+.demo-entry { display: flex; justify-content: center; margin: 12px 16px; }
+.demo-entry button { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 44px; }
+/* La regla global `h1,h2,h3,h4 { color: var(--text) }` del tema claro no debe teñir los paneles oscuros de emisión. */
+.unified-centre :is(.tp-lu-team, .tp-pc, .tp-credits-dialog) :is(h2, h3, h4, h5) { color: inherit; }
+/* Ficha de jugador (G12) como panel lateral, igual que el detalle técnico. */
+.unified-card-drawer { position: fixed; top: 12px; right: 12px; bottom: 12px; width: min(620px, calc(100vw - 24px)); overflow: auto; z-index: 40;
+  border-radius: 16px; box-shadow: 0 12px 60px #0008; background: var(--tp-bg, #05080f); }
+@media (max-width: 600px) { .unified-card-drawer { top: 0; right: 0; bottom: 0; width: 100vw; border-radius: 0; } }
+@media (max-width: 600px) { .movement-selector .movement-reason { display: none; } }
+/* TP203: la demo adopta el fondo oscuro de la maqueta (desde TP215 toda la app es solo oscura). */
+.demo-match { color-scheme: dark; max-width: 1480px; color: var(--tp-ink); border-radius: 18px; margin-block: 8px 24px;
+  background: radial-gradient(1200px 600px at 20% -10%, #11234a 0, transparent 60%), radial-gradient(900px 500px at 100% 0, #1a1630 0, transparent 55%), var(--tp-bg); }
+.demo-match .demo-head h1 { color: var(--tp-ink); }
+.demo-match .demo-note { color: var(--tp-ink3); }
+.demo-match .unified-centre { --surface: var(--tp-panel); --soft: var(--tp-panel2); --line: rgba(255, 255, 255, .12); --bg: var(--tp-bg); }
+@media (max-width: 600px) { .demo-match { border-radius: 0; padding-inline: 10px; margin-block: 0; } }
+.demo-match .unified-centre { gap: 10px; }
+.demo-match .unified-provenance { padding-block: 6px; margin: 0; }
+
+/* ===== Armazón de emisión (maqueta .local/mockup/v1-2d.html: .mc, .appbar, .screen-tabs, .stage, .playback) =====
+   Solo para partidos grabados con análisis (MatchCentre añade .tp-shell); el resto de modos no cambia. */
+/* Fondo oscuro a página completa mientras se ve la demo. */
+:root:has(.demo-match:not([hidden])) { color-scheme: dark; background: var(--tp-bg); }
+body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
+  background: radial-gradient(1200px 600px at 20% -10%, #11234a 0, transparent 60%), radial-gradient(900px 500px at 100% 0, #1a1630 0, transparent 55%), var(--tp-bg); }
+.demo-match { container-type: inline-size; background: none; border-radius: 0; max-width: 1480px; padding: 18px 20px 20px; gap: 14px; margin-block: 0 24px; font-family: var(--tp-ui); }
+@media (max-width: 600px) { .demo-match { padding: 10px 10px 18px; gap: 10px; } }
+
+/* .appbar */
+.demo-appbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 12px; color: var(--tp-ink2); }
+.demo-crumbs { display: flex; gap: 6px; align-items: center; min-width: 0; }
+.demo-match .demo-crumbs h1 { font: inherit; color: inherit; margin: 0; }
+.demo-spacer { flex: 1; }
+/* Selector de movimiento con aspecto de la píldora .engine de la maqueta. */
+.demo-match .movement-selector { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px; padding: 3px 3px 3px 10px; border-radius: 8px;
+  background: #0b1424; border: 1px solid var(--tp-line2); font-size: 11px; font-weight: 600; color: var(--tp-ink2); }
+.demo-match .movement-selector legend { float: left; display: inline-flex; align-items: center; gap: 8px; margin-right: 6px; font-size: 11px; font-weight: 600; padding: 0; }
+.demo-match .movement-selector legend svg { width: 14px; height: 14px; color: var(--tp-sim); }
+.demo-match .movement-selector button { min-height: 30px; padding: 3px 9px; border: 0; border-radius: 6px; background: transparent; color: var(--tp-ink2); font-size: 11px; font-weight: 700; }
+.demo-match .movement-selector button[aria-pressed="true"] { background: #24324f; color: #fff; }
+.demo-match .movement-selector button:disabled { opacity: .55; cursor: not-allowed; }
+/* TP211: barra aligerada. Volver como icono, un único chip de procedencia con su ventana y el selector compacto. */
+.demo-appbar { flex-wrap: nowrap; gap: 10px; min-width: 0; }
+.demo-back { flex: none; display: inline-grid; place-items: center; width: 32px; height: 32px; min-height: 32px; padding: 0; border-radius: 8px;
+  border: 1px solid var(--tp-line2); background: #121b2e; color: var(--tp-ink); }
+.demo-back svg { width: 16px; height: 16px; }
+.demo-back:hover:not(:disabled) { background: #1a2640; }
+/* TP239: en los simulados, «Nuevo partido» con texto (antes, solo una flecha). */
+.demo-back.tp-new-match { display: inline-flex; align-items: center; gap: 6px; width: auto; padding: 0 12px 0 8px; white-space: nowrap; font-size: 13px; font-weight: 600; }
+.demo-crumbs { gap: 6px; overflow: hidden; white-space: nowrap; }
+.demo-crumb-demo { color: var(--tp-ink3); }
+.demo-match .demo-crumbs h1 { overflow: hidden; text-overflow: ellipsis; color: var(--tp-ink); font-weight: 600; }
+.demo-prov { position: relative; flex: none; display: inline-flex; }
+.demo-prov-chip { cursor: help; min-height: 0; font: inherit; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.demo-match .demo-prov-chip:hover:not(:disabled) { background: rgba(255, 138, 154, .16); }
+/* La ventana sigue en el DOM cerrada (descripción del chip); solo se oculta a la vista. */
+.demo-prov-pop { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.demo-prov:hover .demo-prov-pop, .demo-prov-chip:focus-visible + .demo-prov-pop, .demo-prov[data-open] .demo-prov-pop {
+  z-index: 30; top: calc(100% + 8px); left: 0; width: min(320px, calc(100vw - 32px)); height: auto; overflow: visible; clip-path: none; white-space: normal;
+  display: grid; gap: 8px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--tp-line2); background: #0d1526; color: var(--tp-ink);
+  box-shadow: 0 14px 40px -12px #000; font-size: 12px; line-height: 1.45; text-transform: none; letter-spacing: 0; }
+.demo-prov-pop::before { content: ''; position: absolute; left: 0; right: 0; top: -9px; height: 9px; } /* puente para no perder el hover */
+.demo-prov-pop strong { font-size: 13px; }
+.demo-prov-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.demo-match .demo-prov-pop .demo-note { color: var(--tp-ink2); font-size: 12px; }
+.demo-match .movement-selector { flex: none; }
+.demo-match .movement-selector button:disabled small { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.demo-match .movement-selector button:disabled { text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, .35); }
+@container (max-width: 820px) {
+  .demo-crumb-demo, .demo-crumbs > [aria-hidden] { display: none; }
+}
+@container (max-width: 600px) {
+  /* Teléfono: una fila (Volver · chip · motor); el título queda para lectores (el marcador ya nombra los equipos). */
+  .demo-appbar { gap: 6px; flex-wrap: wrap; }
+  .demo-crumbs { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .demo-spacer { display: block; flex: 1; }
+  .demo-prov-chip { font-size: 9.5px; padding: 3px 7px 3px 6px; }
+  /* «Ficticio» a la vista; « · simulado» sigue en el nombre accesible (el HUD del campo ya rotula el movimiento sintético). */
+  /* La ventana se ancla a la barra entera para no salirse de la pantalla. */
+  .demo-appbar { position: relative; }
+  .demo-prov { position: static; }
+  .demo-prov:hover .demo-prov-pop, .demo-prov-chip:focus-visible + .demo-prov-pop, .demo-prov[data-open] .demo-prov-pop { left: 0; right: 0; width: auto; }
+  .demo-prov-more { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: pre; }
+  .demo-match .movement-selector { padding: 2px 2px 2px 7px; }
+  .demo-match .movement-selector .movement-legend-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .demo-match .movement-selector legend { margin-right: 4px; }
+  .demo-match .movement-selector button { min-height: 28px; padding: 3px 6px; font-size: 10.5px; }
+}
+
+/* .screen-tabs: segmento de tres pantallas y, aparte, el grupo secundario «Análisis». */
+.tp-screen-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.tp-tabs-main, .tp-tabs-analysis { display: flex; gap: 4px; padding: 4px; background: var(--tp-panel); border: 1px solid var(--tp-line); border-radius: 12px; max-width: 100%; min-width: 0; overflow-x: auto; }
+.tp-shell .tp-screen-tabs button { border: 0; background: transparent; padding: 9px 16px; border-radius: 9px; font-size: 13px; font-weight: 600; color: var(--tp-ink2); white-space: nowrap; }
+.tp-shell .tp-screen-tabs button[aria-selected="true"] { background: linear-gradient(180deg, #1c2a46, #16213a); color: #fff; box-shadow: inset 0 0 0 1px var(--tp-line2); }
+.tp-tabs-analysis { margin-left: auto; padding: 3px; }
+.tp-tabs-label { align-self: center; padding: 0 6px 0 8px; font-family: var(--tp-display); font-stretch: condensed; text-transform: uppercase; letter-spacing: .08em; font-size: 11px; color: var(--tp-ink3); }
+.tp-shell .tp-tabs-analysis button { padding: 6px 11px; font-size: 12px; }
+@container (max-width: 600px) {
+  .tp-tabs-main, .tp-tabs-analysis { width: 100%; margin-left: 0; }
+  .tp-shell .tp-tabs-main button { padding: 8px 10px; font-size: 12px; }
+}
+
+/* .stage: campo + columna lateral de 320 px; debajo de 1000 px la columna pasa abajo (analysis.css). */
+.tp-shell .unified-match-area.tpa-stage { grid-template-columns: minmax(0, 1fr) 320px; gap: 14px; }
+@container (max-width: 1000px) { .tp-shell .tpa-side { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+@container (max-width: 600px) { .tp-shell .tpa-side { grid-template-columns: minmax(0, 1fr); } .tp-shell .tpa-side .tpa-summary { display: none; } }
+/* .panel.playback a lo ancho bajo la rejilla. */
+.tp-playback-panel { background: linear-gradient(180deg, var(--tp-panel2), var(--tp-panel)); border: 1px solid var(--tp-line); border-radius: 14px; padding: 10px 14px; min-width: 0; }
+.tp-shell .unified-panel { display: grid; gap: 14px; min-width: 0; }
+/* La procedencia ya va en la barra superior (chips sim) y en el HUD del campo (chip, motor y rótulo de escena):
+   la maqueta no repite la franja, así que en el armazón se oculta visualmente (sigue en el DOM para lectores). */
+.tp-shell > .unified-provenance { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Marcador a lo ancho del marco, como .scorebug de la maqueta; la meta (temporada, formación, fuente) en una línea discreta. */
+.tp-shell .unified-scoreboard .tp-scorebug, .tp-shell .unified-score-meta { width: 100%; }
+/* Ajustes del campo plegados bajo la barra de reproducción. */
+.tp-pitch-settings-host .pitch-settings { border: 1px solid var(--tp-line); border-radius: 12px; background: var(--tp-panel); padding: 6px 12px; font-size: 12px; color: var(--tp-ink2); }
+.tp-pitch-settings-host .pitch-settings > summary { cursor: pointer; font-weight: 600; }
+/* TP237: cerrado, solo un icono ⚙ pequeño. */
+.tp-pitch-settings-host .pitch-settings:not([open]) { display: inline-block; padding: 2px 10px; }
+.tp-pitch-settings-host .pitch-settings > summary { list-style: none; font-size: 18px; line-height: 1.4; }
+.tp-pitch-settings-host .pitch-settings > summary::-webkit-details-marker { display: none; }
+.tp-pitch-settings-host .pitch-settings[open] { display: grid; gap: 8px; padding-bottom: 12px; }
+
+/* Pantallas Ficha y Alineaciones. */
+.tp-card-screen, .tp-lineups-screen { display: grid; gap: 14px; min-width: 0; }
+.tp-card-empty { margin: 0; padding: 24px; text-align: center; color: var(--tp-ink2); border: 1px dashed var(--tp-line2); border-radius: 14px; }/* «Gráficos 3D listos» solo para lectores en el armazón; los avisos de reserva o fallo siguen visibles. */
+.tp-shell .pitch-section[data-renderer-status="ready"] .pitch-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Teléfono (390 px): nada del armazón puede ensanchar la página; pestañas a partes iguales y barra sin doble marco. */
+.tp-shell > * { min-width: 0; }
+.tp-tabs-main, .tp-tabs-analysis { box-sizing: border-box; }
+.tp-playback-panel { background: none; border: 0; padding: 0; }
+@container (max-width: 600px) {
+  .tp-shell .tp-tabs-main button { flex: 1 1 0; padding: 8px 6px; font-size: 11.5px; white-space: normal; line-height: 1.2; }
+}
+/* Teléfono: como en la maqueta, la barra de reproducción va justo debajo del campo y la columna lateral después
+   (el escenario pasa a display: contents para que campo, barra y columna se ordenen en la misma rejilla). */
+@container (max-width: 600px) {
+  .tp-shell .unified-match-area.tpa-stage:not([hidden]) { display: contents; }
+  .tp-shell .unified-panel > .tp-playback-panel { order: 1; }
+  .tp-shell .unified-panel > .tp-pitch-settings-host { order: 2; }
+  .tp-shell .unified-panel > :not(.unified-match-area, .tp-playback-panel, .tp-pitch-settings-host),
+  .tp-shell .tpa-stage > .tpa-side { order: 3; }
+}
+/* El rótulo «debajo» (teléfono) va justo tras el campo (mismo orden que .retro-field en analysis.css). */
+.tpa-stage .tp-banner--below { order: 1; }
+
+/* ===== TP226: el armazón también para los partidos simulados (TimePitch y GRF) y emisión en una pantalla ===== */
+/* Barra superior propia de los simulados (Volver · partido · procedencia a la vista · exportar), como la de la demo. */
+.tp-sim-appbar { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 12px; color: var(--tp-ink2); }
+.tp-sim-appbar .demo-crumbs h1 { font: inherit; font-weight: 600; color: var(--tp-ink); margin: 0; overflow: hidden; text-overflow: ellipsis; }
+.tp-sim-appbar .unified-provenance { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; background: none; border: 0; font-size: 11px; color: var(--tp-ink3); min-width: 0; }
+.tp-sim-appbar .unified-engine { margin-left: 0; }
+.tp-sim-appbar .tp-sim-export { flex: none; padding: 6px 10px; min-height: 32px; font-size: 12px; }
+@container (max-width: 600px) {
+  .tp-sim-appbar { flex-wrap: wrap; gap: 6px; }
+  .tp-sim-appbar .demo-crumbs { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .tp-sim-appbar .unified-provenance { flex: 1 1 0; }
+}
+/* Columna lateral de los simulados: la lista de eventos (con sus filtros) en lugar del análisis grabado. */
+.tp-sim-side { align-content: start; }
+.tp-sim-side > * { min-width: 0; }
+/* Botón grande de reproducir sobre el campo cuando el sistema pide movimiento reducido (no hay arranque automático). */
+.tp-big-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3; display: inline-flex; align-items: center; gap: 10px;
+  min-height: 64px; padding: 0 26px 0 20px; border: 0; border-radius: 999px; background: linear-gradient(180deg, #fff, #d9e2f2); color: #0a1020;
+  font-size: 18px; font-weight: 800; box-shadow: 0 14px 40px -10px #000c; cursor: pointer; }
+.tp-big-play svg { width: 30px; height: 30px; }
+.tp-big-play:disabled { opacity: .6; cursor: progress; }
+.tp-big-play:focus-visible { outline: 3px solid var(--che-hi, #2f7bff); outline-offset: 3px; }
+/* Escritorio: MatchCentre mide el alto libre (--tp-fit-h) y el campo se limita a ese alto manteniendo su proporción;
+   la columna lateral se queda con el resto del ancho y desplaza su contenido por dentro. */
+@container (min-width: 1001px) {
+  .tp-shell[data-fit] .unified-match-area.tpa-stage { --tp-field-ratio: 1.5; grid-template-columns: minmax(0, calc(var(--tp-fit-h) * var(--tp-field-ratio))) minmax(300px, 1fr); }
+  .tp-shell[data-fit] .unified-match-area.tpa-stage:has(.pitch-section[data-effective-renderer="stylized-3d-1"]) { --tp-field-ratio: 1.7778; }
+  .tp-shell[data-fit] .tpa-stage > .tpa-side { max-height: var(--tp-fit-h); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+  /* Barra de reproducción en una sola fila: controles y reloj/parte/repetir a la derecha. */
+  .tp-shell .tp-playback-panel .pbk.unified-transport { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 16px; padding: 6px 12px; }
+  .tp-shell .tp-playback-panel .pbk-meta { flex-wrap: nowrap; gap: 10px; }
+  .tp-shell .tp-playback-panel .pbk-meta :is(select, button) { min-height: 0; }
+  .tp-shell .tp-playback-panel .pbk .pbk-replay { margin-left: 0; }
+  .tp-shell .tp-playback-panel .pbk p[role="status"] { grid-column: 1 / -1; }
+}
+/* Escritorio de poca altura (1366×768, 1440×900): pestañas más bajas y el marcador en lo alto de la columna lateral
+   (MatchCentre lo mueve allí), compacto y fijo al desplazar la columna, para que el campo conserve el máximo alto. */
+@media (min-width: 861px) and (max-height: 1000px) {
+  .tp-shell[data-fit] .tp-screen-tabs button { padding-block: 6px; }
+  .tp-shell[data-fit] .tp-tabs-main, .tp-shell[data-fit] .tp-tabs-analysis { padding: 3px; }
+}
+.tpa-side > .unified-scoreboard { position: sticky; top: 0; z-index: 2; gap: 2px; padding-bottom: 4px; background: var(--tp-bg, #05080f); }
+.tpa-side .tp-scorebug { width: 100%; }
+.tpa-side .tp-sb-team { padding: 5px 10px; gap: 8px; }
+.tpa-side .tp-sb-crest { width: 32px; height: 32px; border-radius: 8px; }
+.tpa-side .tp-sb-abbr { font-size: 22px; }
+.tpa-side .tp-sb-full { font-size: 10px; }
+.tpa-side .tp-sb-digits { font-size: 30px; min-width: 96px; gap: 8px; }
+.tpa-side .tp-sb-clock { padding: 3px 6px; }
+.tpa-side .tp-sb-t { font-size: 15px; }
+.tpa-side .unified-score-meta { width: 100%; font-size: 10.5px; }
+.tpa-side .unified-score-meta summary { min-height: 0; padding: 0; }
+/* Lista de eventos de los simulados en la columna: controles compactos. */
+.tp-sim-side [data-unified-events] h2 { font-size: 15px; margin: 0 0 6px; }
+@container (min-width: 601px) {
+  /* Con ratón (escritorio) bastan 32 px; en el teléfono se conservan los 44 px de zona táctil. */
+  .unified-centre.tp-shell .tp-sim-side :is(select, button) { min-height: 32px; }
+  .unified-centre.tp-shell .tp-sim-side select { padding-block: 4px; font-size: 12px; }
+  .tp-shell .tp-sim-side .unified-reveal button { padding: 6px 12px; font-size: 12px; }
+  .tp-shell .tp-sim-appbar .tp-sim-export { display: inline-flex; align-items: center; height: 32px; min-height: 0; padding: 0 10px; }
+}
+/* Sin ajuste a la ventana (teléfono, tableta) la lista de eventos se desplaza dentro de su caja: no alarga la página. */
+.tp-shell:not([data-fit]) .tp-sim-side .unified-events { max-height: 70vh; overflow-y: auto; overscroll-behavior: contain; }
+/* Sin huecos muertos bajo el campo (la capa de evidencias vacía y el gap de la columna sumaban 22 px): a 1366×768 eso
+   decide si el Retro 16 bits dibuja a escala 2 (dorsales visibles, hace falta ≥ 480 px de alto) o a escala 1. */
+.tp-shell[data-fit] .tpa-stage .unified-stage-main { gap: 0; }
+.tp-shell[data-fit] .tpa-stage .unified-layer-evidence:empty { display: none; }
+.tp-shell[data-fit] .unified-panel { gap: 10px; }

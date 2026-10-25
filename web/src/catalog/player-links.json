@@ -1,0 +1,1682 @@
+{
+ "_meta": {
+  "schema": "timepitch-player-links-1",
+  "generated": "2026-10-22",
+  "teamKeys": [
+   "arsenal:2003",
+   "mancity:2024",
+   "chelsea:2015",
+   "swansea:2015"
+  ],
+  "description": "Equivalence source row -> Wikidata QID for the demo club-seasons. Keys only: no source statistics, dates or evidence.",
+  "methods": {
+   "dob_club_season": "date of birth + club + season (approved 2026-10-22)",
+   "jersey_club_season": "shirt number + club + season (approved 2026-10-22)",
+   "opta": "FPL code = Opta ID = Wikidata P8736 (identifier, approved 2026-10-22)",
+   "manual": "manual_verified: one-by-one review with non-name evidence (approved 2026-10-22)"
+  },
+  "excluded": "ambiguous and unmatched rows; no name matching",
+  "derivedFrom": {
+   "path": ".local/player-data/links.json",
+   "sha256": "4a4f20c8911928df342a6791dfd61f8e37f985df785b2219c8917a748a2db0e7"
+  }
+ },
+ "links": [
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:ALIADIJ",
+   "teamKey": "arsenal:2003",
+   "qid": "Q319180",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:BENTLED",
+   "teamKey": "arsenal:2003",
+   "qid": "Q310055",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:BERGKAD",
+   "teamKey": "arsenal:2003",
+   "qid": "Q185389",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:CAMPBES2",
+   "teamKey": "arsenal:2003",
+   "qid": "Q214734",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:CLICHYG",
+   "teamKey": "arsenal:2003",
+   "qid": "Q1929",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:COLEA2",
+   "teamKey": "arsenal:2003",
+   "qid": "Q133556",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:CYGANP",
+   "teamKey": "arsenal:2003",
+   "qid": "Q180276",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:EDU",
+   "teamKey": "arsenal:2003",
+   "qid": "Q314750",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:HENRYT",
+   "teamKey": "arsenal:2003",
+   "qid": "Q45901",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:HOYTEJ",
+   "teamKey": "arsenal:2003",
+   "qid": "Q319164",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:KANUN",
+   "teamKey": "arsenal:2003",
+   "qid": "Q599675",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:KEOWNM",
+   "teamKey": "arsenal:2003",
+   "qid": "Q314405",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:LAUREN",
+   "teamKey": "arsenal:2003",
+   "qid": "Q314755",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:LEHMANJ",
+   "teamKey": "arsenal:2003",
+   "qid": "Q57114",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:LJUNGBF",
+   "teamKey": "arsenal:2003",
+   "qid": "Q10560",
+   "method": "manual",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:PARLOUR",
+   "teamKey": "arsenal:2003",
+   "qid": "Q377746",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:PIRESR",
+   "teamKey": "arsenal:2003",
+   "qid": "Q113156",
+   "method": "manual",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:REYESJ",
+   "teamKey": "arsenal:2003",
+   "qid": "Q276399",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:SILVAG",
+   "teamKey": "arsenal:2003",
+   "qid": "Q190142",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:TOUREK",
+   "teamKey": "arsenal:2003",
+   "qid": "Q147589",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:VIEIRAP",
+   "teamKey": "arsenal:2003",
+   "qid": "Q46347",
+   "method": "manual",
+   "reviewed": true,
+   "confidence": "medium"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2003:arsenal:WILTORS",
+   "teamKey": "arsenal:2003",
+   "qid": "Q217760",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:12529",
+   "teamKey": "arsenal:2003",
+   "qid": "Q133556",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:15042",
+   "teamKey": "arsenal:2003",
+   "qid": "Q185389",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:15512",
+   "teamKey": "arsenal:2003",
+   "qid": "Q217760",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:15515",
+   "teamKey": "arsenal:2003",
+   "qid": "Q46347",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:15516",
+   "teamKey": "arsenal:2003",
+   "qid": "Q45901",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:15637",
+   "teamKey": "arsenal:2003",
+   "qid": "Q214734",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:15654",
+   "teamKey": "arsenal:2003",
+   "qid": "Q314405",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:15754",
+   "teamKey": "arsenal:2003",
+   "qid": "Q10560",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:19312",
+   "teamKey": "arsenal:2003",
+   "qid": "Q113156",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:20015",
+   "teamKey": "arsenal:2003",
+   "qid": "Q57114",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:20302",
+   "teamKey": "arsenal:2003",
+   "qid": "Q1929",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:24840",
+   "teamKey": "arsenal:2003",
+   "qid": "Q319164",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:24971",
+   "teamKey": "arsenal:2003",
+   "qid": "Q599675",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:24972",
+   "teamKey": "arsenal:2003",
+   "qid": "Q377746",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:26014",
+   "teamKey": "arsenal:2003",
+   "qid": "Q314750",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:26194",
+   "teamKey": "arsenal:2003",
+   "qid": "Q180276",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:376521",
+   "teamKey": "arsenal:2003",
+   "qid": "Q310055",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:38412",
+   "teamKey": "arsenal:2003",
+   "qid": "Q147589",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:40221",
+   "teamKey": "arsenal:2003",
+   "qid": "Q190142",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:40222",
+   "teamKey": "arsenal:2003",
+   "qid": "Q314755",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:40255",
+   "teamKey": "arsenal:2003",
+   "qid": "Q319180",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2003:arsenal:42458",
+   "teamKey": "arsenal:2003",
+   "qid": "Q1345122",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:ABRAHAT",
+   "teamKey": "chelsea:2015",
+   "qid": "Q24050378",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:AZPILIC",
+   "teamKey": "chelsea:2015",
+   "qid": "Q294806",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:BEENEYM2",
+   "teamKey": "chelsea:2015",
+   "qid": "Q22098250",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:BEGOVIA",
+   "teamKey": "chelsea:2015",
+   "qid": "Q431368",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:CAHILLG",
+   "teamKey": "chelsea:2015",
+   "qid": "Q223827",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:CLARKEJ",
+   "teamKey": "chelsea:2015",
+   "qid": "Q23688811",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:COSTAD",
+   "teamKey": "chelsea:2015",
+   "qid": "Q459707",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:COURTOT",
+   "teamKey": "chelsea:2015",
+   "qid": "Q73360",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:CUADRAJ",
+   "teamKey": "chelsea:2015",
+   "qid": "Q509374",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:FALCAOR",
+   "teamKey": "chelsea:2015",
+   "qid": "Q138172",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:HAZARDE",
+   "teamKey": "chelsea:2015",
+   "qid": "Q214204",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:IVANOVB",
+   "teamKey": "chelsea:2015",
+   "qid": "Q181921",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:KENEDY",
+   "teamKey": "chelsea:2015",
+   "qid": "Q14755604",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:LOFTUSR",
+   "teamKey": "chelsea:2015",
+   "qid": "Q18616995",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:MATICN",
+   "teamKey": "chelsea:2015",
+   "qid": "Q297603",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:MIAZGAM",
+   "teamKey": "chelsea:2015",
+   "qid": "Q16236909",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:MIKELJ",
+   "teamKey": "chelsea:2015",
+   "qid": "Q166984",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:OSCAR",
+   "teamKey": "chelsea:2015",
+   "qid": "Q19497",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:PATOA",
+   "teamKey": "chelsea:2015",
+   "qid": "Q138075",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:PEDRO",
+   "teamKey": "chelsea:2015",
+   "qid": "Q179773",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:RAHMANB",
+   "teamKey": "chelsea:2015",
+   "qid": "Q317389",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:RAMIRE",
+   "teamKey": "chelsea:2015",
+   "qid": "Q204407",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:REMYL",
+   "teamKey": "chelsea:2015",
+   "qid": "Q114859",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:SOLERF",
+   "teamKey": "chelsea:2015",
+   "qid": "Q17499",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:TERRYJ",
+   "teamKey": "chelsea:2015",
+   "qid": "Q83456",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:TOMORIF",
+   "teamKey": "chelsea:2015",
+   "qid": "Q24068577",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:TRAOREB",
+   "teamKey": "chelsea:2015",
+   "qid": "Q828627",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:WILLIA",
+   "teamKey": "chelsea:2015",
+   "qid": "Q73480",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:chelsea:ZOUMAK",
+   "teamKey": "chelsea:2015",
+   "qid": "Q211271",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:10458",
+   "teamKey": "chelsea:2015",
+   "qid": "Q24068577",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:11492",
+   "teamKey": "chelsea:2015",
+   "qid": "Q20730338",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:12325",
+   "teamKey": "chelsea:2015",
+   "qid": "Q317389",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:15542",
+   "teamKey": "chelsea:2015",
+   "qid": "Q23688811",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:20287",
+   "teamKey": "chelsea:2015",
+   "qid": "Q83456",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:28100",
+   "teamKey": "chelsea:2015",
+   "qid": "Q204407",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:2956",
+   "teamKey": "chelsea:2015",
+   "qid": "Q828627",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3317",
+   "teamKey": "chelsea:2015",
+   "qid": "Q25389532",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3339",
+   "teamKey": "chelsea:2015",
+   "qid": "Q431368",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3381",
+   "teamKey": "chelsea:2015",
+   "qid": "Q297603",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3440",
+   "teamKey": "chelsea:2015",
+   "qid": "Q24050378",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3445",
+   "teamKey": "chelsea:2015",
+   "qid": "Q138172",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:34514",
+   "teamKey": "chelsea:2015",
+   "qid": "Q5651446",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3456",
+   "teamKey": "chelsea:2015",
+   "qid": "Q211271",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3472",
+   "teamKey": "chelsea:2015",
+   "qid": "Q73480",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3478",
+   "teamKey": "chelsea:2015",
+   "qid": "Q17499",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3504",
+   "teamKey": "chelsea:2015",
+   "qid": "Q18616995",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3509",
+   "teamKey": "chelsea:2015",
+   "qid": "Q73360",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3621",
+   "teamKey": "chelsea:2015",
+   "qid": "Q214204",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3645",
+   "teamKey": "chelsea:2015",
+   "qid": "Q223827",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3666",
+   "teamKey": "chelsea:2015",
+   "qid": "Q14755604",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3774",
+   "teamKey": "chelsea:2015",
+   "qid": "Q3362956",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:3957",
+   "teamKey": "chelsea:2015",
+   "qid": "Q294806",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:40122",
+   "teamKey": "chelsea:2015",
+   "qid": "Q19497",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:44981",
+   "teamKey": "chelsea:2015",
+   "qid": "Q234866",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:5198",
+   "teamKey": "chelsea:2015",
+   "qid": "Q459707",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:5475",
+   "teamKey": "chelsea:2015",
+   "qid": "Q166984",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:5594",
+   "teamKey": "chelsea:2015",
+   "qid": "Q181921",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:6623",
+   "teamKey": "chelsea:2015",
+   "qid": "Q114859",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:chelsea:7827",
+   "teamKey": "chelsea:2015",
+   "qid": "Q26923898",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:340",
+   "teamKey": "mancity:2024",
+   "qid": "Q19938984",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:341",
+   "teamKey": "mancity:2024",
+   "qid": "Q1755683",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:342",
+   "teamKey": "mancity:2024",
+   "qid": "Q15521306",
+   "method": "opta",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:343",
+   "teamKey": "mancity:2024",
+   "qid": "Q110466658",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:345",
+   "teamKey": "mancity:2024",
+   "qid": "Q357984",
+   "method": "opta",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:346",
+   "teamKey": "mancity:2024",
+   "qid": "Q59209505",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:347",
+   "teamKey": "mancity:2024",
+   "qid": "Q17074511",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:348",
+   "teamKey": "mancity:2024",
+   "qid": "Q30729096",
+   "method": "opta",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:349",
+   "teamKey": "mancity:2024",
+   "qid": "Q16056053",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:350",
+   "teamKey": "mancity:2024",
+   "qid": "Q73400656",
+   "method": "opta",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:351",
+   "teamKey": "mancity:2024",
+   "qid": "Q28967995",
+   "method": "opta",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:354",
+   "teamKey": "mancity:2024",
+   "qid": "Q701297",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:355",
+   "teamKey": "mancity:2024",
+   "qid": "Q113509374",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:356",
+   "teamKey": "mancity:2024",
+   "qid": "Q96211488",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:357",
+   "teamKey": "mancity:2024",
+   "qid": "Q108653498",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:358",
+   "teamKey": "mancity:2024",
+   "qid": "Q821646",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:360",
+   "teamKey": "mancity:2024",
+   "qid": "Q20994118",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:361",
+   "teamKey": "mancity:2024",
+   "qid": "Q21621168",
+   "method": "opta",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:362",
+   "teamKey": "mancity:2024",
+   "qid": "Q2025900",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:571",
+   "teamKey": "mancity:2024",
+   "qid": "Q99485542",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:607",
+   "teamKey": "mancity:2024",
+   "qid": "Q118645253",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:625",
+   "teamKey": "mancity:2024",
+   "qid": "Q161089",
+   "method": "opta",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:672",
+   "teamKey": "mancity:2024",
+   "qid": "Q130740691",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:698",
+   "teamKey": "mancity:2024",
+   "qid": "Q115044761",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:732",
+   "teamKey": "mancity:2024",
+   "qid": "Q111479885",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:733",
+   "teamKey": "mancity:2024",
+   "qid": "Q120277811",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:755",
+   "teamKey": "mancity:2024",
+   "qid": "Q28065104",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:765",
+   "teamKey": "mancity:2024",
+   "qid": "Q106625792",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "fpl",
+   "sourceKey": "fpl:2024:mancity:785",
+   "teamKey": "mancity:2024",
+   "qid": "Q116463164",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:AMATJ",
+   "teamKey": "swansea:2015",
+   "qid": "Q1157022",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:AYEWA",
+   "teamKey": "swansea:2015",
+   "qid": "Q516921",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:BARROWM",
+   "teamKey": "swansea:2015",
+   "qid": "Q5566331",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:BARTLEK",
+   "teamKey": "swansea:2015",
+   "qid": "Q552171",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:BRITTOL",
+   "teamKey": "swansea:2015",
+   "qid": "Q1374216",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:CORKJ",
+   "teamKey": "swansea:2015",
+   "qid": "Q438025",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:DYERN",
+   "teamKey": "swansea:2015",
+   "qid": "Q1376975",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:EDER",
+   "teamKey": "swansea:2015",
+   "qid": "Q273776",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:EMNESM",
+   "teamKey": "swansea:2015",
+   "qid": "Q1358496",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:FABIANL",
+   "teamKey": "swansea:2015",
+   "qid": "Q40596",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:FERL",
+   "teamKey": "swansea:2015",
+   "qid": "Q795537",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:FERNANF2",
+   "teamKey": "swansea:2015",
+   "qid": "Q713501",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:FULTONJ",
+   "teamKey": "swansea:2015",
+   "qid": "Q6166625",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:GOMISB",
+   "teamKey": "swansea:2015",
+   "qid": "Q11966",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:GRIMESM",
+   "teamKey": "swansea:2015",
+   "qid": "Q16236759",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:KINGSLS",
+   "teamKey": "swansea:2015",
+   "qid": "Q7609694",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:KIS",
+   "teamKey": "swansea:2015",
+   "qid": "Q313083",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:MONTERJ",
+   "teamKey": "swansea:2015",
+   "qid": "Q2300455",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:NORDFEK",
+   "teamKey": "swansea:2015",
+   "qid": "Q1398221",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:PALOSCA",
+   "teamKey": "swansea:2015",
+   "qid": "Q114413",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:RANGELA",
+   "teamKey": "swansea:2015",
+   "qid": "Q880263",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:ROUTLEW",
+   "teamKey": "swansea:2015",
+   "qid": "Q370688",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:SHELVEJ",
+   "teamKey": "swansea:2015",
+   "qid": "Q314627",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:TAYLORN",
+   "teamKey": "swansea:2015",
+   "qid": "Q1191188",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "epldata",
+   "sourceKey": "epldata:2015:swansea:WILLIAA6",
+   "teamKey": "swansea:2015",
+   "qid": "Q528983",
+   "method": "dob_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:15996",
+   "teamKey": "swansea:2015",
+   "qid": "Q273776",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:20521",
+   "teamKey": "swansea:2015",
+   "qid": "Q11966",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3220",
+   "teamKey": "swansea:2015",
+   "qid": "Q60594",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3262",
+   "teamKey": "swansea:2015",
+   "qid": "Q40596",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3290",
+   "teamKey": "swansea:2015",
+   "qid": "Q713501",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3340",
+   "teamKey": "swansea:2015",
+   "qid": "Q348754",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3347",
+   "teamKey": "swansea:2015",
+   "qid": "Q516921",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3449",
+   "teamKey": "swansea:2015",
+   "qid": "Q370688",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3462",
+   "teamKey": "swansea:2015",
+   "qid": "Q438025",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3605",
+   "teamKey": "swansea:2015",
+   "qid": "Q313083",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3631",
+   "teamKey": "swansea:2015",
+   "qid": "Q1376975",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3644",
+   "teamKey": "swansea:2015",
+   "qid": "Q528983",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3944",
+   "teamKey": "swansea:2015",
+   "qid": "Q59105",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:3973",
+   "teamKey": "swansea:2015",
+   "qid": "Q880263",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:4093",
+   "teamKey": "swansea:2015",
+   "qid": "Q6166625",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:4097",
+   "teamKey": "swansea:2015",
+   "qid": "Q16236759",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:43591",
+   "teamKey": "swansea:2015",
+   "qid": "Q1358496",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:4631",
+   "teamKey": "swansea:2015",
+   "qid": "Q1374216",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:4726",
+   "teamKey": "swansea:2015",
+   "qid": "Q552171",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:49142",
+   "teamKey": "swansea:2015",
+   "qid": "Q686197",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:6652",
+   "teamKey": "swansea:2015",
+   "qid": "Q1157022",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:6950",
+   "teamKey": "swansea:2015",
+   "qid": "Q114413",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:7063",
+   "teamKey": "swansea:2015",
+   "qid": "Q2300455",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:9536",
+   "teamKey": "swansea:2015",
+   "qid": "Q5566331",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:9563",
+   "teamKey": "swansea:2015",
+   "qid": "Q1398221",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:9627",
+   "teamKey": "swansea:2015",
+   "qid": "Q1191188",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  },
+  {
+   "source": "statsbomb",
+   "sourceKey": "statsbomb:2015:swansea:9629",
+   "teamKey": "swansea:2015",
+   "qid": "Q7609694",
+   "method": "jersey_club_season",
+   "reviewed": true,
+   "confidence": "high"
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+import { test, expect } from '@playwright/test';
+import { chooseTeam } from './versus-helpers';
+import { expectBroadcastFits, timepitchMatch } from './timepitch-centre';
+
+test('select a lineup, play and inspect a full local replay, export and reimport it', async ({ page }) => {
+  await page.goto('/');await page.getByRole('button',{name:'More details'}).click();
+  await page.getByRole('combobox', { name: 'Simulation engine', exact: true }).selectOption('timepitch');
+  const home = page.getByRole('article', { name: 'Home team', exact: true });
+  await expect(home.getByRole('heading', { name: 'Arsenal', exact: true })).toBeVisible();
+  await home.getByRole('combobox', { name: 'Formation', exact: true }).selectOption('4-3-3');
+  await home.getByRole('combobox', { name: 'Tactic', exact: true }).selectOption('press');
+  await page.getByRole('checkbox', { name: 'Use a fixed seed', exact: true }).check();
+  await page.getByLabel('Simulation seed', { exact: true }).fill('42');
+  await page.getByRole('button',{name:'Play match',exact:true}).click();
+  // TP226: the simulated match opens in the broadcast shell (same tab, no new window) and starts by itself at 10×.
+  const { view, centre: match, clock, speed } = timepitchMatch(page);
+  await expect(match).toBeVisible();
+  await expect(match.getByRole('button', { name: 'Pause', exact: true })).toBeVisible();
+  await expect(speed('10')).toHaveAttribute('aria-pressed', 'true');
+  expect(page.context().pages()).toHaveLength(1);
+  await expectBroadcastFits(page, match);
+  await match.getByRole('button', { name: 'Pause', exact: true }).click();
+  await expect(match.getByRole('img', { name: 'Pitch with 22 players and the ball' })).toBeVisible();
+  const matchId = await view.getAttribute('data-match-id');
+  const original = await (await page.request.get(`/api/matches/${matchId}/replay`)).json();
+  expect(original.config.home_formation).toBe('4-3-3');
+  expect(original.config.home_tactic).toBe('press');
+  expect(new Set(original.config.home_players).size).toBe(11);
+  // At full time the final analysis opens by itself (the old «Match summary»); events list half-time, shots and restarts.
+  await clock.press('End');
+  await expect(match.getByRole('status').filter({ hasText: 'Final analysis revealed' })).toBeVisible();
+  const kinds = match.getByRole('combobox', { name: 'Event type', exact: true });
+  for (const kind of ['halftime', 'shot', 'restart']) await expect(kinds.getByRole('option', { name: kind, exact: true })).toBeAttached();
+  await speed('120').click();
+  await expect(speed('120')).toHaveAttribute('aria-pressed', 'true');
+  await clock.press('Home');
+  await expect(match.getByRole('status').filter({ hasText: 'Final analysis revealed' })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Language: Español' }).click();
+  await expect(match.getByRole('img', { name: 'Campo con 22 jugadores y balón' })).toBeVisible();
+  await expect(view).toHaveAttribute('data-match-id', matchId!);
+  await page.getByRole('button', { name: 'Idioma: English' }).click();
+  const unchanged = await (await page.request.get(`/api/matches/${matchId}/replay`)).json();
+  expect(unchanged.trace_hash).toBe(original.trace_hash);
+  const downloadPromise = page.waitForEvent('download');
+  await match.getByRole('link', { name: 'Export replay', exact: true }).click();
+  const download = await downloadPromise;
+  const saved = test.info().outputPath('owned-replay.json');
+  await download.saveAs(saved);
+  await page.getByRole('button',{name:'Library',exact:true}).click();
+  await page.getByLabel('Import replay file', { exact: true }).setInputFiles(saved);
+  await expect(view).not.toHaveAttribute('data-match-id', matchId!);
+  const importedId = await view.getAttribute('data-match-id');
+  const imported = await (await page.request.get(`/api/matches/${importedId}/replay`)).json();
+  expect(imported.trace_hash).toBe(original.trace_hash);
+  expect(imported.statistics).toEqual(original.statistics);
+  await page.getByRole('button',{name:'Library',exact:true}).click();
+  await expect(page.getByRole('heading', { name: 'Your recent matches', exact: true })).toBeVisible();
+  await page.getByRole('button',{name:'Match centre',exact:true}).click();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await clock.press('End');
+  await page.screenshot({ path: `../.local/qa/match-${test.info().project.name}.png`, fullPage: true });
+});
+
+test('an early-era squad keeps its sources and selected XI when returning from a match', async ({ page }) => {
+  await page.goto('/');await page.getByRole('button',{name:'More details'}).click();
+  await page.getByRole('combobox', { name: 'Simulation engine', exact: true }).selectOption('timepitch');
+  const home = page.getByRole('article', { name: 'Home team', exact: true });
+  await chooseTeam(page, 'home', 'arsenal:1992');
+  await expect(home.locator('.season-tag')).toHaveText('1992/93');
+  await home.getByText('Starting XI · 4-4-2', { exact: true }).click();
+  const goalkeeper = home.locator('.lineup-slots select').first();
+  const other = await goalkeeper.locator('option:not(:checked)').first().getAttribute('value');
+  await goalkeeper.selectOption(other!);
+  await page.getByRole('button',{name:'Play match',exact:true}).click();
+  const { centre: match } = timepitchMatch(page);
+  await expect(match).toBeVisible();
+  await expect(match.locator('[data-unified-scoreboard]')).toContainText('1992/93');
+  // TP224: the unified centre has no squad-source panel; the source stays with the team panel the match returns to.
+  await match.getByRole('button', { name: 'New match', exact: true }).click();
+  await expect(home.locator('.lineup-slots select').first()).toHaveValue(other!);
+  await home.getByText('Season squad and sources', { exact: true }).click();
+  await expect(home.locator('.squad-provenance')).toContainText('epldata');
+});

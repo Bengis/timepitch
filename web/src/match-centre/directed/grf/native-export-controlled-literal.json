@@ -1,0 +1,1491 @@
+{
+ "version": "grf-directed-native-export-1",
+ "patchRevision": "directed-grf-native-1",
+ "status": "captured",
+ "reason": "",
+ "acceptance": "not_assessed",
+ "executionMode": "disabled",
+ "profileJson": "{\"version\": \"directed-profile-1\", \"backend\": \"grf\", \"engineRevision\": \"fixture-grf-revision\", \"directorRevision\": \"directed-grf-native-1\", \"sourceInventorySha256\": \"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\", \"artifactSha256\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"sourceBindingPolicySha256\": \"9999999999999999999999999999999999999999999999999999999999999999\", \"seed\": 42, \"transformId\": \"grf-world-110x72-canonical-105x68-v1\", \"clock\": {\"kind\": \"fixed_10ms\", \"maxStepMs\": 10}, \"availableChannels\": [\"positions\", \"velocity\", \"height\", \"contacts\"], \"unsupported\": [], \"executionMode\": \"disabled\"}",
+ "initialPacketUtf8": "{\"seed\": 42, \"profile\": {\"version\": \"directed-profile-1\", \"backend\": \"grf\", \"engineRevision\": \"fixture-grf-revision\", \"directorRevision\": \"directed-grf-native-1\", \"sourceInventorySha256\": \"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\", \"artifactSha256\": \"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\", \"sourceBindingPolicySha256\": \"9999999999999999999999999999999999999999999999999999999999999999\", \"seed\": 42, \"transformId\": \"grf-world-110x72-canonical-105x68-v1\", \"clock\": {\"kind\": \"fixed_10ms\", \"maxStepMs\": 10}, \"availableChannels\": [\"positions\", \"velocity\", \"height\", \"contacts\"], \"unsupported\": [], \"executionMode\": \"disabled\"}, \"initialState\": {\"version\": \"directed-initial-1\", \"period\": 1, \"sourceMs\": 1684024, \"units\": \"metres\", \"players\": [{\"playerKey\": \"historical:statsbomb:1\", \"engineId\": \"home:1\", \"position\": {\"value\": {\"x\": 12, \"y\": 34, \"z\": 0}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"velocity\": {\"value\": {\"x\": 0, \"y\": 0, \"z\": 0}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"phase\": {\"value\": \"standing\", \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"energy\": {\"value\": 1, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"memory\": {\"value\": {}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}}, {\"playerKey\": \"historical:statsbomb:2\", \"engineId\": \"home:2\", \"position\": {\"value\": {\"x\": 12, \"y\": 34, \"z\": 0}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"velocity\": {\"value\": {\"x\": 0, \"y\": 0, \"z\": 0}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"phase\": {\"value\": \"standing\", \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"energy\": {\"value\": 1, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"memory\": {\"value\": {}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}}], \"ball\": {\"position\": {\"value\": {\"x\": 12, \"y\": 34, \"z\": 0}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"velocity\": {\"value\": {\"x\": 0, \"y\": 0, \"z\": 0}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"ownerId\": {\"value\": null, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}}, \"phase\": {\"value\": \"open_play\", \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"caches\": {\"value\": {\"revision\": \"grf-directed-cold-start-1\", \"values\": {}}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}}, \"nativePlayers\": [{\"playerKey\": \"historical:statsbomb:1\", \"engineId\": \"home:1\", \"position\": {\"value\": {\"x\": -42.42857142857143, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"position\", \"z\": 0, \"zUnit\": \"metres\"}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"velocity\": {\"value\": {\"x\": 0.0, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"velocity\", \"z\": 0, \"zUnit\": \"metres\"}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"phase\": {\"value\": \"standing\", \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"energy\": {\"value\": 1, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"memory\": {\"value\": {}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}}, {\"playerKey\": \"historical:statsbomb:2\", \"engineId\": \"home:2\", \"position\": {\"value\": {\"x\": -42.42857142857143, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"position\", \"z\": 0, \"zUnit\": \"metres\"}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"velocity\": {\"value\": {\"x\": 0.0, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"velocity\", \"z\": 0, \"zUnit\": \"metres\"}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"phase\": {\"value\": \"standing\", \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"energy\": {\"value\": 1, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"memory\": {\"value\": {}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}}], \"nativeBall\": {\"position\": {\"value\": {\"x\": -42.42857142857143, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"position\", \"z\": 0, \"zUnit\": \"metres\"}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"velocity\": {\"value\": {\"x\": 0.0, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"velocity\", \"z\": 0, \"zUnit\": \"metres\"}, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}, \"ownerId\": {\"value\": null, \"provenance\": \"inferred\", \"refs\": [\"pass\"], \"reason\": null}}, \"clock\": {\"startSourceMs\": 1684024, \"tickMs\": 10, \"totalTicks\": 30}, \"nativeOptions\": {\"version\": \"grf-directed-native-options-1\", \"initialStatePolicy\": \"grf-directed-cold-start-1\"}}",
+ "nativeEpochMs": 0,
+ "sourceStartMs": 1684024,
+ "physicalTicks": 30,
+ "actors": [
+  {
+   "playerKey": "historical:statsbomb:1",
+   "engineId": "home:1"
+  },
+  {
+   "playerKey": "historical:statsbomb:2",
+   "engineId": "home:2"
+  }
+ ],
+ "commands": [
+  {
+   "eventId": "pass",
+   "inputPacketUtf8": "{\"eventId\": \"pass\", \"refs\": [\"pass\"], \"kind\": \"Pass\", \"actorEngineId\": \"home:1\", \"recipientEngineId\": \"home:2\", \"sourceMs\": 1684124, \"physicalTick\": 10, \"pointNative\": {\"x\": -42.42857142857143, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"position\"}, \"targetNative\": {\"x\": -42.42857142857143, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"position\"}, \"bodyPart\": null, \"outcomeConstraint\": null, \"sourceCommand\": {\"event\": {\"id\": \"pass\", \"refs\": [\"pass\"], \"sourceIndex\": 1684124, \"period\": 1, \"periodMs\": 1684124, \"elapsedMs\": 1684124, \"kind\": \"Pass\", \"actorId\": \"historical:statsbomb:1\", \"side\": \"home\", \"recipientId\": \"historical:statsbomb:2\", \"relatedIds\": [\"receipt\"], \"assistedShotId\": null, \"possessionId\": 1, \"durationMs\": 100.5, \"start\": {\"x\": 12, \"y\": 34}, \"end\": {\"x\": 12, \"y\": 34}, \"outcome\": null, \"bodyPart\": null, \"xg\": null}, \"evidence\": null, \"alias\": {\"eventId\": \"pass\", \"nextEventId\": \"receipt\", \"sourceEndMs\": 1684224.5, \"presentationEndMs\": 1684224, \"deltaMs\": -0.5, \"kind\": \"pass_receipt\", \"refs\": [\"pass\", \"receipt\"]}}, \"nativeControl\": {\"function\": \"short_pass\", \"launchTick\": 5, \"power\": 0.5}}",
+   "dispatched": true,
+   "contactObserved": true
+  },
+  {
+   "eventId": "receipt",
+   "inputPacketUtf8": "{\"eventId\": \"receipt\", \"refs\": [\"receipt\"], \"kind\": \"Ball Receipt*\", \"actorEngineId\": \"home:2\", \"recipientEngineId\": null, \"sourceMs\": 1684224, \"physicalTick\": 20, \"pointNative\": {\"x\": -42.42857142857143, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"position\"}, \"targetNative\": null, \"bodyPart\": null, \"outcomeConstraint\": null, \"sourceCommand\": {\"event\": {\"id\": \"receipt\", \"refs\": [\"receipt\"], \"sourceIndex\": 1684224, \"period\": 1, \"periodMs\": 1684224, \"elapsedMs\": 1684224, \"kind\": \"Ball Receipt*\", \"actorId\": \"historical:statsbomb:2\", \"side\": \"home\", \"recipientId\": null, \"relatedIds\": [], \"assistedShotId\": null, \"possessionId\": 1, \"durationMs\": null, \"start\": {\"x\": 12, \"y\": 34}, \"end\": null, \"outcome\": null, \"bodyPart\": null, \"xg\": null}, \"evidence\": null, \"alias\": null}, \"nativeControl\": {\"function\": \"trap\", \"launchTick\": 15, \"power\": 0}}",
+   "dispatched": true,
+   "contactObserved": true
+  },
+  {
+   "eventId": "shot",
+   "inputPacketUtf8": "{\"eventId\": \"shot\", \"refs\": [\"shot\"], \"kind\": \"Shot\", \"actorEngineId\": \"home:2\", \"recipientEngineId\": null, \"sourceMs\": 1684274, \"physicalTick\": 25, \"pointNative\": {\"x\": -42.42857142857143, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"position\"}, \"targetNative\": {\"x\": 55.0, \"y\": 0.0, \"space\": \"grf_world_metres\", \"kind\": \"position\"}, \"bodyPart\": \"left_foot\", \"outcomeConstraint\": \"Goal\", \"sourceCommand\": {\"event\": {\"id\": \"shot\", \"refs\": [\"shot\"], \"sourceIndex\": 1697750, \"period\": 1, \"periodMs\": 1684274, \"elapsedMs\": 1684274, \"kind\": \"Shot\", \"actorId\": \"historical:statsbomb:2\", \"side\": \"home\", \"recipientId\": null, \"relatedIds\": [], \"assistedShotId\": null, \"possessionId\": 1, \"durationMs\": 100.325, \"start\": {\"x\": 12, \"y\": 34}, \"end\": {\"x\": 105, \"y\": 34}, \"outcome\": \"Goal\", \"bodyPart\": \"left_foot\", \"xg\": 0.12}, \"evidence\": {\"eventId\": \"shot\", \"elapsedMs\": 1684274, \"actorId\": \"historical:statsbomb:2\", \"refs\": [\"shot\"], \"pass\": null, \"keeper\": null, \"shot\": {\"bodyPart\": \"left_foot\", \"rawEndHeight\": 1.3, \"endHeightUnit\": \"unverified\", \"endHeightMetres\": null, \"rawEndLocation\": [120, 40, 1.3]}}, \"alias\": null}, \"nativeControl\": {\"function\": \"shot\", \"launchTick\": 22, \"power\": 1}}",
+   "dispatched": true,
+   "contactObserved": true
+  }
+ ],
+ "contacts": [
+  {
+   "eventId": "pass",
+   "actorEngineId": "home:1",
+   "nativeMs": 100,
+   "relativeMs": 100,
+   "bodyPart": "right_foot",
+   "function": 0,
+   "role": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityAfterNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "animationTargetNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "animationTargetAuthority": "animation_target_not_body_surface",
+   "bodySurface": null
+  },
+  {
+   "eventId": "receipt",
+   "actorEngineId": "home:2",
+   "nativeMs": 200,
+   "relativeMs": 200,
+   "bodyPart": "left_foot",
+   "function": 0,
+   "role": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityAfterNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "animationTargetNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "animationTargetAuthority": "animation_target_not_body_surface",
+   "bodySurface": null
+  },
+  {
+   "eventId": "shot",
+   "actorEngineId": "home:2",
+   "nativeMs": 250,
+   "relativeMs": 250,
+   "bodyPart": "left_foot",
+   "function": 0,
+   "role": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityAfterNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "animationTargetNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "animationTargetAuthority": "animation_target_not_body_surface",
+   "bodySurface": null
+  }
+ ],
+ "samples": [
+  {
+   "tick": 0,
+   "nativeMs": 0,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 1,
+   "nativeMs": 10,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 2,
+   "nativeMs": 20,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 3,
+   "nativeMs": 30,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 4,
+   "nativeMs": 40,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 5,
+   "nativeMs": 50,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 6,
+   "nativeMs": 60,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 7,
+   "nativeMs": 70,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 8,
+   "nativeMs": 80,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 9,
+   "nativeMs": 90,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 10,
+   "nativeMs": 100,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 11,
+   "nativeMs": 110,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 12,
+   "nativeMs": 120,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 13,
+   "nativeMs": 130,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 14,
+   "nativeMs": 140,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 15,
+   "nativeMs": 150,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 16,
+   "nativeMs": 160,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 17,
+   "nativeMs": 170,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 18,
+   "nativeMs": 180,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 19,
+   "nativeMs": 190,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 20,
+   "nativeMs": 200,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 21,
+   "nativeMs": 210,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 22,
+   "nativeMs": 220,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 23,
+   "nativeMs": 230,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 24,
+   "nativeMs": 240,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 25,
+   "nativeMs": 250,
+   "homeGoals": 0,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 26,
+   "nativeMs": 260,
+   "homeGoals": 1,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 27,
+   "nativeMs": 270,
+   "homeGoals": 1,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 28,
+   "nativeMs": 280,
+   "homeGoals": 1,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 29,
+   "nativeMs": 290,
+   "homeGoals": 1,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  },
+  {
+   "tick": 30,
+   "nativeMs": 300,
+   "homeGoals": 1,
+   "awayGoals": 0,
+   "ballNative": {
+    "x": -44,
+    "y": 0,
+    "z": 0.11
+   },
+   "ballVelocityNative": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "players": [
+    {
+     "engineId": "home:1",
+     "positionNative": {
+      "x": -44,
+      "y": 0,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    },
+    {
+     "engineId": "home:2",
+     "positionNative": {
+      "x": -33,
+      "y": 9,
+      "z": 0
+     },
+     "velocityNative": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+     }
+    }
+   ]
+  }
+ ],
+ "bodyIntervals": null,
+ "historicalTracking": false
+}

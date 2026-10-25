@@ -1,0 +1,286 @@
+[
+ {
+  "request_hash": "79bbc1ec4decbc69774b8150b6ea8dcdad74e4b699d4be0135729e8385073eb3",
+  "analyst": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "e3f519d2-bc58-41ad-a658-89daba752ca4",
+   "output": {
+    "angle": "narrow_win",
+    "paragraphs": [
+     [
+      "result",
+      "coverage"
+     ],
+     [
+      "goal:grf:134",
+      "leader:goals"
+     ],
+     [
+      "comparison:shots",
+      "comparison:pass_received",
+      "comparison:recoveries",
+      "comparison:team_possession_pct"
+     ]
+    ]
+   }
+  },
+  "writer": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "2e59c952-4154-4d4d-b3d8-15765b091963",
+   "output": {
+    "headline": {
+     "text": "steven n'zonzi fires blackburn rovers to a 1–0 win over manchester united",
+     "fact_ids": [
+      "goal:grf:134",
+      "result"
+     ]
+    },
+    "paragraphs": [
+     {
+      "sentences": [
+       {
+        "text": "blackburn rovers hold on to a narrow 1–0 victory against manchester united in a fully covered match.",
+        "fact_ids": [
+         "result",
+         "coverage"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "steven n'zonzi opens the scoring at 27:14, securing the only goal and leading the scorers for blackburn rovers.",
+        "fact_ids": [
+         "goal:grf:134",
+         "leader:goals"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "blackburn rovers fire 7 shots compared to manchester united's 2, receive 31 passes versus 27, and make 23 recoveries against 21, holding 51.2% possession throughout the game.",
+        "fact_ids": [
+         "comparison:shots",
+         "comparison:pass_received",
+         "comparison:recoveries",
+         "comparison:team_possession_pct"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "writer_revision": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "7570bd0c-2fd2-43df-a126-12fc55a131a5",
+   "output": {
+    "headline": {
+     "text": "Steven N'Zonzi fires Blackburn Rovers to a 1–0 win over Manchester United",
+     "fact_ids": [
+      "goal:grf:134",
+      "result"
+     ]
+    },
+    "paragraphs": [
+     {
+      "sentences": [
+       {
+        "text": "Blackburn Rovers hold on to a narrow 1–0 victory against Manchester United in a fully covered match.",
+        "fact_ids": [
+         "result",
+         "coverage"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "Steven N'Zonzi opens the scoring at 27:14, securing the only goal and leading the scorers for Blackburn Rovers.",
+        "fact_ids": [
+         "goal:grf:134",
+         "leader:goals"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "Blackburn Rovers fire 7 shots, receive 31 passes, and make 23 recoveries, holding 51.2% possession throughout the game.",
+        "fact_ids": [
+         "comparison:shots",
+         "comparison:pass_received",
+         "comparison:recoveries",
+         "comparison:team_possession_pct"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "request_hash": "c6fc211d35bcc6a0495dc4742faf825f878ab01bebf3f8994fafc5f55f88313e",
+  "analyst": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "1989b6bf-39da-4e4b-ac23-ac39cf2e2bb1",
+   "output": {
+    "angle": "dominant_display",
+    "paragraphs": [
+     [
+      "goal:grf:4095",
+      "goal:grf:9254",
+      "goal:grf:14036",
+      "goal:grf:15691"
+     ],
+     [
+      "goal:grf:33003",
+      "goal:grf:47428",
+      "goal:grf:52641"
+     ],
+     [
+      "leader:goals",
+      "coverage"
+     ]
+    ]
+   }
+  },
+  "writer": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "0342641b-9c0e-4eee-ad46-615762d832d5",
+   "output": {
+    "headline": {
+     "text": "arsenal fires six goals past manchester city in a commanding 6–1 victory",
+     "fact_ids": [
+      "result"
+     ]
+    },
+    "paragraphs": [
+     {
+      "sentences": [
+       {
+        "text": "Gilberto Silva opens the scoring for Arsenal at 06:49 before Ilkay Gündogan pulls one back for Manchester City at 15:25.",
+        "fact_ids": [
+         "goal:grf:4095",
+         "goal:grf:9254"
+        ]
+       },
+       {
+        "text": "Lauren edges Arsenal ahead again at 23:23, and Thierry Henry doubles the lead at 26:09.",
+        "fact_ids": [
+         "goal:grf:14036",
+         "goal:grf:15691"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "Thierry Henry finishes his brace with a goal at 51:14, extending Arsenal's lead.",
+        "fact_ids": [
+         "goal:grf:33003"
+        ]
+       },
+       {
+        "text": "Robert Pires adds another at 75:16, and Gilberto Silva seals the 6–1 win at 83:58.",
+        "fact_ids": [
+         "goal:grf:47428",
+         "goal:grf:52641"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "Thierry Henry and Gilberto Silva lead Arsenal's scoring with two goals each in this match.",
+        "fact_ids": [
+         "leader:goals"
+        ]
+       },
+       {
+        "text": "The coverage notes that goals and scorers come from engine telemetry, with some data like passes and possession omitted.",
+        "fact_ids": [
+         "coverage"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "writer_revision": {
+   "model": "gpt-4.1-mini-2025-04-14",
+   "request_id": "fc6ff1f2-4fdd-4429-ad67-1698e5dbfd51",
+   "output": {
+    "headline": {
+     "text": "Arsenal fires six goals past Manchester City in a commanding 6–1 victory",
+     "fact_ids": [
+      "result"
+     ]
+    },
+    "paragraphs": [
+     {
+      "sentences": [
+       {
+        "text": "Gilberto Silva opens the scoring for Arsenal at 06:49 before Ilkay Gündogan pulls one back for Manchester City at 15:25.",
+        "fact_ids": [
+         "goal:grf:4095",
+         "goal:grf:9254"
+        ]
+       },
+       {
+        "text": "Lauren edges Arsenal ahead again at 23:23, and Thierry Henry doubles the lead at 26:09.",
+        "fact_ids": [
+         "goal:grf:14036",
+         "goal:grf:15691"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "Thierry Henry finishes his brace with a goal at 51:14, extending Arsenal's lead.",
+        "fact_ids": [
+         "goal:grf:33003"
+        ]
+       },
+       {
+        "text": "Robert Pires adds another at 75:16, and Gilberto Silva seals the 6–1 win at 83:58.",
+        "fact_ids": [
+         "goal:grf:47428",
+         "goal:grf:52641",
+         "result"
+        ]
+       }
+      ]
+     },
+     {
+      "sentences": [
+       {
+        "text": "Thierry Henry and Gilberto Silva lead Arsenal's scoring with two goals each in this match.",
+        "fact_ids": [
+         "leader:goals"
+        ]
+       },
+       {
+        "text": "The coverage notes that some data like passes and possession were omitted.",
+        "fact_ids": [
+         "coverage"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ }
+]

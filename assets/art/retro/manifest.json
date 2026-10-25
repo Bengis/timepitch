@@ -1,0 +1,47 @@
+{
+  "status": "visual prototype over recorded GRF observations, not product integration",
+  "trace_sha256": "66edaad209d9aef84402b0adb8be3c94b76ca9cfe66ab58080f5ec09c1b9cb01",
+  "clips_engine_steps": [
+    [
+      1370,
+      1445
+    ],
+    [
+      2290,
+      2380
+    ]
+  ],
+  "logical_resolution": [
+    384,
+    256
+  ],
+  "output_resolution": [
+    1536,
+    1024
+  ],
+  "scale": 4,
+  "scaling": "nearest neighbour",
+  "fps": 30,
+  "video_frames": 543,
+  "video_duration_s": 18.1,
+  "video_sha256": "e9c59307782968abd56181db4385f1685d0fdf0412aa32d73df19518b8c5a070",
+  "sprite_cell": [
+    16,
+    18
+  ],
+  "sprite_directions": 8,
+  "sprite_states": [
+    "idle",
+    "run-1",
+    "run-2",
+    "run-3",
+    "run-4",
+    "kick",
+    "celebrate"
+  ],
+  "sprite_palettes": 4,
+  "sprite_count": 224,
+  "source_svg_sha256": "aca9e95052726e93cb2411df07175c0d6778d0e0755fde98d8564f3fa5b06fa8",
+  "animation": "display-only estimated movement/kick/celebration, inferred from observation deltas and native contacts; not a second simulation",
+  "renderer_sha256": "cb7621ea81594dace031f58e105356081118a59e40c3c4cd0bd92514741ea0c2"
+}

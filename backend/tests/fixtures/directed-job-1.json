@@ -1,0 +1,1100 @@
+{
+  "version": "directed-job-1",
+  "request": {
+    "version": "directed-request-1",
+    "backend": "grf",
+    "backendRevision": "fixture-grf-revision",
+    "executionAvailable": false,
+    "sourceKey": "[{\"source\":\"historical\",\"id\":\"3754078\",\"revision\":\"controlled-équipe-⚽\"},\"fixture-motion\",\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",{\"id\":\"ayew-equaliser-1\",\"period\":1,\"fromMs\":1684024,\"toMs\":1697850}]",
+    "sourceDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "sourceIdentity": {
+      "source": "historical",
+      "id": "3754078",
+      "revision": "controlled-équipe-⚽"
+    },
+    "motionRevision": "fixture-motion",
+    "clip": {
+      "id": "ayew-equaliser-1",
+      "period": 1,
+      "fromMs": 1684024,
+      "toMs": 1697850
+    },
+    "events": [
+      {
+        "id": "pass",
+        "refs": [
+          "pass"
+        ],
+        "sourceIndex": 1684124,
+        "period": 1,
+        "periodMs": 1684124,
+        "elapsedMs": 1684124,
+        "kind": "Pass",
+        "actorId": "historical:statsbomb:1",
+        "side": "home",
+        "recipientId": "historical:statsbomb:2",
+        "relatedIds": [
+          "receipt"
+        ],
+        "assistedShotId": null,
+        "possessionId": 1,
+        "durationMs": 100.5,
+        "start": {
+          "x": 12,
+          "y": 34
+        },
+        "end": {
+          "x": 12,
+          "y": 34
+        },
+        "outcome": null,
+        "bodyPart": null,
+        "xg": null
+      },
+      {
+        "id": "receipt",
+        "refs": [
+          "receipt"
+        ],
+        "sourceIndex": 1684224,
+        "period": 1,
+        "periodMs": 1684224,
+        "elapsedMs": 1684224,
+        "kind": "Ball Receipt*",
+        "actorId": "historical:statsbomb:2",
+        "side": "home",
+        "recipientId": null,
+        "relatedIds": [],
+        "assistedShotId": null,
+        "possessionId": 1,
+        "durationMs": null,
+        "start": {
+          "x": 12,
+          "y": 34
+        },
+        "end": null,
+        "outcome": null,
+        "bodyPart": null,
+        "xg": null
+      },
+      {
+        "id": "shot",
+        "refs": [
+          "shot"
+        ],
+        "sourceIndex": 1697750,
+        "period": 1,
+        "periodMs": 1697750,
+        "elapsedMs": 1697750,
+        "kind": "Shot",
+        "actorId": "historical:statsbomb:2",
+        "side": "home",
+        "recipientId": null,
+        "relatedIds": [],
+        "assistedShotId": null,
+        "possessionId": 1,
+        "durationMs": 100.325,
+        "start": {
+          "x": 12,
+          "y": 34
+        },
+        "end": {
+          "x": 105,
+          "y": 34
+        },
+        "outcome": "Goal",
+        "bodyPart": "left_foot",
+        "xg": 0.12
+      }
+    ],
+    "evidence": {
+      "version": "sequence-performance-evidence-1",
+      "sourceKey": "[{\"source\":\"historical\",\"id\":\"3754078\",\"revision\":\"controlled-équipe-⚽\"},\"fixture-motion\",\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",{\"id\":\"ayew-equaliser-1\",\"period\":1,\"fromMs\":1684024,\"toMs\":1697850}]",
+      "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "actions": [
+        {
+          "eventId": "shot",
+          "elapsedMs": 1697750,
+          "actorId": "historical:statsbomb:2",
+          "refs": [
+            "shot"
+          ],
+          "pass": null,
+          "keeper": null,
+          "shot": {
+            "bodyPart": "left_foot",
+            "rawEndHeight": 1.3,
+            "endHeightUnit": "unverified",
+            "endHeightMetres": null,
+            "rawEndLocation": [
+              120,
+              40,
+              1.3
+            ]
+          }
+        }
+      ],
+      "snapshots": [
+        {
+          "eventId": "shot",
+          "period": 1,
+          "periodMs": 1697750,
+          "elapsedMs": 1697750,
+          "rows": [
+            {
+              "sourceId": 1,
+              "playerKey": "historical:statsbomb:1",
+              "point": {
+                "x": 20,
+                "y": 34
+              },
+              "eventPoint": {
+                "x": 21.04,
+                "y": 34
+              },
+              "status": "conflict",
+              "reason": "fixture_conflict",
+              "discrepancyM": 1.04,
+              "refs": [
+                "shot"
+              ],
+              "raw": {
+                "kept": true
+              }
+            }
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "eventId": "shot",
+          "playerKey": "historical:statsbomb:1",
+          "code": "fixture_conflict",
+          "refs": [
+            "shot"
+          ]
+        }
+      ]
+    },
+    "roster": [
+      {
+        "sourceId": 1,
+        "playerKey": "historical:statsbomb:1",
+        "teamKey": "team:home",
+        "engineId": "home:1",
+        "side": "home",
+        "activeIntervals": [
+          {
+            "period": 1,
+            "fromMs": 1684024,
+            "toMs": 1697850
+          }
+        ]
+      },
+      {
+        "sourceId": 2,
+        "playerKey": "historical:statsbomb:2",
+        "teamKey": "team:home",
+        "engineId": "home:2",
+        "side": "home",
+        "activeIntervals": [
+          {
+            "period": 1,
+            "fromMs": 1684024,
+            "toMs": 1697850
+          }
+        ]
+      }
+    ],
+    "aliases": [
+      {
+        "eventId": "pass",
+        "nextEventId": "receipt",
+        "sourceEndMs": 1684224.5,
+        "presentationEndMs": 1684224,
+        "deltaMs": -0.5,
+        "kind": "pass_receipt",
+        "refs": [
+          "pass",
+          "receipt"
+        ]
+      }
+    ],
+    "cuts": [],
+    "policy": {
+      "version": "directed-physical-1",
+      "playerSpeedMps": 9,
+      "playerAccelerationMps2": 4,
+      "ballGroundSpeedMps": 45,
+      "contactM": 0.08,
+      "stanceM": 0.03,
+      "rootClearanceM": 0.5
+    },
+    "capabilities": {
+      "version": "directed-engine-capabilities-1",
+      "sourceDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "evidenceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "inventory": {
+        "fixture": {
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "engines": [
+        {
+          "backend": "grf",
+          "revision": "fixture-grf-revision",
+          "executionAvailable": false,
+          "measured": false,
+          "capabilities": [
+            {
+              "id": "identities_active",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "units",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "physical_clock",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "initial_state",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "possession",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "actor_targets",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "explicit_pass_recipient",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "cross_header",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "save_block_recovery",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "prescribed_shot_outcome",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "event_time_between_ticks",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "state_export",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "isolation_rng",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "teardown",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "render_dependency",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "backend": "touchlines",
+          "revision": "dddddddddddddddddddddddddddddddddddddddd",
+          "executionAvailable": false,
+          "measured": false,
+          "capabilities": [
+            {
+              "id": "identities_active",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "units",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "physical_clock",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "initial_state",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "possession",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "actor_targets",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "explicit_pass_recipient",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "cross_header",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "save_block_recovery",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "prescribed_shot_outcome",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "event_time_between_ticks",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "state_export",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "isolation_rng",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "teardown",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            },
+            {
+              "id": "render_dependency",
+              "state": "requires_extension",
+              "finding": "Controlled source report",
+              "requiredChange": "not implemented",
+              "evidence": [
+                {
+                  "file": "fixture",
+                  "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                  "lines": [
+                    1,
+                    2
+                  ],
+                  "symbol": "fixture"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "boundaryIssues": [
+      {
+        "code": "action_end_beyond_clip",
+        "refs": [
+          "shot"
+        ]
+      }
+    ],
+    "requestDigest": "1153bb8b45e900d85d60f88f13b7f69ece695da544bc9d44b1e8ad3146fed2d2"
+  },
+  "requestPayloadUtf8": "{\"version\":\"directed-request-1\",\"backend\":\"grf\",\"backendRevision\":\"fixture-grf-revision\",\"executionAvailable\":false,\"sourceKey\":\"[{\\\"source\\\":\\\"historical\\\",\\\"id\\\":\\\"3754078\\\",\\\"revision\\\":\\\"controlled-équipe-⚽\\\"},\\\"fixture-motion\\\",\\\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",{\\\"id\\\":\\\"ayew-equaliser-1\\\",\\\"period\\\":1,\\\"fromMs\\\":1684024,\\\"toMs\\\":1697850}]\",\"sourceDigest\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"evidenceDigest\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"sourceIdentity\":{\"source\":\"historical\",\"id\":\"3754078\",\"revision\":\"controlled-équipe-⚽\"},\"motionRevision\":\"fixture-motion\",\"clip\":{\"id\":\"ayew-equaliser-1\",\"period\":1,\"fromMs\":1684024,\"toMs\":1697850},\"events\":[{\"id\":\"pass\",\"refs\":[\"pass\"],\"sourceIndex\":1684124,\"period\":1,\"periodMs\":1684124,\"elapsedMs\":1684124,\"kind\":\"Pass\",\"actorId\":\"historical:statsbomb:1\",\"side\":\"home\",\"recipientId\":\"historical:statsbomb:2\",\"relatedIds\":[\"receipt\"],\"assistedShotId\":null,\"possessionId\":1,\"durationMs\":100.5,\"start\":{\"x\":12,\"y\":34},\"end\":{\"x\":12,\"y\":34},\"outcome\":null,\"bodyPart\":null,\"xg\":null},{\"id\":\"receipt\",\"refs\":[\"receipt\"],\"sourceIndex\":1684224,\"period\":1,\"periodMs\":1684224,\"elapsedMs\":1684224,\"kind\":\"Ball Receipt*\",\"actorId\":\"historical:statsbomb:2\",\"side\":\"home\",\"recipientId\":null,\"relatedIds\":[],\"assistedShotId\":null,\"possessionId\":1,\"durationMs\":null,\"start\":{\"x\":12,\"y\":34},\"end\":null,\"outcome\":null,\"bodyPart\":null,\"xg\":null},{\"id\":\"shot\",\"refs\":[\"shot\"],\"sourceIndex\":1697750,\"period\":1,\"periodMs\":1697750,\"elapsedMs\":1697750,\"kind\":\"Shot\",\"actorId\":\"historical:statsbomb:2\",\"side\":\"home\",\"recipientId\":null,\"relatedIds\":[],\"assistedShotId\":null,\"possessionId\":1,\"durationMs\":100.325,\"start\":{\"x\":12,\"y\":34},\"end\":{\"x\":105,\"y\":34},\"outcome\":\"Goal\",\"bodyPart\":\"left_foot\",\"xg\":0.12}],\"evidence\":{\"version\":\"sequence-performance-evidence-1\",\"sourceKey\":\"[{\\\"source\\\":\\\"historical\\\",\\\"id\\\":\\\"3754078\\\",\\\"revision\\\":\\\"controlled-équipe-⚽\\\"},\\\"fixture-motion\\\",\\\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",{\\\"id\\\":\\\"ayew-equaliser-1\\\",\\\"period\\\":1,\\\"fromMs\\\":1684024,\\\"toMs\\\":1697850}]\",\"evidenceDigest\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"actions\":[{\"eventId\":\"shot\",\"elapsedMs\":1697750,\"actorId\":\"historical:statsbomb:2\",\"refs\":[\"shot\"],\"pass\":null,\"keeper\":null,\"shot\":{\"bodyPart\":\"left_foot\",\"rawEndHeight\":1.3,\"endHeightUnit\":\"unverified\",\"endHeightMetres\":null,\"rawEndLocation\":[120,40,1.3]}}],\"snapshots\":[{\"eventId\":\"shot\",\"period\":1,\"periodMs\":1697750,\"elapsedMs\":1697750,\"rows\":[{\"sourceId\":1,\"playerKey\":\"historical:statsbomb:1\",\"point\":{\"x\":20,\"y\":34},\"eventPoint\":{\"x\":21.04,\"y\":34},\"status\":\"conflict\",\"reason\":\"fixture_conflict\",\"discrepancyM\":1.04,\"refs\":[\"shot\"],\"raw\":{\"kept\":true}}]}],\"issues\":[{\"eventId\":\"shot\",\"playerKey\":\"historical:statsbomb:1\",\"code\":\"fixture_conflict\",\"refs\":[\"shot\"]}]},\"roster\":[{\"sourceId\":1,\"playerKey\":\"historical:statsbomb:1\",\"teamKey\":\"team:home\",\"engineId\":\"home:1\",\"side\":\"home\",\"activeIntervals\":[{\"period\":1,\"fromMs\":1684024,\"toMs\":1697850}]},{\"sourceId\":2,\"playerKey\":\"historical:statsbomb:2\",\"teamKey\":\"team:home\",\"engineId\":\"home:2\",\"side\":\"home\",\"activeIntervals\":[{\"period\":1,\"fromMs\":1684024,\"toMs\":1697850}]}],\"aliases\":[{\"eventId\":\"pass\",\"nextEventId\":\"receipt\",\"sourceEndMs\":1684224.5,\"presentationEndMs\":1684224,\"deltaMs\":-0.5,\"kind\":\"pass_receipt\",\"refs\":[\"pass\",\"receipt\"]}],\"cuts\":[],\"policy\":{\"version\":\"directed-physical-1\",\"playerSpeedMps\":9,\"playerAccelerationMps2\":4,\"ballGroundSpeedMps\":45,\"contactM\":0.08,\"stanceM\":0.03,\"rootClearanceM\":0.5},\"capabilities\":{\"version\":\"directed-engine-capabilities-1\",\"sourceDigest\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"evidenceDigest\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"inventory\":{\"fixture\":{\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\"}},\"engines\":[{\"backend\":\"grf\",\"revision\":\"fixture-grf-revision\",\"executionAvailable\":false,\"measured\":false,\"capabilities\":[{\"id\":\"identities_active\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"units\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"physical_clock\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"initial_state\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"possession\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"actor_targets\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"explicit_pass_recipient\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"cross_header\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"save_block_recovery\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"prescribed_shot_outcome\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"event_time_between_ticks\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"state_export\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"isolation_rng\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"teardown\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"render_dependency\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]}]},{\"backend\":\"touchlines\",\"revision\":\"dddddddddddddddddddddddddddddddddddddddd\",\"executionAvailable\":false,\"measured\":false,\"capabilities\":[{\"id\":\"identities_active\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"units\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"physical_clock\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"initial_state\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"possession\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"actor_targets\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"explicit_pass_recipient\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"cross_header\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"save_block_recovery\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"prescribed_shot_outcome\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"event_time_between_ticks\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"state_export\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"isolation_rng\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"teardown\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]},{\"id\":\"render_dependency\",\"state\":\"requires_extension\",\"finding\":\"Controlled source report\",\"requiredChange\":\"not implemented\",\"evidence\":[{\"file\":\"fixture\",\"sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"lines\":[1,2],\"symbol\":\"fixture\"}]}]}]},\"boundaryIssues\":[{\"code\":\"action_end_beyond_clip\",\"refs\":[\"shot\"]}]}",
+  "profile": {
+    "version": "directed-profile-1",
+    "backend": "grf",
+    "engineRevision": "fixture-grf-revision",
+    "directorRevision": "controlled-director-1",
+    "sourceInventorySha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "artifactSha256": null,
+    "sourceBindingPolicySha256": "9999999999999999999999999999999999999999999999999999999999999999",
+    "seed": 42,
+    "transformId": "controlled-canonical-1",
+    "clock": {
+      "kind": "fixed_10ms",
+      "maxStepMs": 10
+    },
+    "availableChannels": [
+      "positions",
+      "contacts"
+    ],
+    "unsupported": [],
+    "executionMode": "disabled"
+  },
+  "initialState": {
+    "version": "directed-initial-1",
+    "period": 1,
+    "sourceMs": 1684024,
+    "units": "metres",
+    "players": [
+      {
+        "playerKey": "historical:statsbomb:1",
+        "engineId": "home:1",
+        "position": {
+          "value": {
+            "x": 12,
+            "y": 34,
+            "z": 0
+          },
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        },
+        "velocity": {
+          "value": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        },
+        "phase": {
+          "value": "standing",
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        },
+        "energy": {
+          "value": 1,
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        },
+        "memory": {
+          "value": {},
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        }
+      },
+      {
+        "playerKey": "historical:statsbomb:2",
+        "engineId": "home:2",
+        "position": {
+          "value": {
+            "x": 12,
+            "y": 34,
+            "z": 0
+          },
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        },
+        "velocity": {
+          "value": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        },
+        "phase": {
+          "value": "standing",
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        },
+        "energy": {
+          "value": 1,
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        },
+        "memory": {
+          "value": {},
+          "provenance": "inferred",
+          "refs": [
+            "pass"
+          ],
+          "reason": null
+        }
+      }
+    ],
+    "ball": {
+      "position": {
+        "value": {
+          "x": 12,
+          "y": 34,
+          "z": 0
+        },
+        "provenance": "inferred",
+        "refs": [
+          "pass"
+        ],
+        "reason": null
+      },
+      "velocity": {
+        "value": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "provenance": "inferred",
+        "refs": [
+          "pass"
+        ],
+        "reason": null
+      },
+      "ownerId": {
+        "value": null,
+        "provenance": "inferred",
+        "refs": [
+          "pass"
+        ],
+        "reason": null
+      }
+    },
+    "phase": {
+      "value": "open_play",
+      "provenance": "inferred",
+      "refs": [
+        "pass"
+      ],
+      "reason": null
+    },
+    "caches": {
+      "value": {
+        "revision": "controlled-1",
+        "values": {}
+      },
+      "provenance": "inferred",
+      "refs": [
+        "pass"
+      ],
+      "reason": null
+    }
+  },
+  "schedule": [
+    {
+      "event": {
+        "id": "pass",
+        "refs": [
+          "pass"
+        ],
+        "sourceIndex": 1684124,
+        "period": 1,
+        "periodMs": 1684124,
+        "elapsedMs": 1684124,
+        "kind": "Pass",
+        "actorId": "historical:statsbomb:1",
+        "side": "home",
+        "recipientId": "historical:statsbomb:2",
+        "relatedIds": [
+          "receipt"
+        ],
+        "assistedShotId": null,
+        "possessionId": 1,
+        "durationMs": 100.5,
+        "start": {
+          "x": 12,
+          "y": 34
+        },
+        "end": {
+          "x": 12,
+          "y": 34
+        },
+        "outcome": null,
+        "bodyPart": null,
+        "xg": null
+      },
+      "evidence": null,
+      "alias": {
+        "eventId": "pass",
+        "nextEventId": "receipt",
+        "sourceEndMs": 1684224.5,
+        "presentationEndMs": 1684224,
+        "deltaMs": -0.5,
+        "kind": "pass_receipt",
+        "refs": [
+          "pass",
+          "receipt"
+        ]
+      }
+    },
+    {
+      "event": {
+        "id": "receipt",
+        "refs": [
+          "receipt"
+        ],
+        "sourceIndex": 1684224,
+        "period": 1,
+        "periodMs": 1684224,
+        "elapsedMs": 1684224,
+        "kind": "Ball Receipt*",
+        "actorId": "historical:statsbomb:2",
+        "side": "home",
+        "recipientId": null,
+        "relatedIds": [],
+        "assistedShotId": null,
+        "possessionId": 1,
+        "durationMs": null,
+        "start": {
+          "x": 12,
+          "y": 34
+        },
+        "end": null,
+        "outcome": null,
+        "bodyPart": null,
+        "xg": null
+      },
+      "evidence": null,
+      "alias": null
+    },
+    {
+      "event": {
+        "id": "shot",
+        "refs": [
+          "shot"
+        ],
+        "sourceIndex": 1697750,
+        "period": 1,
+        "periodMs": 1697750,
+        "elapsedMs": 1697750,
+        "kind": "Shot",
+        "actorId": "historical:statsbomb:2",
+        "side": "home",
+        "recipientId": null,
+        "relatedIds": [],
+        "assistedShotId": null,
+        "possessionId": 1,
+        "durationMs": 100.325,
+        "start": {
+          "x": 12,
+          "y": 34
+        },
+        "end": {
+          "x": 105,
+          "y": 34
+        },
+        "outcome": "Goal",
+        "bodyPart": "left_foot",
+        "xg": 0.12
+      },
+      "evidence": {
+        "eventId": "shot",
+        "elapsedMs": 1697750,
+        "actorId": "historical:statsbomb:2",
+        "refs": [
+          "shot"
+        ],
+        "pass": null,
+        "keeper": null,
+        "shot": {
+          "bodyPart": "left_foot",
+          "rawEndHeight": 1.3,
+          "endHeightUnit": "unverified",
+          "endHeightMetres": null,
+          "rawEndLocation": [
+            120,
+            40,
+            1.3
+          ]
+        }
+      },
+      "alias": null
+    }
+  ]
+}

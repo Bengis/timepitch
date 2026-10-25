@@ -1,0 +1,145 @@
+/* Análisis de partidos grabados (TP203): paneles oscuros de la maqueta (.panel, .tl, .statsmini). */
+.tpa-panel { background: linear-gradient(180deg, var(--tp-panel2), var(--tp-panel)); border: 1px solid var(--tp-line); border-radius: 14px; color: var(--tp-ink); min-width: 0; }
+.tpa-panel-h { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 12px 14px 10px; border-bottom: 1px solid var(--tp-line); }
+.tpa-panel-h h3 { margin: 0 auto 0 0; font-family: var(--tp-display); font-stretch: condensed; font-weight: 700; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--tp-ink); }
+.tpa-note { margin: 0; padding: 0 14px 12px; font-size: 11px; line-height: 1.45; color: var(--tp-ink3); }
+.tpa-empty { margin: 0; padding: 16px 14px; font-size: 12.5px; color: var(--tp-ink2); }
+
+.tpa-teams { display: flex; justify-content: space-between; padding: 10px 14px 0; }
+.tpa-teams b { font-family: var(--tp-display); font-size: 13px; letter-spacing: .08em; border-bottom: 3px solid; padding-bottom: 2px; }
+.tpa-stats { padding: 10px 14px 12px; display: grid; gap: 9px; }
+.tpa-sr { display: grid; grid-template-columns: 52px 1fr 52px; align-items: center; gap: 8px; }
+.tpa-v { font-family: var(--tp-display); font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; }
+.tpa-v:last-child { text-align: right; }
+.tpa-l { text-align: center; color: var(--tp-ink2); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; display: grid; gap: 4px; }
+.tpa-bar { display: flex; gap: 2px; height: 5px; border-radius: 3px; overflow: hidden; background: #1b2337; }
+.tpa-bar i { display: block; min-width: 2px; }
+/* Resumen compacto (maqueta .statsmini / .sm-row): valores de 15 px en columnas de 36 px. */
+.tpa-statsmini { padding: 12px 14px 8px; }
+.tpa-statsmini .tpa-sr { grid-template-columns: 36px 1fr 36px; font-size: 12px; }
+.tpa-statsmini .tpa-v { font-size: 15px; white-space: nowrap; }
+.tpa-statsmini [data-stat="on_target"] .tpa-lt::after { content: "*"; }
+.tpa-missing { font-size: 10px; letter-spacing: 0; text-transform: none; color: var(--tp-ink3); border-top: 1px dashed var(--tp-line2); padding-top: 2px; }
+.tpa-sm-foot { display: grid; gap: 4px; padding: 0 14px 12px; }
+.tpa-sm-foot .tpa-note { padding: 0; font-size: 10.5px; }
+
+/* Cronología (maqueta .tl): el filtro es un control secundario bajo la cabecera. */
+.tpa-seg { display: inline-flex; gap: 2px; padding: 2px; border-radius: 8px; background: #0b1222; border: 1px solid var(--tp-line2); }
+.tpa-timeline > .tpa-seg { display: flex; margin: 8px 12px 0; align-self: start; width: max-content; max-width: calc(100% - 24px); background: transparent; border-color: var(--tp-line); }
+.unified-centre .tpa-seg button { min-height: 28px; padding: 2px 8px; font-size: 11px; font-weight: 700; border: 0; border-radius: 6px; background: transparent; color: var(--tp-ink2); }
+.unified-centre .tpa-timeline > .tpa-seg button { min-height: 24px; padding: 1px 8px; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--tp-ink3); }
+.unified-centre .tpa-seg button[aria-pressed="true"] { background: #24324f; color: #fff; }
+.tpa-tl { list-style: none; margin: 0; padding: 6px 6px 8px; overflow-y: auto; max-height: 430px; scrollbar-width: thin; scrollbar-color: #2a3550 transparent; position: relative; }
+.tpa-tl li { margin: 0; position: relative; }
+/* TP205: la línea del jugador abre su ficha; el resto de la fila salta al momento. Botón transparente sobre esa línea. */
+.unified-centre .tpa-tl button.tpa-who { position: absolute; left: 96px; right: 8px; top: 6px; width: auto; min-height: 0; height: 16px; padding: 0; border-radius: 3px; background: transparent; cursor: pointer; display: block; }
+.unified-centre .tpa-tl button.tpa-who:hover, .unified-centre .tpa-tl button.tpa-who:focus-visible { background: transparent; outline: 1px solid var(--tp-line2); }
+.tpa-tl li:has(.tpa-who:hover) .tpa-tx b { text-decoration: underline; text-underline-offset: 2px; }
+.unified-centre .tpa-tl button { position: relative; width: 100%; min-height: 40px; display: grid; grid-template-columns: 46px 26px 1fr; gap: 8px; align-items: center; padding: 6px 8px;
+  border: 0; border-radius: 9px; background: transparent; color: var(--tp-ink); text-align: left; font-size: 12.5px; }
+.unified-centre .tpa-tl button:hover { background: #16213a; }
+.tpa-tl li[data-current] button { background: #1a2742; box-shadow: inset 0 0 0 1px var(--tp-line2); }
+.tpa-sidebar { position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 2px; }
+.tpa-tm { font-family: var(--tp-display); font-weight: 700; color: var(--tp-ink2); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
+.tpa-ic { width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; background: #18233a; color: var(--tp-ink); }
+.tpa-ic svg { width: 15px; height: 15px; }
+.tpa-goal .tpa-ic { background: var(--tp-goal); color: #111; }
+.tpa-tx { line-height: 1.25; min-width: 0; }
+.tpa-tx b { font-weight: 650; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tpa-out { font-weight: 400; color: var(--tp-ink2); }
+.tpa-tx small { display: block; color: var(--tp-ink3); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tpa-no { font-family: var(--tp-display); font-weight: 700; padding: 0 4px; margin-right: 4px; border-radius: 3px; background: rgba(255, 255, 255, .08); color: var(--tp-ink2); }
+/* Descanso y final (maqueta .tl li.ht): mayúsculas grises con línea discontinua. */
+.tpa-mark .tpa-tx { border-top: 1px dashed var(--tp-line2); padding-top: 4px; }
+.tpa-mark .tpa-tx b { font-size: 11px; font-weight: 400; text-transform: uppercase; letter-spacing: .1em; color: var(--tp-ink3); }
+.tpa-mark .tpa-ic { color: var(--tp-ink3); }
+
+/* Campo y gráficos */
+.tpa-pitch { display: block; width: 100%; height: auto; background: radial-gradient(120% 90% at 50% 0, #173a2a 0, #0d2219 60%, #08150f 100%); border-radius: 10px; }
+.tpa-lines { stroke: rgba(255, 255, 255, .35); stroke-width: .3; }
+.tpa-dir { font-size: 2.6px; fill: rgba(255, 255, 255, .6); font-weight: 700; letter-spacing: .05em; }
+.tpa-num { font-size: 2.3px; font-weight: 800; fill: #fff; paint-order: stroke; stroke: rgba(0, 0, 0, .55); stroke-width: .35; pointer-events: none; }
+.tpa-node { cursor: pointer; }
+.tpa-panel > svg, .tpa-panel > .tpa-shapes { margin: 12px 14px; width: calc(100% - 28px); }
+.tpa-panel > svg + .tpa-note, .tpa-panel > .tpa-shapes + .tpa-note { padding-top: 0; }
+.tpa-shapes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tpa-shape { margin: 0; display: grid; gap: 6px; }
+.tpa-shape figcaption { font-size: 12px; color: var(--tp-ink2); }
+.tpa-momentum { display: block; width: calc(100% - 28px); height: 150px; margin: 12px 14px 0; background: #0b1222; border-radius: 8px; }
+.tpa-axis { stroke: rgba(255, 255, 255, .25); stroke-width: .2; vector-effect: non-scaling-stroke; }
+.tpa-dot { fill: var(--tp-ink2); }
+.tpa-goaldot { fill: var(--tp-goal); stroke: #111; stroke-width: .2; }
+.tpa-xlabels { position: relative; height: 18px; margin: 2px 14px 6px; font-size: 10px; color: var(--tp-ink3); }
+.tpa-xlabels span { position: absolute; transform: translateX(-50%); }
+.tpa-select { display: inline-flex; align-items: center; gap: 6px; color: var(--tp-ink2); font-size: 11px; margin: 0; }
+.unified-centre .tpa-select select { min-height: 32px; margin: 0; padding: 4px 8px; width: auto; max-width: 220px; background: #0b1222; color: var(--tp-ink); border: 1px solid var(--tp-line2); border-radius: 8px; }
+
+.tpa-section { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.tpa-section .tpa-wide { grid-column: 1 / -1; }
+.tpa-col { display: grid; gap: 14px; min-width: 0; }
+.tpa-table { overflow-x: auto; margin: 10px 14px 12px; }
+.tpa-table table { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.tpa-table th { text-align: left; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--tp-ink3); font-weight: 700; padding: 6px 8px; border-bottom: 1px solid var(--tp-line2); white-space: nowrap; }
+.tpa-table td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--tp-line); white-space: nowrap; }
+.tpa-no-cell { font-family: var(--tp-display); font-weight: 700; color: var(--tp-ink2); }
+.unified-centre .tpa-table .tpa-link { display: inline; text-align: left; min-width: 0; min-height: 0; padding: 0; border: 0; background: none; color: var(--tp-ink); font: inherit; text-decoration: underline; text-decoration-color: var(--tp-line2); text-underline-offset: 3px; }
+.tpa-team-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+@container (max-width: 760px) {
+  .tpa-section { grid-template-columns: minmax(0, 1fr); }
+  .tpa-shapes { grid-template-columns: 1fr; }
+  .tpa-momentum { height: 120px; }
+}
+
+/* Colocación (maqueta: .stage = campo dominante + columna lateral de 320–340 px; apilado en móvil). */
+.unified-match-area.tpa-stage { grid-template-columns: minmax(0, 1fr) 340px; gap: 14px; }
+.unified-stage-main { display: grid; gap: 10px; min-width: 0; align-content: start; }
+.tpa-side { display: grid; gap: 10px; min-width: 0; align-content: start; }
+.tpa-side .unified-reveal { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; }
+.tpa-log { border: 1px solid var(--tp-line); border-radius: 12px; padding: 0 10px; font-size: 12px; color: var(--tp-ink2); }
+.tpa-log[open] { padding-bottom: 10px; }
+.tpa-log .unified-events { border: 0; padding: 0; background: none; }
+.tpa-scope { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+@container (max-width: 1000px) {
+  .unified-match-area.tpa-stage { grid-template-columns: minmax(0, 1fr); }
+  .tpa-side { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .tpa-side .tpa-log, .tpa-side .unified-reveal { grid-column: 1 / -1; }
+  .tpa-tl { max-height: 280px; }
+}
+/* Maqueta (≤ 600 px): una columna y sin Resumen en la columna lateral; el marcador ya lleva los goles. */
+@container (max-width: 640px) { .tpa-side { grid-template-columns: minmax(0, 1fr); } }
+@container (max-width: 600px) { .tpa-side .tpa-summary { display: none; } }
+
+/* Marcas de la barra de tiempo (maqueta .scrub .mk). El pulgar del range deja ~8 px a cada lado. */
+.unified-scrub { position: relative; padding-top: 20px; }
+.unified-marks { position: absolute; left: 8px; right: 8px; top: 0; height: 20px; pointer-events: none; }
+.unified-centre .unified-mark { position: absolute; top: 0; transform: translateX(-50%); width: 20px; height: 20px; min-height: 0; min-width: 0; padding: 0; border: 0;
+  border-radius: 50%; background: none; display: grid; place-items: center; pointer-events: auto; color: var(--tp-ink2, #aab4c6); }
+.unified-mark svg { width: 15px; height: 15px; }
+.unified-centre .unified-mark[data-kind="halftime"] { width: 12px; }
+.unified-mark[data-kind="halftime"] svg { display: none; }
+.unified-mark[data-kind="halftime"]::after { content: ""; width: 2px; height: 16px; margin-top: 8px; border-radius: 1px; background: var(--tp-ink3, #6f7b91); }
+
+/* Campo dominante: la barra de reproducción va justo debajo del campo y las notas del campo después (orden visual;
+   el DOM conserva su orden). En 3D estilizado el campo pasa a 16:9 para caber con el marcador en 1440×900. */
+.tpa-stage .sequence-field-host, .tpa-stage .pitch-section { display: contents; }
+.tpa-stage .unified-stage-main { display: flex; flex-direction: column; gap: 10px; }
+.tpa-stage .unified-stage-main > * { order: 4; }
+.tpa-stage .pitch-toolbar { order: 0; }
+.tpa-stage .retro-field { order: 1; border-radius: 12px; overflow: hidden; }
+.tpa-stage .unified-transport { order: 2; }
+.tpa-stage .pitch-status, .tpa-stage .pitch-inspector, .tpa-stage .camera-note, .tpa-stage .pitch-graphics-help { order: 4; }
+/* Apilado (móvil/tableta): campo, barra, columna de análisis y, al final, las notas del campo. */
+@container (max-width: 1000px) {
+  /* stretch: la base del área es grid con align-items:start; en flex columna eso deja el campo 3D (sin ancho
+     intrínseco) a 0 px de ancho. */
+  .unified-match-area.tpa-stage { display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+  .tpa-stage .unified-stage-main { display: contents; }
+  .tpa-stage .tpa-side { order: 3; }
+}
+.tpa-stage .pitch-section[data-effective-renderer="stylized-3d-1"] .retro-field { aspect-ratio: 16 / 9; }
+.unified-centre .unified-marks .unified-mark { min-height: 0; height: 20px; }
+.tpa-panel-h > .tpa-seg, .tpa-panel-h > .tpa-select { flex-basis: 100%; justify-content: flex-start; }
+.tpa-panel-h > .tpa-seg { flex-basis: auto; }
+.tpa-faint { stroke-dasharray: 1 1; opacity: .5; }
+.tpa-ylabels { display: flex; justify-content: space-between; margin: 4px 14px 0; font-size: 10px; font-weight: 700; letter-spacing: .04em; }

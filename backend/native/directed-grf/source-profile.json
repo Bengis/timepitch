@@ -1,0 +1,69 @@
+{
+  "version": "directed-grf-source-profile-1",
+  "engineRevision": "local-gfootball-2.10.2-with-custom-source-content-hashes",
+  "sourceBindingPolicySha256": "e801596e1e81a45d885567dbcf723b8b9ed349979930496a99fa6be106b21229",
+  "sourceFiles": {
+    "ai.cpp": "d9b567d829f01e6f54396af1e108bd5c91e116a574dd317bd7218ba7e7572fae",
+    "src/defines.hpp": "47c91557bdc8f64fc0729e6b72fde5607abc33e295f4ee06598e8e513dcd194e",
+    "src/game_env.cpp": "b6ce66ce6ecd17c2a7e1dd330f08bc0b6a896ee389af251f565263e5c8b9bbab",
+    "src/game_env.hpp": "69ae17ef20a6444d85b73aa5a89f2cb02552f2c7fa7de9b59e35e168bc6545c7",
+    "src/gamedefines.hpp": "1ac40120b93c6c986e7eaf6e33b7ddc6aae24707aca2ada199f82a60ce10d7b5",
+    "src/main.hpp": "a8b8bfe93f1b97147cda5e187d2b8766cf98fe729dd7eb4d5430535f991d5c22",
+    "src/onthepitch/AIsupport/AIfunctions.cpp": "0a7672601e33f63cb6c7b06b8998f89df444b5de194b2cb9a4f9eee69e3ac8ca",
+    "src/onthepitch/AIsupport/mentalimage.cpp": "8dde5093702c149b4190dcde74c8b726f9bae2c3833e311a145cc6f8e821bd57",
+    "src/onthepitch/ball.cpp": "ab5c67794422601756b2d77b032dfc65f2df949df53b1df0dca66f60355af9b1",
+    "src/onthepitch/ball.hpp": "8ec0a93cf1fa28f211b8553ba53950f271088e2b702c3881d647737c8fc069d0",
+    "src/onthepitch/match.cpp": "2f45803170ba5c1fe2835486fd3d41b0366c37825e73ecae147e1ca2ffa31894",
+    "src/onthepitch/match.hpp": "3f969237e9926fab9f5c35e8da94c4e44485ecfc0d3ada0f0882799eb0a9addc",
+    "src/onthepitch/player/controller/elizacontroller.cpp": "2d56a815e260d017c79d77068edb2b8d5aa60a721bec83f4b1fd7ac9d6771240",
+    "src/onthepitch/player/controller/humancontroller.cpp": "f4b9c20472cf756504ce0c6b92d84a52a21375a42dba3866227aad3dc5247ebe",
+    "src/onthepitch/player/controller/playercontroller.cpp": "0a689d9cb01a57b0c414373bd97c77a5eb6d5b0f986c344735ec8fb41fd6225e",
+    "src/onthepitch/player/controller/refereecontroller.cpp": "bd7182fa31762a9e7d7e938faab0220ce527df89cba485acb77b6c318e73c150",
+    "src/onthepitch/player/controller/strategies/offtheball/default_mid.cpp": "3ece68573cb4e29204b01083ae48d78eab5fbaf5013bc18c109f58978264a94a",
+    "src/onthepitch/player/controller/strategies/offtheball/default_off.cpp": "cb90998598905fe36af0c375222224f93f429788709a91a22db2dd39625855a4",
+    "src/onthepitch/player/controller/strategies/offtheball/goalie_default.cpp": "0359463ea6199e5c8c154a6bffc482b5cc7c6022ba64276e86692097ffc4b35c",
+    "src/onthepitch/player/humanoid/animcollection.cpp": "13ddf6959e680576da617caa60d78d74409d06ebfac8bf93b5ba9deac7c103db",
+    "src/onthepitch/player/humanoid/humanoid.cpp": "dd583165d351d3fdeec168224f33874a471a99957601e775d94f10ef00f80304",
+    "src/onthepitch/player/humanoid/humanoid.hpp": "03cf83d565bf490c087acd79da941a35d61b5d00636f6654e4cca1db778eef13",
+    "src/onthepitch/player/humanoid/humanoid_utils.cpp": "5c09c506944f3a9cfb265e73fa2897c8bf4dd65146adc9df0fab2327d84a0427",
+    "src/onthepitch/player/humanoid/humanoidbase.cpp": "2994339c55091432d1617599d2175f161076d3ebc9f5ef2952329c93fbd14b84",
+    "src/onthepitch/player/humanoid/humanoidbase.hpp": "dfbad125cce6299b0c27c110ec7e734a4fc530c3264eb8344f6840456f76bad2",
+    "src/onthepitch/player/player.cpp": "36726b8ffc05e3dfd04e05f1083f9d2ee72cb2a147333bdc7eb85407fd3a14ad",
+    "src/onthepitch/player/playerbase.cpp": "573bbe91eeb5d3c6ae41a6a9dc1dc57e17b82c73135daa06760ce51baafb95b1",
+    "src/onthepitch/referee.cpp": "fe4a5798e2622e0d4701a3cfd14d21fa310eb4f28076c64247433541f7b32378",
+    "src/onthepitch/team.cpp": "d77bfbca82cf541286c6bd7e3c1c39a5378f800fa24b89cf201c1db2b85cb781",
+    "src/onthepitch/teamAIcontroller.cpp": "aac7d764a874b36e31a28f7e691d5fdaab1ff0f8d434026fc6ad394152dff0e1"
+  },
+  "coordinates": {
+    "transformId": "grf-world-110x72-canonical-105x68-v1",
+    "orientation": "unverified",
+    "nativeHalfLengthM": 55,
+    "nativeHalfWidthM": 36,
+    "canonicalLengthM": 105,
+    "canonicalWidthM": 68,
+    "heightUnit": "metres"
+  },
+  "clock": {
+    "basis": "native_physical_ticks",
+    "tickMs": 10,
+    "subTickContact": false
+  },
+  "requiredAbi": [
+    "directed_capabilities_v1",
+    "directed_prepare_v1",
+    "directed_queue_v1",
+    "directed_step_v1",
+    "directed_export_v1"
+  ],
+  "implementedAbi": [],
+  "referenceArtifacts": [
+    {
+      "sha256": "49bc1410d040de4797cd6fba322964d0e679561149826008487fc68f9e4f8b18",
+      "scope": "TP180 bytes reference; no build equivalence or symbol verification"
+    },
+    {
+      "sha256": "33355119d54b77ec2d1696f5ad83c8409a785039cb2dd459f3e2c2e8457a6ca3",
+      "scope": "historical TP121 receipt only; not live/native verification"
+    }
+  ]
+}

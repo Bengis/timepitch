@@ -1,0 +1,50 @@
+{
+  "version": "directed-grf-patch-1",
+  "case": "TP185",
+  "revision": "directed-grf-guard-1",
+  "status": "guard_only_no_football_controls",
+  "baseRevision": "local-gfootball-2.10.2-with-custom-source-content-hashes",
+  "patchSha256": "799ecf90ab5863d9847aaad202cb39cb45c4d408ebc06502417116aeafc9c797",
+  "compiled": false,
+  "loaded": false,
+  "appliedToBuildTree": false,
+  "executionControls": [],
+  "gatedSymbolNames": [
+    "directed_capabilities_v1",
+    "directed_prepare_v1",
+    "directed_queue_v1",
+    "directed_step_v1",
+    "directed_export_v1"
+  ],
+  "symbolAuthority": "source text only, uncompiled, not verified exports or controls",
+  "files": {
+    "ai.cpp": {
+      "baseSha256": "d9b567d829f01e6f54396af1e108bd5c91e116a574dd317bd7218ba7e7572fae",
+      "outputSha256": "04978cf25109dfcf45b86a1c550f5d61690daa41f4944760a776e81e2ba24d18"
+    },
+    "CMakeLists.txt": {
+      "baseSha256": "26af73334f0f7dcb69e6a1505fce0510f3706d174c3417d8848e38407182b3ab",
+      "outputSha256": "02066ccb9eed58ad2174585831e88eef1a756f12701da2296596a9e7972528c5"
+    },
+    "src/directed_reconstruction.hpp": {
+      "baseSha256": null,
+      "outputSha256": "4a5b092cd2f1cb1eb92cb2a3c3c317f4ce51f07aab76601bda54d11553184fc5"
+    },
+    "src/directed_reconstruction.cpp": {
+      "baseSha256": null,
+      "outputSha256": "753bde2fd6211dd4e793013139aea7ef38f8d3d9462e4c5fbce724c778e43bb6"
+    }
+  },
+  "nativeGaps": [
+    "complete_initial_state",
+    "legal_directed_command_paths",
+    "actual_contact_body_telemetry",
+    "source_equivalent_artifact",
+    "fractional_time_contact"
+  ],
+  "notices": {
+    "modifiedSources": "ai.cpp retains Google LLC & Bastiaan Konings Apache-2.0 notice; CMake source context retained",
+    "newSources": "TimePitch guard; contains no copied engine controller implementation"
+  },
+  "compileSelection": "not selected; no configure/build/test/post-build/native load"
+}

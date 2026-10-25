@@ -1,0 +1,326 @@
+{
+  "schema_version": "statsbomb-clubs-1",
+  "snapshot": "4b73468fc5b0f1950f9f66fada70ad3a4f9327cb",
+  "verification": "Explicit club identity table reviewed against pinned fixture metadata and catalog club-season identities. Not an algorithmic name match; no player crosswalk supplied.",
+  "clubs": [
+    {
+      "source_key": "statsbomb:1",
+      "source_name": "Arsenal",
+      "catalog_club": "arsenal",
+      "catalog_name": "Arsenal",
+      "evidence": {
+        "match_id": 3754141,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:101",
+      "source_name": "Leeds United",
+      "catalog_club": "leeds",
+      "catalog_name": "Leeds United",
+      "evidence": {
+        "match_id": 3749346,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    },
+    {
+      "source_key": "statsbomb:105",
+      "source_name": "Portsmouth",
+      "catalog_club": "portsmouth",
+      "catalog_name": "Portsmouth",
+      "evidence": {
+        "match_id": 3749296,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    },
+    {
+      "source_key": "statsbomb:22",
+      "source_name": "Leicester City",
+      "catalog_club": "leicester",
+      "catalog_name": "Leicester City",
+      "evidence": {
+        "match_id": 3754237,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:23",
+      "source_name": "Watford",
+      "catalog_club": "watford",
+      "catalog_name": "Watford",
+      "evidence": {
+        "match_id": 3754300,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:24",
+      "source_name": "Liverpool",
+      "catalog_club": "liverpool",
+      "catalog_name": "Liverpool",
+      "evidence": {
+        "match_id": 3753985,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:25",
+      "source_name": "Southampton",
+      "catalog_club": "southampton",
+      "catalog_name": "Southampton",
+      "evidence": {
+        "match_id": 3754112,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:26",
+      "source_name": "Swansea City",
+      "catalog_club": "swansea",
+      "catalog_name": "Swansea City",
+      "evidence": {
+        "match_id": 3754078,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:27",
+      "source_name": "West Bromwich Albion",
+      "catalog_club": "westbrom",
+      "catalog_name": "West Bromwich Albion",
+      "evidence": {
+        "match_id": 3754145,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:28",
+      "source_name": "AFC Bournemouth",
+      "catalog_club": "bournemouth",
+      "catalog_name": "Bournemouth",
+      "evidence": {
+        "match_id": 3754128,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:29",
+      "source_name": "Everton",
+      "catalog_club": "everton",
+      "catalog_name": "Everton",
+      "evidence": {
+        "match_id": 3754300,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:30",
+      "source_name": "Stoke City",
+      "catalog_club": "stoke",
+      "catalog_name": "Stoke City",
+      "evidence": {
+        "match_id": 3753985,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:31",
+      "source_name": "Crystal Palace",
+      "catalog_club": "crystalpalace",
+      "catalog_name": "Crystal Palace",
+      "evidence": {
+        "match_id": 3754138,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:328",
+      "source_name": "Bolton Wanderers",
+      "catalog_club": "bolton",
+      "catalog_name": "Bolton Wanderers",
+      "evidence": {
+        "match_id": 3749278,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    },
+    {
+      "source_key": "statsbomb:33",
+      "source_name": "Chelsea",
+      "catalog_club": "chelsea",
+      "catalog_name": "Chelsea",
+      "evidence": {
+        "match_id": 3754078,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:36",
+      "source_name": "Manchester City",
+      "catalog_club": "mancity",
+      "catalog_name": "Manchester City",
+      "evidence": {
+        "match_id": 3754145,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:37",
+      "source_name": "Newcastle United",
+      "catalog_club": "newcastle",
+      "catalog_name": "Newcastle United",
+      "evidence": {
+        "match_id": 3754112,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:38",
+      "source_name": "Tottenham Hotspur",
+      "catalog_club": "tottenham",
+      "catalog_name": "Tottenham Hotspur",
+      "evidence": {
+        "match_id": 3754097,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:39",
+      "source_name": "Manchester United",
+      "catalog_club": "manunited",
+      "catalog_name": "Manchester United",
+      "evidence": {
+        "match_id": 3754097,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:40",
+      "source_name": "West Ham United",
+      "catalog_club": "westham",
+      "catalog_name": "West Ham United",
+      "evidence": {
+        "match_id": 3754141,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:41",
+      "source_name": "Sunderland",
+      "catalog_club": "sunderland",
+      "catalog_name": "Sunderland",
+      "evidence": {
+        "match_id": 3754237,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:46",
+      "source_name": "Wolverhampton Wanderers",
+      "catalog_club": "wolves",
+      "catalog_name": "Wolverhampton Wanderers",
+      "evidence": {
+        "match_id": 3749522,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    },
+    {
+      "source_key": "statsbomb:47",
+      "source_name": "Middlesbrough",
+      "catalog_club": "middlesbrough",
+      "catalog_name": "Middlesbrough",
+      "evidence": {
+        "match_id": 3749358,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    },
+    {
+      "source_key": "statsbomb:54",
+      "source_name": "Birmingham City",
+      "catalog_club": "birmingham",
+      "catalog_name": "Birmingham City",
+      "evidence": {
+        "match_id": 3749434,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    },
+    {
+      "source_key": "statsbomb:55",
+      "source_name": "Fulham",
+      "catalog_club": "fulham",
+      "catalog_name": "Fulham",
+      "evidence": {
+        "match_id": 3749192,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    },
+    {
+      "source_key": "statsbomb:56",
+      "source_name": "Norwich City",
+      "catalog_club": "norwich",
+      "catalog_name": "Norwich City",
+      "evidence": {
+        "match_id": 3754138,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:59",
+      "source_name": "Aston Villa",
+      "catalog_club": "astonvilla",
+      "catalog_name": "Aston Villa",
+      "evidence": {
+        "match_id": 3754128,
+        "source_file": "data/matches/2/27.json",
+        "source_sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+      }
+    },
+    {
+      "source_key": "statsbomb:75",
+      "source_name": "Charlton Athletic",
+      "catalog_club": "charlton",
+      "catalog_name": "Charlton Athletic",
+      "evidence": {
+        "match_id": 3749526,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    },
+    {
+      "source_key": "statsbomb:98",
+      "source_name": "Blackburn Rovers",
+      "catalog_club": "blackburn",
+      "catalog_name": "Blackburn Rovers",
+      "evidence": {
+        "match_id": 3749360,
+        "source_file": "data/matches/2/44.json",
+        "source_sha256": "bb4dda2763385050725507de76719f11d506b14a66148c7348950a02eadfcf35"
+      }
+    }
+  ]
+}

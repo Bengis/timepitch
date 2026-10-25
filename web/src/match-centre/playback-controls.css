@@ -1,0 +1,74 @@
+/* Barra de reproducción con aspecto de emisión (maqueta .local/mockup/v1-2d.html, bloque «playback»).
+   Clases propias .pbk-*: no depende de match-centre/styles.css y gana en especificidad a sus reglas
+   .unified-transport / .unified-play y a .unified-mark de analysis.css. */
+.pbk {
+  --pbk-panel: #0e1626; --pbk-line: rgba(255,255,255,.14);
+  --pbk-ink: #eef2f8; --pbk-ink2: #aab4c6; --pbk-ink3: #8792a8;
+  --pbk-btn: #121b2e; --pbk-track: #1b2440; --pbk-seg: #0b1222; --pbk-on: #24324f;
+  --pbk-hi: var(--che-hi, #2f7bff);
+  container: pbk / inline-size;
+}
+.pbk.unified-transport { display: grid; gap: 6px; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--pbk-line); background: var(--pbk-panel); color: var(--pbk-ink); }
+.pbk button { margin: 0; }
+.pbk-main { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; }
+
+/* Botones de icono */
+.pbk-btns { display: flex; align-items: center; gap: 6px; }
+.pbk .pbk-btn { width: 38px; height: 38px; min-width: 0; min-height: 0; padding: 0; border-radius: 10px; border: 1px solid var(--pbk-line); background: var(--pbk-btn); color: var(--pbk-ink); display: grid; place-items: center; }
+.pbk .pbk-btn svg { width: 18px; height: 18px; }
+.pbk .pbk-btn.pbk-play { width: 52px; height: 52px; min-width: 0; border-radius: 50%; border: 0; background: linear-gradient(180deg, #fff, #d9e2f2); color: #0a1020; box-shadow: 0 8px 20px -8px rgba(255,255,255,.4); }
+.pbk .pbk-btn.pbk-play svg { width: 22px; height: 22px; }
+.pbk .pbk-btn:not(:disabled):hover { border-color: var(--pbk-hi); }
+
+/* Scrubber: rail visual + input range nativo (teclado y lectores) encima, transparente salvo la perilla.
+   El rail va metido 8 px por lado para que el centro de la perilla (16 px) coincida con el porcentaje. */
+.pbk-scrub { position: relative; height: 48px; min-width: 0; }
+.pbk-rail, .pbk-marks { position: absolute; left: 8px; right: 8px; }
+.pbk-rail { top: 24px; height: 6px; }
+.pbk-track, .pbk-fill { position: absolute; top: 0; left: 0; height: 6px; border-radius: 3px; }
+.pbk-track { right: 0; background: var(--pbk-track); }
+.pbk-fill { width: var(--pbk-fill, 0%); background: linear-gradient(90deg, var(--pbk-hi), #9cc0ff); }
+.pbk-ht { position: absolute; top: -6px; left: var(--pbk-at); width: 2px; height: 18px; transform: translateX(-50%); background: var(--pbk-ink3); }
+.pbk-marks { top: 0; height: 18px; pointer-events: none; }
+.pbk .pbk-mk { position: absolute; top: 0; left: var(--pbk-at); transform: translateX(-50%); width: 18px; height: 18px; min-width: 0; min-height: 0; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--pbk-ink); display: grid; place-items: center; pointer-events: auto; z-index: 2; }
+.pbk .pbk-mk svg { width: 14px; height: 14px; }
+.pbk .pbk-mk[data-kind="halftime"] { top: 18px; width: 10px; height: 18px; border-radius: 2px; }
+.pbk .pbk-mk[data-kind="halftime"]::after { content: ""; display: block; width: 2px; height: 18px; margin: 0; border-radius: 1px; background: var(--pbk-ink3); }
+.pbk .pbk-mk:hover, .pbk .pbk-mk:focus-visible { background: color-mix(in srgb, var(--pbk-hi) 30%, transparent); }
+
+.pbk .pbk-range { position: absolute; left: 0; right: 0; top: 17px; width: 100%; height: 20px; margin: 0; padding: 0; background: transparent; -webkit-appearance: none; appearance: none; accent-color: var(--pbk-hi); z-index: 1; }
+.pbk .pbk-range::-webkit-slider-runnable-track { height: 20px; background: transparent; border: 0; }
+.pbk .pbk-range::-moz-range-track { height: 20px; background: transparent; border: 0; }
+.pbk .pbk-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; margin-top: 2px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgba(47,123,255,.35); cursor: pointer; }
+.pbk .pbk-range::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgba(47,123,255,.35); cursor: pointer; }
+.pbk .pbk-range:disabled::-webkit-slider-thumb { visibility: hidden; }
+.pbk .pbk-range:disabled::-moz-range-thumb { visibility: hidden; }
+.pbk .pbk-range:focus-visible { outline: 2px solid var(--pbk-hi); outline-offset: 2px; border-radius: 6px; }
+.pbk-lbls { position: absolute; left: 8px; right: 8px; top: 36px; display: flex; justify-content: space-between; font-size: 10px; line-height: 12px; color: var(--pbk-ink3); font-variant-numeric: tabular-nums; pointer-events: none; }
+.pbk-lbls .pbk-lbl-ht { position: absolute; left: var(--pbk-at); transform: translateX(-50%); }
+
+/* Velocidades en segmento */
+.pbk-speed { display: flex; gap: 2px; padding: 3px; border-radius: 9px; background: var(--pbk-seg); border: 1px solid var(--pbk-line); }
+.pbk .pbk-speed button { min-width: 0; min-height: 0; padding: 5px 8px; border: 0; border-radius: 6px; background: transparent; color: var(--pbk-ink2); font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pbk .pbk-speed button[aria-pressed="true"] { background: var(--pbk-on); color: var(--pbk-ink); }
+
+/* Fila secundaria compacta: reloj de reproducción (no es el reloj del partido), parte y repetir */
+.pbk-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: 11px; color: var(--pbk-ink3); }
+.pbk-meta output { font-variant-numeric: tabular-nums; color: var(--pbk-ink2); }
+.pbk-meta output small { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--pbk-ink3); margin-right: 4px; }
+.pbk .pbk-phase { display: inline-flex; align-items: center; gap: 6px; }
+.pbk .pbk-phase select { padding: 2px 6px; font-size: 11px; border-radius: 6px; border: 1px solid var(--pbk-line); background: var(--pbk-btn); color: var(--pbk-ink); }
+.pbk .pbk-replay { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; padding: 3px 8px; min-height: 0; font-size: 11px; font-weight: 600; border-radius: 6px; border: 1px solid var(--pbk-line); background: transparent; color: var(--pbk-ink2); }
+.pbk .pbk-replay svg { width: 13px; height: 13px; }
+/* Sonido del partido (TP231): junto a «Repetir», que pierde el empuje a la derecha; apagado se ve atenuado. */
+.pbk .pbk-sound + .pbk-replay { margin-left: 0; }
+.pbk .pbk-sound[aria-pressed="false"] { color: var(--pbk-ink3); }
+.pbk p[role="status"] { margin: 0; font-size: 11px; color: var(--pbk-ink2); }
+
+@container pbk (max-width: 600px) {
+  .pbk-main { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .pbk-btns { justify-content: center; }
+  .pbk-speed { justify-self: center; }
+  .pbk-meta { justify-content: center; }
+  .pbk .pbk-replay { margin-left: 0; }
+}

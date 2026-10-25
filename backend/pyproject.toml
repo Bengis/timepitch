@@ -1,0 +1,30 @@
+[project]
+name = "timepitch"
+version = "0.1.0"
+description = "Local historical football simulator"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "agent-framework-core==1.22.0",
+    "agent-framework-foundry-local>=1.0.0b261015",
+    "agent-framework-openai==1.17.0",
+    "fastapi==0.143.2",
+    "httpx==0.28.1",
+    "jsonschema>=4.26.0",
+    "openai==3.31.0",
+    "uvicorn[standard]==0.54.0",
+]
+
+[dependency-groups]
+dev = ["pytest==9.1.1", "httpx2"]
+# Only where the crew runs (TP232): Foundry evaluations and OpenTelemetry export to Application Insights.
+crew = ["azure-ai-evaluation==1.18.10", "opentelemetry-sdk==1.45.1", "azure-monitor-opentelemetry-exporter==1.0.0b58"]
+# Only in the crew job image and on the demo server (TP233): queue + blobs + Entra identity for the cloud-native crew.
+crew-cloud = ["azure-identity==1.26.0", "azure-storage-queue==12.18.0", "azure-storage-blob==12.31.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

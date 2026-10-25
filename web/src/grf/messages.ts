@@ -1,0 +1,26 @@
+import { useLanguage } from '../i18n';
+const en={engine:'Simulation engine',experimental:'Google Research Football · experimental',grfName:'Google Research Football',touchlinesName:'TouchLines',touchlinesNote:'TouchLines · arcade engine: each half lasts 150 real seconds and the clock runs fast. AGPL-3.0, source available.',checking:'Checking local GRF availability…',
+  physicalUnavailable:'Physical GRF replays are not yet available in this browser. The match stays in your library; you can return to a new match.',
+  unavailable:'GRF is unavailable in this local installation.',missing_runtime:'The GRF runtime is not installed.',missing_assets:'Required GRF files are missing.',unsupported_native_binary:'This GRF build is not supported.',
+  nativeAI:'Native GRF AI',tactics:'GRF uses its native AI. TimePitch tactical instructions are not mapped yet.',
+  limits:'Experimental GRF · Three estimated attributes per player; remaining attributes and decisions use native profiles. This does not reconstruct historical team tactics.',
+  clock:'GRF playback time',step:'Native step',transition:'Native transition · no movement inferred between these observations',
+  noMetrics:'Advanced statistics and AI analysis are not available for this experimental engine. The GRF playback clock is not a 90-minute Premier match clock.',
+  history:'Your experimental GRF matches',historyNote:'Separate from TimePitch replays. Experimental JSON downloads cannot be imported as TimePitch matches.',
+  export:'Download experimental GRF replay',free:'Ball owner unknown',owner:'Ball owner',
+  matchClock:'Match time',firstHalf:'First half',secondHalf:'Second half',fullTime:'Full time',replay:'Replay match',legacyEnd:'End of experimental replay',
+  noMetricsFull:'Advanced statistics and AI analysis are not available for this engine yet. Match time comes from GRF; playback time controls the recorded animation.',
+} as const;
+const es:{[K in keyof typeof en]:string}={engine:'Motor de simulación',experimental:'Google Research Football · experimental',grfName:'Google Research Football',touchlinesName:'TouchLines',touchlinesNote:'TouchLines · motor arcade: cada parte dura 150 segundos reales y el reloj corre deprisa. AGPL-3.0, con el código disponible.',checking:'Comprobando disponibilidad local de GRF…',
+  physicalUnavailable:'Las repeticiones físicas de GRF todavía no están disponibles en este navegador. El partido sigue en tu biblioteca; puedes volver a un nuevo partido.',
+  unavailable:'GRF no está disponible en esta instalación local.',missing_runtime:'El entorno GRF no está instalado.',missing_assets:'Faltan archivos necesarios de GRF.',unsupported_native_binary:'Esta compilación de GRF no está admitida.',
+  nativeAI:'IA nativa de GRF',tactics:'GRF usa su IA nativa. Las instrucciones tácticas de TimePitch todavía no están adaptadas.',
+  limits:'GRF experimental · Tres atributos estimados por jugador; los restantes y las decisiones usan perfiles nativos. No reconstruye las tácticas históricas del equipo.',
+  clock:'Tiempo de reproducción GRF',step:'Paso nativo',transition:'Transición nativa · no se deduce movimiento entre estas observaciones',
+  noMetrics:'Las estadísticas avanzadas y el análisis de IA aún no están disponibles para este motor experimental. El reloj GRF no equivale a un partido de Premier de 90 minutos.',
+  history:'Tus partidos GRF experimentales',historyNote:'Separados de las repeticiones TimePitch. El JSON experimental descargado no se puede importar como partido TimePitch.',
+  export:'Descargar repetición GRF experimental',free:'Poseedor del balón desconocido',owner:'Poseedor del balón',
+  matchClock:'Tiempo de partido',firstHalf:'Primera parte',secondHalf:'Segunda parte',fullTime:'Final del partido',replay:'Ver de nuevo',legacyEnd:'Fin de la repetición experimental',
+  noMetricsFull:'Las estadísticas avanzadas y el análisis de IA aún no están disponibles para este motor. El tiempo de partido procede de GRF; el de reproducción controla la animación grabada.',
+};
+export function useGrfText(){const {locale}=useLanguage();return locale==='es'?es:en;}

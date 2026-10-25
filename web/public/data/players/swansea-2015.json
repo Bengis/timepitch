@@ -1,0 +1,2648 @@
+{
+ "_meta": {
+  "schema": "timepitch-player-cards-1",
+  "teamKey": "swansea:2015",
+  "seasonLabel": "2015/16",
+  "generated": "2026-10-22",
+  "sources": {
+   "wikidata": {
+    "kind": "wikidata",
+    "licence": "CC0 1.0",
+    "fields": "display (label), dob (P569), heightCm (P2048), nation (P1532, else P27), citizenship (P27), wikidataPositions (P413)",
+    "revision": "per field: qid + revision"
+   },
+   "wikipedia": {
+    "kind": "wikipedia",
+    "title": "2015–16 Swansea City A.F.C. season",
+    "revid": 1373056985,
+    "licence": "CC BY-SA 4.0",
+    "fields": "numbers (shirt number, position code, nationality flag) from the season article"
+   }
+  },
+  "rules": "Identity by QID only (no name matching). Public subset: no Transfermarkt, FPL, epldata or StatsBomb fields. Nationality = Wikidata P1532 (sporting), else P27; manual corrections only for reviewed cases, cited to the season article.",
+  "derivedFrom": {
+   "path": ".local/player-data/cards.json",
+   "sha256": "8a1f20090bd94ef773ff3181ab565461a8d1fcd13636aa2ac3ce3bcc17f16fc4"
+  }
+ },
+ "players": [
+  {
+   "qid": "Q40596",
+   "number": "1",
+   "display": "Łukasz Fabiański",
+   "position": "GK",
+   "nation": "Poland",
+   "dob": "1985-04-18",
+   "heightCm": 190,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q40596",
+     "revision": 2546275065,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q40596",
+     "revision": 2546275065,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q40596",
+     "revision": 2546275065,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q40596",
+     "revision": 2546275065,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q40596",
+     "revision": 2546275065,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "1",
+     "position": "GK",
+     "nationFlag": "POL"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Poland"
+   ],
+   "citizenship": [
+    "Poland"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1157022",
+   "number": "2",
+   "display": "Jordi Amat",
+   "position": "DF",
+   "nation": "Spain",
+   "dob": "1992-03-21",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1157022",
+     "revision": 2553435404,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0",
+     "note": "Wikidata P1532 = Indonesia (naturalised later); season article flag for 2015/16: ESP"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1157022",
+     "revision": 2553435404,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1157022",
+     "revision": 2553435404,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1157022",
+     "revision": 2553435404,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "2",
+     "position": "DF",
+     "nationFlag": "ESP"
+    }
+   ],
+   "nationBasis": "manual",
+   "sportNationalities": [
+    "Indonesia"
+   ],
+   "citizenship": [
+    "Indonesia"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1191188",
+   "number": "3",
+   "display": "Neil Taylor",
+   "position": "DF",
+   "nation": "Wales",
+   "dob": "1989-02-07",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1191188",
+     "revision": 2546338124,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1191188",
+     "revision": 2546338124,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1191188",
+     "revision": 2546338124,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1191188",
+     "revision": 2546338124,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1191188",
+     "revision": 2546338124,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "3",
+     "position": "DF",
+     "nationFlag": "WAL"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Wales"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q313083",
+   "number": "4",
+   "display": "Ki Sung-yueng",
+   "position": "MF",
+   "nation": "South Korea",
+   "dob": "1989-01-24",
+   "heightCm": 189,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q313083",
+     "revision": 2546349483,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q313083",
+     "revision": 2546349483,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q313083",
+     "revision": 2546349483,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q313083",
+     "revision": 2546349483,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q313083",
+     "revision": 2546349483,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "4",
+     "position": "MF",
+     "nationFlag": "KOR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "South Korea"
+   ],
+   "citizenship": [
+    "South Korea"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q528983",
+   "number": "6",
+   "display": "Ashley Williams",
+   "position": "DF",
+   "nation": "Wales",
+   "dob": "1984-08-23",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q528983",
+     "revision": 2546233093,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q528983",
+     "revision": 2546233093,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q528983",
+     "revision": 2546233093,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q528983",
+     "revision": 2546233093,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q528983",
+     "revision": 2546233093,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "6",
+     "position": "DF",
+     "nationFlag": "WAL"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Wales"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back",
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1374216",
+   "number": "7",
+   "display": "Leon Britton",
+   "position": "MF",
+   "nation": "England",
+   "dob": "1982-09-16",
+   "heightCm": 165,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1374216",
+     "revision": 2545131936,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1374216",
+     "revision": 2545131936,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1374216",
+     "revision": 2545131936,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1374216",
+     "revision": 2545131936,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1374216",
+     "revision": 2545131936,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "7",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q795537",
+   "number": "8",
+   "display": "Leroy Fer",
+   "position": "MF",
+   "nation": "Netherlands",
+   "dob": "1990-01-05",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q795537",
+     "revision": 2546128153,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q795537",
+     "revision": 2546128153,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q795537",
+     "revision": 2546128153,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q795537",
+     "revision": 2546128153,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q795537",
+     "revision": 2546128153,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "8",
+     "position": "MF",
+     "nationFlag": "NED"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Netherlands"
+   ],
+   "citizenship": [
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q114413",
+   "number": "9",
+   "display": "Alberto Paloschi",
+   "position": "FW",
+   "nation": "Italy",
+   "dob": "1990-01-04",
+   "heightCm": 182,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q114413",
+     "revision": 2546398622,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q114413",
+     "revision": 2546398622,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q114413",
+     "revision": 2546398622,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q114413",
+     "revision": 2546398622,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q114413",
+     "revision": 2546398622,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "9",
+     "position": "FW",
+     "nationFlag": "ITA"
+    }
+   ],
+   "nationBasis": "citizenship",
+   "sportNationalities": [],
+   "citizenship": [
+    "Italy"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q516921",
+   "number": "10",
+   "display": "André Ayew",
+   "position": "FW",
+   "nation": "Ghana",
+   "dob": "1989-12-17",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q516921",
+     "revision": 2546346110,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q516921",
+     "revision": 2546346110,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q516921",
+     "revision": 2546346110,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q516921",
+     "revision": 2546346110,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q516921",
+     "revision": 2546346110,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "10",
+     "position": "FW",
+     "nationFlag": "GHA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Ghana"
+   ],
+   "citizenship": [
+    "France",
+    "Ghana"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1358496",
+   "number": "11",
+   "display": "Marvin Emnes",
+   "position": "FW",
+   "nation": "Netherlands",
+   "dob": "1988-05-27",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1358496",
+     "revision": 2546163637,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1358496",
+     "revision": 2546163637,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1358496",
+     "revision": 2546163637,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1358496",
+     "revision": 2546163637,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1358496",
+     "revision": 2546163637,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "11",
+     "position": "FW",
+     "nationFlag": "NED"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Netherlands"
+   ],
+   "citizenship": [
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1376975",
+   "number": "12",
+   "display": "Nathan Dyer",
+   "position": "MF",
+   "nation": "United Kingdom",
+   "dob": "1987-11-29",
+   "heightCm": 165,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1376975",
+     "revision": 2546184942,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1376975",
+     "revision": 2546184942,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1376975",
+     "revision": 2546184942,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1376975",
+     "revision": 2546184942,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1376975",
+     "revision": 2546184942,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "12",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "citizenship",
+   "sportNationalities": [],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1398221",
+   "number": "13",
+   "display": "Kristoffer Nordfeldt",
+   "position": "GK",
+   "nation": "Sweden",
+   "dob": "1989-06-23",
+   "heightCm": 190,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1398221",
+     "revision": 2548304415,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1398221",
+     "revision": 2548304415,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1398221",
+     "revision": 2548304415,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1398221",
+     "revision": 2548304415,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1398221",
+     "revision": 2548304415,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "13",
+     "position": "GK",
+     "nationFlag": "SWE"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Sweden"
+   ],
+   "citizenship": [
+    "Sweden"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q60594",
+   "number": "14",
+   "display": "Franck Tabanou",
+   "position": "DF",
+   "nation": "France",
+   "dob": "1989-01-30",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q60594",
+     "revision": 2546125979,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q60594",
+     "revision": 2546125979,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q60594",
+     "revision": 2546125979,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q60594",
+     "revision": 2546125979,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q60594",
+     "revision": 2546125979,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "14",
+     "position": "DF",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q370688",
+   "number": "15",
+   "display": "Wayne Routledge",
+   "position": "MF",
+   "nation": "England",
+   "dob": "1985-01-07",
+   "heightCm": 170,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q370688",
+     "revision": 2546251285,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q370688",
+     "revision": 2546251285,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q370688",
+     "revision": 2546251285,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q370688",
+     "revision": 2546251285,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q370688",
+     "revision": 2546251285,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "15",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q273776",
+   "number": "17",
+   "display": "Éder",
+   "position": "FW",
+   "nation": "Portugal",
+   "dob": "1987-12-22",
+   "heightCm": 189,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q273776",
+     "revision": 2546185447,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q273776",
+     "revision": 2546185447,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q273776",
+     "revision": 2546185447,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q273776",
+     "revision": 2546185447,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q273776",
+     "revision": 2546185447,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "17",
+     "position": "FW",
+     "nationFlag": "POR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Portugal"
+   ],
+   "citizenship": [
+    "Guinea-Bissau",
+    "Portugal"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q11966",
+   "number": "18",
+   "display": "Bafétimbi Gomis",
+   "position": "FW",
+   "nation": "France",
+   "dob": "1985-08-06",
+   "heightCm": 186,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q11966",
+     "revision": 2546275576,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q11966",
+     "revision": 2546275576,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q11966",
+     "revision": 2546275576,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q11966",
+     "revision": 2546275576,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q11966",
+     "revision": 2546275576,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "18",
+     "position": "FW",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France",
+    "Senegal"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q2300455",
+   "number": "20",
+   "display": "Jefferson Montero",
+   "position": "MF",
+   "nation": "Ecuador",
+   "dob": "1989-09-01",
+   "heightCm": 169,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q2300455",
+     "revision": 2546151457,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q2300455",
+     "revision": 2546151457,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q2300455",
+     "revision": 2546151457,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q2300455",
+     "revision": 2546151457,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q2300455",
+     "revision": 2546151457,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "20",
+     "position": "MF",
+     "nationFlag": "ECU"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Ecuador"
+   ],
+   "citizenship": [
+    "Ecuador"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q16236759",
+   "number": "21",
+   "display": "Matt Grimes",
+   "position": "MF",
+   "nation": "England",
+   "dob": "1995-07-15",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q16236759",
+     "revision": 2556479419,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q16236759",
+     "revision": 2556479419,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q16236759",
+     "revision": 2556479419,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q16236759",
+     "revision": 2556479419,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q16236759",
+     "revision": 2556479419,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "21",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q880263",
+   "number": "22",
+   "display": "Àngel Rangel",
+   "position": "DF",
+   "nation": "Spain",
+   "dob": "1982-10-28",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q880263",
+     "revision": 2517229844,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q880263",
+     "revision": 2517229844,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q880263",
+     "revision": 2517229844,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q880263",
+     "revision": 2517229844,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q880263",
+     "revision": 2517229844,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "22",
+     "position": "DF",
+     "nationFlag": "ESP"
+    }
+   ],
+   "nationBasis": "citizenship",
+   "sportNationalities": [],
+   "citizenship": [
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q59105",
+   "number": "23",
+   "display": "Gylfi Sigurðsson",
+   "position": "MF",
+   "nation": "Iceland",
+   "dob": "1989-09-08",
+   "heightCm": 186,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q59105",
+     "revision": 2546346612,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q59105",
+     "revision": 2546346612,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q59105",
+     "revision": 2546346612,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q59105",
+     "revision": 2546346612,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q59105",
+     "revision": 2546346612,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "23",
+     "position": "MF",
+     "nationFlag": "ISL"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Iceland"
+   ],
+   "citizenship": [
+    "Iceland"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q438025",
+   "number": "24",
+   "display": "Jack Cork",
+   "position": "MF",
+   "nation": "England",
+   "dob": "1989-06-25",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q438025",
+     "revision": 2546136448,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q438025",
+     "revision": 2546136448,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q438025",
+     "revision": 2546136448,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q438025",
+     "revision": 2546136448,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q438025",
+     "revision": 2546136448,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "24",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q686197",
+   "number": "25",
+   "display": "Gerhard Tremmel",
+   "position": "GK",
+   "nation": "Germany",
+   "dob": "1978-11-16",
+   "heightCm": 190,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q686197",
+     "revision": 2530043810,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q686197",
+     "revision": 2530043810,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q686197",
+     "revision": 2530043810,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q686197",
+     "revision": 2530043810,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q686197",
+     "revision": 2530043810,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "25",
+     "position": "GK",
+     "nationFlag": "GER"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Germany"
+   ],
+   "citizenship": [
+    "Germany"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q348754",
+   "number": "26",
+   "display": "Kyle Naughton",
+   "position": "DF",
+   "nation": "England",
+   "dob": "1988-11-17",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q348754",
+     "revision": 2546377105,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q348754",
+     "revision": 2546377105,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q348754",
+     "revision": 2546377105,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q348754",
+     "revision": 2546377105,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q348754",
+     "revision": 2546377105,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "26",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q552171",
+   "number": "27",
+   "display": "Kyle Bartley",
+   "position": "DF",
+   "nation": "England",
+   "dob": "1991-05-22",
+   "heightCm": 191,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q552171",
+     "revision": 2546089686,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q552171",
+     "revision": 2546089686,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q552171",
+     "revision": 2546089686,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q552171",
+     "revision": 2546089686,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q552171",
+     "revision": 2546089686,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "27",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q19668085",
+   "number": "32",
+   "display": "Liam Shephard",
+   "position": "DF",
+   "nation": "United Kingdom",
+   "dob": "1994-11-22",
+   "heightCm": null,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q19668085",
+     "revision": 2546579584,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q19668085",
+     "revision": 2546579584,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q19668085",
+     "revision": 2546579584,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q19668085",
+     "revision": 2546579584,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    }
+   },
+   "numbers": [
+    {
+     "value": "32",
+     "position": "DF",
+     "nationFlag": "WAL"
+    }
+   ],
+   "nationBasis": "citizenship",
+   "sportNationalities": [],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q713501",
+   "number": "33",
+   "display": "Federico Fernández",
+   "position": "DF",
+   "nation": "Argentina",
+   "dob": "1989-02-21",
+   "heightCm": 189,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q713501",
+     "revision": 2546141783,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q713501",
+     "revision": 2546141783,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q713501",
+     "revision": 2546141783,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q713501",
+     "revision": 2546141783,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q713501",
+     "revision": 2546141783,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "33",
+     "position": "DF",
+     "nationFlag": "ARG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Argentina"
+   ],
+   "citizenship": [
+    "Argentina"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q7609694",
+   "number": "35",
+   "display": "Stephen Kingsley",
+   "position": "DF",
+   "nation": "Scotland",
+   "dob": "1994-07-23",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q7609694",
+     "revision": 2551449028,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q7609694",
+     "revision": 2551449028,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q7609694",
+     "revision": 2551449028,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q7609694",
+     "revision": 2551449028,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q7609694",
+     "revision": 2551449028,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "35",
+     "position": "DF",
+     "nationFlag": "SCO"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Scotland"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q6166625",
+   "number": "56",
+   "display": "Jay Fulton",
+   "position": "MF",
+   "nation": "Scotland",
+   "dob": "1994-04-04",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q6166625",
+     "revision": 2506352514,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q6166625",
+     "revision": 2506352514,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q6166625",
+     "revision": 2506352514,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q6166625",
+     "revision": 2506352514,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q6166625",
+     "revision": 2506352514,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "56",
+     "position": "MF",
+     "nationFlag": "SCO"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Scotland"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q5566331",
+   "number": "58",
+   "display": "Modou Barrow",
+   "position": "FW",
+   "nation": "The Gambia",
+   "dob": "1992-10-13",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q5566331",
+     "revision": 2546067460,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2015–16 Swansea City A.F.C. season",
+     "revid": 1373056985,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q5566331",
+     "revision": 2546067460,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q5566331",
+     "revision": 2546067460,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q5566331",
+     "revision": 2546067460,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q5566331",
+     "revision": 2546067460,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "58",
+     "position": "FW",
+     "nationFlag": "GAM"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "The Gambia"
+   ],
+   "citizenship": [
+    "Sweden",
+    "The Gambia"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q20878221",
+   "number": null,
+   "display": "Connor Roberts",
+   "position": "defender",
+   "nation": "Wales",
+   "dob": "1995-09-23",
+   "heightCm": 173,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q20878221",
+     "revision": 2545985736,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q20878221",
+     "revision": 2545985736,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q20878221",
+     "revision": 2545985736,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q20878221",
+     "revision": 2545985736,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q20878221",
+     "revision": 2545985736,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q20878221",
+     "revision": 2545985736,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Wales"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q3701545",
+   "number": null,
+   "display": "Daniel Alfei",
+   "position": "defender",
+   "nation": "United Kingdom",
+   "dob": "1992-02-23",
+   "heightCm": null,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q3701545",
+     "revision": 2546102134,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q3701545",
+     "revision": 2546102134,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q3701545",
+     "revision": 2546102134,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q3701545",
+     "revision": 2546102134,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q3701545",
+     "revision": 2546102134,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "citizenship",
+   "sportNationalities": [],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q30689579",
+   "number": null,
+   "display": "Daniel James",
+   "position": "wing half",
+   "nation": "Wales",
+   "dob": "1997-11-10",
+   "heightCm": 171,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q30689579",
+     "revision": 2545943133,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q30689579",
+     "revision": 2545943133,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q30689579",
+     "revision": 2545943133,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q30689579",
+     "revision": 2545943133,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q30689579",
+     "revision": 2545943133,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q30689579",
+     "revision": 2545943133,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Wales"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q47658470",
+   "number": null,
+   "display": "Joe Rodon",
+   "position": "centre-back",
+   "nation": "Wales",
+   "dob": "1997-10-22",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q47658470",
+     "revision": 2556678423,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q47658470",
+     "revision": 2556678423,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q47658470",
+     "revision": 2556678423,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q47658470",
+     "revision": 2556678423,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q47658470",
+     "revision": 2556678423,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q47658470",
+     "revision": 2556678423,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Wales"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q314627",
+   "number": null,
+   "display": "Jonjo Shelvey",
+   "position": "midfielder",
+   "nation": "England",
+   "dob": "1992-02-27",
+   "heightCm": 184,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q314627",
+     "revision": 2546063578,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q314627",
+     "revision": 2546063578,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q314627",
+     "revision": 2546063578,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q314627",
+     "revision": 2546063578,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q314627",
+     "revision": 2546063578,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q314627",
+     "revision": 2546063578,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q26251653",
+   "number": null,
+   "display": "Josh Vickers",
+   "position": "goalkeeper",
+   "nation": "England",
+   "dob": "1995-12-01",
+   "heightCm": 193,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q26251653",
+     "revision": 2546000503,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q26251653",
+     "revision": 2546000503,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q26251653",
+     "revision": 2546000503,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q26251653",
+     "revision": 2546000503,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q26251653",
+     "revision": 2546000503,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q26251653",
+     "revision": 2546000503,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q19969384",
+   "number": null,
+   "display": "Kenji Gorré",
+   "position": "wing half",
+   "nation": "Curaçao",
+   "dob": "1994-09-29",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q19969384",
+     "revision": 2554655194,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q19969384",
+     "revision": 2554655194,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q19969384",
+     "revision": 2554655194,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q19969384",
+     "revision": 2554655194,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q19969384",
+     "revision": 2554655194,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q19969384",
+     "revision": 2554655194,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Curaçao"
+   ],
+   "citizenship": [
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  }
+ ]
+}

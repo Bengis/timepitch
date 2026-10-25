@@ -1,0 +1,345 @@
+{
+  "version": "kits-manual-1",
+  "created": "2026-10-22",
+  "description": "Equipaciones de los equipos de la demo completadas a mano desde el wikitext de los artículos de temporada de la Wikipedia inglesa. Tienen prioridad sobre historical-kits.json para la misma clave. Pendiente de revisión visual.",
+  "method": "Wikitext de Wikipedia (action=raw, UA TimePitch-research/0.1, >=1 s entre peticiones). Sin descargar imagenes. Valores copiados literalmente de {{Football kit}} o del infobox; nada inferido.",
+  "licence": "Datos de plantillas de Wikipedia, CC BY-SA 4.0: atribuir al articulo citado.",
+  "revid_note": "revid=null: la API de Wikipedia devolvio 429 (rate limit) al pedir revisiones el 2026-10-22; se indica la fecha de lectura en fetched. Arsenal 2003 si lleva revid (de arsenal.json).",
+  "pattern_note": "Hex = color base del template; el detalle (rayas, ribetes, cuello) vive en la imagen overlay del patron (Kit_<parte>_<patron>.png en Wikimedia Commons), no descargada.",
+  "confidence_scale": {
+    "high": "literal de plantilla del articulo de temporada, coherente con infobox y/o texto",
+    "medium": "literal de plantilla pero con duda de representacion o de eleccion entre variantes",
+    "unknown": "sin fuente; valor null"
+  },
+  "variants_note": "Las variantes (home_alt, away_alt, third_alt, goalkeeper_2/3) de .local/kits/demo-manual.json no se incluyen: el resolutor solo usa primera, segunda, tercera y portero.",
+  "seasons": {
+    "chelsea:2015": {
+      "home": {
+        "leftarm": "#0000FF",
+        "body": "#0000FF",
+        "rightarm": "#0000FF",
+        "shorts": "#0000FF",
+        "socks": "#FFFFFF",
+        "patterns": {
+          "la": "_chelsea1516h",
+          "b": "_chelsea1516h",
+          "ra": "_chelsea1516h",
+          "sh": "_chelsea1516h",
+          "so": "_chelsea1516h"
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2015–16 Chelsea F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Chelsea_F.C._season",
+          "section": "Kits",
+          "template": "Football kit \"Home\" (= infobox kit 1)",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        }
+      },
+      "away": {
+        "leftarm": "#FFFFFF",
+        "body": "#FFFFFF",
+        "rightarm": "#FFFFFF",
+        "shorts": "#FFFFFF",
+        "socks": "#0000FF",
+        "patterns": {
+          "la": "_chelsea1516a",
+          "b": "_chelsea1516a",
+          "ra": "_chelsea1516a",
+          "sh": "_chelsea1516a",
+          "so": "_chelsea1516a"
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2015–16 Chelsea F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Chelsea_F.C._season",
+          "section": "Kits",
+          "template": "Football kit \"Away\" (= infobox kit 2)",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        }
+      },
+      "third": {
+        "leftarm": "#000000",
+        "body": "#000000",
+        "rightarm": "#000000",
+        "shorts": "#000000",
+        "socks": "#000000",
+        "patterns": {
+          "la": "_chelsea1516t",
+          "b": "_chelsea1516t",
+          "ra": "_chelsea1516t",
+          "sh": "_chelsea1516t",
+          "so": "_chelsea1314t"
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2015–16 Chelsea F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Chelsea_F.C._season",
+          "section": "Kits",
+          "template": "Football kit \"Third\" (= infobox kit 3)",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        }
+      },
+      "goalkeeper": {
+        "leftarm": "#4FD2CF",
+        "body": "#4FD2CF",
+        "rightarm": "#4FD2CF",
+        "shorts": "#4FD2CF",
+        "socks": "#4FD2CF",
+        "patterns": {
+          "la": "_chelsea1516g1",
+          "b": "_chelsea1516g1",
+          "ra": "_chelsea1516g1",
+          "sh": "_chelsea1516g1",
+          "so": "_chelsea1516g1"
+        },
+        "confidence": "medium",
+        "source": {
+          "title": "2015–16 Chelsea F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Chelsea_F.C._season",
+          "section": "Kits",
+          "template": "Football kit \"Goalkeeper 1\"",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        },
+        "note": "El articulo lista 3 kits de portero (1 turquesa #4FD2CF, 2 amarillo #FFFF00, 3 negro #000000) sin decir cual fue el principal; se toma \"Goalkeeper 1\" por orden. Resto en variants."
+      },
+      "source": {
+        "title": "2015–16 Chelsea F.C. season",
+        "revid": null,
+        "url": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Chelsea_F.C._season",
+        "note": "completado a mano desde Wikipedia"
+      },
+      "trim_note": "El articulo no describe ribetes en texto; solo proveedor y patrocinador.",
+      "excluded": [
+        "\"Home 2016-17\" y \"Goalkeeper 2016-17\" estan en la seccion Kits de este articulo pero son de la temporada siguiente; no se usan."
+      ]
+    },
+    "swansea:2015": {
+      "home": {
+        "leftarm": "#FFFFFF",
+        "body": "#FFFFFF",
+        "rightarm": "#FFFFFF",
+        "shorts": "#FFFFFF",
+        "socks": "#FFFFFF",
+        "patterns": {
+          "la": "_swansea1516h",
+          "b": "_swansea1516h",
+          "ra": "_swansea1516h",
+          "sh": "_swansea1516h",
+          "so": "_swansea1516h"
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2015–16 Swansea City A.F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Swansea_City_A.F.C._season",
+          "section": "Infobox football club season",
+          "template": "infobox kit 1 (home)",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        }
+      },
+      "away": {
+        "leftarm": "#000060",
+        "body": "#00FF00",
+        "rightarm": "#000060",
+        "shorts": "#00FF00",
+        "socks": "#00FF00",
+        "patterns": {
+          "la": "_swansea1516a",
+          "b": "_swansea1516a",
+          "ra": "_swansea1516a",
+          "sh": "_swansea1516a",
+          "so": "_swansea1516a"
+        },
+        "confidence": "medium",
+        "source": {
+          "title": "2015–16 Swansea City A.F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Swansea_City_A.F.C._season",
+          "section": "Infobox football club season",
+          "template": "infobox kit 2 (away)",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        },
+        "note": "Valores literales, pero mangas #000060 (azul marino) con cuerpo/pantalon/medias #00FF00 (verde puro) parece una codificacion aproximada del editor; el aspecto real depende del overlay _swansea1516a. Verificar a ojo antes de la demo."
+      },
+      "third": null,
+      "goalkeeper": null,
+      "source": {
+        "title": "2015–16 Swansea City A.F.C. season",
+        "revid": null,
+        "url": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Swansea_City_A.F.C._season",
+        "note": "completado a mano desde Wikipedia"
+      },
+      "trim_note": "Sin descripcion textual del kit en el articulo de temporada.",
+      "unknown": {
+        "third": "El articulo no tiene tercera equipacion.",
+        "goalkeeper": "Sin plantilla ni texto de portero en el articulo de temporada ni en el del club. footballkitarchive.com responde 403 a curl (no se fuerza)."
+      }
+    },
+    "mancity:2017": {
+      "home": {
+        "leftarm": "#71AFFA",
+        "body": "#71AFFA",
+        "rightarm": "#71AFFA",
+        "shorts": "#FFFFFF",
+        "socks": "#71AFFA",
+        "patterns": {
+          "la": "_mancity1718h",
+          "b": "_mancity1718h",
+          "ra": "_mancity1718h",
+          "sh": "_mancity1718h",
+          "so": "_mancity1718h"
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2017–18 Manchester City F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Manchester_City_F.C._season",
+          "section": "Kits",
+          "template": "Football kit \"Home\" (= infobox kit 1)",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        }
+      },
+      "away": {
+        "leftarm": "#851152",
+        "body": "#851152",
+        "rightarm": "#851152",
+        "shorts": "#851152",
+        "socks": "#851152",
+        "patterns": {
+          "la": "_mancity1718a",
+          "b": "_mancity1718a",
+          "ra": "_mancity1718a",
+          "sh": "_mancity1718a",
+          "so": "_mancity1718a"
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2017–18 Manchester City F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Manchester_City_F.C._season",
+          "section": "Kits",
+          "template": "Football kit \"Away\" (= infobox kit 2)",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        }
+      },
+      "third": {
+        "leftarm": "#0F1D20",
+        "body": "#0F1D20",
+        "rightarm": "#0F1D20",
+        "shorts": "#0F1D20",
+        "socks": "#0F1D20",
+        "patterns": {
+          "la": "_mancity1718t",
+          "b": "_mancity1718t",
+          "ra": "_mancity1718t",
+          "sh": "_mancity1718t",
+          "so": null
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2017–18 Manchester City F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Manchester_City_F.C._season",
+          "section": "Kits",
+          "template": "Football kit \"Third\" (= infobox kit 3)",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        },
+        "note": "pattern_so vacio en la fuente."
+      },
+      "goalkeeper": null,
+      "source": {
+        "title": "2017–18 Manchester City F.C. season",
+        "revid": null,
+        "url": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Manchester_City_F.C._season",
+        "note": "completado a mano desde Wikipedia"
+      },
+      "trim_note": "Sin descripcion textual del kit en el articulo de temporada.",
+      "unknown": {
+        "goalkeeper": "Sin plantilla ni texto de portero en el articulo de temporada, en 2018 EFL Cup final ni en el articulo del club."
+      },
+      "excluded": [
+        "\"Home 2018–19\" esta en la seccion Kits pero es de la temporada siguiente; no se usa."
+      ]
+    },
+    "arsenal:2003": {
+      "home": {
+        "leftarm": "#FFFFFF",
+        "body": "#DD0000",
+        "rightarm": "#FFFFFF",
+        "shorts": "#FFFFFF",
+        "socks": "#FFFFFF",
+        "patterns": {
+          "la": "_arsenal0204h",
+          "b": "_arsenal0204h",
+          "ra": "_arsenal0204h",
+          "sh": "_arsenal0204h",
+          "so": "_arsenal0204h"
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2003–04 Arsenal F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Arsenal_F.C._season",
+          "section": "Infobox football club season",
+          "template": "infobox kit 1 (home); coincide con .local/kits/arsenal.json 2003",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        },
+        "note": "El texto confirma cuerpo rojo y mangas, pantalon y medias blancos."
+      },
+      "away": {
+        "leftarm": "#FFFF00",
+        "body": "#FFFF00",
+        "rightarm": "#FFFF00",
+        "shorts": "#0000FF",
+        "socks": "#FFFF00",
+        "patterns": {
+          "la": "_arsenal0304a",
+          "b": "_arsenal0304a",
+          "ra": "_arsenal0304a",
+          "sh": null,
+          "so": "_arsenal0304al"
+        },
+        "confidence": "high",
+        "source": {
+          "title": "2003–04 Arsenal F.C. season",
+          "revid": null,
+          "url": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Arsenal_F.C._season",
+          "section": "Infobox football club season",
+          "template": "infobox kit 2 (away); coincide con .local/kits/arsenal.json 2003",
+          "fetched": "2026-10-22",
+          "note": "completado a mano desde Wikipedia"
+        },
+        "note": "El texto confirma camiseta amarilla con cuello azul y pantalon azul."
+      },
+      "third": null,
+      "goalkeeper": null,
+      "source": {
+        "title": "2003–04 Arsenal F.C. season",
+        "revid": 1380992540,
+        "url": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Arsenal_F.C._season",
+        "revid_note": "revid tomado de .local/kits/arsenal.json",
+        "note": "completado a mano desde Wikipedia"
+      },
+      "trim_note": "home: sin ribete documentado; away: cuello azul",
+      "unknown": {
+        "third": "Sin tercera equipacion en el articulo.",
+        "goalkeeper": "Sin plantilla ni texto de portero en el articulo de temporada ni en 2003 FA Community Shield."
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+/* Marcador de emisión y rótulo de anuncios (maqueta objetivo .local/mockup/v1-2d.html, scoreboard()/bannerHTML()).
+   La colocación sobre el campo la decide el layout (G17); aquí solo el aspecto y la variante móvil. */
+.tp-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- marcador ---------- */
+/* Marcador a lo ancho (maqueta v1-2d, .scorebar): cada mitad se tiñe con la camiseta del club hacia el centro. */
+.tp-scorebug {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: stretch; border-radius: 14px; overflow: hidden;
+  color: var(--tp-ink); font-family: var(--tp-ui);
+  background: linear-gradient(180deg, #121c31, #0b1222);
+  box-shadow: inset 0 0 0 1px var(--tp-line2), 0 18px 40px -20px #000;
+}
+.tp-sb-team { display: flex; align-items: center; gap: 14px; padding: 10px 18px; position: relative; min-width: 0;
+  --tint: color-mix(in srgb, var(--club, rgba(255, 255, 255, .17)) 35%, transparent); }
+.tp-sb-team--light { --tint: rgba(255, 255, 255, .08); }
+.tp-sb-team--home { justify-content: flex-end; background: linear-gradient(90deg, transparent, var(--tint)); }
+.tp-sb-team--away { background: linear-gradient(270deg, transparent, var(--tint)); }
+.tp-sb-kitstrip { position: absolute; bottom: 0; left: 0; height: 4px; width: 100%; display: flex; }
+.tp-sb-kitstrip i { flex: 1; }
+.tp-sb-crest {
+  width: 46px; height: 46px; border-radius: 12px; background: #fff; display: grid; place-items: center; flex: none;
+  box-shadow: 0 4px 14px -4px #000, inset 0 0 0 1px rgba(0, 0, 0, .1); color: #6f7b91;
+}
+.tp-sb-crest img { max-width: 84%; max-height: 84%; }
+.tp-sb-crest--none { background: var(--tp-panel2); color: var(--tp-ink3); }
+.tp-sb-name { display: flex; flex-direction: column; line-height: 1.05; min-width: 0; }
+.tp-sb-team--home .tp-sb-name { align-items: flex-end; text-align: right; }
+.tp-sb-abbr { font-family: var(--tp-display); font-stretch: condensed; font-weight: 700; font-size: 30px; letter-spacing: .04em; }
+.tp-sb-full { font-size: 11px; color: var(--tp-ink2); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.tp-sb-reds { display: flex; gap: 3px; margin-top: 3px; }
+.tp-sb-reds i { width: 7px; height: 10px; border-radius: 1.5px; background: var(--tp-red); box-shadow: 0 0 6px var(--tp-red); }
+.tp-sb-score { display: flex; align-items: center; background: #060a12; padding: 0 6px; }
+.tp-sb-digits { font-family: var(--tp-display); font-weight: 700; font-size: 44px; letter-spacing: .02em; min-width: 142px; text-align: center; display: flex; justify-content: center; gap: 14px; font-variant-numeric: tabular-nums; }
+.tp-sb-digits em { font-style: normal; color: var(--tp-ink3); font-weight: 400; }
+.tp-sb-flash { animation: tp-digitflash 1.2s ease; }
+.tp-sb-clock {
+  grid-column: 1 / -1; display: flex; justify-content: center; gap: 10px; align-items: center; padding: 6px;
+  background: #060a12; border-top: 1px solid var(--tp-line); font-size: 12px; color: var(--tp-ink2); flex-wrap: wrap;
+}
+.tp-sb-t { font-family: var(--tp-display); font-weight: 700; font-size: 18px; color: #fff; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.tp-sb-clabel { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--tp-ink3); }
+.tp-sb-half { padding: 2px 7px; border-radius: 5px; background: #1c2740; color: #fff; font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.tp-sb-livedot { width: 7px; height: 7px; border-radius: 50%; background: var(--tp-live); }
+.tp-sb-livedot--pulse { animation: tp-pulse 1.6s infinite; }
+
+/* Línea discreta bajo el marcador: temporada · formación y la procedencia del marcador («Fuente», desplegable). */
+.tp-sb-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 0 6px; color: var(--tp-ink3); font-size: 11px; font-family: var(--tp-ui); }
+.tp-sb-meta > small { flex: 1 1 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: inherit; }
+.tp-sb-meta > small:last-child { text-align: right; }
+.tp-sb-elapsed { flex: none; white-space: nowrap; }
+.tp-sb-meta details { flex: none; text-align: center; max-width: 60%; }
+.tp-sb-meta summary { cursor: pointer; color: var(--tp-ink3); letter-spacing: .04em; }
+.tp-sb-meta summary:hover, .tp-sb-meta details[open] summary { color: var(--tp-ink2); }
+.tp-sb-meta details p { margin: 2px 0 0; color: var(--tp-ink2); overflow-wrap: anywhere; }
+
+.tp-sb--compact .tp-sb-team { padding: 5px 8px; gap: 7px; }
+.tp-sb--compact .tp-sb-crest { width: 28px; height: 28px; border-radius: 7px; }
+.tp-sb--compact .tp-sb-abbr { font-size: 19px; }
+.tp-sb--compact .tp-sb-digits { font-size: 26px; min-width: 70px; gap: 6px; }
+.tp-sb--compact .tp-sb-t { font-size: 15px; }
+
+/* ---------- rótulo ---------- */
+.tp-banner { pointer-events: none; color: var(--tp-ink); font-family: var(--tp-ui); }
+/* Sobre el campo (maqueta .banner): centrado abajo, 660 px. Si el host ya lo coloca (.pitch-hud), manda el host. */
+.tp-banner--overlay:not(.pitch-hud .tp-banner) { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); width: min(660px, 86%); z-index: 2; }
+/* Debajo del campo (teléfonos): en flujo, a lo ancho; vacío no ocupa sitio. */
+.tp-banner--below { position: relative; margin: 0 8px 8px; }
+.tp-banner--below .tp-bn-wrap { filter: none; }
+.tp-bn-wrap { filter: drop-shadow(0 20px 30px rgba(0, 0, 0, .6)); }
+.tp-bn { display: grid; grid-template-columns: auto 1fr auto; align-items: stretch; border-radius: 12px; overflow: hidden; }
+.tp-bn--animate { animation: tp-bannerIn var(--bn-dur, 4.6s) cubic-bezier(.2, .8, .2, 1) both; }
+.tp-bn-crest { background: #fff; display: grid; place-items: center; width: 84px; }
+.tp-bn-crest img { max-width: 70%; max-height: 70%; }
+.tp-bn-body {
+  position: relative; padding: 12px 18px 12px 20px; overflow: hidden; color: var(--acc-ink, #fff);
+  background: linear-gradient(100deg, var(--acc) 0, color-mix(in srgb, var(--acc) 70%, #000) 100%);
+  box-shadow: inset 0 3px 0 var(--goal-line, transparent);
+}
+.tp-bn--animate .tp-bn-body::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-120%);
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+  animation: tp-sheen var(--bn-dur, 4.6s) ease .35s both;
+}
+.tp-bn-kicker { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; opacity: .85; }
+.tp-bn-title {
+  font-family: var(--tp-display); font-stretch: condensed; font-weight: 700; font-size: 54px; line-height: .95; letter-spacing: .02em;
+  text-transform: uppercase; display: flex; align-items: center; gap: 12px;
+}
+.tp-bn-title svg { width: 40px; height: 40px; flex: none; }
+.tp-bn-sub { font-size: 14px; font-weight: 600; margin-top: 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.tp-bn-shirtno { font-family: var(--tp-display); font-weight: 700; padding: 0 6px; border-radius: 4px; background: rgba(0, 0, 0, .25); }
+.tp-bn-on > span[aria-hidden] { color: #3ee08f; }
+.tp-bn-off { margin-left: 6px; }
+.tp-bn-off > span[aria-hidden] { color: #ff6b7d; }
+.tp-bn-min { background: #060a12; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 16px; min-width: 92px; }
+.tp-bn-min b { font-family: var(--tp-display); font-size: 28px; font-weight: 700; line-height: 1; }
+.tp-bn-foot { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 6px; padding: 0 4px; flex-wrap: wrap; }
+.tp-bn-wrap--animate .tp-bn-foot { animation: tp-fadeup var(--bn-dur, 4.6s) ease both; }
+/* Sobre el césped 3D los chips de procedencia necesitan fondo para leerse (la maqueta 2D tiene un campo más oscuro). */
+.tp-bn-foot .chip.chip { background-color: rgba(6, 10, 18, .72); }
+
+/* Móvil (390 px, maqueta @container 600): rótulo compacto; debajo del campo cuando el host usa placement="below".
+   Los chips de procedencia se mantienen, más pequeños: la maqueta los oculta, pero la procedencia no se pierde. */
+@media (max-width: 600px) {
+  .tp-bn-wrap { filter: none; }
+  .tp-bn-crest { width: 52px; }
+  .tp-bn-title { font-size: 32px; gap: 8px; }
+  .tp-bn-title svg { width: 26px; height: 26px; }
+  .tp-bn-body { padding: 8px 10px 8px 12px; }
+  .tp-bn-kicker { font-size: 10px; letter-spacing: .12em; }
+  .tp-bn-sub { font-size: 12px; }
+  .tp-bn-min { min-width: 62px; padding: 0 8px; }
+  .tp-bn-min b { font-size: 20px; }
+  .tp-bn-foot { margin-bottom: 4px; padding: 0; justify-content: flex-start; }
+  .tp-bn-foot .chip { font-size: 9.5px; padding: 2px 6px; }
+  .tp-scorebug:not(.tp-sb--compact) .tp-sb-team { padding: 8px; gap: 8px; }
+  .tp-scorebug:not(.tp-sb--compact) .tp-sb-full { display: none; }
+  .tp-scorebug:not(.tp-sb--compact) .tp-sb-crest { width: 34px; height: 34px; border-radius: 9px; }
+  .tp-scorebug:not(.tp-sb--compact) .tp-sb-abbr { font-size: 22px; }
+  .tp-scorebug:not(.tp-sb--compact) .tp-sb-digits { font-size: 32px; min-width: 90px; gap: 8px; }
+  .tp-sb-meta { font-size: 10px; flex-wrap: wrap; row-gap: 2px; }
+  /* En el teléfono temporada y formación van en una línea y el tiempo y la fuente debajo, sin recortar. */
+  .tp-sb-meta > small { flex: 1 1 45%; }
+  .tp-sb-meta > details, .tp-sb-meta > span { order: 3; flex: 1 1 100%; max-width: none; }
+}
+
+@keyframes tp-bannerIn {
+  0% { opacity: 0; transform: translateX(-40px) skewX(-8deg); clip-path: inset(0 100% 0 0); }
+  9%, 88% { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
+  100% { opacity: 0; transform: translateX(30px); clip-path: inset(0 0 0 100%); }
+}
+@keyframes tp-sheen { 0% { transform: translateX(-120%); } 25%, 100% { transform: translateX(120%); } }
+@keyframes tp-fadeup { 0%, 8% { opacity: 0; transform: translateY(-6px); } 15%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes tp-pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 61, 90, .7); } 70% { box-shadow: 0 0 0 8px rgba(255, 61, 90, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 61, 90, 0); } }
+@keyframes tp-digitflash { 0% { color: var(--tp-goal); text-shadow: 0 0 24px var(--tp-goal); } 100% { color: inherit; text-shadow: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-bn, .tp-bn-foot, .tp-bn-body::after, .tp-sb-flash, .tp-sb-livedot { animation: none !important; }
+}

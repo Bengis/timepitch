@@ -1,0 +1,277 @@
+/* TP213 · Pantalla VERSUS con el estilo oscuro de emisión de la maqueta v1-2d (tokens --tp-*).
+   TP225 · Compacta: cabe en 1440×900 y 1366×768 sin desplazar; el selector es una capa (.vs-modal-root, en <body>). */
+.vs, .vs-modal-root { color-scheme: dark; color: var(--tp-ink); font-family: var(--tp-ui); }
+.vs :is(h2, h3), .vs-modal-root :is(h2, h3) { color: inherit; }
+:is(.vs, .vs-modal-root) button { font-family: inherit; }
+:is(.vs, .vs-modal-root) .vs-kicker { margin: 0; font-size: 10.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--tp-ink2); }
+:is(.vs, .vs-modal-root) .vs-muted { color: var(--tp-ink3); font-size: 12px; }
+.vs-note { margin: 6px 0 0; font-size: 11.5px; line-height: 1.5; color: var(--tp-ink2); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
+.vs-deduction { margin-top: 4px; font-size: 11px; }
+.vs-deduction a { color: inherit; overflow-wrap: anywhere; }
+:is(.vs, .vs-modal-root) .chip { font-size: 9.5px; padding: 2px 7px 2px 6px; gap: 5px; }
+:is(.vs, .vs-modal-root) :is(button, input, select, summary):focus-visible { outline: 2px solid var(--tp-goal); outline-offset: 2px; }
+
+.vs {
+  --vs-gap: 12px; position: relative; isolation: isolate;
+  display: grid; gap: var(--vs-gap); padding: 14px; border-radius: 18px; margin: 0 0 24px;
+  background: radial-gradient(1000px 500px at 15% -20%, rgba(17, 35, 74, .8) 0, transparent 60%), radial-gradient(800px 460px at 100% 0, rgba(26, 22, 48, .8) 0, transparent 55%), rgba(5, 8, 15, .86);
+  border: 1px solid var(--tp-line2); box-shadow: 0 40px 120px -50px rgba(0, 0, 0, .9);
+}
+/* Portada desenfocada detrás de la zona VERSUS (sin overflow:hidden, para que la llamada a la acción pueda ser sticky). */
+.vs::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; clip-path: inset(0 round 18px);
+  background: url('../assets/timepitch-premier.webp') center 30% / cover no-repeat; filter: blur(36px) brightness(.32) saturate(.9);
+}
+
+/* ---------- escenario: dos tarjetas y el VS ---------- */
+.vs-stage { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: var(--vs-gap); align-items: stretch; }
+.vs-side {
+  position: relative; overflow: hidden; min-width: 0; border-radius: 16px; padding: 0 14px 12px; cursor: pointer; container: vs-card / inline-size;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--vs-shirt) 30%, #0e1626) 0, #0e1626 120px, #0b1222 100%);
+  box-shadow: inset 0 0 0 1px var(--tp-line2), 0 18px 40px -20px #000; transition: box-shadow .2s;
+}
+.vs-side:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tp-goal) 55%, transparent), 0 18px 40px -20px #000; }
+.vs-side.is-active { box-shadow: inset 0 0 0 2px var(--tp-goal), 0 0 0 4px color-mix(in srgb, var(--tp-goal) 18%, transparent), 0 18px 40px -20px #000; }
+.vs-side-band { height: 5px; margin: 0 -14px 10px; background: linear-gradient(90deg, var(--vs-shirt) 0 70%, var(--vs-trim) 70% 100%); }
+.vs-side-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; }
+.vs-crest { width: 64px; height: 64px; border-radius: 15px; background: #fff; display: grid; place-items: center; box-shadow: 0 8px 18px -8px #000, inset 0 0 0 1px rgba(0, 0, 0, .1); }
+.vs-crest .team-crest { width: 50px; height: 50px; flex-basis: 50px; }
+.vs-side-id { min-width: 0; }
+.vs-team-name { margin: 1px 0 0; font-family: var(--tp-display); font-stretch: condensed; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; font-size: clamp(22px, 2vw, 30px); line-height: 1; overflow-wrap: anywhere; }
+.vs-season { margin: 3px 0 0; display: flex; align-items: center; gap: 10px; font-family: var(--tp-display); font-weight: 700; font-size: 17px; color: var(--tp-goal); letter-spacing: .04em; }
+.vs-swatches { display: inline-flex; gap: 3px; }
+.vs-swatches i { width: 12px; height: 12px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); }
+.vs .vs-change {
+  min-height: 44px; padding: 8px 16px; border-radius: 11px; font-size: 13.5px; font-weight: 800; letter-spacing: .02em; white-space: nowrap;
+  color: #111; background: linear-gradient(180deg, #ffe27d, var(--tp-goal)); border: 0; box-shadow: 0 6px 18px -8px rgba(255, 211, 77, .7);
+}
+.vs .vs-change:hover:not(:disabled) { background: linear-gradient(180deg, #fff0a8, #ffdc66); }
+
+.vs-side-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 12px; margin-top: 10px; align-items: start; }
+.vs-side-record { min-width: 0; }
+.vs-record-status { margin: 4px 0; }
+.vs-record { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; margin: 0; }
+.vs-record > div { background: rgba(6, 10, 18, .55); border: 1px solid var(--tp-line); border-radius: 9px; padding: 5px 9px; min-width: 0; }
+.vs-record dt { font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--tp-ink3); font-weight: 700; }
+.vs-record dd { margin: 1px 0 0; font-family: var(--tp-display); font-weight: 700; font-size: 20px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.vs-record dd small { font-family: var(--tp-ui); font-size: 10.5px; font-weight: 600; color: var(--tp-ink2); }
+.vs-record .vs-record-pos { background: linear-gradient(160deg, color-mix(in srgb, var(--vs-shirt) 40%, #0b1424), #0b1424); }
+/* TP217: las cifras («26-12-0») nunca se parten en dos líneas; la rejilla responde al ancho de la tarjeta. */
+.vs-record-wrap { container: vs-rec / inline-size; }
+.vs-record dd { white-space: nowrap; }
+@container vs-rec (max-width: 220px) {
+  .vs-record dd { font-size: 17px; }
+  .vs-record > div { padding: 4px 7px; }
+}
+
+.vs-prov { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 7px; font-size: 11px; color: var(--tp-ink2); }
+.vs-prov-item { display: inline-flex; align-items: center; gap: 5px; }
+.vs-sources { flex-basis: 100%; }
+.vs-sources summary { cursor: pointer; width: max-content; font-size: 11px; font-weight: 700; color: var(--tp-ink2); text-decoration: underline dotted; text-underline-offset: 3px; }
+.vs-sources[open] { padding: 6px 8px; border-radius: 9px; background: rgba(6, 10, 18, .7); border: 1px solid var(--tp-line); }
+
+/* ---------- estrella: mini ficha ---------- */
+.vs-star { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px; padding: 8px 10px; border-radius: 12px; background: linear-gradient(180deg, #131d31, #0e1626); border: 1px solid color-mix(in srgb, var(--tp-goal) 35%, transparent); min-width: 0; }
+.vs-star-art { display: flex; align-items: flex-end; justify-content: center; background: radial-gradient(80% 70% at 50% 40%, color-mix(in srgb, var(--vs-shirt) 45%, transparent), transparent 70%); border-radius: 10px; }
+.vs-star-art .tp-portrait--card { width: 76px; }
+.vs-star-art .tp-portrait--card .tp-portrait-art svg { filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .5)); }
+.vs-star-body { min-width: 0; }
+.vs-star .vs-kicker { color: var(--tp-goal); }
+.vs-star-name { margin: 1px 0 3px; font-family: var(--tp-display); font-stretch: condensed; font-weight: 700; font-size: 20px; line-height: 1; text-transform: uppercase; letter-spacing: .02em; overflow-wrap: anywhere; }
+.vs-star-facts { display: flex; flex-wrap: wrap; gap: 2px 10px; margin: 0 0 5px; font-size: 11.5px; color: var(--tp-ink2); }
+.vs-star-facts b { color: var(--tp-ink); }
+.vs-star-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin: 0; }
+.vs-star-stats > div { background: rgba(6, 10, 18, .55); border-radius: 8px; padding: 3px 6px; border: 1px solid var(--tp-line); min-width: 0; }
+.vs-star-stats dt { font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--tp-ink3); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vs-star-stats dd { margin: 1px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 5px; }
+.vs-star-stats b { font-family: var(--tp-display); font-size: 19px; line-height: 1; font-variant-numeric: tabular-nums; }
+.vs-star-stats .chip { font-size: 8.5px; padding: 1px 5px; }
+.vs-star-chip { margin: 5px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 10.5px; color: var(--tp-ink2); }
+.vs-star-chip .chip { white-space: normal; }
+.vs-star-missing { align-self: center; }
+
+/* Tarjeta estrecha (dos columnas en ventanas medias): balance encima de la estrella. */
+@container vs-card (max-width: 470px) {
+  .vs-side-body { grid-template-columns: minmax(0, 1fr); }
+  .vs-record { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@container vs-card (max-width: 380px) {
+  .vs-side-head { grid-template-columns: auto minmax(0, 1fr); }
+  .vs .vs-change { grid-column: 1 / -1; width: 100%; min-height: 40px; padding: 6px 12px; }
+  .vs-record { gap: 4px; }
+  .vs-record > div { padding: 4px 6px; }
+  .vs-record dt { font-size: 8.5px; letter-spacing: .04em; }
+  .vs-record dd { font-size: 16px; }
+  .vs-record dd small { display: block; font-size: 9.5px; }
+}
+
+/* ---------- VS ---------- */
+.vs-badge { display: grid; place-items: center; }
+.vs-badge span {
+  display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; transform: rotate(-8deg);
+  font-family: var(--tp-display); font-weight: 700; font-size: 27px; letter-spacing: .02em; color: #111;
+  background: radial-gradient(circle at 35% 30%, #fff3b0, var(--tp-goal) 55%, #c79a12); box-shadow: 0 0 0 5px rgba(255, 211, 77, .14), 0 0 34px rgba(255, 211, 77, .35);
+}
+@media (prefers-reduced-motion: no-preference) { .vs-badge span { animation: vs-pulse 2.6s ease-in-out infinite; } }
+@keyframes vs-pulse { 50% { box-shadow: 0 0 0 9px rgba(255, 211, 77, .08), 0 0 50px rgba(255, 211, 77, .45); } }
+
+/* ---------- abajo: rivalidad, demo y llamada a la acción ---------- */
+.vs-bottom { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); grid-template-areas: "rivalry cta" "rivalry demo"; gap: 10px var(--vs-gap); align-items: start; }
+.vs-rivalry { grid-area: rivalry; border-radius: 14px; padding: 10px 14px; background: linear-gradient(180deg, rgba(19, 29, 49, .92), rgba(14, 22, 38, .92)); border: 1px solid var(--tp-line); min-width: 0; align-self: start; }
+.vs-rivalry-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.vs-rivalry h2 { margin: 0 4px 0 0; font-family: var(--tp-display); font-stretch: condensed; font-weight: 700; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
+.vs .vs-more-toggle { margin-left: auto; min-height: 30px; padding: 3px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--tp-ink); background: transparent; border: 1px solid var(--tp-line2); }
+.vs .vs-more-toggle:hover { background: #16213a; }
+.vs-rivalry > p { margin: 8px 0 0; }
+.vs-h2h-mini { margin-top: 6px; }
+.vs-h2h { display: grid; grid-template-columns: repeat(4, minmax(0, .7fr)) minmax(0, 2fr); gap: 6px; margin: 0; }
+.vs-h2h > div { border-radius: 9px; padding: 4px 9px; background: rgba(6, 10, 18, .5); border: 1px solid var(--tp-line); border-top: 3px solid #6f7b91; min-width: 0; }
+.vs-h2h .n { border-top-color: var(--tp-ink2); }
+.vs-h2h .a { border-top-color: var(--vs-a); }
+.vs-h2h .b { border-top-color: var(--vs-b); }
+.vs-h2h .last { border-top-color: var(--tp-goal); }
+.vs-h2h dt { font-size: 10px; color: var(--tp-ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vs-h2h dd { margin: 1px 0 0; font-family: var(--tp-display); font-weight: 700; font-size: 22px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.vs-h2h .last dd { font-family: var(--tp-ui); font-size: 12px; font-weight: 400; }
+.vs-h2h-bar { display: flex; height: 6px; border-radius: 4px; overflow: hidden; background: #1c2740; margin-top: 6px; }
+.vs-h2h-bar i { display: block; height: 100%; }
+.vs-h2h-bar .a { background: var(--vs-a); }
+.vs-h2h-bar .d { background: #6f7b91; }
+.vs-h2h-bar .b { background: var(--vs-b); }
+.vs-meeting { display: flex; flex-direction: column; gap: 1px; font-size: 12px; min-width: 0; }
+.vs-meeting b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vs-meeting small { color: var(--tp-ink2); font-size: 10.5px; }
+.vs-rivalry-more { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--tp-line); }
+.vs-crossera { margin: 6px 0 0; font-size: 12px; line-height: 1.45; color: var(--tp-ink2); }
+.vs-range { margin: 6px 0; font-size: 12px; color: var(--tp-ink2); }
+.vs-h2h-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.vs-h2h-facts dt { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--tp-ink3); font-weight: 700; }
+.vs-h2h-facts dd { margin: 2px 0 0; }
+.vs-own { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; margin-top: 8px; font-size: 12.5px; }
+.vs-own b { font-family: var(--tp-display); font-size: 17px; color: var(--tp-goal); }
+
+/* TP240: un solo botón grande y centrado; motor, gráficos, alineaciones y semilla, plegados en «Opciones». */
+.vs-launch { display: grid; justify-items: center; gap: 8px; }
+.vs-launch > p { margin: 0; }
+.vs-launch > .vs-cta { width: min(460px, 100%); }
+.vs-options { justify-self: stretch; display: grid; gap: 12px; }
+.vs-options > summary { justify-self: center; min-height: 36px; padding: 6px 10px; color: var(--tp-ink2); font-size: 13px; font-weight: 600; cursor: pointer; list-style: none; }
+.vs-options > summary::-webkit-details-marker { display: none; }
+.vs-options > summary:hover { color: var(--tp-ink); }
+.vs-options[open] > .vs-choices { max-width: 640px; width: 100%; justify-self: center; }
+.vs-choices { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; align-items: start; min-width: 0; }
+.vs-choices .engine-selector { min-width: 0; margin: 0; padding: 0; border: 0; background: none; }
+.vs-choices label { display: grid; gap: 4px; max-width: none; font-size: 12px; font-weight: 600; color: var(--tp-ink2); text-align: left; }
+.vs-choices select { width: 100%; min-height: 44px; background: #0b1424; color: var(--tp-ink); border: 1px solid var(--tp-line2); border-radius: 9px; }
+.vs-choices .engine-selector .small-note { margin: 3px 0 0; font-size: 11px; color: var(--tp-ink3); }
+.vs .vs-details-toggle { justify-self: start; min-height: 36px; padding: 4px 2px; background: transparent; border: 0; color: var(--tp-ink2); font-size: 13px; font-weight: 600; cursor: pointer; }
+.vs .vs-details-toggle:hover { color: var(--tp-ink); }
+.vs-details { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--vs-gap); }
+.vs-details > * { grid-area: auto; }
+.vs-details[hidden] { display: none; }
+/* Plegado sencillo: sin la etiqueta «Histórico» en cada dato (lo dice una nota); «Estimado» y «Ficticio» sí se ven. */
+:is(.vs-side-body, .vs-rivalry) .chip.hist { display: none; }
+.hero.vs-hero.vs-hero--compact { min-height: 0; margin: 10px 0 6px; padding: 6px 2px; background: none; box-shadow: none; }
+/* La frase dice qué se puede hacer: también en el teléfono (antes se ocultaba con la portada). */
+.hero.vs-hero.vs-hero--compact .intro { display: block; }
+.vs .vs-cta {
+  min-height: 56px; padding: 10px 26px; border-radius: 12px; border: 0; font-family: var(--tp-display); font-weight: 700;
+  font-size: 24px; letter-spacing: .08em; text-transform: uppercase; color: #111;
+  background: linear-gradient(180deg, #ffe27d, var(--tp-goal) 60%, #e0b22a); box-shadow: 0 10px 30px -8px rgba(255, 211, 77, .55);
+}
+.vs .vs-cta:hover:not(:disabled) { background: linear-gradient(180deg, #fff0a8, #ffdc66 60%, #e9bd36); }
+
+.vs-demo { grid-area: demo; display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 6px 8px 6px 6px; border-radius: 12px; border: 1px solid var(--tp-line2); background: rgba(11, 18, 34, .9); min-width: 0; }
+.vs-demo img { width: 64px; height: 40px; object-fit: cover; object-position: center 30%; border-radius: 8px; display: block; }
+.vs-demo-body { min-width: 0; }
+.vs-demo-body h2 { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--tp-display); font-stretch: condensed; font-weight: 700; font-size: 16px; text-transform: uppercase; line-height: 1.05; }
+.vs-demo-sub { margin: 2px 0 0; font-size: 10.5px; color: var(--tp-ink2); display: flex; flex-wrap: wrap; gap: 3px 6px; align-items: center; }
+.vs-demo-sub .chip { white-space: normal; max-width: 100%; }
+.vs .vs-demo-open { min-height: 36px; border-radius: 9px; color: #fff; background: linear-gradient(180deg, #2f7bff, #0a4fb5); border: 0; padding: 6px 12px; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.vs .vs-demo-open:hover:not(:disabled) { background: linear-gradient(180deg, #4b8dff, #1159c4); }
+
+.prepare-heading { margin: 8px 0 12px; outline: none; }
+.prepare-heading h2 { margin: 0; }
+/* TP237: alineaciones y semilla, dentro de «Más detalles». */
+.advanced-options { padding: 12px 14px; border: 1px solid var(--tp-line2); border-radius: 12px; background: rgba(11, 18, 34, .9); }
+.advanced-options > h2 { margin: 0; font-size: 15px; }
+.advanced-options > .small-note { margin: 2px 0 12px; }
+.advanced-options .matchup-grid { margin-bottom: 14px; }
+.advanced-options .seed-choice .fixed-seed { margin-top: 0; }
+
+/* ---------- selector: capa (escritorio) / hoja a pantalla completa (teléfono) ---------- */
+.vs-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 3vh 16px; background: rgba(3, 5, 10, .72); backdrop-filter: blur(4px); }
+.vs-picker {
+  display: flex; flex-direction: column; width: min(980px, 100%); max-height: min(860px, 94vh); min-height: 0;
+  border-radius: 16px; padding: 14px 16px 12px; background: linear-gradient(180deg, var(--tp-panel2), var(--tp-panel)); border: 1px solid var(--tp-line2);
+  box-shadow: 0 40px 120px -30px #000;
+}
+.vs-picker-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.vs-picker-head h2 { margin: 0; font-family: var(--tp-display); font-stretch: condensed; font-weight: 700; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; }
+.vs-sides { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; background: #0b1424; border-radius: 12px; border: 1px solid var(--tp-line); max-width: 100%; }
+.vs-modal-root .vs-side-tab { min-height: 36px; padding: 5px 12px; font-size: 12.5px; font-weight: 600; color: var(--tp-ink2); background: transparent; border: 0; border-radius: 9px; text-align: left; }
+.vs-modal-root .vs-side-tab b { color: var(--tp-ink); }
+.vs-modal-root .vs-side-tab[aria-pressed=true] { background: linear-gradient(180deg, #1c2a46, #16213a); color: #fff; box-shadow: inset 0 0 0 1px var(--tp-goal); }
+.vs-modal-root .vs-side-tab:hover { background: #16213a; }
+.vs-modal-root .vs-close { margin-left: auto; width: 44px; height: 44px; min-height: 44px; padding: 0; border-radius: 10px; font-size: 26px; line-height: 1; color: var(--tp-ink); background: rgba(6, 10, 18, .6); border: 1px solid var(--tp-line2); }
+.vs-modal-root .vs-close:hover { background: #16213a; }
+.vs-picking { margin: 6px 0 0; font-size: 12px; color: var(--tp-goal); font-weight: 700; letter-spacing: .03em; }
+.vs-picking .vs-muted { font-weight: 500; letter-spacing: 0; }
+.vs-filters { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 8px; }
+.vs-filters label { color: var(--tp-ink2); font-size: 12px; }
+.vs-modal-root :is(input, select) { background: #0b1424; color: var(--tp-ink); border: 1px solid var(--tp-line2); border-radius: 9px; }
+.vs-eras { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.vs-modal-root .vs-eras button { min-height: 34px; padding: 4px 12px; border-radius: 999px; font-size: 12px; color: var(--tp-ink2); background: transparent; border: 1px solid var(--tp-line2); }
+.vs-modal-root .vs-eras button[aria-pressed=true] { color: #111; background: var(--tp-ink); border-color: var(--tp-ink); }
+.vs-picker-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin: 8px -6px 0; padding: 0 6px 4px; }
+.vs-quick .vs-kicker .vs-muted { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.vs-quick-row { display: flex; gap: 6px; overflow-x: auto; padding: 6px 0 4px; scrollbar-width: thin; }
+.vs-count { margin: 8px 0 6px; font-size: 12px; color: var(--tp-ink2); }
+.vs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 6px; }
+.vs-modal-root .vs-option {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; min-height: 44px; padding: 6px 10px;
+  text-align: left; font-size: 13px; font-weight: 600; color: var(--tp-ink); background: rgba(6, 10, 18, .55); border: 1px solid var(--tp-line); border-radius: 10px;
+}
+.vs-modal-root .vs-option--quick { flex: 0 0 auto; }
+.vs-modal-root .vs-option:hover { background: #16213a; border-color: var(--tp-line2); }
+.vs-modal-root .vs-option[aria-pressed=true] { border-color: var(--tp-goal); box-shadow: inset 0 0 0 1px var(--tp-goal); background: #1a2238; }
+.vs-modal-root .vs-option .team-crest { background: #fff; border-radius: 6px; padding: 2px; }
+.vs-option-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vs-option small { color: var(--tp-goal); font-family: var(--tp-display); font-size: 13px; }
+.vs-modal-root .vs-more { margin-top: 8px; width: 100%; min-height: 40px; color: var(--tp-ink); background: transparent; border: 1px dashed var(--tp-line2); border-radius: 10px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .vs-bottom { grid-template-columns: minmax(0, 1fr) minmax(240px, 300px); }
+  .vs-h2h { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .vs-h2h .last { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  .vs { padding: 10px; --vs-gap: 10px; }
+  .vs-stage { grid-template-columns: minmax(0, 1fr); }
+  .vs-badge { margin: -22px 0; position: relative; z-index: 1; pointer-events: none; }
+  .vs-badge span { width: 46px; height: 46px; font-size: 21px; }
+  /* TP240: en el teléfono «Jugar partido» vuelve a quedarse pegado abajo, como en la portada de TP225. */
+  .vs-launch { position: sticky; bottom: 0; z-index: 2; margin: 0 -10px -10px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); border-radius: 0 0 18px 18px; background: linear-gradient(180deg, rgba(5, 8, 15, .2), rgba(5, 8, 15, .96) 30%); }
+  .vs-choices { grid-template-columns: minmax(0, 1fr); }
+  .vs .vs-cta { min-height: 52px; font-size: 21px; }
+  .vs-overlay { padding: 0; place-items: stretch; }
+  .vs-picker { width: 100%; max-height: none; height: 100%; border-radius: 0; border: 0; padding: 12px 14px calc(10px + env(safe-area-inset-bottom)); }
+  .vs-filters { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .vs-filters label:first-child { grid-column: 1 / -1; }
+  .vs-picker-head h2 { font-size: 18px; }
+  .vs-sides { order: 3; width: 100%; }
+  .vs-modal-root .vs-side-tab { flex: 1 1 140px; }
+}
+@media (max-width: 480px) {
+  .vs-side { padding: 0 10px 10px; }
+  .vs-side-band { margin: 0 -10px 8px; }
+  .vs-crest { width: 52px; height: 52px; border-radius: 12px; }
+  .vs-crest .team-crest { width: 40px; height: 40px; flex-basis: 40px; }
+  .vs-h2h { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vs-demo { grid-template-columns: 52px minmax(0, 1fr) auto; }
+  .vs-demo img { width: 52px; height: 34px; }
+  .vs-grid { grid-template-columns: minmax(0, 1fr); }
+  .vs-picking .vs-muted { display: none; }
+  .vs-demo-body h2 { white-space: normal; }
+}

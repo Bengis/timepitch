@@ -1,0 +1,2786 @@
+{
+ "_meta": {
+  "schema": "timepitch-player-cards-1",
+  "teamKey": "arsenal:2003",
+  "seasonLabel": "2003/04",
+  "generated": "2026-10-22",
+  "sources": {
+   "wikidata": {
+    "kind": "wikidata",
+    "licence": "CC0 1.0",
+    "fields": "display (label), dob (P569), heightCm (P2048), nation (P1532, else P27), citizenship (P27), wikidataPositions (P413)",
+    "revision": "per field: qid + revision"
+   },
+   "wikipedia": {
+    "kind": "wikipedia",
+    "title": "2003–04 Arsenal F.C. season",
+    "revid": 1380992540,
+    "licence": "CC BY-SA 4.0",
+    "fields": "numbers (shirt number, position code, nationality flag) from the season article"
+   }
+  },
+  "rules": "Identity by QID only (no name matching). Public subset: no Transfermarkt, FPL, epldata or StatsBomb fields. Nationality = Wikidata P1532 (sporting), else P27; manual corrections only for reviewed cases, cited to the season article.",
+  "derivedFrom": {
+   "path": ".local/player-data/cards.json",
+   "sha256": "8a1f20090bd94ef773ff3181ab565461a8d1fcd13636aa2ac3ce3bcc17f16fc4"
+  }
+ },
+ "players": [
+  {
+   "qid": "Q57114",
+   "number": "1",
+   "display": "Jens Lehmann",
+   "position": "GK",
+   "nation": "Germany",
+   "dob": "1969-11-10",
+   "heightCm": 191,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q57114",
+     "revision": 2541362287,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q57114",
+     "revision": 2541362287,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q57114",
+     "revision": 2541362287,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q57114",
+     "revision": 2541362287,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q57114",
+     "revision": 2541362287,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "1",
+     "position": "GK",
+     "nationFlag": "GER"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Germany"
+   ],
+   "citizenship": [
+    "Germany"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q133556",
+   "number": "3",
+   "display": "Ashley Cole",
+   "position": "DF",
+   "nation": "England",
+   "dob": "1980-12-20",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q133556",
+     "revision": 2557800791,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q133556",
+     "revision": 2557800791,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q133556",
+     "revision": 2557800791,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q133556",
+     "revision": 2557800791,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q133556",
+     "revision": 2557800791,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "3",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q46347",
+   "number": "4",
+   "display": "Patrick Vieira",
+   "position": "MF",
+   "nation": "France",
+   "dob": "1976-06-23",
+   "heightCm": 192,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q46347",
+     "revision": 2558205922,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q46347",
+     "revision": 2558205922,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q46347",
+     "revision": 2558205922,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q46347",
+     "revision": 2558205922,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q46347",
+     "revision": 2558205922,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "4",
+     "position": "MF",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "defensive midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q314405",
+   "number": "5",
+   "display": "Martin Keown",
+   "position": "DF",
+   "nation": "England",
+   "dob": "1966-07-24",
+   "heightCm": 186,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q314405",
+     "revision": 2536168601,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q314405",
+     "revision": 2536168601,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q314405",
+     "revision": 2536168601,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q314405",
+     "revision": 2536168601,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q314405",
+     "revision": 2536168601,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "5",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q113156",
+   "number": "7",
+   "display": "Robert Pires",
+   "position": "MF",
+   "nation": "France",
+   "dob": "1973-10-29",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q113156",
+     "revision": 2558226998,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q113156",
+     "revision": 2558226998,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q113156",
+     "revision": 2558226998,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q113156",
+     "revision": 2558226998,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q113156",
+     "revision": 2558226998,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "7",
+     "position": "MF",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "midfielder",
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q10560",
+   "number": "8",
+   "display": "Freddie Ljungberg",
+   "position": "MF",
+   "nation": "Sweden",
+   "dob": "1977-04-16",
+   "heightCm": 175,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q10560",
+     "revision": 2524156566,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q10560",
+     "revision": 2524156566,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q10560",
+     "revision": 2524156566,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q10560",
+     "revision": 2524156566,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q10560",
+     "revision": 2524156566,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "8",
+     "position": "MF",
+     "nationFlag": "SWE"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Sweden"
+   ],
+   "citizenship": [
+    "Sweden"
+   ],
+   "wikidataPositions": [
+    "winger"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q952335",
+   "number": "9",
+   "display": "Francis Jeffers",
+   "position": "FW",
+   "nation": "England",
+   "dob": "1981-01-25",
+   "heightCm": 175,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q952335",
+     "revision": 2536680727,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q952335",
+     "revision": 2536680727,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q952335",
+     "revision": 2536680727,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q952335",
+     "revision": 2536680727,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q952335",
+     "revision": 2536680727,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "9",
+     "position": "FW",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": [
+    "number_shared_with_other_player"
+   ]
+  },
+  {
+   "qid": "Q276399",
+   "number": "9",
+   "display": "José Antonio Reyes",
+   "position": "FW",
+   "nation": "Spain",
+   "dob": "1983-09-01",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q276399",
+     "revision": 2546282959,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q276399",
+     "revision": 2546282959,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q276399",
+     "revision": 2546282959,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q276399",
+     "revision": 2546282959,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q276399",
+     "revision": 2546282959,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "9",
+     "position": "FW",
+     "nationFlag": "ESP"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Spain"
+   ],
+   "citizenship": [
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": [
+    "number_shared_with_other_player"
+   ]
+  },
+  {
+   "qid": "Q185389",
+   "number": "10",
+   "display": "Dennis Bergkamp",
+   "position": "FW",
+   "nation": "Netherlands",
+   "dob": "1969-05-10",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q185389",
+     "revision": 2557852964,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q185389",
+     "revision": 2557852964,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q185389",
+     "revision": 2557852964,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q185389",
+     "revision": 2557852964,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q185389",
+     "revision": 2557852964,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "10",
+     "position": "FW",
+     "nationFlag": "NED"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Netherlands"
+   ],
+   "citizenship": [
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q217760",
+   "number": "11",
+   "display": "Sylvain Wiltord",
+   "position": "FW",
+   "nation": "France",
+   "dob": "1974-05-10",
+   "heightCm": 173,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q217760",
+     "revision": 2539189532,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q217760",
+     "revision": 2539189532,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q217760",
+     "revision": 2539189532,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q217760",
+     "revision": 2539189532,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q217760",
+     "revision": 2539189532,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "11",
+     "position": "FW",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q314755",
+   "number": "12",
+   "display": "Lauren",
+   "position": "DF",
+   "nation": "Cameroon",
+   "dob": "1977-01-19",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q314755",
+     "revision": 2529012984,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q314755",
+     "revision": 2529012984,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q314755",
+     "revision": 2529012984,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q314755",
+     "revision": 2529012984,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q314755",
+     "revision": 2529012984,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "12",
+     "position": "DF",
+     "nationFlag": "CMR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Cameroon"
+   ],
+   "citizenship": [
+    "Cameroon",
+    "Equatorial Guinea",
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "defender",
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q45901",
+   "number": "14",
+   "display": "Thierry Henry",
+   "position": "FW",
+   "nation": "France",
+   "dob": "1977-08-17",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q45901",
+     "revision": 2558255406,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q45901",
+     "revision": 2558255406,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q45901",
+     "revision": 2558255406,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q45901",
+     "revision": 2558255406,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q45901",
+     "revision": 2558255406,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "14",
+     "position": "FW",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q377746",
+   "number": "15",
+   "display": "Ray Parlour",
+   "position": "MF",
+   "nation": "England",
+   "dob": "1973-03-07",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q377746",
+     "revision": 2536387578,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q377746",
+     "revision": 2536387578,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q377746",
+     "revision": 2536387578,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q377746",
+     "revision": 2536387578,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q377746",
+     "revision": 2536387578,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "15",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q173360",
+   "number": "16",
+   "display": "Giovanni van Bronckhorst",
+   "position": "MF",
+   "nation": "Netherlands",
+   "dob": "1975-02-05",
+   "heightCm": 179,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q173360",
+     "revision": 2557838657,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q173360",
+     "revision": 2557838657,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q173360",
+     "revision": 2557838657,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q173360",
+     "revision": 2557838657,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q173360",
+     "revision": 2557838657,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "16",
+     "position": "MF",
+     "nationFlag": "NED"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Netherlands"
+   ],
+   "citizenship": [
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q314750",
+   "number": "17",
+   "display": "Edu",
+   "position": "MF",
+   "nation": "Brazil / Portugal",
+   "dob": "1978-05-16",
+   "heightCm": 185,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q314750",
+     "revision": 2528976182,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q314750",
+     "revision": 2528976182,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q314750",
+     "revision": 2528976182,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q314750",
+     "revision": 2528976182,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q314750",
+     "revision": 2528976182,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "17",
+     "position": "MF",
+     "nationFlag": "BRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil",
+    "Portugal"
+   ],
+   "citizenship": [
+    "Brazil",
+    "Portugal"
+   ],
+   "wikidataPositions": [
+    "attacking midfielder",
+    "central midfielder",
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q180276",
+   "number": "18",
+   "display": "Pascal Cygan",
+   "position": "DF",
+   "nation": "France",
+   "dob": "1974-04-29",
+   "heightCm": 192,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q180276",
+     "revision": 2529937049,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q180276",
+     "revision": 2529937049,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q180276",
+     "revision": 2529937049,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q180276",
+     "revision": 2529937049,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q180276",
+     "revision": 2529937049,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "18",
+     "position": "DF",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q190142",
+   "number": "19",
+   "display": "Gilberto Silva",
+   "position": "MF",
+   "nation": "Brazil",
+   "dob": "1976-10-07",
+   "heightCm": 184,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q190142",
+     "revision": 2529465025,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q190142",
+     "revision": 2529465025,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q190142",
+     "revision": 2529465025,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q190142",
+     "revision": 2529465025,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q190142",
+     "revision": 2529465025,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "19",
+     "position": "MF",
+     "nationFlag": "BRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Brazil"
+   ],
+   "citizenship": [
+    "Brazil"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1929",
+   "number": "22",
+   "display": "Gaël Clichy",
+   "position": "DF",
+   "nation": "France",
+   "dob": "1985-07-26",
+   "heightCm": 176,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1929",
+     "revision": 2546249599,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1929",
+     "revision": 2546249599,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1929",
+     "revision": 2546249599,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1929",
+     "revision": 2546249599,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1929",
+     "revision": 2546249599,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "22",
+     "position": "DF",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France"
+   ],
+   "wikidataPositions": [
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q214734",
+   "number": "23",
+   "display": "Sol Campbell",
+   "position": "DF",
+   "nation": "England",
+   "dob": "1974-09-18",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q214734",
+     "revision": 2529727701,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q214734",
+     "revision": 2529727701,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q214734",
+     "revision": 2529727701,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q214734",
+     "revision": 2529727701,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q214734",
+     "revision": 2529727701,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "23",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q599675",
+   "number": "25",
+   "display": "Nwankwo Kanu",
+   "position": "FW",
+   "nation": "Nigeria",
+   "dob": "1976-08-01",
+   "heightCm": 197,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q599675",
+     "revision": 2549156089,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q599675",
+     "revision": 2549156089,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q599675",
+     "revision": 2549156089,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q599675",
+     "revision": 2549156089,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q599675",
+     "revision": 2549156089,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "25",
+     "position": "FW",
+     "nationFlag": "NGR"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Nigeria"
+   ],
+   "citizenship": [
+    "Nigeria"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q391248",
+   "number": "27",
+   "display": "Efstathios Tavlaridis",
+   "position": "DF",
+   "nation": "Greece",
+   "dob": "1980-01-25",
+   "heightCm": 187,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q391248",
+     "revision": 2554202645,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q391248",
+     "revision": 2554202645,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q391248",
+     "revision": 2554202645,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q391248",
+     "revision": 2554202645,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q391248",
+     "revision": 2554202645,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "27",
+     "position": "DF",
+     "nationFlag": "GRE"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Greece"
+   ],
+   "citizenship": [
+    "Greece"
+   ],
+   "wikidataPositions": [
+    "centre-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q147589",
+   "number": "28",
+   "display": "Kolo Touré",
+   "position": "DF",
+   "nation": "Ivory Coast",
+   "dob": "1981-03-19",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q147589",
+     "revision": 2546308092,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q147589",
+     "revision": 2546308092,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q147589",
+     "revision": 2546308092,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q147589",
+     "revision": 2546308092,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q147589",
+     "revision": 2546308092,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "28",
+     "position": "DF",
+     "nationFlag": "CIV"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Ivory Coast"
+   ],
+   "citizenship": [
+    "Ivory Coast"
+   ],
+   "wikidataPositions": [
+    "centre-back",
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q319180",
+   "number": "30",
+   "display": "Jérémie Aliadière",
+   "position": "FW",
+   "nation": "France",
+   "dob": "1983-03-30",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q319180",
+     "revision": 2546286602,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q319180",
+     "revision": 2546286602,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q319180",
+     "revision": 2546286602,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q319180",
+     "revision": 2546286602,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q319180",
+     "revision": 2546286602,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "30",
+     "position": "FW",
+     "nationFlag": "FRA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "France"
+   ],
+   "citizenship": [
+    "France",
+    "Algeria"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q953497",
+   "number": "32",
+   "display": "Michal Papadopulos",
+   "position": "FW",
+   "nation": "Czech Republic",
+   "dob": "1985-04-14",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q953497",
+     "revision": 2546253291,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q953497",
+     "revision": 2546253291,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q953497",
+     "revision": 2546253291,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q953497",
+     "revision": 2546253291,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q953497",
+     "revision": 2546253291,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "32",
+     "position": "FW",
+     "nationFlag": "CZE"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Czech Republic"
+   ],
+   "citizenship": [
+    "Czech Republic"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1345122",
+   "number": "33",
+   "display": "Graham Stack",
+   "position": "GK",
+   "nation": "Ireland",
+   "dob": "1981-09-26",
+   "heightCm": 188,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1345122",
+     "revision": 2546299356,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1345122",
+     "revision": 2546299356,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1345122",
+     "revision": 2546299356,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1345122",
+     "revision": 2546299356,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1345122",
+     "revision": 2546299356,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "33",
+     "position": "GK",
+     "nationFlag": "IRL"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Ireland"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q310055",
+   "number": "37",
+   "display": "David Bentley",
+   "position": "MF",
+   "nation": "England",
+   "dob": "1984-08-27",
+   "heightCm": 175,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q310055",
+     "revision": 2536632860,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q310055",
+     "revision": 2536632860,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q310055",
+     "revision": 2536632860,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q310055",
+     "revision": 2536632860,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q310055",
+     "revision": 2536632860,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "37",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "wide midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q319164",
+   "number": "45",
+   "display": "Justin Hoyte",
+   "position": "DF",
+   "nation": "England / Trinidad and Tobago",
+   "dob": "1984-11-20",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q319164",
+     "revision": 2549273793,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q319164",
+     "revision": 2549273793,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q319164",
+     "revision": 2549273793,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q319164",
+     "revision": 2549273793,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q319164",
+     "revision": 2549273793,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "45",
+     "position": "DF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England",
+    "Trinidad and Tobago"
+   ],
+   "citizenship": [
+    "Trinidad and Tobago",
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "defender",
+    "full-back"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q346009",
+   "number": "51",
+   "display": "Frank Simek",
+   "position": "DF",
+   "nation": "United States",
+   "dob": "1984-10-13",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q346009",
+     "revision": 2559530408,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q346009",
+     "revision": 2559530408,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q346009",
+     "revision": 2559530408,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q346009",
+     "revision": 2559530408,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q346009",
+     "revision": 2559530408,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "51",
+     "position": "DF",
+     "nationFlag": "USA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "United States"
+   ],
+   "citizenship": [
+    "United States"
+   ],
+   "wikidataPositions": [
+    "defender"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q6258664",
+   "number": "52",
+   "display": "John Spicer",
+   "position": "FW",
+   "nation": "United Kingdom",
+   "dob": "1983-09-13",
+   "heightCm": null,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q6258664",
+     "revision": 2529687640,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q6258664",
+     "revision": 2529687640,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q6258664",
+     "revision": 2529687640,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q6258664",
+     "revision": 2529687640,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    }
+   },
+   "numbers": [
+    {
+     "value": "52",
+     "position": "FW",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "citizenship",
+   "sportNationalities": [],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q2663282",
+   "number": "53",
+   "display": "Jerome Thomas",
+   "position": "MF",
+   "nation": "United Kingdom",
+   "dob": "1983-03-23",
+   "heightCm": 178,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q2663282",
+     "revision": 2546289240,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q2663282",
+     "revision": 2546289240,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q2663282",
+     "revision": 2546289240,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q2663282",
+     "revision": 2546289240,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q2663282",
+     "revision": 2546289240,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "53",
+     "position": "MF",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "citizenship",
+   "sportNationalities": [],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "wing half"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q313140",
+   "number": "54",
+   "display": "Quincy Owusu-Abeyie",
+   "position": "FW",
+   "nation": "Ghana",
+   "dob": "1986-04-15",
+   "heightCm": 180,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q313140",
+     "revision": 2553994332,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q313140",
+     "revision": 2553994332,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q313140",
+     "revision": 2553994332,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q313140",
+     "revision": 2553994332,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q313140",
+     "revision": 2553994332,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "54",
+     "position": "FW",
+     "nationFlag": "GHA"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Ghana"
+   ],
+   "citizenship": [
+    "Ghana",
+    "Kingdom of the Netherlands"
+   ],
+   "wikidataPositions": [
+    "forward"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q293007",
+   "number": "55",
+   "display": "Ólafur Ingi Skúlason",
+   "position": "MF",
+   "nation": "Iceland",
+   "dob": "1983-04-01",
+   "heightCm": 183,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q293007",
+     "revision": 2555431325,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q293007",
+     "revision": 2555431325,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q293007",
+     "revision": 2555431325,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q293007",
+     "revision": 2555431325,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q293007",
+     "revision": 2555431325,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "55",
+     "position": "MF",
+     "nationFlag": "ISL"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Iceland"
+   ],
+   "citizenship": [
+    "Iceland"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q1387139",
+   "number": "56",
+   "display": "Ryan Smith",
+   "position": "FW",
+   "nation": "England",
+   "dob": "1986-11-10",
+   "heightCm": 175,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q1387139",
+     "revision": 2536237371,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q1387139",
+     "revision": 2536237371,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q1387139",
+     "revision": 2536237371,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q1387139",
+     "revision": 2536237371,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q1387139",
+     "revision": 2536237371,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "56",
+     "position": "FW",
+     "nationFlag": "ENG"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q17499",
+   "number": "57",
+   "display": "Cesc Fàbregas",
+   "position": "MF",
+   "nation": "Spain",
+   "dob": "1987-05-04",
+   "heightCm": 179,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0"
+    },
+    "number": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "position": {
+     "kind": "wikipedia",
+     "title": "2003–04 Arsenal F.C. season",
+     "revid": 1380992540,
+     "licence": "CC BY-SA 4.0"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q17499",
+     "revision": 2557881608,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [
+    {
+     "value": "57",
+     "position": "MF",
+     "nationFlag": "ESP"
+    }
+   ],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Spain"
+   ],
+   "citizenship": [
+    "Spain"
+   ],
+   "wikidataPositions": [
+    "midfielder"
+   ],
+   "flags": []
+  },
+  {
+   "qid": "Q187450",
+   "number": null,
+   "display": "Philippe Senderos",
+   "position": "centre-back",
+   "nation": "Switzerland",
+   "dob": "1985-02-14",
+   "heightCm": 189,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q187450",
+     "revision": 2546249526,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q187450",
+     "revision": 2546249526,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q187450",
+     "revision": 2546249526,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q187450",
+     "revision": 2546249526,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q187450",
+     "revision": 2546249526,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q187450",
+     "revision": 2546249526,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Switzerland"
+   ],
+   "citizenship": [
+    "Switzerland"
+   ],
+   "wikidataPositions": [
+    "centre-back",
+    "defender"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q369915",
+   "number": null,
+   "display": "Rami Shaaban",
+   "position": "goalkeeper",
+   "nation": "Sweden",
+   "dob": "1975-06-30",
+   "heightCm": 193,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q369915",
+     "revision": 2554084895,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q369915",
+     "revision": 2554084895,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q369915",
+     "revision": 2554084895,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q369915",
+     "revision": 2554084895,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q369915",
+     "revision": 2554084895,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q369915",
+     "revision": 2554084895,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "Sweden"
+   ],
+   "citizenship": [
+    "Sweden"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  },
+  {
+   "qid": "Q314102",
+   "number": null,
+   "display": "Stuart Taylor",
+   "position": "goalkeeper",
+   "nation": "England",
+   "dob": "1980-11-28",
+   "heightCm": 196,
+   "fields": {
+    "display": {
+     "kind": "wikidata",
+     "qid": "Q314102",
+     "revision": 2529467181,
+     "licence": "CC0 1.0"
+    },
+    "position": {
+     "kind": "wikidata",
+     "qid": "Q314102",
+     "revision": 2529467181,
+     "licence": "CC0 1.0",
+     "note": "P413"
+    },
+    "nation": {
+     "kind": "wikidata",
+     "qid": "Q314102",
+     "revision": 2529467181,
+     "licence": "CC0 1.0",
+     "note": "P1532"
+    },
+    "citizenship": {
+     "kind": "wikidata",
+     "qid": "Q314102",
+     "revision": 2529467181,
+     "licence": "CC0 1.0",
+     "note": "P27"
+    },
+    "dob": {
+     "kind": "wikidata",
+     "qid": "Q314102",
+     "revision": 2529467181,
+     "licence": "CC0 1.0",
+     "note": "P569"
+    },
+    "heightCm": {
+     "kind": "wikidata",
+     "qid": "Q314102",
+     "revision": 2529467181,
+     "licence": "CC0 1.0",
+     "note": "P2048"
+    }
+   },
+   "numbers": [],
+   "nationBasis": "sport",
+   "sportNationalities": [
+    "England"
+   ],
+   "citizenship": [
+    "United Kingdom"
+   ],
+   "wikidataPositions": [
+    "goalkeeper"
+   ],
+   "flags": [
+    "no_enwiki_number"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+import {useLanguage} from '../i18n';
+
+const en={workspace:'Workspace',newMatch:'New match',matchCentre:'Match centre',library:'Library',
+  libraryNote:'Saved matches keep their original engine, season, seed and replay.',
+  noMatches:'No saved matches yet. Create a matchup to start your library.',
+  squadSources:'Season squad and sources',reproducibility:'Reproducibility options',
+  experimental:'Experimental',modelLimits:'Model limits',matchReplay:'Match replay',
+  events:'Match events',noMilestones:'Goals and period changes will appear here as playback reaches them.',
+  episodeEvents:'This older replay has no recorded goal events.',watch:'Watch moment',
+  additional:'Additional team statistics',keyStats:'The match at a glance',
+  playerDetail:'More statistics for',more:'Details',allGroups:'All recorded player metrics',
+  additionalPlayer:'Additional player metrics',summaryNote:'Final statistics · independent of replay position',
+  allMaps:'Map view',short:{goals:'Goals',assists:'Ast.',shots:'Shots',recoveries:'Recov.',
+    pass_attempts:'Att.',pass_received:'Conf.',confirmed_receipt_pct:'Conf. %',fouls:'Fouls',offsides:'Offs.'} as Record<string,string>,
+  abbreviations:'Att. = pass attempts · Conf. = confirmed receipts · Ast. = assists · Recov. = recoveries · Offs. = offsides.',
+};
+const es:typeof en={workspace:'Espacio de trabajo',newMatch:'Nuevo partido',matchCentre:'Centro de partido',library:'Biblioteca',
+  libraryNote:'Los partidos guardados conservan su motor, temporada, semilla y repetición originales.',
+  noMatches:'Todavía no hay partidos guardados. Prepara un enfrentamiento para empezar.',
+  squadSources:'Plantilla de temporada y fuentes',reproducibility:'Opciones de reproducibilidad',
+  experimental:'Experimental',modelLimits:'Límites del modelo',matchReplay:'Repetición del partido',
+  events:'Eventos del partido',noMilestones:'Los goles y cambios de parte aparecerán al llegar a su instante en la repetición.',
+  episodeEvents:'Esta repetición antigua no tiene eventos de gol registrados.',watch:'Ver momento',
+  additional:'Estadísticas adicionales de equipo',keyStats:'El partido de un vistazo',
+  playerDetail:'Más estadísticas de',more:'Detalle',allGroups:'Todas las métricas registradas por jugador',
+  additionalPlayer:'Métricas adicionales del jugador',summaryNote:'Estadísticas finales · independientes del cursor',
+  allMaps:'Vista del mapa',short:{goals:'Goles',assists:'Asist.',shots:'Tiros',recoveries:'Recup.',
+    pass_attempts:'Int.',pass_received:'Conf.',confirmed_receipt_pct:'Conf. %',fouls:'Faltas',offsides:'F. j.'},
+  abbreviations:'Int. = intentos de pase · Conf. = recepciones confirmadas · Asist. = asistencias · Recup. = recuperaciones · F. j. = fueras de juego.',
+};
+export function useCentreText(){return useLanguage().locale==='es'?es:en;}

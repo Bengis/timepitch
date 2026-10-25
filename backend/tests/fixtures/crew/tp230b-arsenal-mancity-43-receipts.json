@@ -1,0 +1,134 @@
+{
+ "analyst": {
+  "angle": "dominant_display",
+  "paragraphs": [
+   [
+    "coverage"
+   ],
+   [
+    "goal:grf:4095",
+    "goal:grf:9254",
+    "goal:grf:14036",
+    "goal:grf:15691"
+   ],
+   [
+    "goal:grf:33003",
+    "goal:grf:47428",
+    "goal:grf:52641",
+    "leader:goals"
+   ]
+  ]
+ },
+ "writer": {
+  "headline": {
+   "text": "Arsenal Overwhelms Manchester City 6-1 in Simulated Showdown",
+   "fact_ids": [
+    "result"
+   ]
+  },
+  "paragraphs": [
+   {
+    "sentences": [
+     {
+      "text": "This fictional cross-era simulation between Arsenal and Manchester City featured complete goal data but omitted pass outcomes and possession details, providing a focused view on scoring events.",
+      "fact_ids": [
+       "coverage"
+      ]
+     }
+    ]
+   },
+   {
+    "sentences": [
+     {
+      "text": "Gilberto Silva opened the scoring for Arsenal at 6:49, but Ilkay Gündogan quickly equalized for Manchester City at 15:25, setting an early competitive tone.",
+      "fact_ids": [
+       "goal:grf:4095",
+       "goal:grf:9254"
+      ]
+     },
+     {
+      "text": "Arsenal then surged ahead with goals from Lauren at 23:23 and Thierry Henry at 26:09, establishing a 3-1 lead before halftime.",
+      "fact_ids": [
+       "goal:grf:14036",
+       "goal:grf:15691"
+      ]
+     }
+    ]
+   },
+   {
+    "sentences": [
+     {
+      "text": "Thierry Henry doubled his tally with a goal at 51:14, followed by Robert Pires at 75:16 and Gilberto Silva again at 83:58, sealing a dominant 6-1 victory for Arsenal.",
+      "fact_ids": [
+       "goal:grf:33003",
+       "goal:grf:47428",
+       "goal:grf:52641"
+      ]
+     },
+     {
+      "text": "Henry and Gilberto Silva led the scoring charts with two goals each, underscoring Arsenal's offensive prowess in this simulation.",
+      "fact_ids": [
+       "leader:goals"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "writer_revision": {
+  "headline": {
+   "text": "Arsenal Dominates Manchester City 6-1 in Fictional Cross-Era Simulation",
+   "fact_ids": [
+    "result"
+   ]
+  },
+  "paragraphs": [
+   {
+    "sentences": [
+     {
+      "text": "This fictional cross-era simulation between Arsenal and Manchester City featured complete goal data but omitted pass outcomes and possession details, providing a focused view on scoring events.",
+      "fact_ids": [
+       "coverage"
+      ]
+     }
+    ]
+   },
+   {
+    "sentences": [
+     {
+      "text": "Gilberto Silva opened the scoring for Arsenal at 6:49, but Ilkay Gündogan quickly equalized for Manchester City at 15:25, setting an early competitive tone.",
+      "fact_ids": [
+       "goal:grf:4095",
+       "goal:grf:9254"
+      ]
+     },
+     {
+      "text": "Arsenal then surged ahead with goals from Lauren at 23:23 and Thierry Henry at 26:09, establishing a 3-1 lead before halftime.",
+      "fact_ids": [
+       "goal:grf:14036",
+       "goal:grf:15691"
+      ]
+     }
+    ]
+   },
+   {
+    "sentences": [
+     {
+      "text": "Thierry Henry doubled his tally with a goal at 51:14, followed by Robert Pires at 75:16 and Gilberto Silva again at 83:58, sealing a dominant 6-1 victory for Arsenal.",
+      "fact_ids": [
+       "goal:grf:33003",
+       "goal:grf:47428",
+       "goal:grf:52641"
+      ]
+     },
+     {
+      "text": "Henry and Gilberto Silva led the scoring charts with two goals each, underscoring Arsenal's offensive prowess in this simulation.",
+      "fact_ids": [
+       "leader:goals"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

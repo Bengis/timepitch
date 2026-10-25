@@ -1,0 +1,57 @@
+TimePitch
+Copyright (C) 2026 The TimePitch authors
+
+TimePitch is free software: you can redistribute it and/or modify it under the
+terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version. See LICENSE. Third-party material keeps its own licence; see
+THIRD_PARTY.md.
+
+-------------------------------------------------------------------------------
+External match engines and modifications
+-------------------------------------------------------------------------------
+
+"Play match" runs Google Research Football or TouchLines live on the demo
+server, and the demo match plays back matches recorded beforehand with three
+external football engines. The recordings are not stored in git: the public
+demo serves them as static files. TouchLines is included in source form in
+engines/touchlines/ (see its README); no source code, binary or asset of the
+other two engines is included.
+
+The engines were run with modified builds or harnesses. Those modifications
+are stated here as required by the engines' licences:
+
+1. Google Research Football (gfootball)
+   https://github.com/google-research/football
+   Python wrapper: Copyright Google LLC, Apache License 2.0.
+   Native engine: based on GameplayFootball by Bastiaan Konings Schuiling,
+   The Unlicense.
+   Modified by the TimePitch authors in October 2026: the native engine was
+   rebuilt with instrumentation patches that record match statistics, physical
+   clock and player activity, and the Python side is driven by the TimePitch
+   worker (backend/src/timepitch/grf/). The patched engine itself is not
+   distributed here.
+
+2. open-football
+   https://github.com/ZOXEXIVO/open-football, commit bfb2273
+   Copyright ZOXEXIVO and contributors, Apache License 2.0.
+   Modified by the TimePitch authors in October 2026: a harness patch adjusts
+   movement effort (speed, sprint and acceleration). The modified engine is not
+   distributed here.
+
+3. TouchLines
+   https://github.com/brenosss/touchlines, commit 5c5c71a
+   Copyright TouchLines authors (brenosss and contributors),
+   GNU Affero General Public License v3.0 or later.
+   Run by the TimePitch authors in October 2026 through a TimePitch harness
+   (engines/touchlines/harness/) that seeds the engine, runs it headless and
+   records the match. The demo recordings used calibration settings (for
+   example a reduced goal probability); the live engine uses upstream values
+   and the upstream clock. engines/touchlines/make_native.py states the exact
+   rewrites applied to the bundle. The 39 upstream source files included are
+   unmodified. As TimePitch offers TouchLines over a network, the complete
+   corresponding source of TimePitch is published under the AGPL.
+
+The adapters in web/src/match-centre/adapters/ (recorded-grf.ts,
+open-football.ts, touchlines.ts) are original TimePitch code that parses the
+recorded output; they contain no code from the engines.

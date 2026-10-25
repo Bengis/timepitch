@@ -1,0 +1,1 @@
+"""Versioned, reproducible football simulation."""
