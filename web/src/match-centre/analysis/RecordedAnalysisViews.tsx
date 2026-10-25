@@ -43,18 +43,31 @@ export function Panel({ title, engine, children, className = '', extra }: { titl
 const pct = (v: number | null) => v === null ? null : Math.round(v * 100);
 const fixed = (v: number | null, d = 1) => v === null ? null : Number(v.toFixed(d));
 
+/**
+ * TP249: barra comparada de retransmisión. Cada equipo crece desde el centro hacia su lado, en proporción al mayor de
+ * los dos: con 1–0 la mitad del local se llena y la del visitante queda vacía (antes salía toda roja con una punta azul).
+ */
+export function StatBar({ home, away, homeColour, awayColour }: { home: number | null; away: number | null; homeColour: string; awayColour: string }) {
+  const max = Math.max(Math.abs(home ?? 0), Math.abs(away ?? 0)), width = (v: number | null) => `${max ? Math.abs(v ?? 0) / max * 100 : 0}%`;
+  return <span className="tpa-bar" aria-hidden="true">
+    <span className="tpa-half" data-side="home"><i style={{ width: width(home), background: homeColour }} /></span>
+    <span className="tpa-half" data-side="away"><i style={{ width: width(away), background: awayColour }} /></span>
+  </span>;
+}
+
 /** `missing`: estadística que el motor no graba; la fila sale con «—» y lo dice en lugar de la barra. */
 type Row = { id: string; label: string; home: number | null; away: number | null; unit?: string; missing?: string };
 function StatRows({ rows, ctx, compact = false }: { rows: readonly Row[]; ctx: AnalysisContext; compact?: boolean }) {
   const n = useNumber();
   return <div className={compact ? 'tpa-stats tpa-statsmini' : 'tpa-stats'}>{rows.map(r => {
-    const total = (r.home ?? 0) + (r.away ?? 0);
+    // TP249: el que va por delante en el dato, en blanco; el otro, atenuado.
+    const h = Math.abs(r.home ?? 0), w = Math.abs(r.away ?? 0), lead = r.missing || h === w ? null : h > w ? 'home' : 'away';
     return <div className="tpa-sr" key={r.id} data-stat={r.id}>
-      <span className="tpa-v">{r.home === null ? '—' : n(r.home)}{r.home !== null && r.unit}</span>
+      <span className={`tpa-v${lead === 'away' ? ' tpa-trail' : ''}`}>{r.home === null ? '—' : n(r.home)}{r.home !== null && r.unit}</span>
       <span className="tpa-l"><span className="tpa-lt">{r.label}</span>
         {r.missing ? <small className="tpa-missing">{r.missing}</small>
-          : <span className="tpa-bar" aria-hidden="true">{total ? <><i style={{ flex: r.home ?? 0, background: ctx.teams.home.colour }} /><i style={{ flex: r.away ?? 0, background: ctx.teams.away.colour }} /></> : <i style={{ flex: 1 }} />}</span>}</span>
-      <span className="tpa-v">{r.away === null ? '—' : n(r.away)}{r.away !== null && r.unit}</span>
+          : <StatBar home={r.home} away={r.away} homeColour={ctx.teams.home.colour} awayColour={ctx.teams.away.colour} />}</span>
+      <span className={`tpa-v${lead === 'home' ? ' tpa-trail' : ''}`}>{r.away === null ? '—' : n(r.away)}{r.away !== null && r.unit}</span>
     </div>;
   })}</div>;
 }
@@ -111,8 +124,8 @@ export function BreakStats({ ctx }: { ctx: AnalysisContext }) {
   const t = useAnalysisText(), a = ctx.analysis, h = a.teams.home, w = a.teams.away;
   const rows = [...summaryRows(a, t, false), { id: 'passes', label: t.passes, home: h.passes, away: w.passes },
     { id: 'distance', label: `${t.distance} (${t.km})`, home: fixed(h.distanceM / 1000), away: fixed(w.distanceM / 1000) }];
-  return <div className="tpa-break-stats"><TeamsHead ctx={ctx} /><StatRows rows={rows} ctx={ctx} compact />
-    <NotRecorded team={h} t={t} engine={ctx.engineLabel} /></div>;
+  // TP250 (jueces: la nota «no lo graba» rompía la tarjeta): sin nota; la pestaña Resumen la conserva.
+  return <div className="tpa-break-stats"><TeamsHead ctx={ctx} /><StatRows rows={rows} ctx={ctx} compact /></div>;
 }
 
 /** Resumen compacto de la columna lateral. */

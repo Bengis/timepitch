@@ -37,5 +37,6 @@ it('GRF retains its recorded native clock rather than historical second-half ari
   await waitFor(()=>expect(container.querySelector('[data-unified-scoreboard] .tp-sb-t')).toHaveTextContent('90:14'));
   expect(container.querySelector('[data-unified-scoreboard] .tp-sb-half')).toHaveTextContent('2nd half');
   expect(screen.getByTestId('pitch-clock')).toHaveTextContent('90:14');
-  expect(container.querySelector('.unified-score-source summary')).toHaveTextContent('Source · GRF simulation');
+  // TP250: en la emisión el marcador no repite la fuente (la cabecera dice que es un partido simulado).
+  expect(container.querySelector('.unified-score-source')).toBeNull();
 });

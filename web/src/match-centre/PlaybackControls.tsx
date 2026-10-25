@@ -49,8 +49,11 @@ export function PlaybackControls({ state, descriptor, cursor, onPlay, onPause, o
       <div className="pbk-btns">
         {marks && jump(x.previous, ICON.previous, targets.previous)}
         {jump(x.back, ICON.back, back)}
-        <button type="button" className="pbk-btn pbk-play unified-play" aria-label={state.wantsPlay ? t.pause : t.play} title={state.wantsPlay ? t.pause : t.play}
-          onClick={state.wantsPlay ? onPause : onPlay} disabled={state.status === 'unavailable' || state.status === 'ended'}>{state.wantsPlay ? ICON.pause : ICON.play}</button>
+        {/* TP249 («ese botón de play» gris al acabar): al final, el botón grande vuelve a empezar en vez de quedarse apagado. */}
+        {state.status === 'ended' && !state.wantsPlay
+          ? <button type="button" className="pbk-btn pbk-play unified-play" data-replay aria-label={t.replay} title={t.replay} onClick={onReplay}>{ICON.replay}</button>
+          : <button type="button" className="pbk-btn pbk-play unified-play" aria-label={state.wantsPlay ? t.pause : t.play} title={state.wantsPlay ? t.pause : t.play}
+            onClick={state.wantsPlay ? onPause : onPlay} disabled={state.status === 'unavailable'}>{state.wantsPlay ? ICON.pause : ICON.play}</button>}
         {jump(x.forward, ICON.forward, forward)}
         {marks && jump(x.next, ICON.next, targets.next)}
       </div>
@@ -72,7 +75,8 @@ export function PlaybackControls({ state, descriptor, cursor, onPlay, onPause, o
       </select></label>
       {sound && <button type="button" className="pbk-replay pbk-sound" data-sound-toggle aria-pressed={sound.enabled}
         title={sound.enabled ? app.soundMute : app.soundUnmute} onClick={sound.onToggle}>{sound.enabled ? ICON.soundOn : ICON.soundOff}{app.sound}</button>}
-      <button type="button" className="pbk-replay" onClick={onReplay}>{ICON.replay}{t.replay}</button>
+      {/* Al final ya lo hace el botón grande: sin duplicado. */}
+      {!(state.status === 'ended' && !state.wantsPlay) && <button type="button" className="pbk-replay" onClick={onReplay}>{ICON.replay}{t.replay}</button>}
     </div>
     {state.status === 'buffering' && <p role="status">{t.buffering}</p>}
   </section>;

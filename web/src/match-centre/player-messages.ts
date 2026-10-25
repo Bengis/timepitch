@@ -26,7 +26,7 @@ const en = {
   newMatch: 'New match', simulatedWith: (engine: string) => `Fictional match · ${engine}`,
   technical: 'Technical details', allMetrics: 'All metrics (technical)', teamStats: 'Match stats',
   noStatsYet: 'No stats yet: they fill in as the match is played.', mapEmpty: 'Nothing to draw yet at this point of the match.', asTable: 'View as table',
-  plotTitles: { shots: 'Shot map', xg: 'xG through the match', actions: 'Action map', pass_network: 'Passing network', occupancy: 'Heat map', occupancy_1: 'Heat map · 1st half', occupancy_2: 'Heat map · 2nd half', effort: 'Effort' } as Record<string, string>,
+  plotTitles: { shots: 'Shot map', xg: 'xG through the match', actions: 'Action map', pass_network: 'Passing network', occupancy: 'Heat map', occupancy_1: 'Heat map · 1st half', occupancy_2: 'Heat map · 2nd half', effort: 'Effort', average_positions: 'Average positions', team_shape: 'Team shape' } as Record<string, string>,
 };
 type Text = { [K in keyof typeof en]: (typeof en)[K] };
 const es: Text = {
@@ -55,7 +55,7 @@ const es: Text = {
   newMatch: 'Nuevo partido', simulatedWith: (engine: string) => `Partido ficticio · ${engine}`,
   technical: 'Detalles técnicos', allMetrics: 'Todas las métricas (técnico)', teamStats: 'Estadísticas del partido',
   noStatsYet: 'Aún no hay estadísticas: se van llenando según avanza el partido.', mapEmpty: 'Todavía no hay nada que dibujar en este momento del partido.', asTable: 'Ver como tabla',
-  plotTitles: { shots: 'Mapa de tiros', xg: 'xG a lo largo del partido', actions: 'Mapa de acciones', pass_network: 'Red de pases', occupancy: 'Mapa de calor', occupancy_1: 'Mapa de calor · 1.ª parte', occupancy_2: 'Mapa de calor · 2.ª parte', effort: 'Esfuerzo' } as Record<string, string>,
+  plotTitles: { shots: 'Mapa de tiros', xg: 'xG a lo largo del partido', actions: 'Mapa de acciones', pass_network: 'Red de pases', occupancy: 'Mapa de calor', occupancy_1: 'Mapa de calor · 1.ª parte', occupancy_2: 'Mapa de calor · 2.ª parte', effort: 'Esfuerzo', average_positions: 'Posiciones medias', team_shape: 'Forma del equipo' } as Record<string, string>,
 };
 export const usePlayerText = () => useLanguage().locale === 'es' ? es : en;
 export function matchTime(ms: number | null): string {

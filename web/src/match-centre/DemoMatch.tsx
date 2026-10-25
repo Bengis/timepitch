@@ -21,12 +21,12 @@ const TEXT = {
   en: { demo: 'Demo', title: 'Arsenal 2003/04 v Manchester City 2024/25', fictional: 'Fictional cross-era simulation',
     note: 'Synthetic movement recorded from a football engine with estimated attributes. Not a real match and not historical tracking.',
     loading: 'Loading recording', failed: 'Recording unavailable', back: 'Back',
-    syntheticMovement: 'Synthetic movement', simulatedEvents: 'Simulated events', provenance: ['Fictional', ' · simulated'],
+    syntheticMovement: 'Synthetic movement', simulatedEvents: 'Simulated events', provenance: ['Simulated match', ''],
     reasons: { no_recording: 'no recording for this match and seed' } as Record<string, string> },
   es: { demo: 'Demo', title: 'Arsenal 2003/04 – Manchester City 2024/25', fictional: 'Simulación ficticia entre épocas',
     note: 'Movimiento sintético grabado de un motor de fútbol con atributos estimados. No es un partido real ni seguimiento histórico.',
     loading: 'Cargando grabación', failed: 'Grabación no disponible', back: 'Volver',
-    syntheticMovement: 'Movimiento sintético', simulatedEvents: 'Acontecimientos simulados', provenance: ['Ficticio', ' · simulado'],
+    syntheticMovement: 'Movimiento sintético', simulatedEvents: 'Acontecimientos simulados', provenance: ['Partido simulado', ''],
     reasons: { no_recording: 'sin grabación para este partido y semilla' } as Record<string, string> },
 } as const;
 
@@ -133,7 +133,8 @@ function DemoProvenance({ text }: { text: (typeof TEXT)[keyof typeof TEXT] }) {
   }, [open]);
   return <span className="demo-prov" data-open={open || undefined} ref={root}
     onKeyDown={event => { if (event.key === 'Escape' && open) { event.stopPropagation(); setOpen(false); } }}>
-    <button type="button" className="chip ph demo-prov-chip" data-fictional aria-expanded={open} aria-controls={id} aria-describedby={id}
+    {/* TP250 (jueces: «Ficticio · simulado» en rojo parecía un error): un chip neutro; la explicación sigue en su ventana. */}
+    <button type="button" className="chip demo-prov-chip" data-fictional aria-expanded={open} aria-controls={id} aria-describedby={id}
       onClick={() => setOpen(value => !value)}>{text.provenance[0]}<span className="demo-prov-more">{text.provenance[1]}</span></button>
     <span className="demo-prov-pop" id={id} role="note">
       <strong>{text.fictional}</strong>

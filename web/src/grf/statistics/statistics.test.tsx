@@ -42,8 +42,8 @@ it('loads only on explicit final-result reveal or completion and keeps final sta
 });
 it('loads automatically at full time and translates without another request or forced tab',async()=>{
   render(<LanguageProvider><LocaleSwitch/><GrfMatchView id="one" record={fullFixture()} onBack={()=>{}}/></LanguageProvider>);
-  fireEvent.change(screen.getByRole('slider'),{target:{value:'300'}});await waitFor(()=>expect(getGrfStatistics).toHaveBeenCalledTimes(1));await screen.findByText('Final analysis revealed');
-  fireEvent.click(screen.getByText('ES'));expect(screen.getByText('Análisis final visible')).toBeVisible();expect(screen.getByRole('tab',{name:'Emisión en directo'})).toHaveAttribute('aria-selected','true');expect(getGrfStatistics).toHaveBeenCalledTimes(1);
+  fireEvent.change(screen.getByRole('slider'),{target:{value:'300'}});await waitFor(()=>expect(getGrfStatistics).toHaveBeenCalledTimes(1));await screen.findAllByText('Full match');
+  fireEvent.click(screen.getByText('ES'));expect(screen.getAllByText('Partido completo')[0]).toBeVisible();expect(screen.getByRole('tab',{name:'Emisión en directo'})).toHaveAttribute('aria-selected','true');expect(getGrfStatistics).toHaveBeenCalledTimes(1);
 });
 it('discards delayed responses for another id and retries a recoverable error',async()=>{
   let finish!:(value:GrfStatisticsSummary)=>void;

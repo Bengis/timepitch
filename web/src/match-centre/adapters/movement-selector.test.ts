@@ -14,8 +14,8 @@ describe('movement selector model', () => {
     const options = movementOptions(await index(['grf', 'open-football']), match);
     expect(options.map(o => [o.engine, o.label, o.status, o.reason])).toEqual([
       ['grf', 'GRF', 'available', null], ['touchlines', 'TouchLines', 'unavailable', 'no_recording'], ['open-football', 'open-football', 'available', null]]);
-    expect(movementText('es')).toMatchObject({ title: 'Movimiento', unavailable: 'no disponible' });
-    expect(movementText('en')).toMatchObject({ title: 'Movement', unavailable: 'not available' });
+    expect(movementText('es')).toMatchObject({ title: 'Motor', unavailable: 'no disponible' });
+    expect(movementText('en')).toMatchObject({ title: 'Engine', unavailable: 'not available' });
   });
   it('recordings of another match or seed are not offered; rejected entries say why', async () => {
     const other = { ...await entryFor('grf'), id: 'other', home_key: 'arsenal:2003' };

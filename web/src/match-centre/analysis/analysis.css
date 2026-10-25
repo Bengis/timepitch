@@ -11,9 +11,13 @@
 .tpa-sr { display: grid; grid-template-columns: 52px 1fr 52px; align-items: center; gap: 8px; }
 .tpa-v { font-family: var(--tp-display); font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; }
 .tpa-v:last-child { text-align: right; }
-.tpa-l { text-align: center; color: var(--tp-ink2); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; display: grid; gap: 4px; }
-.tpa-bar { display: flex; gap: 2px; height: 5px; border-radius: 3px; overflow: hidden; background: #1b2337; }
-.tpa-bar i { display: block; min-width: 2px; }
+/* TP249: nombre del dato en letra normal (no mayúsculas técnicas) y barra en dos mitades que crecen desde el centro. */
+.tpa-l { text-align: center; color: var(--tp-ink2); font-size: 12px; font-weight: 600; display: grid; gap: 5px; }
+.tpa-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; height: 6px; }
+.tpa-half { display: flex; border-radius: 3px; overflow: hidden; background: #1b2337; }
+.tpa-half[data-side="home"] { justify-content: flex-end; }
+.tpa-half i { display: block; height: 100%; border-radius: 3px; transition: width .35s ease; }
+.tpa-v.tpa-trail { color: var(--tp-ink2); font-weight: 600; }
 /* Resumen compacto (maqueta .statsmini / .sm-row): valores de 15 px en columnas de 36 px. */
 .tpa-statsmini { padding: 12px 14px 8px; }
 .tpa-statsmini .tpa-sr { grid-template-columns: 36px 1fr 36px; font-size: 12px; }

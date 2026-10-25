@@ -46,7 +46,8 @@ it('does not steal navigation when a previously requested saved replay becomes r
   resolve(job);
   await waitFor(()=>expect(api.getGrfReplay).toHaveBeenCalled());
   expect(window.location.hash).toBe('#/reconstruction');
-  expect(await screen.findByRole('button',{name:'Back to your match'})).toBeVisible();
+  // TP248: sin «Volver a tu partido» en otras pantallas; el partido no se impone.
+  expect(screen.queryByRole('button',{name:'Back to your match'})).toBeNull();
 });
 it('explains an unavailable historical deep link instead of leaving an empty page',async()=>{
   window.location.hash='#/reconstruction/9';

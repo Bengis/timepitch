@@ -301,3 +301,44 @@ body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
 @media (max-width: 600px) { .tp-break-stats .tpa-stats { grid-template-columns: 1fr; } }
 /* En el teléfono el campo es bajo: el descanso y el final ocupan la pantalla, con los botones a la vista. */
 @media (max-width: 600px) { .tp-break-card-wrap { position: fixed; z-index: 50; } }
+.tp-pitch-settings-host .pitch-settings > summary .pitch-settings-label { font-size: 13px; vertical-align: middle; }
+/* TP250: datos de la crónica a la vista y «Cómo se hace en Azure». */
+.crew-report-facts { margin: 0; font-size: 12px; color: var(--tp-ink2); }
+.crew-how { margin-top: 8px; font-size: 12.5px; }
+.crew-how > summary { cursor: pointer; font-weight: 700; color: #b9a6ff; min-height: 32px; display: flex; align-items: center; }
+.crew-how ol { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 4px; color: var(--tp-ink2); }
+/* TP250: alineaciones en la salida, jugador del partido y botón de la crónica en el final. */
+.tp-break-lineups { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; margin-top: 6px; font-size: 12px; font-weight: 500; }
+.tp-break-lineups ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+.tp-break-lineups ol + ol { border-left: 1px solid rgba(255, 255, 255, .15); padding-left: 12px; }
+.tp-break-best { margin: 4px 0 8px; font-size: .95rem; }
+.tp-break-best .tp-break-kicker { color: #ffd24a; }
+.tp-break-best span:last-child { opacity: .75; font-size: .85rem; }
+.tp-break-actions .tp-break-report { border-color: rgba(169, 139, 255, .7); background: rgba(124, 92, 255, .2); }
+@media (max-width: 600px) { .tp-break-lineups { display: none; } }
+/* Compacto: cada once en dos columnas, para no tapar la salida. */
+.tp-break-walkout .tp-break-lower { max-width: min(620px, 72%); background: rgba(8, 12, 24, .72); }
+.tp-break-lineups { font-size: 11px; gap: 0 16px; }
+.tp-break-lineups ol { grid-template-columns: 1fr 1fr; column-gap: 10px; }
+.tp-break-lineups li { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* TP249: «hasta aquí / partido completo» en una sola fila: rótulo del instante y botón, o dos botones segmentados. */
+.tp-scope-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0; font-size: 12.5px; color: var(--tp-ink2, #aab4c6); }
+.tp-scope-now { font-family: var(--tp-display); font-weight: 700; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--tp-ink, #eef2f8); }
+.unified-centre .tp-scope-bar .tp-scope-reveal { min-height: 32px; padding: 4px 12px; border-radius: 8px; border: 1px solid var(--tp-line2, rgba(255,255,255,.2)); background: #121b2e; color: var(--tp-ink, #eef2f8); font-size: 12px; font-weight: 700; }
+.unified-centre .tp-scope-bar .tp-scope-reveal:hover { border-color: var(--che-hi, #2f7bff); }
+.unified-centre .tp-scope-bar .tpa-seg button { min-height: 30px; padding: 2px 12px; font-size: 12px; }
+.tpa-side > .tp-scope-bar { grid-column: 1 / -1; }
+/* TP249: mapas de los simulados como los de la demo: tarjetas de panel en rejilla, campo verde a todo el ancho y leyenda. */
+.tp-maps-simple { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 14px; align-items: start; }
+.tp-maps-simple > .tpa-empty { grid-column: 1 / -1; }
+.unified-centre .tp-maps-simple .unified-plot { padding: 0; margin: 0; background: linear-gradient(180deg, var(--tp-panel2), var(--tp-panel)); border: 1px solid var(--tp-line); border-radius: 14px; }
+.tp-maps-simple .unified-plot > svg { margin: 12px 14px; width: calc(100% - 28px); max-height: none; }
+.tp-maps-simple .unified-plot > .tpa-log { margin: 0 14px 12px; }
+.tp-maps-simple .tpa-panel-h > .tpa-seg { flex-basis: auto; }
+.tp-map-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0 14px 8px; list-style: none; font-size: 12.5px; color: var(--tp-ink2, #aab4c6); }
+.tp-map-legend li { display: inline-flex; align-items: center; gap: 6px; }
+.tp-map-legend b { color: var(--tp-ink, #eef2f8); font-family: var(--tp-display); letter-spacing: .04em; }
+.tp-map-legend i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.tp-map-legend .tp-map-key { color: var(--tp-ink3, #8792a8); font-size: 11.5px; }
+.tp-map-legend .tp-key-goal { background: var(--tp-ink2, #aab4c6); }
+.tp-map-legend .tp-key-shot { border: 2px solid var(--tp-ink2, #aab4c6); width: 9px; height: 9px; background: transparent; }

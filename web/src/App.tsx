@@ -6,7 +6,8 @@ import { LineupPicker } from './match/LineupPicker';
 import { useTeam, type TeamSelection } from './match/useTeam';
 import { useMatchText } from './match/messages';
 import { MatchView } from './match/MatchView';
-import {EngineSelector,type Engine} from './grf/EngineSelector';
+import {type Engine} from './grf/EngineSelector';
+import {ChoiceGroup} from './versus/MatchChoices';
 import {TouchLinesMatchView} from './touchlines/TouchLinesMatchView';
 import {GrfMatchView} from './grf/GrfMatchView';
 import {GrfHistory} from './grf/GrfHistory';
@@ -26,7 +27,6 @@ import {VersusScreen} from './versus/VersusScreen';
 import {installGestureUnlock} from './match/audio/engine';
 import {useVersusText} from './versus/messages';
 import {DEFAULT_RENDERER,pitchStorage,readPitchPreferences,writePitchPreferences} from './match/renderers/preferences';
-import {useGraphicsText} from './match/renderers/messages';
 import type {SelectableRendererId} from './match/renderers/types';
 // TP215/TP240: portada propia dentro del build (asset con hash).
 import coverArt from './assets/timepitch-premier.webp';
@@ -58,7 +58,6 @@ export default function App() {
   const c=useCentreText();
   const h=useHistoricalText();
   const v=useVersusText();
-  const gt=useGraphicsText();
   const {locale}=useLanguage();
   // TP236: gráficos elegidos al lanzar el partido. Sin elección previa, Capitán Hane (lo más vistoso de la demo).
   const [graphics,setGraphics]=useState<SelectableRendererId>(()=>{const p=readPitchPreferences(pitchStorage());return p.rendererChosen?p.renderer:DEFAULT_RENDERER;});
@@ -215,9 +214,17 @@ export default function App() {
           onPlay={()=>{void start();}} playDisabled={!canStart}
           onOpenAiReport={()=>{setDemoAutoplay(false);setDemoReport(true);navigate({mode:'demo'});}}
           // TP237: a la vista, las dos elecciones que definen el partido: motor y modo gráfico.
-          playControls={<div className="vs-choices"><EngineSelector value={engine} capabilities={capabilities} disabled={busy||capabilities===null} onChange={setEngine}/>
-            <label className="vs-graphics">{gt.graphics}<select value={graphics} disabled={busy} onChange={e=>setGraphics(e.target.value as SelectableRendererId)}>
-            <option value="retro16-1">{gt.styleRetro16}</option><option value="stylized-3d-1">{gt.style3d}</option></select></label></div>}
+          // TP248: las cuatro opciones (dos motores y dos gráficos) a la vista, no en «Opciones».
+          playControls={<div className="vs-choices">
+            <ChoiceGroup name="engine" title={v.engineTitle} value={engine} disabled={busy||capabilities===null} onChange={setEngine} options={[
+              ...(engine==='timepitch'?[{value:'timepitch' as Engine,label:'TimePitch',hint:''}]:[]),
+              {value:'grf',label:v.grfLabel,hint:v.grfHint,disabled:!capabilities?.find(c=>c.id==='grf')?.available},
+              ...(capabilities?.find(c=>c.id==='touchlines')?.available?[{value:'touchlines' as Engine,label:v.touchlinesLabel,hint:v.touchlinesHint}]:[])]}/>
+            <ChoiceGroup name="graphics" title={v.graphicsTitle} value={graphics} disabled={busy} onChange={setGraphics} options={[
+              {value:'retro16-1',label:v.retroLabel,hint:v.retroHint},{value:'stylized-3d-1',label:v.threeLabel,hint:v.threeHint}]}/>
+            {/* TP250: sin el desplegable de TP248 se perdía el aviso de por qué GRF no está disponible. */}
+            {(()=>{const grf=capabilities?.find(c=>c.id==='grf');return !capabilities?<p className="small-note vs-engine-note" role="status">{g.checking}</p>
+              :!grf?.available?<p className="small-note vs-engine-note" role="status">{grf?.reason?g[grf.reason as keyof typeof g] as string:g.unavailable}</p>:null;})()}</div>}
           playStatus={page==='setup'&&(busy||error)?<>{busy && <p className="panel-message start-status" role="status">{m.working} {status && m[status]}</p>}
             {error && <p className="panel-message start-status" role="alert">{error==='physicalUnavailable'?g.physicalUnavailable:m[error]}</p>}</>:undefined}
           moreDetails={<section className="advanced-options" id="prepare-match" aria-labelledby="prepare-match-h"><h2 id="prepare-match-h">{v.prepare}</h2>

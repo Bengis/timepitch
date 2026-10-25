@@ -48,16 +48,17 @@ function mount(home: VersusSide, away: VersusSide, onPlay = vi.fn(), options?: {
 }
 
 describe('VersusScreen (TP213)', () => {
-  it('shows record and star at once, one Play button and the rest in Options; no demo, rivalry or "More details" (TP240)', async () => {
+  it('shows record and star at once, one Play button with the match choices in view; no demo, rivalry or "More details" (TP240, TP248)', async () => {
     mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon), vi.fn(), { controls: <label>Engine<select /></label> });
     expect(screen.getByRole('heading', { name: 'Thierry Henry' })).toBeInTheDocument();
     expect(await screen.findByText('1st')).toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: /Play match/ })).toHaveLength(1);
     expect(screen.queryByRole('button', { name: /Watch the demo|More details/ })).toBeNull();
     expect(screen.queryByRole('region', { name: 'Rivalry' })).toBeNull();
-    const options = screen.getByText('Options').closest('details')!;
-    expect(options).not.toHaveAttribute('open');
-    expect(within(options).getByLabelText('Engine')).toBeInTheDocument();
+    // TP248: motor y gráficos a la vista, fuera de «Opciones» (que solo aparece con más detalles).
+    expect(screen.getByLabelText('Engine')).toBeVisible();
+    expect(screen.getByLabelText('Engine').closest('details')).toBeNull();
+    expect(screen.queryByText('Tactics')).toBeNull();
   });
   it('shows both teams, their real season record, the star player and the real head-to-head', async () => {
     const onPlay = vi.fn();

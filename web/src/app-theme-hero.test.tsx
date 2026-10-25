@@ -17,7 +17,7 @@ afterEach(()=>vi.restoreAllMocks());
 
 // TP237 («simplifica»): sin portada ni cifras; la frase dice lo que se puede hacer y a la vista quedan motor,
 // gráficos y jugar. Balance, estrella, rivalidad, alineaciones y semilla, en «Más detalles».
-it('shows the illustrated cover with one Play button; engine and graphics (no Captain Hane) folded in Options (TP240, EN/ES)',async()=>{
+it('shows the illustrated cover with one Play button; engine and graphics (no Captain Hane) in view as four choices (TP240, TP248, EN/ES)',async()=>{
   const {container}=render(<LanguageProvider><App/></LanguageProvider>);
   const hero=container.querySelector('.setup-view .vs-hero') as HTMLElement;
   expect(hero).not.toBeNull();
@@ -26,12 +26,15 @@ it('shows the illustrated cover with one Play button; engine and graphics (no Ca
   await waitFor(()=>expect(container.querySelector('.vs')).not.toBeNull());
   expect(screen.getByRole('button',{name:'Play match'})).toBeVisible();
   expect(screen.queryByRole('button',{name:/Watch the demo|More details/})).toBeNull();
-  const options=screen.getByText('Options').closest('details')!;
-  expect(options).not.toHaveAttribute('open');
-  const graphics=within(options).getByRole('combobox',{name:'Graphics',hidden:true}) as HTMLSelectElement;
-  expect(graphics).toHaveValue('retro16-1');
-  expect([...graphics.options].map(o=>o.value)).toEqual(['retro16-1','stylized-3d-1']);
-  expect(within(options).getByRole('combobox',{name:'Simulation engine',hidden:true})).toBeInTheDocument();
+  // TP248: motor y gráficos a la vista encima de «Jugar partido», no plegados en «Opciones».
+  const graphics=screen.getByRole('group',{name:'Graphics'});
+  expect(graphics.closest('details')).toBeNull();
+  expect(within(graphics).getAllByRole('radio').map(r=>(r as HTMLInputElement).value)).toEqual(['retro16-1','stylized-3d-1']);
+  expect(within(graphics).getByRole('radio',{name:/Retro 16-bit/})).toBeChecked();
+  const engine=screen.getByRole('group',{name:'Engine'});
+  expect(engine.closest('details')).toBeNull();
+  expect(within(engine).getByRole('radio',{name:/Google Research Football/})).toBeInTheDocument();
+  expect(screen.getByText('Tactics').closest('details')).not.toHaveAttribute('open');
   fireEvent.click(screen.getByRole('button',{name:/Español/}));
   expect(within(hero).getByText(/desde 1992\/93 y míralos jugar/i)).toBeInTheDocument();
 });

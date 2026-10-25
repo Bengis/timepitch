@@ -37,10 +37,11 @@ it('navigates setup, library and an open match without requesting the replay aga
 it('defaults to GRF when the prepared GRF runtime is available (TP242)',async()=>{
   api.getGrfMatches.mockResolvedValue([]);
   render(<LanguageProvider><App/></LanguageProvider>);
-  await waitFor(()=>expect(screen.getByRole('option',{name:'Google Research Football'})).toBeEnabled());
-  expect(screen.getByRole('combobox',{name:'Simulation engine'})).toHaveValue('grf');
+  // TP248/TP250: el motor se elige con botones a la vista.
+  await waitFor(()=>expect(screen.getByRole('radio',{name:/Google Research Football/})).toBeEnabled());
+  expect(screen.getByRole('radio',{name:/Google Research Football/})).toBeChecked();
   // TP242: el motor TimePitch ya no se ofrece cuando GRF está disponible.
-  expect(screen.queryByRole('option',{name:'TimePitch'})).toBeNull();
+  expect(screen.queryByRole('radio',{name:/^TimePitch/})).toBeNull();
 });
 
 it('keeps TimePitch usable when GRF is unavailable',async()=>{
@@ -48,7 +49,8 @@ it('keeps TimePitch usable when GRF is unavailable',async()=>{
   api.getEngines.mockResolvedValue([{id:'timepitch',available:true},{id:'grf',available:false,reason:'missing_runtime'}]);
   render(<LanguageProvider><App/></LanguageProvider>);
   await screen.findByText('The GRF runtime is not installed.');
-  expect(screen.getByRole('combobox',{name:'Simulation engine'})).toHaveValue('timepitch');
+  expect(screen.getByRole('radio',{name:/^TimePitch/})).toBeChecked();
+  expect(screen.getByRole('radio',{name:/Google Research Football/})).toBeDisabled();
   expect(screen.getByRole('button',{name:'Play match'})).toBeEnabled();
 });
 
@@ -59,9 +61,8 @@ it('keeps the refreshed GRF history when the older initial response arrives last
   api.getGrfMatches.mockReturnValueOnce(initial).mockResolvedValue([job]);
   api.createGrfMatch.mockResolvedValue(job);api.getGrfMatch.mockResolvedValue(job);api.getGrfReplay.mockResolvedValue({});
   const {container}=render(<LanguageProvider><App/></LanguageProvider>);
-  const selector=await screen.findByRole('combobox',{name:'Simulation engine'});
-  await waitFor(()=>expect(screen.getByRole('option',{name:'Google Research Football'})).toBeEnabled());
-  fireEvent.change(selector,{target:{value:'grf'}});
+  await waitFor(()=>expect(screen.getByRole('radio',{name:/Google Research Football/})).toBeEnabled());
+  fireEvent.click(screen.getByRole('radio',{name:/Google Research Football/}));
   fireEvent.click(screen.getByRole('button',{name:'Play match'}));
   await screen.findByText('Native replay opened');
   fireEvent.click(screen.getByRole('button',{name:'Library'}));
@@ -78,7 +79,7 @@ it('opens delayed GRF history and survives a language change without querying th
   api.getGrfMatches.mockResolvedValue([job]);api.getGrfMatch.mockReturnValueOnce(pending);
   api.getGrfReplay.mockResolvedValue({});
   render(<LanguageProvider><App/></LanguageProvider>);
-  await waitFor(()=>expect(screen.getByRole('combobox',{name:'Simulation engine'})).toBeEnabled());
+  await waitFor(()=>expect(screen.getByRole('radio',{name:/Google Research Football/})).toBeEnabled());
   fireEvent.click(screen.getByRole('button',{name:'Library'}));
   fireEvent.click(await screen.findByRole('button',{name:/Saved home — Saved away/}));
   fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));

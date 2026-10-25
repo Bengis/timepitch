@@ -37,11 +37,12 @@ it('open, shows the checked AI report with how it was made, its cost and the Fou
   expect(screen.getByText(/0\.0039 USD · Foundry evaluation: groundedness 5\/5, coherence 5\/5, fluency 3\/5/)).toBeInTheDocument();
 });
 
-it('in Spanish shows the Spanish report without an evaluation line it does not have', async () => {
+it('in Spanish shows the Spanish report, with the Foundry evaluation of the English one said as such (TP250)', async () => {
   render(<CrewReportPanel traceHash="grf-trace" locale="es" open load={load} />);
   expect(await screen.findByRole('heading', { name: 'Crónica IA del partido' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Arsenal gana 6–1' })).toBeInTheDocument();
-  expect(screen.queryByText(/Evaluación de Foundry/)).toBeNull();
+  expect(screen.getByText(/Evaluación de Foundry: fundamentación 5\/5.*\(crónica en inglés\)/)).toBeInTheDocument();
+  expect(screen.getByText('Cómo se hace en Azure')).toBeInTheDocument();
 });
 
 it('for another engine says where the report is; with no reports or a failed load it shows nothing', async () => {

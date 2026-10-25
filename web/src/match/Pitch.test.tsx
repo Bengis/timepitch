@@ -153,7 +153,7 @@ it.each(['historical', 'grf', 'timepitch'] as const)('switch_preserves_controlle
   if (shell) expect(screen.getByRole('button', { name: 'Tactical' })).toHaveAttribute('aria-pressed', 'true');
   else expect(screen.getByRole('combobox', { name: 'Camera' })).toHaveValue('overview');
   expect(screen.getByRole('combobox', { name: 'Inspect player' })).toHaveValue('test:home:1');
-  expect(screen.queryByText('Final analysis revealed')).not.toBeInTheDocument();
+  expect(screen.queryByText('Full match')).not.toBeInTheDocument();
   fireEvent.change(screen.getByRole('combobox', { name: 'Lighting' }), { target: { value: 'floodlights' } });
   fireEvent.change(screen.getByRole('combobox', { name: 'Detail' }), { target: { value: 'low' } });
   act(() => graphics.failures.at(-1)!('context_lost'));
@@ -181,11 +181,11 @@ it('persists presentation across sources and exposes localized graphics help', a
 it('changing graphics retains already revealed final analysis', async () => {
   const f = screenFixture('grf'), view = render(<MatchCentre adapter={f.adapter} visible onBack={() => {}} />);
   fireEvent.change(screen.getByRole('slider'), { target: { value: '10000' } });
-  await waitFor(() => expect(screen.getByText('Final analysis revealed')).toBeVisible());
+  await waitFor(() => expect(screen.getAllByText('Full match')[0]).toBeVisible());
   const slider = screen.getByRole('slider');
   await waitFor(() => expect(view.container.querySelector('canvas')).toHaveAttribute('data-renderer', 'stylized-3d-1'));
   expect(screen.getByRole('slider')).toBe(slider); expect(slider).toHaveValue('10000');
-  expect(screen.getByText('Final analysis revealed')).toBeVisible(); expect(screen.getByRole('button', { name: 'Replay' })).toBeEnabled();
+  expect(screen.getAllByText('Full match')[0]).toBeVisible(); expect(screen.getByRole('button', { name: 'Replay' })).toBeEnabled();
 });
 
 it('changing graphics during playback preserves playback intent without an explicit seek', async () => {

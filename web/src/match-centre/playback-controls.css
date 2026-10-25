@@ -18,6 +18,9 @@
 .pbk .pbk-btn svg { width: 18px; height: 18px; }
 .pbk .pbk-btn.pbk-play { width: 52px; height: 52px; min-width: 0; border-radius: 50%; border: 0; background: linear-gradient(180deg, #fff, #d9e2f2); color: #0a1020; box-shadow: 0 8px 20px -8px rgba(255,255,255,.4); }
 .pbk .pbk-btn.pbk-play svg { width: 22px; height: 22px; }
+/* TP249: sin vídeo que reproducir, el botón grande se apaga sin quedarse como un círculo gris translúcido. */
+.pbk .pbk-btn.pbk-play:disabled { background: var(--pbk-btn); color: var(--pbk-ink3); border: 1px solid var(--pbk-line); box-shadow: none; opacity: 1; }
+.pbk .pbk-btn:disabled { opacity: .45; cursor: default; }
 .pbk .pbk-btn:not(:disabled):hover { border-color: var(--pbk-hi); }
 
 /* Scrubber: rail visual + input range nativo (teclado y lectores) encima, transparente salvo la perilla.

@@ -34,7 +34,7 @@ it('preserves filter controls through language and cutoff updates and reuses fin
 });
 it('supports keyboard tabs and inspection without forced tab switches',async()=>{
   open(modernGrf());tab('Live broadcast').focus();fireEvent.keyDown(tab('Live broadcast'),{key:'End'});expect(tab('Effort')).toHaveFocus();fireEvent.keyDown(tab('Effort'),{key:'Home'});expect(tab('Live broadcast')).toHaveFocus();
-  fireEvent.change(screen.getByRole('slider'),{target:{value:'300'}});await screen.findByText('Final analysis revealed');expect(tab('Live broadcast')).toHaveAttribute('aria-selected','true');
+  fireEvent.change(screen.getByRole('slider'),{target:{value:'300'}});await screen.findAllByText('Full match');expect(tab('Live broadcast')).toHaveAttribute('aria-selected','true');
   const buttons=screen.getAllByRole('button').filter(b=>b.textContent?.startsWith('goal ·'));fireEvent.click(buttons[0]);expect(screen.getByRole('button',{name:'Watch event'})).toBeEnabled();
 });
 it('keeps loading and failure visible while retaining the selected tab and source metadata',async()=>{
@@ -43,5 +43,5 @@ it('keeps loading and failure visible while retaining the selected tab and sourc
   reject(new Error('Offline'));await screen.findByRole('alert');expect(tab('Live broadcast')).toHaveAttribute('aria-selected','true');expect(screen.getByRole('heading',{name:'input'})).toBeVisible();expect(screen.getByRole('button',{name:'Retry data read'})).toBeEnabled();
 });
 it('keeps full-time keyboard focus on the mounted playback control without forcing Summary',async()=>{
-  open();const slider=screen.getByRole('slider');slider.focus();fireEvent.change(slider,{target:{value:'300'}});await screen.findByText('Final analysis revealed');expect(slider).toHaveFocus();expect(tab('Live broadcast')).toHaveAttribute('aria-selected','true');
+  open();const slider=screen.getByRole('slider');slider.focus();fireEvent.change(slider,{target:{value:'300'}});await screen.findAllByText('Full match');expect(slider).toHaveFocus();expect(tab('Live broadcast')).toHaveAttribute('aria-selected','true');
 });

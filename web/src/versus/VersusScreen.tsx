@@ -289,6 +289,15 @@ export function VersusScreen({ teams, home, away, onPlay, onOpenAiReport, playDi
     setTimeout(() => opener.current[lastSide.current]?.focus(), 0);
   }, []);
   const ready = !!home.key && !!away.key;
+  // TP250 (juez aficionado: «revancha con los campos cambiados» y «partido al azar»): dos atajos junto al lanzamiento.
+  const swap = () => { const h = home.key, a = away.key; home.setKey(a); away.setKey(h); };
+  const random = () => {
+    if (teams.length < 2) return;
+    const first = teams[Math.floor(Math.random() * teams.length)];
+    const rivals = teams.filter(x => clubKey(x.key) !== clubKey(first.key));
+    const second = rivals[Math.floor(Math.random() * rivals.length)] ?? teams.find(x => x.key !== first.key)!;
+    home.setKey(first.key); away.setKey(second.key);
+  };
   return <section className="vs" aria-label={t.region}>
     <div className="vs-stage">
       <SideCard side="home" sel={home} summary={byKey.get(home.key)} record={homeRecord} open={picking === 'home'} onChoose={() => open('home')} t={t}
@@ -300,11 +309,18 @@ export function VersusScreen({ teams, home, away, onPlay, onOpenAiReport, playDi
     {/* TP240 («quitar todo lo que sobre»): un solo botón; motor, gráficos, alineaciones y semilla, en «Opciones».
         Sin demo, rivalidad ni «Más detalles». */}
     <div className="vs-launch">
+      <div className="vs-shortcuts">
+        <button type="button" onClick={swap} disabled={!ready}><span aria-hidden="true">⇄</span> {t.swap}</button>
+        <button type="button" onClick={random} disabled={teams.length < 2}><span aria-hidden="true">🎲</span> {t.random}</button>
+      </div>
+      {/* TP248: motor y gráficos a la vista, encima de «Jugar partido». */}
+      {playControls}
       <button type="button" className="vs-cta" disabled={!ready || playDisabled} onClick={onPlay}>{t.play} <span aria-hidden="true">▸</span></button>
       {playStatus ?? (!ready && <p className="vs-muted">{t.playWaiting}</p>)}
-      {onOpenAiReport && <button type="button" className="vs-ai-link" onClick={onOpenAiReport}><span className="vs-ai-icon" aria-hidden="true">✦</span>{t.aiReport} <span aria-hidden="true">→</span></button>}
-      {(playControls || moreDetails) && <details className="vs-options"><summary><span aria-hidden="true">⚙ </span>{t.options}</summary>
-        {playControls}{moreDetails}</details>}
+      {/* TP250 («no se entiende para qué sirve»): dice qué abre y cuándo se escribe la crónica. */}
+      {onOpenAiReport && <button type="button" className="vs-ai-link" onClick={onOpenAiReport}><span className="vs-ai-icon" aria-hidden="true">✦</span>
+        <span className="vs-ai-text"><span>{t.aiReport} <span aria-hidden="true">→</span></span><small>{t.aiReportNote}</small></span></button>}
+      {moreDetails && <details className="vs-options"><summary><span aria-hidden="true">⚙ </span>{t.options}</summary>{moreDetails}</details>}
     </div>
     {picking && <TeamPicker teams={teams} side={picking} setSide={open} home={home} away={away} onClose={close} t={t} />}
   </section>;

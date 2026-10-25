@@ -8,6 +8,7 @@ export function WorkspaceShell({route,onNavigate,children,busy,ready}:{route:Wor
     {/* TP240 («quitaría partidos reales… y mis partidos»): la web es solo jugar un partido; sin pestañas.
         Las rutas de reconstrucción y biblioteca siguen existiendo, pero no se enlazan. */}
     <LanguageSelector/>
-  </header>{/* TP239 (jueces: la barra salía hasta dentro del partido): solo en curso o con un partido esperando en otra pantalla. */}
-  {(busy||ready&&!(route.mode==='simulation'&&route.view==='centre'))&&<aside className="simulation-access">{busy&&<span role="status">{h.progress}</span>}<button onClick={()=>onNavigate({mode:'simulation',view:'centre'})}>{h.viewSimulation}</button></aside>}{children}</>;
+  </header>{/* TP248 (25-oct: «¿yo por qué tengo que volver al match desde el principal?»): el partido se abre solo al
+      terminar la simulación; aquí solo el aviso mientras se simula, sin «Volver a tu partido». */}
+  {busy&&<aside className="simulation-access"><span role="status">{h.progress}</span></aside>}{children}</>;
 }

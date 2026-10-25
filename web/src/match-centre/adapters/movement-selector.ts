@@ -15,8 +15,8 @@ export type MovementState = Readonly<{ match: MovementMatch; engine: RecordedEng
 
 export const ENGINE_LABELS: Readonly<Record<RecordedEngineId, string>> = { grf: 'GRF', touchlines: 'TouchLines', 'open-football': 'open-football' };
 const TEXT = {
-  es: { title: 'Movimiento', unavailable: 'no disponible', synthetic: 'Movimiento sintético' },
-  en: { title: 'Movement', unavailable: 'not available', synthetic: 'Synthetic movement' },
+  es: { title: 'Motor', unavailable: 'no disponible', synthetic: 'Movimiento sintético' },
+  en: { title: 'Engine', unavailable: 'not available', synthetic: 'Synthetic movement' },
 } as const;
 export const movementText = (language: 'es' | 'en') => TEXT[language];
 

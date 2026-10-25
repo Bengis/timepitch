@@ -45,3 +45,18 @@ it('full-time offers to watch again or close; the walkout can be skipped', () =>
   fireEvent.click(screen.getByRole('button', { name: /Skip to kick-off/ }));
   expect(calls).toEqual(['again', 'close', 'skip']);
 });
+
+it('TP250: the walkout lists both line-ups; full-time names the player of the match and opens the AI report', () => {
+  const calls: string[] = [];
+  const { unmount } = render(<LanguageProvider><MatchBreak phase="walkout" home="A" away="B" score={null}
+    lineups={{ home: ['1 Jens Lehmann', '14 Thierry Henry'], away: ['31 Ederson'] }} /></LanguageProvider>);
+  expect(screen.getByText('14 Thierry Henry')).toBeInTheDocument();
+  expect(screen.getByText('31 Ederson')).toBeInTheDocument();
+  unmount();
+  render(<LanguageProvider><MatchBreak phase="fulltime" home="A" away="B" score={{ home: 6, away: 1 }}
+    best={{ name: '14 Thierry Henry', detail: '2 goals · 7 shots · 30 passes' }} onReport={() => calls.push('report')} /></LanguageProvider>);
+  expect(screen.getByText('Player of the match')).toBeInTheDocument();
+  expect(screen.getByText('14 Thierry Henry')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: /Read the AI match report/ }));
+  expect(calls).toEqual(['report']);
+});

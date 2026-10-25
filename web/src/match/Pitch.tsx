@@ -124,6 +124,6 @@ export function Pitch({ frame, previous = frame, cue, restarting = false, home, 
     </div>
     {active && (graphics.status === 'fallback' || graphics.status === 'failed') && <button type="button" onClick={graphics.retry}>{drawn === 'retro16-1' ? g.retryRetro16 : g.retry}</button>}
     {/* TP237: los ajustes, tras un icono ⚙ pequeño (el nombre sigue para lectores de pantalla). */}
-    {settingsTarget!==undefined?(settingsTarget?createPortal(<details className="pitch-settings"><summary title={settingsLabel}><span aria-hidden="true">⚙</span><span className="sr-only">{settingsLabel}</span></summary>{toolbar}{inspector}</details>,settingsTarget):null):settingsLabel?<details className="pitch-settings"><summary title={settingsLabel}><span aria-hidden="true">⚙</span><span className="sr-only">{settingsLabel}</span></summary>{toolbar}{inspector}</details>:inspector}
+    {settingsTarget!==undefined?(settingsTarget?createPortal(<details className="pitch-settings"><summary title={settingsLabel}><span aria-hidden="true">⚙</span> <span className="pitch-settings-label">{settingsLabel}</span></summary>{toolbar}{inspector}</details>,settingsTarget):null):settingsLabel?<details className="pitch-settings"><summary title={settingsLabel}><span aria-hidden="true">⚙</span> <span className="pitch-settings-label">{settingsLabel}</span></summary>{toolbar}{inspector}</details>:inspector}
   </section>;
 }

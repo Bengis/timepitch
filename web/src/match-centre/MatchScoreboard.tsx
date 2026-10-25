@@ -8,8 +8,10 @@ const NO_CREST: CrestRef = { src: '', kind: 'none', source: null };
 
 /** Marcador del Match Centre (G17): marcador de emisión a lo ancho (maqueta v1-2d) + una línea discreta con
  *  temporada/formación de cada lado y la procedencia del marcador («Fuente», desplegable; nunca se pierde). */
-export function MatchScoreboard({ snapshot, elapsedMs, clock, crests, kits = null, reds = { home: 0, away: 0 } }: {
+export function MatchScoreboard({ snapshot, elapsedMs, clock, crests, kits = null, reds = { home: 0, away: 0 }, compact = false }: {
   snapshot: SessionSnapshot; elapsedMs: number; clock?: ClockView;
+  /** TP250 (jueces: ruido técnico): en la emisión, sin «Tiempo de reproducción» ni «Fuente»; la barra ya los muestra. */
+  compact?: boolean;
   /** Escudos resueltos (HD → HFK → ninguno); si no hay, el de la fuente (`crestUrl`). */
   crests?: { home: CrestRef; away: CrestRef };
   kits?: MatchKits | null; reds?: { home: number; away: number };
@@ -28,8 +30,8 @@ export function MatchScoreboard({ snapshot, elapsedMs, clock, crests, kits = nul
       reds={reds} crests={{ home: crest('home'), away: crest('away') }} kits={kits} />
     <div className="unified-score-meta tp-sb-meta">
       <small>{meta('home')}</small>
-      {!clock && <span className="tp-sb-elapsed">{t.elapsed}: {matchTime(elapsedMs)}</span>}
-      <details className="unified-score-source"><summary>{t.source} · {t.sourceKinds[d.identity.source] ?? d.identity.source}</summary><p>{facts.score.provenance} · {facts.score.refs.join(', ')}</p><p>{d.identity.id} · {d.identity.revision}</p><p>{t.clock}: {snapshot.clockMs === null ? t.noClock : matchTime(snapshot.clockMs)}</p></details>
+      {!clock && !compact && <span className="tp-sb-elapsed">{t.elapsed}: {matchTime(elapsedMs)}</span>}
+      {!compact && <details className="unified-score-source"><summary>{t.source} · {t.sourceKinds[d.identity.source] ?? d.identity.source}</summary><p>{facts.score.provenance} · {facts.score.refs.join(', ')}</p><p>{d.identity.id} · {d.identity.revision}</p><p>{t.clock}: {snapshot.clockMs === null ? t.noClock : matchTime(snapshot.clockMs)}</p></details>}
       <small>{meta('away')}</small>
     </div>
   </header>;

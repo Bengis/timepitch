@@ -48,6 +48,8 @@ import { PlayerCard } from '../presentation/PlayerCard';
 import { LineupsPair, isStarter } from '../presentation/LineupsView';
 import { analyseUntil, type RecordedAnalysisModel } from './analysis/recorded-analysis';
 import { TeamComparison } from './TeamComparison';
+import { AnalysisScopeBar } from './AnalysisScopeBar';
+import { SimulatedEffort } from './SimulatedEffort';
 import { NarrationPanel } from './narration/NarrationPanel';
 import { AnalysisEffortSection, AnalysisMapsSection, AnalysisSummarySection, BreakStats, EventIcon, SummaryMini, TimelinePanel, type AnalysisContext, type TimelineContext } from './analysis/RecordedAnalysisViews';
 import { useAnalysisText } from './analysis/messages';
@@ -363,8 +365,26 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
   const breakStats = !pause ? null : analysisCtx ? <BreakStats ctx={analysisCtx}/> : timelineCtx ? <TeamComparison metrics={panel?.metrics ?? []}
     events={snapshot.events.filter(e => e.elapsedMs !== null && e.elapsedMs <= elapsed)} score={snapshot.facts.score.value}
     teams={{ home: { id: d.home.id, abbr: timelineCtx.teams.home.abbr, colour: timelineCtx.teams.home.colour }, away: { id: d.away.id, abbr: timelineCtx.teams.away.abbr, colour: timelineCtx.teams.away.colour } }} /> : null;
-  const phaseOverlay = walking ? <MatchBreak phase="walkout" home={d.home.name} away={d.away.name} score={null} onContinue={endWalkout}/>
+  // TP250: alineaciones en la salida (portero primero, dorsal y nombre) y jugador del partido en el final.
+  const ROLE_RANK: Record<string, number> = { GK: 0, DEF: 1, MID: 2, FWD: 3 };
+  const lineup = (side: 'home' | 'away') => !walking ? [] : walking.players.filter(p => p.side === side)
+    .sort((a, b) => (ROLE_RANK[a.role] ?? 4) - (ROLE_RANK[b.role] ?? 4))
+    .map(p => { const who = timelineCtx?.player(p.key); return `${who?.number ?? ''} ${who?.name ?? p.name}`.trim(); });
+  const best = (() => {
+    if (pause !== 'fulltime' || !analysis) return null;
+    const rated = analysis.players.map(p => ({ p, score: p.goals * 10 + p.shots + p.passes * .05 + p.distanceM / 2000 })).sort((a, b) => b.score - a.score)[0];
+    if (!rated) return null;
+    const who = timelineCtx?.player(rated.p.id), es = locale === 'es';
+    const bits = [rated.p.goals ? `${rated.p.goals} ${es ? (rated.p.goals === 1 ? 'gol' : 'goles') : (rated.p.goals === 1 ? 'goal' : 'goals')}` : null,
+      `${rated.p.shots} ${es ? 'tiros' : 'shots'}`, `${rated.p.passes} ${es ? 'pases' : 'passes'}`].filter(Boolean);
+    return { name: `${who?.number ? `${who.number} ` : ''}${who?.name ?? rated.p.name}`, detail: bits.join(' · ') };
+  })();
+  const readReport = sideReport ? () => { setPause(null); const panel = centre.current?.querySelector<HTMLElement>('[data-crew-report]');
+    panel?.scrollIntoView?.({ block: 'start', behavior: 'smooth' }); panel?.focus?.(); } : undefined;
+  const phaseOverlay = walking ? <MatchBreak phase="walkout" home={d.home.name} away={d.away.name} score={null} onContinue={endWalkout}
+      lineups={{ home: lineup('home'), away: lineup('away') }}/>
     : pause ? <MatchBreak phase={pause} home={d.home.name} away={d.away.name} score={snapshot.facts.score.value} scorers={breakScorers} stats={breakStats}
+      best={best} onReport={readReport}
       onContinue={() => { setPause(null); playback.play(); }} onReplay={() => { setPause(null); playback.replay(); }} onClose={() => setPause(null)}/> : null;
   const field=<div className="sequence-field-host">
     <Pitch frame={walking?walkoutFrame(walking,walkoutMs):frame} previous={walking?walkoutFrame(walking,walkoutMs-WALKOUT_STEP_MS):previous} cue={walking?undefined:sequence?.kind==='actions'?sequenceCue(sequence.source,elapsed):view?.cue} restarting={walking?false:view?.restarting ?? true} home={snapshot.descriptor.home.name} away={snapshot.descriptor.away.name} displayClockLabel={displayClock?.text??matchTime(view?.clockMs ?? snapshot.clockMs)} playerDisplayRoles={new Map(players.map(p => [p.id, p.role]))} selectedPlayerKey={selected} active={visible && (sequence?motionReady:section === 'match')} onPlayerSelect={openPlayer} defaultCamera={sequence?'overview':undefined} settingsLabel={sequence||shell?q.settings:undefined} settingsTarget={sequence||shell?settingsTarget:undefined} fieldFocus={walking?WALKOUT_FOCUS:sequence?.kind==='actions'?sequenceFocus(sequence.depiction,elapsed,selected,false):undefined} cast={cast}
@@ -373,9 +393,9 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
         playing={state.isPlaying} seekToken={seekGeneration} seeking={state.pendingSeekMs!==null} scenes={scenes} reducedMotion={still} soundOn={soundOn}
         pause={playback.pause} play={playback.play} labels={ANIME_LABELS[locale==='es'?'es':'en']}
         specFor={cut=>specFor(cut,{players,cast,data:animeData,events:snapshot.events,locale:locale==='es'?'es':'en',nameOf:id=>frame.players.find(p=>p.key===id)?.name??null,art:haneArt})}/>}
-      hud={sequence||bannerBelow?undefined:banner('overlay')} renderOverlay={projection => sequence?null:<MatchLayers layers={snapshot.layers} projection={projection} elapsedMs={elapsed} showAnchors={showAnchors}/>}
-      /* 25-oct: «veo términos repetidos». Sobre el campo basta el chip: el motor ya está en la cabecera y el reloj en el marcador. */
-      {...(shell&&hudEngine?{hudTopLeft:<span className="chip sim">{t.synthetic}</span>,cameraTabs:true}:{})}
+      hud={sequence||bannerBelow||pause||walking?undefined:banner('overlay')} renderOverlay={projection => sequence?null:<MatchLayers layers={snapshot.layers} projection={projection} elapsedMs={elapsed} showAnchors={showAnchors}/>}
+      /* 25-oct: «veo términos repetidos». TP250: sobre el campo, solo las cámaras; la procedencia va en la cabecera. */
+      {...(shell&&hudEngine?{cameraTabs:true}:{})}
       overlay={phaseOverlay??(bigPlay&&!state.wantsPlay&&!sequence?<button type="button" className="tp-big-play" data-big-play aria-label={BIG_PLAY[locale === 'es' ? 'es' : 'en']} title={BIG_PLAY[locale === 'es' ? 'es' : 'en']}
         disabled={!autoplayReady} onClick={()=>{playback.setSpeed(autoplaySpeed());playback.play();setBigPlay(false);}}>
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M7 4.5v15a1 1 0 001.5.86l12-7.5a1 1 0 000-1.72l-12-7.5A1 1 0 007 4.5z"/></svg><span>{t.play}</span></button>:undefined)} />
@@ -383,8 +403,13 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
     {!sequence&&bannerBelow&&section==='match'&&banner('below')}
     {!sequence&&!view&&<p role="status">{t.noMotion}</p>}
   </div>;
-  const scoreboard=<MatchScoreboard snapshot={snapshot} elapsedMs={elapsed} clock={displayClock} crests={crests} kits={cast?.kits ?? null} reds={reds}/>;
+  const scoreboard=<MatchScoreboard snapshot={snapshot} elapsedMs={elapsed} clock={displayClock} crests={crests} kits={cast?.kits ?? null} reds={reds} compact={shell}/>;
   const revealBlock=<div className="unified-reveal"><button disabled={revealed} onClick={() => {setReveal(true);setAnalysisScope('final');}}>{t.reveal}</button>{revealed && <><span role="status">{t.revealed}</span><label>{t.analysisScope}<select value={finalRequested?'final':'cursor'} onChange={e=>setAnalysisScope(e.target.value as 'cursor'|'final')}><option value="cursor">{t.cursor}</option><option value="final">{t.final}</option></select></label></>}</div>;
+  // TP249: en el armazón de emisión, un solo control para «hasta aquí / partido completo» (revealBlock queda en la vista histórica).
+  // Minuto del partido («Hasta el 47'»), no el tiempo de reproducción comprimido.
+  const scopeClock = analysisCtx || snapshot.clockMs !== null && !displayClock ? minuteLabel(source, snapshot.presentedCursor.period, snapshot.clockMs ?? 0) : displayClock?.text ?? matchTime(elapsed);
+  const scopeBar = (compact = false) => <AnalysisScopeBar revealed={revealed} final={finalRequested} ended={state.isMatchEnd} clock={scopeClock} compact={compact}
+    onReveal={() => { setReveal(true); setAnalysisScope('final'); }} onScope={setAnalysisScope} />;
   const transport=<PlaybackControls state={state} descriptor={snapshot.descriptor} cursor={cursorAt(snapshot.descriptor, elapsed)} onPlay={playback.play} onPause={playback.pause} onSeek={seek} onSpeed={playback.setSpeed} onReplay={playback.replay} marks={analysisCtx ? marks : undefined} sound={{ enabled: soundOn, onToggle: toggleSound }} />;
   const explorer=<MatchEventExplorer snapshot={sequence?{...snapshot,events:snapshot.events.filter(e=>e.elapsedMs!==null&&e.elapsedMs<=elapsed)}:snapshot} players={players} onSeek={watch} onPlayer={openPlayer} onWindow={readWindow} resolvedEvents={resolvedActions} watchRequest={watchRequest} />;
   const filtersUseful=historicalMotion||!!snapshot.layers;
@@ -400,14 +425,14 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
           {sideReport?.({ revealed, reveal: () => { setReveal(true); setAnalysisScope('final'); } })}
           <SummaryMini ctx={analysisCtx}/>
           <TimelinePanel ctx={analysisCtx} events={analysisModel.events} untilMs={finalRequested?d.durationMs??elapsed:elapsed} onSeek={seek}/>
-          {revealBlock}
+          {scopeBar(true)}
           <details className="tpa-log"><summary>{ta.events}</summary>{explorer}</details>
           {technical}
         </aside>:shell?<aside className="tpa-side tp-sim-side" data-simulated-side>{scoreInSide&&scoreboard}
           {/* TP241 («la acción debería verla narrada»): narración en frases llanas en vez de la cronología de TP239;
               el registro sigue plegado. */}
           {timelineCtx&&<NarrationPanel ctx={timelineCtx} events={narrationEvents} keepers={keeperIds} untilMs={finalRequested?d.durationMs??elapsed:elapsed} onSeek={seek}/>}
-          {revealBlock}
+          {scopeBar(true)}
           <details className="tpa-log"><summary>{ta.events}</summary>{explorer}</details>
           {technical}</aside>:explorer}</div>
       {/* Maqueta: la barra de reproducción va en un panel a lo ancho, debajo de la rejilla campo + columna. */}
@@ -424,19 +449,17 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
         <details className="tpa-log"><summary>{t.players}</summary><MatchPlayers players={players} onSelect={openPlayer} /></details>
       </div>}
       {analysisCtx && isAnalysisView && <>
-        <p className="unified-scope tpa-scope">{/* Resumen, Mapas y Esfuerzo ya llevan el chip en cada panel (TP205). */}
-          {section !== 'summary' && section !== 'maps' && section !== 'effort' && <span className="chip sim">{ta.simulated} · {analysisCtx.engineLabel}</span>} {finalRequested ? ta.final : ta.upTo(minuteLabel(source, snapshot.presentedCursor.period, snapshot.clockMs ?? 0))}</p>
+        {/* Resumen, Mapas y Esfuerzo ya llevan el chip en cada panel (TP205). */}
+        {section !== 'summary' && section !== 'maps' && section !== 'effort' && <p className="unified-scope tpa-scope"><span className="chip sim">{ta.simulated} · {analysisCtx.engineLabel}</span></p>}
+        {scopeBar()}
         {section === 'summary' && analysisModel && <AnalysisSummarySection ctx={analysisCtx} events={analysisModel.events} />}
         {section === 'maps' && <AnalysisMapsSection ctx={analysisCtx} selected={selected} />}
         {section === 'effort' && <AnalysisEffortSection ctx={analysisCtx} />}
         {section === 'data' && <MatchData panel={panel} snapshot={snapshot} revealed={revealed} explanationsAvailable={!!explanations||azureEnabled} />}
-        {revealBlock}
       </>}
       {section !== 'match' && !analysisCtx && (!shell || isAnalysisView) && <>
-        {shell && revealBlock}
         {/* TP239: en los simulados, solo el instante («hasta 0:30»); el estado técnico del panel queda en la vista histórica. */}
-        <p className="unified-scope">{shell ? (panel?.scope === 'final' ? ta.final : ta.upTo(displayClock?.text ?? matchTime(elapsed)))
-          : <>{panel?.scope === 'final' ? t.final : t.cursor} · {matchTime(panel?.cutoff?.elapsedMs ?? null)} · {panel?.availability.status ?? t.loading} {panel?.availability.reason}</>}</p>
+        {shell ? scopeBar() : <p className="unified-scope">{panel?.scope === 'final' ? t.final : t.cursor} · {matchTime(panel?.cutoff?.elapsedMs ?? null)} · {panel?.availability.status ?? t.loading} {panel?.availability.reason}</p>}
         {section === 'summary' && <>
           {finalResult?.score && <p>{t.finalResult}: {finalResult.score.home} : {finalResult.score.away} · {t.final}</p>}
           {/* TP239: en los simulados, primero la comparación tipo retransmisión; la tabla técnica, plegada. */}
@@ -453,9 +476,14 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
           home={{ side: 'home', formation: d.home.formation, players, cast, announcements: reached, onSelect: choosePlayer, teamName: d.home.name }}
           away={{ side: 'away', formation: d.away.formation, players, cast, announcements: reached, onSelect: choosePlayer, teamName: d.away.name }} />}
           <MatchPlayers players={players} onSelect={choosePlayer} /></>}
-        {section === 'maps' && <MatchMaps plots={panel?.plots.filter(p => p.kind !== 'effort') ?? []} onSeek={watch} simple={shell} />}
+        {section === 'maps' && <MatchMaps plots={panel?.plots.filter(p => p.kind !== 'effort') ?? []} onSeek={watch} simple={shell} ctx={timelineCtx} />}
         {/* TP239 (jueces: «Esfuerzo» repetía la tabla del Resumen): en los simulados, solo las métricas de esfuerzo. */}
-        {section === 'effort' && (historicalMotion ? <p role="status">{t.tracking}</p> : <><MatchMetricTable metrics={[...(panel?.metrics ?? []), ...(panel?.players.flatMap(p => p.metrics) ?? [])].filter(m => !shell || EFFORT_METRIC.test(m.id))} names={names} title={t.effort} /><MatchMaps plots={panel?.plots.filter(p => p.kind === 'effort') ?? []} onSeek={watch} /></>)}
+        {section === 'effort' && (historicalMotion ? <p role="status">{t.tracking}</p> : (() => {
+          const effortMetrics = [...(panel?.metrics ?? []), ...(panel?.players.flatMap(p => p.metrics) ?? [])].filter(m => !shell || EFFORT_METRIC.test(m.id));
+          const technicalEffort = <><MatchMetricTable metrics={effortMetrics} names={names} title={t.effort} /><MatchMaps plots={panel?.plots.filter(p => p.kind === 'effort') ?? []} onSeek={watch} /></>;
+          // TP249: en el armazón, panel de retransmisión; la tabla técnica, plegada dentro.
+          return shell && timelineCtx ? <SimulatedEffort metrics={effortMetrics} players={players} ctx={timelineCtx} technical={technicalEffort} /> : technicalEffort;
+        })())}
         {section === 'data' && <MatchData panel={panel} snapshot={snapshot} revealed={revealed} explanationsAvailable={!!explanations||azureEnabled} />}
       </>}
     </section>

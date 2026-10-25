@@ -123,8 +123,9 @@ describe('demo match', () => {
     const appbar = document.querySelector('[data-demo-appbar]') as HTMLElement;
     // TP211: sin segunda marca (la cabecera global ya la lleva) y un único chip de procedencia con su explicación.
     expect(within(appbar).queryByText('TimePitch')).toBeNull();
-    const chip = within(appbar).getByRole('button', { name: /^Fictional\s*·\s*simulated$/ });
-    expect(chip).toHaveClass('chip', 'ph');
+    // TP250: chip neutro «Simulated match» (el rojo discontinuo parecía un error).
+    const chip = within(appbar).getByRole('button', { name: /^Simulated match$/ });
+    expect(chip).toHaveClass('chip'); expect(chip).not.toHaveClass('ph');
     expect(chip).toHaveAttribute('aria-expanded', 'false');
     const explanation = document.getElementById(chip.getAttribute('aria-controls')!) as HTMLElement;
     expect(chip).toHaveAccessibleDescription(/Fictional cross-era simulation.*Synthetic movement.*Simulated events.*Not a real match and not historical tracking/);
