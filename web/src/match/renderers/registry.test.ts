@@ -14,8 +14,11 @@ it('only loads Three on demand and rejects arbitrary IDs or module URLs', async 
     await expect(loadRenderer(id as never)).rejects.toThrow();
 });
 
-it('Retro 16 bits is reserved: without its renderer the ID is rejected', async () => {
-  await expect(loadRenderer('retro16-1')).rejects.toThrow('Unknown pitch renderer');
+it('Retro 16 bits is a separate, explicitly chosen renderer loaded on demand', async () => {
+  const factory = await loadRenderer('retro16-1');
+  expect(factory).toBe((await import('./retro16')).createRetro16Renderer);
+  expect(factory).not.toBe(createRetroRenderer);
+  expect(three.loaded).toBe(1);
 });
 
 it('explicit recovery rejects untrusted manifest paths before importing a URL', async () => {

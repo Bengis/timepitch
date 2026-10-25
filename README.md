@@ -31,6 +31,7 @@ TimePitch does **not** claim to predict real results, and its reconstructions ar
 ## Features
 
 - **3D broadcast** (Three.js): procedural stadium and **skeletal, motion-captured players** that wear their season kit, number, skin tone, hair and height. Stride follows the engine's speed; kicks, headers, slide tackles, keeper dives and goal celebrations are driven by the recorded events. TV camera with a close-up of the scorer; automatic quality reduction on slow devices.
+- **Retro 16-bit graphics**: an original pixel-art pitch in the style of 16-bit console football, chosen under "⚙ Options → Graphics".
 - **Live engines**: Google Research Football (compressed match clock) and TouchLines (upstream clock) run on the server in bounded worker processes. The built-in TimePitch engine is kept as a fallback.
 - **Commentary next to the pitch**: who passes how far, who wins the ball, shots and their outcome, goals with the score, set pieces.
 - **Recorded-match analysis**: possession, territory, field tilt, heat maps, shots, pass network (when the engine records receivers), distance and high-intensity running in five-minute blocks. Figures an engine did not record are shown as "not recorded", never as zero.
@@ -140,5 +141,6 @@ Player and club names are used factually. TimePitch is an independent fan projec
 ## Credits
 
 - **Ignacio** ([@Bengis](https://github.com/Bengis)): author.
+- **Manuel** ([@ManuelAMS](https://github.com/ManuelAMS)): co-author; idea and design of the Retro 16-bit graphics.
 
 Third-party data, engines, libraries and artwork are credited in [THIRD_PARTY.md](THIRD_PARTY.md) and [NOTICE](NOTICE).

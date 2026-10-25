@@ -27,6 +27,7 @@ export async function loadRenderer(id: RendererId): Promise<RendererFactory> {
   switch (id) {
     case 'retro-1': return createRetroRenderer;
     case 'stylized-3d-1': return loadThree();
+    case 'retro16-1': return (await import('./retro16')).createRetro16Renderer;
     default: throw new Error('Unknown pitch renderer');
   }
 }

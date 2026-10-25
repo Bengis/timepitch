@@ -12,22 +12,28 @@ import type { PitchRenderInput, RendererFailure } from './renderers/types';
 import type { MatchCast } from '../presentation/types';
 
 const graphics = vi.hoisted(() => ({ failures: [] as ((reason: RendererFailure) => void)[] }));
-it.each([undefined,'Display settings'])('graphics offer only 3D, never Captain Hane or the retired 2D styles (settings %s)',settingsLabel=>{
+it.each([undefined,'Display settings'])('graphics offer only Retro 16-bit (default) and 3D, never Captain Hane or the retired 2D styles (settings %s)',settingsLabel=>{
   localStorage.removeItem('timepitch.pitch.v1');
   render(<LanguageProvider><Pitch frame={syntheticFrame()} home="H" away="A" settingsLabel={settingsLabel}/></LanguageProvider>);
   if(settingsLabel)fireEvent.click(screen.getByText(settingsLabel));
   const picker=screen.getByRole('combobox',{name:'Graphics'}) as HTMLSelectElement;
-  expect(picker.value).toBe('stylized-3d-1');
-  expect(within(picker).getAllByRole('option').map(o=>(o as HTMLOptionElement).value)).toEqual(['stylized-3d-1']);
+  expect(picker.value).toBe('retro16-1');
+  expect(within(picker).getAllByRole('option').map(o=>(o as HTMLOptionElement).value)).toEqual(['retro16-1','stylized-3d-1']);
   for(const name of ['FC · Broadcast','Sensible · Pixel','Retro 2D'])expect(screen.queryByText(name)).toBeNull();
   expect(screen.getByRole('combobox',{name:'Lighting'})).toBeInTheDocument();
   expect(screen.getByRole('combobox',{name:'Camera'})).toBeInTheDocument();
 });
-it('a fresh profile requests 3D and saves it as the default, not as a choice',()=>{
+it('a fresh profile requests Retro 16-bit; choosing 3D is saved as an explicit choice and remembered',()=>{
   localStorage.removeItem('timepitch.pitch.v1');
-  const {container}=render(<LanguageProvider><Pitch frame={syntheticFrame()} home="H" away="A"/></LanguageProvider>);
+  const {container,unmount}=render(<LanguageProvider><Pitch frame={syntheticFrame()} home="H" away="A"/></LanguageProvider>);
+  expect(container.querySelector('.pitch-section')?.getAttribute('data-requested-renderer')).toBe('retro16-1');
+  expect(JSON.parse(localStorage.getItem('timepitch.pitch.v1')!)).toMatchObject({version:2,renderer:'retro16-1',rendererChosen:false});
+  fireEvent.change(screen.getByRole('combobox',{name:'Graphics'}),{target:{value:'stylized-3d-1'}});
   expect(container.querySelector('.pitch-section')?.getAttribute('data-requested-renderer')).toBe('stylized-3d-1');
-  expect(JSON.parse(localStorage.getItem('timepitch.pitch.v1')!)).toMatchObject({version:2,renderer:'stylized-3d-1',rendererChosen:false});
+  expect(JSON.parse(localStorage.getItem('timepitch.pitch.v1')!)).toMatchObject({version:2,renderer:'stylized-3d-1',rendererChosen:true});
+  unmount();
+  render(<LanguageProvider><Pitch frame={syntheticFrame()} home="H" away="A"/></LanguageProvider>);
+  expect((screen.getByRole('combobox',{name:'Graphics'}) as HTMLSelectElement).value).toBe('stylized-3d-1');
   localStorage.removeItem('timepitch.pitch.v1');
 });
 it('Inspect player uses the match cast numbers and names and drops the lineup-slot note',()=>{
@@ -253,7 +259,7 @@ it('a stored Captain Hane choice is not offered and never mounts the anime layer
   const layer=vi.fn(()=> <div data-testid="anime-layer"/>);
   render(<LanguageProvider><Pitch frame={syntheticFrame()} home="H" away="A" renderAnime={layer}/></LanguageProvider>);
   const picker=screen.getByRole('combobox',{name:'Graphics'}) as HTMLSelectElement;
-  expect(picker.value).toBe('stylized-3d-1');
+  expect(picker.value).toBe('retro16-1');
   expect(within(picker).queryByRole('option',{name:'Captain Hane'})).toBeNull();
   expect(screen.queryByTestId('anime-layer')).toBeNull();
   expect(document.querySelector('[data-anime-intro]')).toBeNull();

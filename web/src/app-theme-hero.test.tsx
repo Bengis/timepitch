@@ -29,8 +29,8 @@ it('shows the illustrated cover with one Play button; engine and graphics (no Ca
   const options=screen.getByText('Options').closest('details')!;
   expect(options).not.toHaveAttribute('open');
   const graphics=within(options).getByRole('combobox',{name:'Graphics',hidden:true}) as HTMLSelectElement;
-  expect(graphics).toHaveValue('stylized-3d-1');
-  expect([...graphics.options].map(o=>o.value)).toEqual(['stylized-3d-1']);
+  expect(graphics).toHaveValue('retro16-1');
+  expect([...graphics.options].map(o=>o.value)).toEqual(['retro16-1','stylized-3d-1']);
   expect(within(options).getByRole('combobox',{name:'Simulation engine',hidden:true})).toBeInTheDocument();
   fireEvent.click(screen.getByRole('button',{name:/Español/}));
   expect(within(hero).getByText(/desde 1992\/93 y míralos jugar/i)).toBeInTheDocument();

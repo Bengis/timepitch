@@ -1,0 +1,55 @@
+{
+ "image": "pitch.png",
+ "width": 726,
+ "height": 1062,
+ "pxPerMetre": 8,
+ "case": "TP219",
+ "orientation": "Vertical: la portería «norte» arriba. Las líneas ocupan 2 px hacia dentro del rectángulo de juego.",
+ "field": {
+  "x": 91,
+  "y": 111,
+  "w": 544,
+  "h": 840,
+  "note": "Rectángulo de juego (68 × 105 m). px = x + ancho_m·8, py = y + (105 − largo_m)·8 si el largo se mide desde la portería sur."
+ },
+ "goals": {
+  "north": {
+   "x": 363,
+   "y": 111,
+   "sprites": {
+    "net": "env.goal-n-net",
+    "frame": "env.goal-n-frame"
+   },
+   "depthSort": "net antes que todo; frame ordenado en la línea de gol"
+  },
+  "south": {
+   "x": 363,
+   "y": 951,
+   "sprites": {
+    "frame": "env.goal-s-frame",
+    "net": "env.goal-s-net"
+   },
+   "depthSort": "frame ordenado en la línea de gol; net ordenado 2 m por detrás (encima del portero)"
+  }
+ },
+ "corners": [
+  [
+   91,
+   111
+  ],
+  [
+   635,
+   111
+  ],
+  [
+   91,
+   951
+  ],
+  [
+   635,
+   951
+  ]
+ ],
+ "goalHeightPx": 20,
+ "goalWidthPx": 59
+}

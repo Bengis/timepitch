@@ -3,8 +3,8 @@ import type { MatchCast } from '../../presentation/types';
 import type { CameraFraming } from './camera';
 
 /**
- * Gráfico elegible: `stylized-3d-1` (3D). `retro16-1` («Retro 16 bits») queda reservado para su dibujador, que se añade
- * aparte. `retro-1` no se elige: solo es el respaldo automático si el 3D no arranca (TP205).
+ * Gráficos elegibles: `retro16-1` («Retro 16 bits», TP220; de serie desde TP223) y `stylized-3d-1` (3D, de serie en
+ * TP205–TP222). `retro-1` no se elige: solo es el respaldo automático si el 3D no arranca (TP205).
  */
 export type RendererId = 'retro-1' | 'stylized-3d-1' | 'retro16-1';
 /** `anime-1` = «Capitán Hane» (TP234): el juego se dibuja con Retro 16 bits (con `style: 'hane'`, TP238) y las
