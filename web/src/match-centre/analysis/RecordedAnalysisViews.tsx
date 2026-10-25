@@ -106,6 +106,15 @@ function miniRows(a: MatchAnalysis, t: AnalysisText, engine: string): Row[] {
   ];
 }
 
+/** TP247: estadísticas del descanso y del final, sobre el campo: las del Resumen más pases y distancia recorrida. */
+export function BreakStats({ ctx }: { ctx: AnalysisContext }) {
+  const t = useAnalysisText(), a = ctx.analysis, h = a.teams.home, w = a.teams.away;
+  const rows = [...summaryRows(a, t, false), { id: 'passes', label: t.passes, home: h.passes, away: w.passes },
+    { id: 'distance', label: `${t.distance} (${t.km})`, home: fixed(h.distanceM / 1000), away: fixed(w.distanceM / 1000) }];
+  return <div className="tpa-break-stats"><TeamsHead ctx={ctx} /><StatRows rows={rows} ctx={ctx} compact />
+    <NotRecorded team={h} t={t} engine={ctx.engineLabel} /></div>;
+}
+
 /** Resumen compacto de la columna lateral. */
 export function SummaryMini({ ctx }: { ctx: AnalysisContext }) {
   const t = useAnalysisText(), a = ctx.analysis, onTarget = a.teams.home.shotsOnTarget !== null;

@@ -266,3 +266,38 @@ body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
 .crew-report-foot { display: grid; gap: 4px; padding-top: 8px; border-top: 1px solid var(--tp-line); }
 .crew-report-foot p { font-size: 11px; color: var(--tp-ink2); }
 .crew-report-note { margin: 0; font-size: 12px; color: var(--tp-ink2); }
+
+/* TP247: fases del partido sobre el campo (salida de los equipos, descanso y final). */
+.tp-break { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.tp-break button { pointer-events: auto; }
+.tp-break-walkout { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 16px; }
+.tp-break-lower { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; padding: 10px 16px; border-radius: 10px;
+  background: rgba(8, 12, 24, .82); color: #fff; font-size: 1.05rem; box-shadow: 0 6px 24px rgba(0, 0, 0, .35); }
+.tp-break-kicker { display: block; width: 100%; margin: 0; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #b9a6ff; }
+.tp-break-vs { opacity: .7; }
+.tp-break-skip, .tp-break-actions button { border: 1px solid rgba(255, 255, 255, .25); border-radius: 999px; padding: 8px 16px; background: rgba(8, 12, 24, .82);
+  color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+.tp-break-card-wrap { display: grid; place-items: center; padding: 12px; background: rgba(4, 6, 14, .55); pointer-events: auto; overflow: auto; }
+.tp-break-card { width: min(560px, 100%); max-height: 100%; overflow: auto; padding: 18px 20px; border-radius: 14px; background: #0d1222f2;
+  border: 1px solid rgba(255, 255, 255, .12); color: #fff; box-shadow: 0 12px 40px rgba(0, 0, 0, .5); text-align: center; }
+.tp-break-score { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin: 6px 0 4px; }
+.tp-break-team { font-weight: 700; font-size: 1rem; }
+.tp-break-team:first-child { text-align: right; }
+.tp-break-team:last-child { text-align: left; }
+.tp-break-result { font-size: 2.2rem; font-weight: 800; }
+.tp-break-goals { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 4px 0 10px; font-size: .85rem; opacity: .85; }
+.tp-break-scorers { list-style: none; margin: 0; padding: 0; }
+.tp-break-scorers.home { text-align: right; }
+.tp-break-scorers.away { text-align: left; }
+.tp-break-stats { text-align: left; margin: 8px 0 12px; }
+.tp-break-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.tp-break-actions .tp-break-primary { background: #7c5cff; border-color: #7c5cff; }
+@media (max-width: 600px) { .tp-break-result { font-size: 1.6rem; } .tp-break-card { padding: 12px; } }
+.tp-break-stats .tpa-stats { grid-template-columns: 1fr 1fr; gap: 6px 22px; padding: 4px 0 6px; }
+.tp-break-stats .tpa-teams { display: none; }
+.tp-break-stats .tpa-note { margin: 4px 0 0; font-size: .72rem; opacity: .7; }
+.tp-break-card { width: min(640px, 100%); padding: 14px 18px; }
+.tp-break-goals { margin: 2px 0 6px; }
+@media (max-width: 600px) { .tp-break-stats .tpa-stats { grid-template-columns: 1fr; } }
+/* En el teléfono el campo es bajo: el descanso y el final ocupan la pantalla, con los botones a la vista. */
+@media (max-width: 600px) { .tp-break-card-wrap { position: fixed; z-index: 50; } }

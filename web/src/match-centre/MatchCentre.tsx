@@ -19,7 +19,6 @@ import { BroadcastSections, MatchSections } from './MatchSections';
 import { analysisViews, broadcastViewFor, panelSectionFor, type BroadcastView } from './navigation';
 import { PlayerPicker, pickerOptions } from '../presentation/PlayerPicker';
 import { MatchMetaBar, matchMetaFromDescriptor } from '../presentation/MatchMetaBar';
-import { PitchHudEngine } from '../match/PitchHud';
 import { MatchEventExplorer } from './MatchEventExplorer';
 import { MatchMetricTable } from './MatchMetricTable';
 import { MatchPlayers, MatchPlayerDetail } from './MatchPlayers';
@@ -50,10 +49,13 @@ import { LineupsPair, isStarter } from '../presentation/LineupsView';
 import { analyseUntil, type RecordedAnalysisModel } from './analysis/recorded-analysis';
 import { TeamComparison } from './TeamComparison';
 import { NarrationPanel } from './narration/NarrationPanel';
-import { AnalysisEffortSection, AnalysisMapsSection, AnalysisSummarySection, EventIcon, SummaryMini, TimelinePanel, type AnalysisContext, type TimelineContext } from './analysis/RecordedAnalysisViews';
+import { AnalysisEffortSection, AnalysisMapsSection, AnalysisSummarySection, BreakStats, EventIcon, SummaryMini, TimelinePanel, type AnalysisContext, type TimelineContext } from './analysis/RecordedAnalysisViews';
 import { useAnalysisText } from './analysis/messages';
 import { teamAbbreviation } from '../presentation/BroadcastScorebug';
 import { minuteLabel } from './announcements/announcements';
+import { halftimeMs } from './transport';
+import { MatchBreak, type BreakScorer } from './MatchBreak';
+import { WALKOUT_FOCUS, WALKOUT_STEP_MS, walkoutDuration, walkoutFrame } from './match-phases';
 import '../presentation/tokens.css';
 import './broadcast-layout.css';
 
@@ -253,6 +255,43 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
       return entry || view ? { number: entry?.number ?? null, name: entry?.displayName ?? view?.name ?? id } : null; },
   } : null;
   const analysisCtx: AnalysisContext | null = analysis && engineLabel && timelineCtx ? { ...timelineCtx, analysis } : null;
+  // TP247 (25-oct: «como en FIFA»): salida de los equipos al estadio, descanso y final con las estadísticas.
+  const phasesOn = shell && !sequence && visible;
+  const [walkoutAt, setWalkoutAt] = useState<number | null>(null), [walkoutMs, setWalkoutMs] = useState(0);
+  const [pause, setPause] = useState<'halftime' | 'fulltime' | null>(null);
+  const walkedOut = useRef(false), kickoff = useRef<SceneFrame | null>(null), lastElapsed = useRef(elapsed);
+  const htMs = halftimeMs(d.periods, d.durationMs ?? null);
+  // Al arrancar desde el saque inicial: pausa, salida de los equipos y, al terminar (o al saltarla), el partido.
+  useEffect(() => {
+    if (!phasesOn || walkedOut.current || !state.wantsPlay || elapsed > 2000 || !view?.frame.players.length) return;
+    walkedOut.current = true;
+    // En las pruebas (jsdom) no hay salida: comprueban el arranque automático del partido tal cual.
+    if (reducedMotion || import.meta.env.MODE === 'test') return;
+    playback.pause(); seek(0); kickoff.current = view.frame; setWalkoutMs(0); setWalkoutAt(performance.now());
+  }, [phasesOn, state.wantsPlay, elapsed, view]); // eslint-disable-line react-hooks/exhaustive-deps
+  const endWalkout = () => { setWalkoutAt(null); playback.play(); };
+  useEffect(() => {
+    if (walkoutAt === null) return;
+    const total = kickoff.current ? walkoutDuration(kickoff.current) : 0;
+    const id = window.setInterval(() => {
+      const t = performance.now() - walkoutAt;
+      if (t >= total) { window.clearInterval(id); endWalkout(); } else setWalkoutMs(Math.floor(t / WALKOUT_STEP_MS) * WALKOUT_STEP_MS);
+    }, WALKOUT_STEP_MS / 2);
+    return () => window.clearInterval(id);
+  }, [walkoutAt]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Descanso y final: solo al llegar reproduciendo (no al saltar con la barra).
+  const phaseSeek = useRef(seekGeneration);
+  useEffect(() => {
+    const before = lastElapsed.current, sought = phaseSeek.current !== seekGeneration; lastElapsed.current = elapsed; phaseSeek.current = seekGeneration;
+    if (!phasesOn || sought || state.pendingSeekMs !== null || elapsed <= before || elapsed - before > 600000) return;
+    if (htMs !== null && before < htMs && elapsed >= htMs && state.wantsPlay) { playback.pause(); setPause('halftime'); }
+    else if (d.durationMs != null && before < d.durationMs && elapsed >= d.durationMs) setPause('fulltime');
+  }, [elapsed]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Darle a reproducir con la barra cierra el rótulo que haya (y salta la salida de los equipos).
+  useEffect(() => { if (state.wantsPlay) { setPause(null); if (walkoutAt !== null) setWalkoutAt(null); } }, [state.wantsPlay]); // eslint-disable-line react-hooks/exhaustive-deps
+  const breakScorers = { home: [] as BreakScorer[], away: [] as BreakScorer[] };
+  for (const a of reached) if ((a.kind === 'goal' || a.kind === 'own_goal') && a.side)
+    breakScorers[a.side].push({ id: a.id, name: timelineCtx?.player(a.primaryPlayerId)?.name ?? '', minute: a.minuteLabel, ownGoal: a.kind === 'own_goal' });
   // Marcas de la barra: descanso siempre; goles, penaltis y rojas hasta el cursor (o todos con el análisis final visible).
   const marks: TransportMark[] = analysisCtx && analysisModel ? analysisModel.events.filter(e => e.elapsedMs !== null && (e.kind === 'halftime'
     || (e.kind === 'goal' || e.kind === 'penalty' || e.kind === 'card_red') && (finalRequested || e.elapsedMs <= elapsed))).map(e => {
@@ -320,18 +359,26 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
   // Rótulo de acontecimientos: sobre el campo; en el teléfono del armazón, debajo (maqueta v1-2d a 390 px).
   const bannerBelow = shell && bannerPlacement === 'below';
   const banner = (placement: 'overlay' | 'below') => <AnnouncementBanner current={announcement} source={source} cast={cast} players={players} homeName={d.home.name} awayName={d.away.name} crests={crests} engineLabel={engineLabel} placement={placement}/>;
+  const walking = walkoutAt !== null && kickoff.current ? kickoff.current : null;
+  const breakStats = !pause ? null : analysisCtx ? <BreakStats ctx={analysisCtx}/> : timelineCtx ? <TeamComparison metrics={panel?.metrics ?? []}
+    events={snapshot.events.filter(e => e.elapsedMs !== null && e.elapsedMs <= elapsed)} score={snapshot.facts.score.value}
+    teams={{ home: { id: d.home.id, abbr: timelineCtx.teams.home.abbr, colour: timelineCtx.teams.home.colour }, away: { id: d.away.id, abbr: timelineCtx.teams.away.abbr, colour: timelineCtx.teams.away.colour } }} /> : null;
+  const phaseOverlay = walking ? <MatchBreak phase="walkout" home={d.home.name} away={d.away.name} score={null} onContinue={endWalkout}/>
+    : pause ? <MatchBreak phase={pause} home={d.home.name} away={d.away.name} score={snapshot.facts.score.value} scorers={breakScorers} stats={breakStats}
+      onContinue={() => { setPause(null); playback.play(); }} onReplay={() => { setPause(null); playback.replay(); }} onClose={() => setPause(null)}/> : null;
   const field=<div className="sequence-field-host">
-    <Pitch frame={frame} previous={previous} cue={sequence?.kind==='actions'?sequenceCue(sequence.source,elapsed):view?.cue} restarting={view?.restarting ?? true} home={snapshot.descriptor.home.name} away={snapshot.descriptor.away.name} displayClockLabel={displayClock?.text??matchTime(view?.clockMs ?? snapshot.clockMs)} playerDisplayRoles={new Map(players.map(p => [p.id, p.role]))} selectedPlayerKey={selected} active={visible && (sequence?motionReady:section === 'match')} onPlayerSelect={openPlayer} defaultCamera={sequence?'overview':undefined} settingsLabel={sequence||shell?q.settings:undefined} settingsTarget={sequence||shell?settingsTarget:undefined} fieldFocus={sequence?.kind==='actions'?sequenceFocus(sequence.depiction,elapsed,selected,false):undefined} cast={cast}
+    <Pitch frame={walking?walkoutFrame(walking,walkoutMs):frame} previous={walking?walkoutFrame(walking,walkoutMs-WALKOUT_STEP_MS):previous} cue={walking?undefined:sequence?.kind==='actions'?sequenceCue(sequence.source,elapsed):view?.cue} restarting={walking?false:view?.restarting ?? true} home={snapshot.descriptor.home.name} away={snapshot.descriptor.away.name} displayClockLabel={displayClock?.text??matchTime(view?.clockMs ?? snapshot.clockMs)} playerDisplayRoles={new Map(players.map(p => [p.id, p.role]))} selectedPlayerKey={selected} active={visible && (sequence?motionReady:section === 'match')} onPlayerSelect={openPlayer} defaultCamera={sequence?'overview':undefined} settingsLabel={sequence||shell?q.settings:undefined} settingsTarget={sequence||shell?settingsTarget:undefined} fieldFocus={walking?WALKOUT_FOCUS:sequence?.kind==='actions'?sequenceFocus(sequence.depiction,elapsed,selected,false):undefined} cast={cast}
       onRendererChange={setRendererId} rendererLocked={rendererLocked}
       renderAnime={sequence?undefined:({scenes,reducedMotion:still})=><AnimeCutIns events={animeEvents} announcements={announcements} keeperIds={keeperIds} cursorMs={elapsed} speed={state.speed}
         playing={state.isPlaying} seekToken={seekGeneration} seeking={state.pendingSeekMs!==null} scenes={scenes} reducedMotion={still} soundOn={soundOn}
         pause={playback.pause} play={playback.play} labels={ANIME_LABELS[locale==='es'?'es':'en']}
         specFor={cut=>specFor(cut,{players,cast,data:animeData,events:snapshot.events,locale:locale==='es'?'es':'en',nameOf:id=>frame.players.find(p=>p.key===id)?.name??null,art:haneArt})}/>}
       hud={sequence||bannerBelow?undefined:banner('overlay')} renderOverlay={projection => sequence?null:<MatchLayers layers={snapshot.layers} projection={projection} elapsedMs={elapsed} showAnchors={showAnchors}/>}
-      {...(shell&&hudEngine?{hudTopLeft:<><span className="chip sim">{t.synthetic}</span><PitchHudEngine label={hudEngine}/></>,sceneCaption:true,cameraTabs:true}:{})}
-      overlay={bigPlay&&!state.wantsPlay&&!sequence?<button type="button" className="tp-big-play" data-big-play aria-label={BIG_PLAY[locale === 'es' ? 'es' : 'en']} title={BIG_PLAY[locale === 'es' ? 'es' : 'en']}
+      /* 25-oct: «veo términos repetidos». Sobre el campo basta el chip: el motor ya está en la cabecera y el reloj en el marcador. */
+      {...(shell&&hudEngine?{hudTopLeft:<span className="chip sim">{t.synthetic}</span>,cameraTabs:true}:{})}
+      overlay={phaseOverlay??(bigPlay&&!state.wantsPlay&&!sequence?<button type="button" className="tp-big-play" data-big-play aria-label={BIG_PLAY[locale === 'es' ? 'es' : 'en']} title={BIG_PLAY[locale === 'es' ? 'es' : 'en']}
         disabled={!autoplayReady} onClick={()=>{playback.setSpeed(autoplaySpeed());playback.play();setBigPlay(false);}}>
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M7 4.5v15a1 1 0 001.5.86l12-7.5a1 1 0 000-1.72l-12-7.5A1 1 0 007 4.5z"/></svg><span>{t.play}</span></button>:undefined} />
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M7 4.5v15a1 1 0 001.5.86l12-7.5a1 1 0 000-1.72l-12-7.5A1 1 0 007 4.5z"/></svg><span>{t.play}</span></button>:undefined)} />
     {sequence&&!motionReady&&<p className="sequence-unavailable" role="status">{state.status==='buffering'?q.loading:q.unavailable}</p>}
     {!sequence&&bannerBelow&&section==='match'&&banner('below')}
     {!sequence&&!view&&<p role="status">{t.noMotion}</p>}
