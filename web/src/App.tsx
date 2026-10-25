@@ -19,7 +19,7 @@ import {HistoricalExplorer} from './historical/HistoricalExplorer';
 import {HistoricalMatchCentre} from './historical/HistoricalMatchCentre';
 import {useHistoricalText} from './historical/messages';
 import {WorkspaceShell} from './match-centre/WorkspaceShell';
-import {parseWorkspaceHash,formatWorkspaceHash,type WorkspaceRoute} from './match-centre/navigation';
+import {HOME_ROUTE,parseWorkspaceHash,formatWorkspaceHash,type WorkspaceRoute} from './match-centre/navigation';
 import type {MatchSection} from './match-centre/session';
 import {DemoEntry,DemoMatch,demoEntryText} from './match-centre/DemoMatch';
 import {VersusScreen} from './versus/VersusScreen';
@@ -67,6 +67,8 @@ export default function App() {
   const [legacyPage,setLegacyPage]=useState<'setup'|'match'|'library'>('setup');
   // TP226: la demo arranca sola cuando se abre desde VERSUS (no desde la biblioteca ni con el enlace directo).
   const [demoAutoplay,setDemoAutoplay]=useState(false);
+  // TP246: la demo abierta desde «Crónica IA de ejemplo» baja hasta la crónica y «Volver» lleva a la portada.
+  const [demoReport,setDemoReport]=useState(false);
   const [historicalCapabilities,setHistoricalCapabilities]=useState<HistoricalCapabilities|null>(null);
   const [route,setRoute]=useState<WorkspaceRoute>(()=>parseWorkspaceHash(window.location.hash));
   const [historicalRoute,setHistoricalRoute]=useState<Extract<WorkspaceRoute,{mode:'reconstruction'}>>(()=>{const route=parseWorkspaceHash(window.location.hash);return route.mode==='reconstruction'?route:{mode:'reconstruction'};});
@@ -197,7 +199,8 @@ export default function App() {
         {route.mode==='simulation'&&route.view==='centre'&&!active&&<div className="simulation-subnav"><p>{h.simulated}</p><button aria-current={page==='setup'?'page':undefined} onClick={()=>setPage('setup')}>{c.newMatch}</button><button disabled={!active} aria-current={page==='match'?'page':undefined} onClick={()=>setPage('match')}>{c.matchCentre}</button></div>}
         {route.mode==='simulation'&&route.view==='centre'&&!active&&!busy&&<div className="empty-state"><p>{h.chooseSaved}</p><button onClick={()=>navigate({mode:'library'})}>{h.library}</button></div>}
       </>}
-      {route.mode==='demo'&&<DemoMatch visible autoplay={demoAutoplay} rendererLocked={demoAutoplay} onBack={()=>{setLegacyPage('library');navigate({mode:'library'});}}/>}
+      {route.mode==='demo'&&<DemoMatch visible autoplay={demoAutoplay} rendererLocked={demoAutoplay} focusReport={demoReport}
+        onBack={()=>{if(demoReport){setDemoReport(false);navigate(HOME_ROUTE);return;}setLegacyPage('library');navigate({mode:'library'});}}/>}
       {active&&<div hidden={page!=='match'}>{active.engine==='touchlines'?<TouchLinesMatchView key={active.id} id={active.id} record={active.record} visible={page==='match'} tab={twoModes?simulationTab.current:undefined} onSectionChange={section=>{if(modesRef.current&&routeRef.current.mode==='simulation')navigate({...routeRef.current,tab:section});}} onBack={()=>setPage('setup')} autoplay/>:active.engine==='grf'?<GrfMatchView key={active.id} id={active.id} record={active.record} visible={page==='match'} tab={twoModes?simulationTab.current:undefined} onSectionChange={section=>{if(modesRef.current&&routeRef.current.mode==='simulation')navigate({...routeRef.current,tab:section});}} onBack={()=>setPage('setup')} autoplay/>:<MatchView key={active.id} id={active.id} record={active.record} visible={page==='match'} tab={twoModes?simulationTab.current:undefined} onSectionChange={section=>{if(modesRef.current&&routeRef.current.mode==='simulation')navigate({...routeRef.current,tab:section});}} onBack={()=>setPage('setup')} autoplay />}</div>}
       <section className="setup-view" hidden={page!=='setup'}>
       {/* TP240 («vuelve a la de ayer»): otra vez la portada con la ilustración y las cifras del catálogo. */}
@@ -210,6 +213,7 @@ export default function App() {
         <VersusScreen teams={teams} home={home} away={away}
           // TP236 (24-oct: «el match no debería requerir dos clics»): «Jugar partido» simula directamente.
           onPlay={()=>{void start();}} playDisabled={!canStart}
+          onOpenAiReport={()=>{setDemoAutoplay(false);setDemoReport(true);navigate({mode:'demo'});}}
           // TP237: a la vista, las dos elecciones que definen el partido: motor y modo gráfico.
           playControls={<div className="vs-choices"><EngineSelector value={engine} capabilities={capabilities} disabled={busy||capabilities===null} onChange={setEngine}/>
             <label className="vs-graphics">{gt.graphics}<select value={graphics} disabled={busy} onChange={e=>setGraphics(e.target.value as SelectableRendererId)}>

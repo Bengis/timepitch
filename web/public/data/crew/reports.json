@@ -1,0 +1,67 @@
+{
+ "version": "crew-demo-reports-1",
+ "reports": [
+  {
+   "trace_hash": "0dd67ae120fb5b9db4d82659848ccf2eda910110350085a003f30b8f58ff0e67",
+   "locale": "en",
+   "engine": "grf",
+   "headline": "Arsenal fires six goals past Manchester City in a commanding 6–1 victory",
+   "paragraphs": [
+    [
+     "Gilberto Silva opens the scoring for Arsenal at 06:49 before Ilkay Gündogan pulls one back for Manchester City at 15:25."
+    ],
+    [
+     "Lauren edges Arsenal ahead again at 23:23, and Thierry Henry doubles the lead at 26:09, then finishes his second goal at 51:14 to extend the advantage."
+    ],
+    [
+     "Robert Pires adds another for Arsenal at 75:16, and Gilberto Silva fires the sixth goal at 83:58, with Thierry Henry and Gilberto Silva both leading scorers on two goals each."
+    ]
+   ],
+   "coverage_notes": [
+    "The chronicle uses recorded facts from a simulation.",
+    "Event coverage is incomplete; missing data is not zero.",
+    "Physical GRF recording: goals and scorers come from engine telemetry.",
+    "Pass outcomes, recoveries and possession were not exported and are left out.",
+    "Fictional cross-era simulation: this match never took place."
+   ],
+   "model": "gpt-4.1-mini",
+   "total_cost": "0.003869",
+   "report_sha256": "88c0bfac7ad322757d785f7ac46c252f0a42e1f44243b69e6388cb5303b208a2",
+   "evaluation": {
+    "groundedness": 5.0,
+    "coherence": 5.0,
+    "fluency": 3.0
+   }
+  },
+  {
+   "trace_hash": "0dd67ae120fb5b9db4d82659848ccf2eda910110350085a003f30b8f58ff0e67",
+   "locale": "es",
+   "engine": "grf",
+   "headline": "Arsenal golpea con seis goles y aplasta a Manchester City 6–1",
+   "paragraphs": [
+    [
+     "Gilberto Silva adelanta a Arsenal al minuto 06:49 con un gol tempranero.",
+     "Ilkay Gündogan iguala para Manchester City en el 15:25, pero la reacción de Arsenal es rápida."
+    ],
+    [
+     "Lauren remata para Arsenal en el 23:23 y Thierry Henry amplía la ventaja al 26:09.",
+     "Thierry Henry firma su segundo gol al 51:14, seguido por Robert Pires al 75:16 y Gilberto Silva cierra la goleada al 83:58."
+    ],
+    [
+     "Thierry Henry y Gilberto Silva lideran la tabla de goleadores con dos goles cada uno para Arsenal."
+    ]
+   ],
+   "coverage_notes": [
+    "La crónica usa hechos registrados de una simulación.",
+    "La cobertura de eventos es incompleta; un dato ausente no es cero.",
+    "Physical GRF recording: goals and scorers come from engine telemetry.",
+    "Pass outcomes, recoveries and possession were not exported and are left out.",
+    "Fictional cross-era simulation: this match never took place."
+   ],
+   "model": "gpt-4.1-mini",
+   "total_cost": "0.004115",
+   "report_sha256": "9b853bd6b6d2308ae9c422aead05f83e31b803ff62fdb98e0fdb1e22243b4e69",
+   "evaluation": null
+  }
+ ]
+}

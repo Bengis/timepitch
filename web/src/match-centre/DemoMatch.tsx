@@ -11,6 +11,7 @@ import { loadRecordedEvents } from './adapters/recorded-events';
 import { prepareRecordedAnalysis, type RecordedAnalysisModel } from './analysis/recorded-analysis';
 import { RecordingError, type RecordedEngineId, type RecordedTrack } from './adapters/recorded-track';
 import type { MatchSessionAdapter } from './session';
+import { CrewReportPanel } from './CrewReportPanel';
 import './broadcast-layout.css';
 
 /** Partido y semilla de la demo; las grabaciones de otra semilla salen «no disponible» (ver TP193). */
@@ -44,8 +45,10 @@ export function MovementSelector({ options, value, onChange, language }: {
   </fieldset>;
 }
 
-export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read, autoplay = false, rendererLocked = false }: {
+export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read, autoplay = false, rendererLocked = false, focusReport = false }: {
   visible: boolean; onBack: () => void; index?: RecordedReplayIndex;
+  /** TP246: abierta desde «Crónica IA de ejemplo»: lleva la vista a la crónica cuando aparece. */
+  focusReport?: boolean;
   /** TP226: arrancar la primera grabación cargada (al abrir desde VERSUS); al cambiar de motor no se fuerza. */
   autoplay?: boolean;
   /** TP237: desde VERSUS los gráficos ya se eligieron; desde la biblioteca se pueden cambiar en el campo. */
@@ -112,7 +115,8 @@ export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read,
     {busy && <p className="demo-status" role="status">{text.loading}…</p>}
     {failure && <p className="demo-status" role="alert">{text.failed} · {failure}</p>}
     {loaded && <MatchCentre key={`${loaded.adapter.identity.id}#${loaded.load}`} adapter={loaded.adapter} visible={visible} onBack={onBack}
-      matchLabel={text.fictional} initialElapsedMs={loaded.startMs} analysis={loaded.analysis} autoplay={autoplay && loaded.load === 1} rendererLocked={rendererLocked} />}
+      matchLabel={text.fictional} initialElapsedMs={loaded.startMs} analysis={loaded.analysis} autoplay={autoplay && loaded.load === 1} rendererLocked={rendererLocked}
+      sideReport={({ revealed, reveal }) => <CrewReportPanel traceHash={loaded.track.traceHash} locale={language} open={revealed || focusReport} onOpen={reveal} />} />}
   </section>;
 }
 

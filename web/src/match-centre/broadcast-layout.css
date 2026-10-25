@@ -251,3 +251,18 @@ body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
 .tp-shell[data-fit] .tpa-stage .unified-stage-main { gap: 0; }
 .tp-shell[data-fit] .tpa-stage .unified-layer-evidence:empty { display: none; }
 .tp-shell[data-fit] .unified-panel { gap: 10px; }
+
+/* TP246: crónica IA de la demo (crew multiagente en Azure AI Foundry), en la columna lateral junto al campo. */
+.crew-report { display: grid; gap: 8px; padding: 14px 16px; border-radius: 14px; background: linear-gradient(160deg, rgba(169, 139, 255, .16), var(--tp-panel) 60%);
+  border: 1px solid rgba(169, 139, 255, .45); }
+.crew-report-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.crew-report-head h2 { margin: 0; font: 700 12px var(--tp-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--tp-sim); }
+.crew-report-headline { margin: 0; font: 700 18px/1.25 var(--tp-display); color: var(--tp-ink); }
+.crew-report p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--tp-ink); }
+.crew-report .crew-report-teaser { color: var(--tp-ink2); }
+.crew-report-open { justify-self: start; padding: 8px 14px; border-radius: 999px; border: 0; background: var(--tp-sim); color: #10091f; font: 700 13px var(--tp-ui); cursor: pointer; }
+.crew-report-open:hover, .crew-report-open:focus-visible { filter: brightness(1.12); }
+.crew-report-notes { margin: 0; padding-left: 18px; font-size: 11px; color: var(--tp-ink3); }
+.crew-report-foot { display: grid; gap: 4px; padding-top: 8px; border-top: 1px solid var(--tp-line); }
+.crew-report-foot p { font-size: 11px; color: var(--tp-ink2); }
+.crew-report-note { margin: 0; font-size: 12px; color: var(--tp-ink2); }

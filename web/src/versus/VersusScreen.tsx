@@ -27,6 +27,8 @@ export type VersusScreenProps = Readonly<{
   home: VersusSide;
   away: VersusSide;
   onPlay: () => void;
+  /** TP246: enlace en texto (no un segundo botón) a la crónica IA de ejemplo de la demo. */
+  onOpenAiReport?: () => void;
   /** TP236: «Jugar partido» simula directamente; `App` pone al lado la elección de gráficos y el estado. */
   playDisabled?: boolean;
   playControls?: ReactNode;
@@ -272,7 +274,7 @@ function TeamPicker({ teams, side, setSide, home, away, onClose, t }: {
  * Primera visita (decisión TP225): el enfrentamiento de la demo, Arsenal 2003/04 contra Manchester City 2024/25, viene
  * preseleccionado (lo fija `App`); así la pantalla nunca abre vacía y cada tarjeta ya invita a «Cambiar equipo».
  */
-export function VersusScreen({ teams, home, away, onPlay, playDisabled, playControls, playStatus, moreDetails }: VersusScreenProps) {
+export function VersusScreen({ teams, home, away, onPlay, onOpenAiReport, playDisabled, playControls, playStatus, moreDetails }: VersusScreenProps) {
   const t = useVersusText();
   const [picking, setPicking] = useState<Side | null>(null);
   const opener = useRef<Record<Side, HTMLButtonElement | null>>({ home: null, away: null });
@@ -300,6 +302,7 @@ export function VersusScreen({ teams, home, away, onPlay, playDisabled, playCont
     <div className="vs-launch">
       <button type="button" className="vs-cta" disabled={!ready || playDisabled} onClick={onPlay}>{t.play} <span aria-hidden="true">▸</span></button>
       {playStatus ?? (!ready && <p className="vs-muted">{t.playWaiting}</p>)}
+      {onOpenAiReport && <button type="button" className="vs-ai-link" onClick={onOpenAiReport}><span className="vs-ai-icon" aria-hidden="true">✦</span>{t.aiReport} <span aria-hidden="true">→</span></button>}
       {(playControls || moreDetails) && <details className="vs-options"><summary><span aria-hidden="true">⚙ </span>{t.options}</summary>
         {playControls}{moreDetails}</details>}
     </div>

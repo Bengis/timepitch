@@ -1,5 +1,5 @@
 import statsbombIcon from '../assets/statsbomb.svg?no-inline';
-import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Pitch } from '../match/Pitch';
 import { HistoricalComparisonPanel } from '../historical/HistoricalComparison';
 import type { SceneFrame } from '../match/retroScene';
@@ -94,7 +94,9 @@ export type MatchCentreProps = { adapter: MatchSessionAdapter; sequence?: Sequen
   /** TP237: el modo gráfico se eligió al lanzar (simulación y demo); el campo no ofrece cambiarlo. */
   rendererLocked?: boolean;
   /** TP243: grabación de motor jugada en vivo (TouchLines): lleva el armazón de partido simulado, no el de la demo. */
-  liveSimulation?: boolean };
+  liveSimulation?: boolean;
+  /** TP246: pieza de la columna lateral (crónica IA de la demo); recibe si el resultado ya se reveló y cómo revelarlo. */
+  sideReport?: (reveal: Readonly<{ revealed: boolean; reveal: () => void }>) => ReactNode };
 
 /** TP239: métricas que enseña «Esfuerzo» en los partidos simulados (distancia, carrera intensa, sprints, velocidad). */
 const EFFORT_METRIC = /distance|hsr|sprint|speed|accel|decel|metres_per_minute/;
@@ -111,7 +113,7 @@ export function MatchCentre(props: MatchCentreProps) {
   return <SessionCentre key={identityKey(props.adapter.identity)} {...props} />;
 }
 
-function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onSectionChange, focusEvents = false, actions, sequence, matchLabel, initialElapsedMs, analysis: analysisModel, autoplay = false, rendererLocked = false, liveSimulation = false }: MatchCentreProps) {
+function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onSectionChange, focusEvents = false, actions, sequence, matchLabel, initialElapsedMs, analysis: analysisModel, autoplay = false, rendererLocked = false, liveSimulation = false, sideReport }: MatchCentreProps) {
   const playback = useMatchPlayback(adapter, visible, sequence?.policy), { state, snapshot, view } = playback;
   const t = usePlayerText(), q = useSequenceText(), ta = useAnalysisText(), panelId = useId();
   const profileKey=sequence?.kind==='actions'?sequence.depiction.key:sequence?.policy.id??'ordinary';
@@ -348,6 +350,7 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
       <div className={`unified-match-area${shell?' tpa-stage':''}`} hidden={section!=='match'}>{!sequence&&<div className="unified-stage-main">{(!shell||filtersUseful)&&<div className="unified-filters" aria-label={t.layers}><label><input type="checkbox" checked={showSynthetic} disabled={!historicalMotion} onChange={e => setSynthetic(e.target.checked)} />{t.synthetic}</label><label><input type="checkbox" checked={showAnchors} disabled={!snapshot.layers} onChange={e => setAnchors(e.target.checked)} />{t.anchors}</label></div>}{field}<MatchLayerEvidence layers={snapshot.layers}/></div>}
         {analysisCtx&&analysisModel?<aside className="tpa-side" data-analysis-side>
           {scoreInSide&&scoreboard}
+          {sideReport?.({ revealed, reveal: () => { setReveal(true); setAnalysisScope('final'); } })}
           <SummaryMini ctx={analysisCtx}/>
           <TimelinePanel ctx={analysisCtx} events={analysisModel.events} untilMs={finalRequested?d.durationMs??elapsed:elapsed} onSeek={seek}/>
           {revealBlock}

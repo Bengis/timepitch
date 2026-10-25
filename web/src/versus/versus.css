@@ -154,6 +154,11 @@
 .vs-launch { display: grid; justify-items: center; gap: 8px; }
 .vs-launch > p { margin: 0; }
 .vs-launch > .vs-cta { width: min(460px, 100%); }
+/* TP246: acceso a la crónica IA de ejemplo: a la vista bajo «Jugar partido», en el color de lo simulado, sin competir con él. */
+.vs .vs-ai-link { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(169, 139, 255, .55);
+  background: rgba(169, 139, 255, .12); color: var(--tp-ink); font: 600 13px var(--tp-ui); cursor: pointer; }
+.vs .vs-ai-link:hover, .vs .vs-ai-link:focus-visible { background: rgba(169, 139, 255, .24); }
+.vs .vs-ai-link .vs-ai-icon { color: var(--tp-sim); font-size: 15px; line-height: 1; }
 .vs-options { justify-self: stretch; display: grid; gap: 12px; }
 .vs-options > summary { justify-self: center; min-height: 36px; padding: 6px 10px; color: var(--tp-ink2); font-size: 13px; font-weight: 600; cursor: pointer; list-style: none; }
 .vs-options > summary::-webkit-details-marker { display: none; }
