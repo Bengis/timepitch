@@ -26,8 +26,8 @@ const TEXT = {
       'A deterministic verifier checks every sentence against the facts; if one fails, the writer fixes it.',
       'The sealed report is published as a static file and scored with Azure AI evaluation (groundedness, coherence, fluency). Visitors do not trigger any AI call.'],
     open: 'Read the AI report (reveals the result)',
-    how: (model: string) => `Written by a multi-agent crew (analyst and writer, ${model} on Azure AI Foundry, run as an Azure Container Apps job) and checked sentence by sentence against the recorded facts by a deterministic verifier.`,
-    cost: 'Model cost', evaluation: 'Foundry evaluation', groundedness: 'groundedness', coherence: 'coherence', fluency: 'fluency',
+    how: 'Written by AI agents on Azure after the match and checked line by line against the match data.',
+    evaluation: 'Foundry evaluation', groundedness: 'groundedness', coherence: 'coherence', fluency: 'fluency',
     otherEngine: 'AI match report: choose the GRF recording of this match to read it.' },
   es: { title: 'Crónica IA del partido', badge: 'Agent Framework · Azure AI Foundry',
     teaser: 'Se escribió en Azure después del partido, a partir de la grabación del motor: agentes de IA la redactan y un verificador comprueba cada frase contra los hechos.',
@@ -40,8 +40,8 @@ const TEXT = {
       'Un verificador determinista comprueba cada frase contra los hechos; si una falla, el redactor la corrige.',
       'La crónica sellada se publica como fichero estático y se puntúa con la evaluación de Azure AI (fundamentación, coherencia, fluidez). El visitante no dispara ninguna llamada a la IA.'],
     open: 'Leer la crónica IA (revela el resultado)',
-    how: (model: string) => `Escrita por un equipo de agentes (analista y redactor, ${model} en Azure AI Foundry, ejecutado como job de Azure Container Apps) y comprobada frase a frase contra los hechos grabados por un verificador determinista.`,
-    cost: 'Coste del modelo', evaluation: 'Evaluación de Foundry', groundedness: 'fundamentación', coherence: 'coherencia', fluency: 'fluidez',
+    how: 'Escrita por agentes de IA en Azure al acabar el partido y comprobada línea a línea con los datos del partido.',
+    evaluation: 'Evaluación de Foundry', groundedness: 'fundamentación', coherence: 'coherencia', fluency: 'fluidez',
     otherEngine: 'Crónica IA: elige la grabación de GRF de este partido para leerla.' },
 } as const;
 
@@ -118,9 +118,9 @@ export function CrewReportPanel({ traceHash, locale, open = false, onOpen, load 
       {report.paragraphs.map((p, i) => <p key={i}>{p.join(' ')}</p>)}
       {report.coverage_notes.length > 0 && <ul className="crew-report-notes">{report.coverage_notes.map(n => <li key={n}>{noteIn(n, report.locale)}</li>)}</ul>}
       <footer className="crew-report-foot">
-        <p>{t.how(report.model)}</p>
+        <p>{t.how}</p>
         <p>
-          {t.cost}: {Number(report.total_cost).toFixed(4)} USD
+          {report.model} · {Number(report.total_cost).toFixed(4)} USD
           {scores && <> · {scores}</>}
         </p>
         <AzurePipeline locale={report.locale} />

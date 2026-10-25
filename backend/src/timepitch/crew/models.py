@@ -17,10 +17,10 @@ from ..chronicles.models import FACT_VERSION, Digest, Identifier, Locale, Strict
 CREW_VERSION = 'crew-1'
 ANALYST_PROMPT_VERSION = 'crew-analyst-2'
 WRITER_PROMPT_VERSION = 'crew-writer-6'  # TP253: marcador solo en el titular, local–visitante también si gana el visitante
-VERIFIER_VERSION = 'crew-verifier-4'
-FIXER_VERSION = 'crew-fixer-1'
+VERIFIER_VERSION = 'crew-verifier-5'
+FIXER_VERSION = 'crew-fixer-2'
 EVALUATION_VERSION = 'crew-eval-1'
-FALLBACK_VERSION = 'crew-fallback-2'
+FALLBACK_VERSION = 'crew-fallback-3'
 REPORT_VERSION = 'crew-report-2'
 MAX_OUTPUT_TOKENS = 1024
 CALLS_PER_REPORT = 3

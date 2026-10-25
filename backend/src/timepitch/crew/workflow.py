@@ -12,9 +12,9 @@ from agent_framework import Case, Default, Executor, WorkflowBuilder, WorkflowCo
 
 from ..chronicles.models import FactPack, Locale, fact_pack_hash
 from ..chronicles.azure.validation import validate_draft
-from ..chronicles.render import render_chronicle
-from .checks import fix_citations
-from .agents import (CrewAgents, SendGate, analyst_instructions, analyst_payload, analyst_schema, fallback_selection,
+from .fallback import crew_fallback_text
+from .checks import fix_citations, normalize_names
+from .agents import (CrewAgents, SendGate, analyst_instructions, analyst_payload, analyst_schema,
                      parse_draft, parse_plan, planned_pack, verify, writer_instructions, writer_payload, writer_schema)
 from .gated import gated_call
 from .ledger import CrewLedger
@@ -113,10 +113,16 @@ class WriterExecutor(Executor):
         rt = self.rt
         draft, record = await rt.llm_step(step, writer_instructions(rt.locale, planned_pack(rt.pack, state.plan)), writer_payload(rt.pack, state.plan, revision),
                                           'chronicle_prose', writer_schema(), lambda text: parse_draft(text, attempt))
+        names = []
+        if draft is not None:
+            fixed, names = normalize_names(rt.pack, draft.draft)
+            draft = draft.model_copy(update={'draft': fixed})
         if draft is not None and attempt == 2 and state.drafts and draft.draft == state.drafts[-1].draft:
             record = record.model_copy(update={'code': 'revision_noop'})
             draft = None
         rt.add_step(state, record)
+        if draft is not None and names:
+            rt.add_step(state, CrewStep(role='fixer', code='fixed', reason='names', fixes=names))
         if draft is None:
             verdict = Verdict(decision='fallback', code=record.code, location='draft', attempt=attempt)
             state.verdicts.append(verdict)
@@ -189,7 +195,7 @@ class PublisherExecutor(Executor):
         rt = self.rt
         accepted = verdict.decision == 'accept' and state.drafts and state.drafts[-1].attempt == verdict.attempt
         provenance = 'crew_ai_draft_checked' if accepted else 'deterministic_fallback'
-        fallback_text = None if accepted else render_chronicle(rt.pack, fallback_selection(rt.pack), rt.locale)
+        fallback_text = None if accepted else crew_fallback_text(rt.pack, rt.locale)
         state.outcome = provenance
         rt.add_step(state, CrewStep(role='publisher', code=provenance, reason=verdict.code))
         _save(ctx, state)

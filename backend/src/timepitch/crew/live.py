@@ -4,15 +4,18 @@ El servidor público construye el FactPack del partido del dueño (GRF físico o
 gasto y encola la petición con la SAS de solo añadir; después consulta el blob del informe con la SAS de solo lectura y
 lo revalida entero con ``cloud.fetch`` antes de servirlo. Sin SDK de Azure: dos llamadas REST con la SAS (que nunca se
 imprime). Topes: los del sobre (dinero, informes, caducidad; el job solo acepta ese sobre) y, aquí, una petición en
-curso por dueño, unas pocas al día por dueño y nunca más informes que ``max_reports``.
+curso por dueño, unas pocas al día por dueño y por IP (TP257: borrar la cookie no da más) y nunca más informes que
+``max_reports``. La IP no se guarda: solo un HMAC con una sal aleatoria propia del fichero de estado.
 """
 from __future__ import annotations
 
 from dataclasses import dataclass
 import gzip
+import hmac
 import json
 import os
 from pathlib import Path
+import secrets
 import threading
 import time
 import urllib.error
@@ -27,6 +30,7 @@ from .models import CrewReport, default_binding, request_hash
 ENGINES = ('grf', 'touchlines')
 PENDING_TIMEOUT_S = 15 * 60
 OWNER_DAILY = 6
+CLIENT_DAILY = 10  # por IP: varias sesiones tras una misma red (una oficina, los jueces) siguen cabiendo
 
 
 class LiveCrewUnavailable(RuntimeError):
@@ -97,7 +101,10 @@ def report_view(report: CrewReport) -> dict:
     if draft is not None:
         headline, paragraphs = draft.headline.text, [[s.text for s in p.sentences] for p in draft.paragraphs]
     else:
-        headline, paragraphs = None, [[report.fallback_text or '']]
+        # El texto de reserva llega como bloques separados por una línea en blanco: el primero, el marcador, es el
+        # titular y cada uno de los demás, un párrafo.
+        blocks = [b.strip() for b in (report.fallback_text or '').split('\n\n') if b.strip()]
+        headline, paragraphs = (blocks[0] if blocks else None), [[b] for b in blocks[1:]]
     models = sorted({s.model for s in report.steps if s.model})
     return {'trace_hash': report.source.trace_hash, 'locale': report.locale, 'engine': report.source.engine,
             'headline': headline, 'paragraphs': paragraphs, 'coverage_notes': list(report.coverage_notes),
@@ -157,7 +164,14 @@ class LiveCrew:
             raise KeyError(engine)
         return self.source(engine, match_id, owner)
 
-    def request(self, engine: str, match_id: str, owner: str, locale: str) -> dict:
+    @staticmethod
+    def _client_key(state: dict, client: str | None) -> str | None:
+        if not client:
+            return None
+        salt = state.setdefault('salt', secrets.token_hex(16))
+        return hmac.new(bytes.fromhex(salt), client.encode(), 'sha256').hexdigest()[:32]
+
+    def request(self, engine: str, match_id: str, owner: str, locale: str, client: str | None = None) -> dict:
         if not self.available():
             raise LiveCrewUnavailable('disabled')
         pack = self._pack(engine, match_id, owner)
@@ -173,12 +187,16 @@ class LiveCrew:
                 raise LiveCrewBusy('one_in_flight')
             if sum(1 for r in mine if now - r['at'] < 86400) >= OWNER_DAILY:
                 raise LiveCrewBusy('daily_limit')
+            key = self._client_key(state, client)
+            if key and sum(1 for r in state['requests'].values() if r.get('client') == key and now - r['at'] < 86400) >= CLIENT_DAILY:
+                raise LiveCrewBusy('daily_limit')
             grant = self._grant()
             if len(state['requests']) >= grant.max_reports:
                 raise LiveCrewBusy('budget_exhausted')
             body, rh = build_request(pack, locale, self._envelope(), self.binding, now=self.now)
             self.queue().send(body)
-            state['requests'][rh] = {'owner': owner, 'at': now, 'engine': engine, 'match_id': match_id, 'locale': locale}
+            state['requests'][rh] = {'owner': owner, 'client': key, 'at': now, 'engine': engine, 'match_id': match_id,
+                                     'locale': locale}
             self._save(state)
         return {'status': 'pending', 'request_hash': rh}
 

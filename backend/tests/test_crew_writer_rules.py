@@ -123,15 +123,13 @@ def test_all_failures_of_the_real_tp230b_drafts_are_located():
 
 
 @pytest.mark.parametrize('name,source,lively,expected', [
-    # crew-verifier-4 adds the possessive on a full name ("Steven N'Zonzi's decisive goal").
-    ('tp230b-blackburn-united', blackburn, lively_blackburn,
-     [('possessive_name', 'headline'), ('unknown_entity', 'p2s2'), ('name_not_as_recorded', 'p2s2'),
-      ('unknown_entity', 'p3s1'), ('name_not_as_recorded', 'p3s1')]),
+    # crew-fixer-2 writes the short names as recorded and crew-verifier-5 allows "Steven N'Zonzi's": the real
+    # draft is now accepted without a revision.
+    ('tp230b-blackburn-united', blackburn, lively_blackburn, None),
     # Plan replayed without coverage (crew-analyst-2); after the Fixer cites result for the final 6-1 in p3s1.
     ('tp230b-arsenal-mancity-43', arsenal, lively_arsenal,
      [('unknown_entity', 'headline'), ('unsupported_metric', 'p1s1'), ('coverage_in_prose', 'p1s1'),
-      ('unsupported_clock', 'p2s1'), ('unsupported_score', 'p2s2'), ('name_not_as_recorded', 'p3s2'),
-      ('possessive_name', 'p3s2')])])
+      ('unsupported_clock', 'p2s1'), ('unsupported_score', 'p2s2')])])
 def test_real_drafts_replayed_revision_carries_every_failure(offline, tmp_path, name, source, lively, expected):
     real = receipts(name)
     model = 'gpt-4.1-mini-2025-04-14'
@@ -145,7 +143,12 @@ def test_real_drafts_replayed_revision_carries_every_failure(offline, tmp_path, 
         finally:
             await h.close()
     report = offline.run(go())
-    roles = [(s.role, s.code) for s in report.steps]
+    # crew-fixer-2 writes names as recorded before the Verifier; its step is left out here.
+    roles = [(s.role, s.code) for s in report.steps if s.reason != 'names']
+    if expected is None:
+        assert roles == [('analyst', 'ok'), ('writer', 'ok'), ('verifier', 'accepted'), ('publisher', 'crew_ai_draft_checked')]
+        assert len(fake.requests) == 2
+        return
     assert roles[:3] == [('analyst', 'ok'), ('writer', 'ok'), ('verifier', 'rejected')]
     assert roles[-3:] == [('writer_revision', 'ok'), ('verifier', 'accepted'), ('publisher', 'crew_ai_draft_checked')]
     request = json.loads(fake.requests[2]['input'][0]['content'][0]['text'])['revision_request']

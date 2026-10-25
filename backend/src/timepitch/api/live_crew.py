@@ -35,7 +35,7 @@ def live_crew_router():
     def create(body: LiveCrewRequest, request: Request, owner: Owner):
         crew = service(request)
         try:
-            return crew.request(body.engine, body.match_id, owner, body.locale)
+            return crew.request(body.engine, body.match_id, owner, body.locale, request.client.host if request.client else None)
         except KeyError:
             raise HTTPException(404, 'Match not found or not finished') from None
         except LiveCrewBusy as error:

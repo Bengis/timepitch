@@ -6,8 +6,8 @@ import pytest
 from crew_fixtures import CANARY, FIXED, LIVELY, PLAN, Harness, intents, offline, receipts, reply, tp229_pack  # noqa: F401
 from timepitch.chronicles.azure.models import VALIDATOR_VERSION, ChronicleDraft
 from timepitch.chronicles.azure.validation import DraftRejected, locate_rejection, validate_draft
-from timepitch.chronicles.render import render_chronicle
-from timepitch.crew.agents import LIVELY_STYLE, PROPER_NOUN_RULE, analyst_schema, fallback_selection
+from timepitch.crew.fallback import crew_fallback_text
+from timepitch.crew.agents import LIVELY_STYLE, PROPER_NOUN_RULE, analyst_schema
 from timepitch.crew.models import verify_report
 from timepitch.crew.workflow import run_crew
 
@@ -70,16 +70,18 @@ def test_tp229_headline_rejection_is_revised_then_accepted(offline, tmp_path):
     h = Harness(tmp_path)
     report = run(offline, h)
     # The Fixer cites result for the 1-0 in p1s1 (literal support); the uncited name needs the Writer.
-    assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('verifier', 'rejected'), ('fixer', 'fixed'),
+    # crew-fixer-2 first writes the names of p2s1 as recorded, with no model call.
+    assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('fixer', 'fixed'), ('verifier', 'rejected'), ('fixer', 'fixed'),
                              ('verifier', 'rejected'), ('writer_revision', 'ok'), ('verifier', 'accepted'),
                              ('publisher', 'crew_ai_draft_checked')]
-    assert report.steps[3].fixes == ['p1s1+result']
-    rejected = report.steps[4]
+    assert report.steps[2].reason == 'names' and report.steps[2].fixes == ['p2s1:names']
+    assert report.steps[4].fixes == ['p1s1+result']
+    rejected = report.steps[5]
     assert (rejected.reason, rejected.location) == ('uncited_entity', 'headline')
     assert report.provenance == 'crew_ai_draft_checked' and report.semantic_verified is False
     assert report.draft == ChronicleDraft.model_validate(FIXED) and report.fallback_text is None
     assert verify_report(report)
-    assert report.steps[5].request_id == 'req-fixed' and report.steps[5].model == 'gpt-4.1-mini'
+    assert report.steps[6].request_id == 'req-fixed' and report.steps[6].model == 'gpt-4.1-mini'
     assert report.versions['agent-framework-core'] == '1.22.0' and report.versions['agent-framework-openai'] == '1.17.0'
     assert report.versions['writer_prompt'] == 'crew-writer-6'
     # Three real requests, all bounded, unstored and gated.
@@ -100,11 +102,11 @@ def test_second_rejection_goes_to_deterministic_fallback(offline, tmp_path):
     fake = offline([reply(PLAN), reply(CANARY), reply(CANARY)])
     h = Harness(tmp_path)
     report = run(offline, h)
-    assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('verifier', 'rejected'), ('fixer', 'fixed'),
-                             ('verifier', 'rejected'), ('writer_revision', 'ok'), ('verifier', 'rejected'),
+    assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('fixer', 'fixed'), ('verifier', 'rejected'), ('fixer', 'fixed'),
+                             ('verifier', 'rejected'), ('writer_revision', 'ok'), ('fixer', 'fixed'), ('verifier', 'rejected'),
                              ('fixer', 'fixed'), ('verifier', 'rejected'), ('publisher', 'deterministic_fallback')]
     assert report.provenance == 'deterministic_fallback' and report.draft is None
-    assert report.fallback_text == render_chronicle(tp229_pack(), fallback_selection(tp229_pack()), 'en')
+    assert report.fallback_text == crew_fallback_text(tp229_pack(), 'en')
     assert len(fake.requests) == 3  # never a fourth call
     assert verify_report(report)
 

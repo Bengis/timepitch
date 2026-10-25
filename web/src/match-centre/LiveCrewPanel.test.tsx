@@ -42,7 +42,8 @@ it('before the end it says what will happen; at the end it requests once, waits 
   await vi.advanceTimersByTimeAsync(13_000);
   expect(await screen.findByRole('heading', { name: 'Home Town win 2–1' })).toBeInTheDocument();
   expect(screen.getByText('First sentence. Second.')).toBeInTheDocument();
-  expect(screen.getByText(/Model cost: 0\.0041 USD/)).toBeInTheDocument();
+  expect(screen.getByText(/checked line by line against the match data/)).toBeInTheDocument();
+  expect(screen.getByText(/· 0\.0041 USD/)).toBeInTheDocument();
   expect(calls.filter(c => c === 'POST /api/crew/live')).toHaveLength(1);
 });
 

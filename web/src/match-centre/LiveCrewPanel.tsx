@@ -14,17 +14,17 @@ const TEXT = {
     pending: 'AI agents on Azure are writing the report… it usually takes 1–2 minutes.',
     failed: 'The AI report could not be written this time.', busy: 'Another AI report of yours is still being written: try again in a minute.',
     limit: 'You have reached today\'s AI reports.', budget: 'The AI reports budget for the demo is used up.',
-    fallback: 'The AI draft did not pass the verifier, so this is the report built directly from the recorded facts.',
-    retry: 'Try again', cost: 'Model cost',
-    how: (model: string) => `Written after the match by a multi-agent crew (analyst and writer, ${model} on Azure AI Foundry, run as an Azure Container Apps job) and checked sentence by sentence against the recorded facts by a deterministic verifier.` },
+    fallback: 'The AI draft did not pass the fact check, so these are the plain match facts.',
+    retry: 'Try again',
+    how: 'Written by AI agents on Azure after the match and checked line by line against the match data.' },
   es: { title: 'Crónica IA del partido', badge: 'Agent Framework · Azure AI Foundry',
     before: 'Cuando acabe el partido, agentes de IA en Azure escribirán su crónica con lo que grabó el motor.',
     pending: 'Los agentes de IA en Azure están escribiendo la crónica… suele tardar 1-2 minutos.',
     failed: 'Esta vez no se pudo escribir la crónica IA.', busy: 'Todavía se está escribiendo otra crónica tuya: prueba dentro de un minuto.',
     limit: 'Has llegado a las crónicas IA de hoy.', budget: 'Se ha agotado el presupuesto de crónicas IA de la demo.',
-    fallback: 'El borrador de la IA no pasó el verificador; esta es la crónica construida directamente con los hechos grabados.',
-    retry: 'Reintentar', cost: 'Coste del modelo',
-    how: (model: string) => `Escrita al acabar el partido por un equipo de agentes (analista y redactor, ${model} en Azure AI Foundry, ejecutado como job de Azure Container Apps) y comprobada frase a frase contra los hechos grabados por un verificador determinista.` },
+    fallback: 'El borrador de la IA no pasó la comprobación, así que estos son los datos del partido tal cual.',
+    retry: 'Reintentar',
+    how: 'Escrita por agentes de IA en Azure al acabar el partido y comprobada línea a línea con los datos del partido.' },
 } as const;
 
 const POLL_MS = 6000, MAX_POLLS = 50;
@@ -100,8 +100,8 @@ export function LiveCrewPanel({ engine, matchId, locale, ended }: { engine: Engi
       {report.paragraphs.map((p, i) => <p key={i}>{p.join(' ')}</p>)}
       {report.coverage_notes.length > 0 && <ul className="crew-report-notes">{report.coverage_notes.map(n => <li key={n}>{noteIn(n, locale)}</li>)}</ul>}
       <footer className="crew-report-foot">
-        <p>{t.how(report.model ?? 'gpt-4.1-mini')}</p>
-        <p>{t.cost}: {Number(report.total_cost).toFixed(4)} USD</p>
+        <p>{t.how}</p>
+        <p>{report.model ?? 'gpt-4.1-mini'} · {Number(report.total_cost).toFixed(4)} USD</p>
       </footer>
     </>}
     <AzurePipeline locale={locale} />

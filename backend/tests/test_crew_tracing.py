@@ -46,7 +46,9 @@ def test_run_and_step_spans_carry_codes_not_text(offline, tmp_path):
     assert attrs['crew.version.agent-framework-core'] == '1.22.0'
     steps = [s.attributes for s in spans if s.name == 'crew.step']
     assert [(a['crew.role'], a['crew.code']) for a in steps] == [(s.role, s.code) for s in report.steps]
-    fixer = next(a for a in steps if a['crew.role'] == 'fixer')
+    names = next(a for a in steps if a['crew.role'] == 'fixer')
+    assert names['crew.reason'] == 'names'  # crew-fixer-2 writes names as recorded first
+    fixer = next(a for a in steps if a['crew.role'] == 'fixer' and a['crew.reason'] != 'names')
     assert list(fixer['crew.fixes']) == ['p1s1+result']
     revision = next(a for a in steps if a['crew.role'] == 'writer_revision')
     assert revision['crew.provider_request_id'] == 'req-fixed' and revision['crew.tokens.input'] == 900

@@ -33,7 +33,7 @@ it('open, shows the checked AI report with how it was made, its cost and the Fou
   expect(await screen.findByRole('heading', { name: 'AI match report' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Arsenal win 6–1' })).toBeInTheDocument();
   expect(screen.getByText('First sentence. Second sentence.')).toBeInTheDocument();
-  expect(screen.getByText(/multi-agent crew .*gpt-4\.1-mini on Azure AI Foundry, run as an Azure Container Apps job/)).toBeInTheDocument();
+  expect(screen.getByText(/Written by AI agents on Azure after the match and checked line by line/)).toBeInTheDocument();
   expect(screen.getByText(/0\.0039 USD · Foundry evaluation: groundedness 5\/5, coherence 5\/5, fluency 3\/5/)).toBeInTheDocument();
 });
 

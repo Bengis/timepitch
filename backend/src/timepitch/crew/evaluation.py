@@ -17,7 +17,7 @@ import json
 from ..chronicles.azure.validation import locate_all_rejections
 from ..chronicles.models import FactPack, fact_pack_hash
 from .agents import AgentResult, fallback_selection
-from .checks import possessive_failure, name_failure, sentences
+from .checks import name_failure, sentences
 from .gated import gated_call
 from .models import EVALUATION_VERSION, CrewBinding, CrewReport, digest, verify_report
 
@@ -109,8 +109,6 @@ class NamesAsRecorded(_CodeEvaluator):
         for where, s in sentences(report.draft):
             if name_failure(pack, s.text):
                 out.append(f'name_not_as_recorded@{where}')
-            if possessive_failure(pack, s.text):
-                out.append(f'possessive_name@{where}')
         return out
 
 

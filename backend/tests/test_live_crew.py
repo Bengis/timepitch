@@ -14,7 +14,7 @@ from timepitch.chronicles.live_facts import from_grf_physical
 from timepitch.chronicles.models import fact_pack_hash
 from timepitch.chronicles.recorded_facts import from_recorded
 from timepitch.crew.cloud import build_request, failed_name, report_name, run_job_once
-from timepitch.crew.live import LiveCrew, LiveCrewBusy, LiveCrewSettings, report_view
+from timepitch.crew.live import CLIENT_DAILY, LiveCrew, LiveCrewBusy, LiveCrewSettings, report_view
 from timepitch.crew.models import request_hash
 
 TRACE = '0' * 63 + '2'
@@ -124,6 +124,21 @@ def test_one_in_flight_per_owner_a_daily_limit_and_the_envelope_cap(tmp_path):
     assert crew.remaining() == 0 and len(crew._queue.sent) == 3
 
 
+
+def test_new_sessions_from_one_ip_share_its_daily_limit_and_the_ip_is_not_stored(tmp_path):
+    packs = {}
+
+    def source(engine, match_id, owner):
+        return packs.setdefault(match_id, tp229_pack().model_copy(update={'trace_hash': f'{len(packs) + 1:064x}'}))
+    crew, clock = service(tmp_path, g=grant(max_reports=40, locales=['en', 'es']), source=source)
+    for i in range(CLIENT_DAILY):  # a fresh cookie each time: the owner limits never apply
+        crew.request('grf', f'm{i}', f'owner-{i}', 'en', '203.0.113.7')
+    with pytest.raises(LiveCrewBusy, match='daily_limit'):
+        crew.request('grf', 'm-extra', 'owner-extra', 'en', '203.0.113.7')
+    crew.request('grf', 'm-other', 'owner-other', 'en', '198.51.100.9')
+    stored = (tmp_path / 'live' / 'requests.json').read_text(encoding='utf-8')
+    assert '203.0.113.7' not in stored and '198.51.100.9' not in stored
+
 def test_failed_marker_and_timeout_close_the_request(tmp_path):
     blobs = FakeStore()
     crew, clock = service(tmp_path, blobs=blobs)
@@ -169,6 +184,14 @@ def test_report_view_keeps_only_what_the_sealed_report_says():
     view = report_view(report)
     assert view['headline'] == 'Home win' and view['paragraphs'] == [['One.', 'Two.']] and view['model'] == 'gpt-4.1-mini'
     assert view['total_cost'] == '0.0041' and view['evaluation'] is None
+
+
+def test_report_view_turns_the_fallback_score_into_the_headline():
+    report = SimpleNamespace(draft=None, fallback_text='Home 0–0 Away\n\nOne.\n\nTwo.', steps=[], locale='en', coverage_notes=[],
+                             source=SimpleNamespace(trace_hash=TRACE, engine='grf'), total_cost=Decimal('0.0028'),
+                             report_sha256='b' * 64, provenance='deterministic_fallback')
+    view = report_view(report)
+    assert view['headline'] == 'Home 0–0 Away' and view['paragraphs'] == [['One.'], ['Two.']]
 
 
 def test_writer_keeps_the_home_side_first_when_the_away_side_won():

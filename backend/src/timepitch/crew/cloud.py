@@ -384,8 +384,7 @@ class FetchRejected(ValueError):
 
 def revalidate(raw: bytes, pack: FactPack, locale: str, binding: CrewBinding) -> CrewReport:
     from ..chronicles.azure.validation import locate_all_rejections, validate_draft
-    from ..chronicles.render import render_chronicle
-    from .agents import fallback_selection
+    from .fallback import crew_fallback_text
     from .checks import coverage_failures, name_failures
     if len(raw) > MAX_REPORT_BYTES:
         raise FetchRejected('report_too_large')
@@ -414,7 +413,7 @@ def revalidate(raw: bytes, pack: FactPack, locale: str, binding: CrewBinding) ->
             raise FetchRejected('draft_fails_verifier')
         if report.coverage_notes != validate_draft(pack, report.draft, locale).coverage_notes:
             raise FetchRejected('coverage_notes')
-    elif report.fallback_text != render_chronicle(pack, fallback_selection(pack), locale) or report.coverage_notes:
+    elif report.fallback_text != crew_fallback_text(pack, locale) or report.coverage_notes:
         raise FetchRejected('fallback_text')
     return report
 

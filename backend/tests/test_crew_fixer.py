@@ -109,7 +109,7 @@ def test_names_must_be_written_as_recorded(text, bad):
 def test_versions_and_writer_three_rules():
     versions = crew_versions()
     assert (versions['writer_prompt'], versions['verifier'], versions['fixer'], versions['analyst_prompt']) == (
-        'crew-writer-6', 'crew-verifier-4', 'crew-fixer-1', 'crew-analyst-2')
+        'crew-writer-6', 'crew-verifier-5', 'crew-fixer-2', 'crew-analyst-2')
     assert versions['validator'] == 'azure-prose-checks-1'
     text = writer_instructions('en')
     assert 'recorded capitals' in text and 'Never write a whole sentence in lowercase' in text
@@ -213,15 +213,17 @@ def codes(report):
 def test_replay_tp230c_blackburn_fixer_then_guided_revision_accepts(offline, tmp_path):
     run = tp230c()[0]
     report, fake = replay(offline, tmp_path, BLACKBURN, [run['analyst'], run['writer'], compliant_blackburn()])
-    assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('verifier', 'rejected'), ('fixer', 'fixed'),
+    # crew-fixer-2 restores the capitals of every full name; the lowercase short "n'zonzi" still needs the Writer.
+    assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('fixer', 'fixed'), ('verifier', 'rejected'), ('fixer', 'fixed'),
                              ('verifier', 'rejected'), ('writer_revision', 'ok'), ('verifier', 'rejected'),
                              ('fixer', 'fixed'), ('verifier', 'accepted'), ('publisher', 'crew_ai_draft_checked')]
-    assert report.steps[3].fixes == ['p1s1+result'] and report.steps[7].fixes == ['p1s1+result']
+    assert report.steps[2].fixes == ['headline:names', 'p1s1:names', 'p2s1:names', 'p2s2:names', 'p3s1:names']
+    assert report.steps[4].fixes == ['p1s1+result'] and report.steps[8].fixes == ['p1s1+result']
     request = json.loads(fake.requests[2]['input'][0]['content'][0]['text'])['revision_request']
-    assert {f['failed_check'] for f in request['failures']} == {'name_not_as_recorded'}
-    headline = request['failures'][0]
-    assert headline['location'] == 'headline' and headline['sentence'] == run['writer']['headline']['text']
-    assert 'recorded capitals' in ' '.join(headline['fix_options'])
+    assert [(f['failed_check'], f['location']) for f in request['failures']] == [('name_not_as_recorded', 'p2s1')]
+    short = request['failures'][0]
+    assert short['sentence'].startswith("n'zonzi leads with one goal, while Paul Scholes")
+    assert 'recorded capitals' in ' '.join(short['fix_options'])
     assert report.draft.paragraphs[0].sentences[0].fact_ids == ['goal:grf:134', 'result']
     assert report.draft.paragraphs[0].sentences[0].text == compliant_blackburn()['paragraphs'][0]['sentences'][0]['text']
     assert len(fake.requests) == 3
@@ -231,9 +233,9 @@ def test_replay_tp230c_arsenal_identical_revision_is_revision_noop(offline, tmp_
     run = tp230c()[1]
     assert run['writer'] == run['writer_revision']
     report, fake = replay(offline, tmp_path, ARSENAL, [run['analyst'], run['writer'], run['writer_revision']])
-    assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('verifier', 'rejected'),
+    assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('fixer', 'fixed'), ('verifier', 'rejected'),
                              ('writer_revision', 'revision_noop'), ('publisher', 'deterministic_fallback')]
-    assert report.steps[3].cost > 0 and report.steps[-1].reason == 'revision_noop'
+    assert report.steps[4].cost > 0 and report.steps[-1].reason == 'revision_noop'
     request = json.loads(fake.requests[2]['input'][0]['content'][0]['text'])['revision_request']
     coverage = next(f for f in request['failures'] if f['location'] == 'p1s1')
     assert coverage['rule'].startswith('The coverage sentence must not mention')

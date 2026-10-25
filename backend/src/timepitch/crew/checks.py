@@ -48,15 +48,49 @@ def possessive_failure(pack: FactPack, text: str) -> bool:
 
 
 def name_failures(pack: FactPack, draft: ChronicleDraft, skip: set[str]) -> list[tuple[str, str]]:
-    out = []
-    for where, s in sentences(draft):
-        if where in skip:
-            continue
-        if name_failure(pack, s.text):
-            out.append(('name_not_as_recorded', where))
-        if possessive_failure(pack, s.text):
-            out.append(('possessive_name', where))
-    return out
+    # crew-verifier-5: a possessive on a full recorded name ("Arsenal's") is plain English and no longer fails.
+    return [('name_not_as_recorded', where) for where, s in sentences(draft)
+            if where not in skip and name_failure(pack, s.text)]
+
+
+def normalize_names(pack: FactPack, draft: ChronicleDraft) -> tuple[ChronicleDraft, list[str]]:
+    """crew-fixer-2: write every recorded name in its recorded form before the Verifier sees the draft.
+
+    A full name in other capitals gets its recorded capitals; a capitalised short form ("Henry", "City", "Henry's")
+    becomes the full name only when that word belongs to exactly one recorded name. Nothing else changes; the
+    Verifier then checks the result as usual (and the Fixer adds the citation a new full name may need).
+    """
+    names = recorded_names(pack)
+    owners: dict[str, set[str]] = {}
+    for name in names:
+        for w in _WORD.findall(name):
+            if len(w) >= 3:
+                owners.setdefault(w.casefold(), set()).add(name)
+    recorded = {n.casefold(): n for n in names}
+    full = '|'.join(r'(?<!\w)' + re.escape(n) + r'(?!\w)' for n in names)
+    token = re.compile(f'(?P<full>(?i:{full}))|(?P<word>{_WORD.pattern})')
+    fixes: list[str] = []
+
+    def one(m):
+        if m['full']:
+            return recorded[m['full'].casefold()]
+        word = m['word']
+        base = re.sub(r"['’]s$", '', word)
+        owner = owners.get(base.casefold(), set())
+        if not base[:1].isupper() or len(owner) != 1:
+            return word
+        name = next(iter(owner))
+        return name + word[len(base):]
+
+    data = draft.model_dump(mode='json')
+    targets = [('headline', data['headline'])] + [(f'p{i}s{j}', s) for i, p in enumerate(data['paragraphs'], 1)
+                                                 for j, s in enumerate(p['sentences'], 1)]
+    for where, target in targets:
+        text = token.sub(one, target['text'])
+        if text != target['text']:
+            target['text'] = text
+            fixes.append(f'{where}:names')
+    return ChronicleDraft.model_validate(data), fixes
 
 
 # ---- coverage is server-owned (crew-verifier-4) ------------------------------------------------
