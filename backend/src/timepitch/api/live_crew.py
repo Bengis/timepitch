@@ -13,6 +13,8 @@ class LiveCrewRequest(BaseModel):
     engine: Literal['grf', 'touchlines']
     match_id: str = Field(min_length=1, max_length=120)
     locale: Literal['en', 'es']
+    names: Literal['fictional', 'real'] = 'real'  # TP259: fictional league or real names
+    audience: Literal['fan', 'analyst'] = 'fan'  # TP260: who the report is written for
 
 
 def live_crew_router():
@@ -35,7 +37,8 @@ def live_crew_router():
     def create(body: LiveCrewRequest, request: Request, owner: Owner):
         crew = service(request)
         try:
-            return crew.request(body.engine, body.match_id, owner, body.locale, request.client.host if request.client else None)
+            return crew.request(body.engine, body.match_id, owner, body.locale, request.client.host if request.client else None,
+                                body.names, body.audience)
         except KeyError:
             raise HTTPException(404, 'Match not found or not finished') from None
         except LiveCrewBusy as error:
@@ -46,10 +49,11 @@ def live_crew_router():
             raise HTTPException(503, 'Live AI match reports are unavailable') from None
 
     @router.get('')
-    def read(engine: Literal['grf', 'touchlines'], match_id: str, locale: Literal['en', 'es'], request: Request, owner: Owner):
+    def read(engine: Literal['grf', 'touchlines'], match_id: str, locale: Literal['en', 'es'], request: Request, owner: Owner,
+             names: Literal['fictional', 'real'] = 'real', audience: Literal['fan', 'analyst'] = 'fan'):
         crew = service(request)
         try:
-            return crew.status(engine, match_id, owner, locale)
+            return crew.status(engine, match_id, owner, locale, names, audience)
         except KeyError:
             raise HTTPException(404, 'Match not found or not finished') from None
         except (LiveCrewUnavailable, OSError, ValueError):

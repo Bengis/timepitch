@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { usePrefersReducedMotion } from './AnnouncementBanner';
 import { usePresentationText } from './messages';
+import { fictionalAbbr } from '../catalog/fictional';
 import type { CrestRef, KitSpec, MatchKits } from './types';
 import './tokens.css';
 import './broadcast.css';
@@ -17,6 +18,8 @@ const ABBR: Readonly<Record<string, string>> = {
 };
 
 export function teamAbbreviation(name: string): string {
+  const made = fictionalAbbr(name);
+  if (made) return made;
   // «Manchester City 2024/25» → «manchester city»: la temporada no forma parte del nombre del club.
   const key = name.trim().toLowerCase().replace(/\s+\d{4}\/\d{2,4}$/, '');
   if (ABBR[key]) return ABBR[key];

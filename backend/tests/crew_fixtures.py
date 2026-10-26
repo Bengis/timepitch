@@ -53,6 +53,11 @@ CANARY = {'headline': {'text': "Steven N'Zonzi scores to give Blackburn Rovers a
                         'fact_ids': ['comparison:team_possession_pct', 'comparison:shots', 'comparison:pass_received',
                                      'comparison:recoveries']}]}]}
 
+# crew-fixer-3 cites a player named in several facts, so CANARY alone is now fixed without a revision. The revision and
+# fallback paths use this variant: the headline also carries a number no cited fact holds, which no fixer may touch.
+CANARY_HARD = {**CANARY, 'headline': {'text': "Steven N'Zonzi scores to give Blackburn Rovers a 1-0 lead over Manchester United "
+                                               'with 9 shots', 'fact_ids': ['result']}}
+
 FIXED = {'headline': {'text': "Steven N'Zonzi scores as Blackburn Rovers beat Manchester United 1–0",
                       'fact_ids': ['result', 'goal:grf:134']},
     'paragraphs': [

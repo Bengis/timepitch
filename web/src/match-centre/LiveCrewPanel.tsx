@@ -4,6 +4,7 @@
 // el informe entero antes de servirlo y aplica el tope de gasto; aquí solo se pide, se espera y se muestra.
 import { useEffect, useRef, useState } from 'react';
 import { AzurePipeline, noteIn, type CrewReportView } from './CrewReportPanel';
+import { namesMode } from '../catalog/fictional';
 
 type Engine = 'grf' | 'touchlines';
 type Live = { status: 'none' | 'pending' | 'ready' | 'failed'; code?: string; report?: CrewReportView & { headline: string | null; provenance?: string } };
@@ -15,7 +16,7 @@ const TEXT = {
     failed: 'The AI report could not be written this time.', busy: 'Another AI report of yours is still being written: try again in a minute.',
     limit: 'You have reached today\'s AI reports.', budget: 'The AI reports budget for the demo is used up.',
     fallback: 'The AI draft did not pass the fact check, so these are the plain match facts.',
-    retry: 'Try again',
+    retry: 'Try again', audience: 'Report for', fan: 'Fans', analyst: 'Analysts',
     how: 'Written by AI agents on Azure after the match and checked line by line against the match data.' },
   es: { title: 'Crónica IA del partido', badge: 'Agent Framework · Azure AI Foundry',
     before: 'Cuando acabe el partido, agentes de IA en Azure escribirán su crónica con lo que grabó el motor.',
@@ -23,7 +24,7 @@ const TEXT = {
     failed: 'Esta vez no se pudo escribir la crónica IA.', busy: 'Todavía se está escribiendo otra crónica tuya: prueba dentro de un minuto.',
     limit: 'Has llegado a las crónicas IA de hoy.', budget: 'Se ha agotado el presupuesto de crónicas IA de la demo.',
     fallback: 'El borrador de la IA no pasó la comprobación, así que estos son los datos del partido tal cual.',
-    retry: 'Reintentar',
+    retry: 'Reintentar', audience: 'Crónica para', fan: 'Aficionados', analyst: 'Analistas',
     how: 'Escrita por agentes de IA en Azure al acabar el partido y comprobada línea a línea con los datos del partido.' },
 } as const;
 
@@ -42,7 +43,10 @@ export function LiveCrewPanel({ engine, matchId, locale, ended }: { engine: Engi
   const [live, setLive] = useState<Live>({ status: 'none' });
   const [attempt, setAttempt] = useState(0);
   const requested = useRef(false);
-  const query = `/api/crew/live?engine=${engine}&match_id=${encodeURIComponent(matchId)}&locale=${locale}`;
+  // TP260: la misma crónica escrita para aficionados (por defecto) o para analistas; cada público es un informe aparte.
+  const [audience, setAudience] = useState<'fan' | 'analyst'>('fan');
+  // TP259: la crónica nombra lo que se ve en pantalla (liga ficticia o nombres reales).
+  const query = `/api/crew/live?engine=${engine}&match_id=${encodeURIComponent(matchId)}&locale=${locale}&names=${namesMode()}&audience=${audience}`;
 
   useEffect(() => {
     let alive = true;
@@ -63,7 +67,7 @@ export function LiveCrewPanel({ engine, matchId, locale, ended }: { engine: Engi
       if (body?.status === 'none' && !requested.current) {
         requested.current = true;
         const created = await call('/api/crew/live', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ engine, match_id: matchId, locale }) }).catch(() => null);
+          body: JSON.stringify({ engine, match_id: matchId, locale, names: namesMode(), audience }) }).catch(() => null);
         if (!alive) return;
         if (!created?.ok) {
           const code = (created?.body as { detail?: string } | null)?.detail;
@@ -77,7 +81,7 @@ export function LiveCrewPanel({ engine, matchId, locale, ended }: { engine: Engi
     };
     void poll();
     return () => { alive = false; window.clearTimeout(timer); };
-  }, [available, ended, query, engine, matchId, locale, attempt]);
+  }, [available, ended, query, engine, matchId, locale, audience, attempt]);
 
   if (!available) return null;
   const report = live.status === 'ready' ? live.report : undefined;
@@ -89,6 +93,10 @@ export function LiveCrewPanel({ engine, matchId, locale, ended }: { engine: Engi
       <span className="chip sim">{t.badge}</span>
     </header>
     {!ended && <p className="crew-report-teaser">{t.before}</p>}
+    {ended && <div className="crew-audience" role="group" aria-label={t.audience}>{t.audience}:
+      {(['fan', 'analyst'] as const).map(a => <button key={a} type="button" aria-pressed={audience === a} disabled={live.status === 'pending'}
+        onClick={() => { if (a !== audience) { requested.current = false; setLive({ status: 'none' }); setAudience(a); } }}>{t[a]}</button>)}
+    </div>}
     {ended && live.status !== 'ready' && live.status !== 'failed' && <p className="crew-report-teaser crew-live-pending" role="status">
       <span className="crew-live-spinner" aria-hidden="true" />{t.pending}</p>}
     {live.status === 'failed' && <p className="crew-report-teaser" role="status">{failure}

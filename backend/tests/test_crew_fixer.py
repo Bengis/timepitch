@@ -109,7 +109,7 @@ def test_names_must_be_written_as_recorded(text, bad):
 def test_versions_and_writer_three_rules():
     versions = crew_versions()
     assert (versions['writer_prompt'], versions['verifier'], versions['fixer'], versions['analyst_prompt']) == (
-        'crew-writer-6', 'crew-verifier-5', 'crew-fixer-2', 'crew-analyst-2')
+        'crew-writer-7', 'crew-verifier-5', 'crew-fixer-3', 'crew-analyst-3')
     assert versions['validator'] == 'azure-prose-checks-1'
     text = writer_instructions('en')
     assert 'recorded capitals' in text and 'Never write a whole sentence in lowercase' in text
@@ -138,7 +138,7 @@ def test_fixer_refuses_claims_without_literal_support():
     assert ('unsupported_score', 'p2s2') in left and ('unsupported_clock', 'p2s1') in left
 
 
-def test_ambiguous_name_is_not_fixed():
+def test_name_in_several_facts_cites_the_first():
     p = pack(BLACKBURN)
     plan = CrewPlan(angle='narrow_win', paragraphs=[['goal:grf:134', 'leader:goals'], ['comparison:shots']])
     draft = ChronicleDraft.model_validate({
@@ -146,8 +146,9 @@ def test_ambiguous_name_is_not_fixed():
         'paragraphs': [{'sentences': [{'text': "Steven N'Zonzi scored for Blackburn Rovers at 27:14.", 'fact_ids': ['goal:grf:134']}]},
                        {'sentences': [{'text': 'Blackburn Rovers recorded 7 shots and Manchester United had 5.',
                                        'fact_ids': ['comparison:shots']}]}]})
-    # Two planned facts name him (goal and goals leader): which one the headline means is not literal.
-    assert fix_citations(p, plan, draft, all_failures(p, plan, draft, 'en'))[1] == []
+    # crew-fixer-3: two planned facts name him (goal and goals leader); either one supports the name, so the first is
+    # cited. The Verifier still checks the sentence again afterwards.
+    assert fix_citations(p, plan, draft, all_failures(p, plan, draft, 'en'))[1] == ['headline+goal:grf:134']
 
 
 # ---- expected acceptance of the eight real drafts ----------------------------------------------

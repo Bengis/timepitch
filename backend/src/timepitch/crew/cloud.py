@@ -38,7 +38,7 @@ from pydantic import Field
 
 from ..chronicles.models import Digest, FactPack, Locale, canonical_bytes, fact_pack_hash
 from .ledger import MAX_ENVELOPE_BYTES, EnvelopeRefused, Intent, Receipt, call_reservation, parse_grant
-from .models import (CALLS_PER_REPORT, CrewBinding, CrewGrant, CrewModel, CrewReport, crew_versions, default_binding,
+from .models import (CALLS_PER_REPORT, Audience, CrewBinding, CrewGrant, CrewModel, CrewReport, crew_versions, default_binding,
                      digest, request_hash, verify_report)
 
 REQUEST_VERSION = 'crew-request-1'
@@ -61,6 +61,7 @@ class CrewRequest(CrewModel):
     request_version: Literal['crew-request-1'] = REQUEST_VERSION
     request_hash: Digest
     locale: Locale
+    audience: Audience = 'fan'
     envelope: Annotated[str, Field(min_length=2, max_length=MAX_ENVELOPE_BYTES)]
     envelope_sha256: Digest
     fact_pack: FactPack
@@ -82,16 +83,16 @@ def check_crew_grant(grant: CrewGrant, locale: str) -> None:
 
 
 def build_request(pack: FactPack, locale: str, envelope_raw: bytes, binding: CrewBinding, *,
-                  expected_sha256: str | None = None, now=time.time) -> tuple[bytes, str]:
+                  expected_sha256: str | None = None, now=time.time, audience: str = 'fan') -> tuple[bytes, str]:
     """Server side: check the envelope locally and return (message bytes, request_hash)."""
     grant, grant_sha256 = parse_grant(envelope_raw, binding, expected_sha256=expected_sha256, now=now)
     check_crew_grant(grant, locale)
-    rh = request_hash(fact_pack_hash(pack), locale, binding)
+    rh = request_hash(fact_pack_hash(pack), locale, binding, audience)
     try:
         envelope = envelope_raw.decode('utf-8')
     except UnicodeDecodeError:
         raise EnvelopeRefused('envelope_invalid') from None
-    body = json.dumps({'request_version': REQUEST_VERSION, 'request_hash': rh, 'locale': locale,
+    body = json.dumps({'request_version': REQUEST_VERSION, 'request_hash': rh, 'locale': locale, 'audience': audience,
                        'envelope': envelope, 'envelope_sha256': grant_sha256,
                        'fact_pack': json.loads(canonical_bytes(pack))},
                       sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode('ascii')
@@ -109,7 +110,7 @@ def parse_request(raw: bytes, binding: CrewBinding) -> CrewRequest:
         request = CrewRequest.model_validate_json(raw)
     except ValueError:
         raise EnvelopeRefused('request_invalid') from None
-    if request.request_hash != request_hash(fact_pack_hash(request.fact_pack), request.locale, binding):
+    if request.request_hash != request_hash(fact_pack_hash(request.fact_pack), request.locale, binding, request.audience):
         raise EnvelopeRefused('request_hash_mismatch')
     return request
 
@@ -334,7 +335,7 @@ async def run_cloud_crew(request: CrewRequest, grant: CrewGrant, grant_sha256: s
     client = None
     try:
         client = bounded_client(binding, token(), gate)
-        runtime = CrewRuntime(pack=request.fact_pack, locale=request.locale, binding=binding, grant=grant,
+        runtime = CrewRuntime(pack=request.fact_pack, locale=request.locale, audience=request.audience, binding=binding, grant=grant,
                               grant_sha256=grant_sha256, ledger=ledger, gate=gate,
                               agents=CrewAgents(chat_client(binding, client)), tracer=tracer)
         return await run_crew(runtime)
@@ -382,7 +383,7 @@ class FetchRejected(ValueError):
         super().__init__(code)
 
 
-def revalidate(raw: bytes, pack: FactPack, locale: str, binding: CrewBinding) -> CrewReport:
+def revalidate(raw: bytes, pack: FactPack, locale: str, binding: CrewBinding, audience: str = 'fan') -> CrewReport:
     from ..chronicles.azure.validation import locate_all_rejections, validate_draft
     from .fallback import crew_fallback_text
     from .checks import coverage_failures, name_failures
@@ -395,10 +396,10 @@ def revalidate(raw: bytes, pack: FactPack, locale: str, binding: CrewBinding) ->
     if not verify_report(report):
         raise FetchRejected('report_seal')
     src, fact_hash = report.source, fact_pack_hash(pack)
-    expected = {'request_hash': request_hash(fact_hash, locale, binding), 'fact_hash': fact_hash,
+    expected = {'request_hash': request_hash(fact_hash, locale, binding, audience), 'fact_hash': fact_hash,
                 'trace_hash': pack.trace_hash, 'engine': pack.engine, 'dataset_version': pack.dataset_version,
                 'binding_hash': digest(binding)}
-    if any(getattr(src, k) != v for k, v in expected.items()) or report.locale != locale:
+    if any(getattr(src, k) != v for k, v in expected.items()) or report.locale != locale or report.audience != audience:
         raise FetchRejected('report_source')
     if any(report.versions.get(k) != v for k, v in crew_versions().items()):
         raise FetchRejected('report_versions')
@@ -418,8 +419,8 @@ def revalidate(raw: bytes, pack: FactPack, locale: str, binding: CrewBinding) ->
     return report
 
 
-def fetch(*, pack: FactPack, locale: str, reports, out_dir: Path, binding: CrewBinding) -> dict:
-    rh = request_hash(fact_pack_hash(pack), locale, binding)
+def fetch(*, pack: FactPack, locale: str, reports, out_dir: Path, binding: CrewBinding, audience: str = 'fan') -> dict:
+    rh = request_hash(fact_pack_hash(pack), locale, binding, audience)
     raw = reports.get(report_name(rh))
     if raw is None:
         failed = reports.get(failed_name(rh))
@@ -431,7 +432,7 @@ def fetch(*, pack: FactPack, locale: str, reports, out_dir: Path, binding: CrewB
             code = None
         return {'status': 'failed', 'request_hash': rh,
                 'code': code if isinstance(code, str) and _CODE.match(code) else 'unknown'}
-    report = revalidate(raw, pack, locale, binding)
+    report = revalidate(raw, pack, locale, binding, audience)
     body = gzip.compress(report.model_dump_json(indent=1).encode(), compresslevel=9, mtime=0)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

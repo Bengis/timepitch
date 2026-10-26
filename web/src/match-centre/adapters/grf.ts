@@ -2,6 +2,7 @@ import { getGrfStatistics, UnsupportedGrfReplayError, type GrfReplay, type GrfSt
 import { cursorAt, type EventView, type MotionInterval, type SessionSnapshot } from '../session';
 import type { SceneFrame } from '../../match/retroScene';
 import { available, blankSnapshot, clamp, descriptor, ns } from './base';
+import { showPlayer } from '../../catalog/fictional';
 import { normalizeGrfMetrics } from './metrics';
 import { savedSession } from './saved';
 
@@ -19,7 +20,7 @@ export function createGrfSession(id:string,record:GrfReplay,readers:{statistics?
     const a=record.samples[index],owner=a.owner_team>=0&&a.owner_slot>=0?record.input.players.find(p=>p.side===(a.owner_team===0?'home':'away')&&p.slot===a.owner_slot):null;
     return {clock_ms:index*100,period:'phase' in a?a.phase:1,score:{home:a.score[0],away:a.score[1]},possession:a.owner_team===0?'home':a.owner_team===1?'away':null,
       carrier:owner?ns('grf',owner.id):null,ball:point(a.ball_xyz),players:record.input.players.filter(p=>!('home_active' in a)||(p.side==='home'?a.home_active[p.slot]:a.away_active[p.slot])!==false)
-        .map(p=>({...point(p.side==='home'?a.home_xy[p.slot]:a.away_xy[p.slot]),key:ns('grf',p.id),name:p.name,role:p.role,side:p.side}))};
+        .map(p=>({...point(p.side==='home'?a.home_xy[p.slot]:a.away_xy[p.slot]),key:ns('grf',p.id),name:showPlayer(p.name),role:p.role,side:p.side}))};
   }
   function interval(time:number):MotionInterval {
     const i=Math.min(record.samples.length-1,Math.floor(time/100)),a=record.samples[i],b=record.samples[i+1];

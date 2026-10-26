@@ -2,6 +2,7 @@
 import hdRegistry from './crests-hd.json';
 import historical from './historical-crests.json';
 import { resolveHistoricalCrest } from './crests';
+import { fictional } from './fictional';
 import { isAssetSource } from '../presentation/registry-schema';
 import type { AssetSource, CrestRef } from '../presentation/types';
 
@@ -59,10 +60,10 @@ export function createCrestResolver(registry: CrestHdRegistry) {
 const defaultResolver = createCrestResolver(hdRegistry as unknown as CrestHdRegistry);
 
 /** Escudo a mostrar para `club:season_start`: HD revisado, si no HFK, si no neutro. */
-export function resolveCrest(teamKey: string): CrestRef { return defaultResolver(teamKey); }
+export function resolveCrest(teamKey: string): CrestRef { return fictional() ? NO_CREST : defaultResolver(teamKey); }
 
 /** Orden de reserva para la carga de imágenes: `[hd, hfk]`, `[hfk]` o `[]`. */
-export function crestChain(teamKey: string): CrestRef[] { return defaultResolver.chain(teamKey); }
+export function crestChain(teamKey: string): CrestRef[] { return fictional() ? [] : defaultResolver.chain(teamKey); }
 
 const SAFE_DATA = /^data:image\/(?:png|jpe?g|gif|webp);/i;
 

@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from crew_fixtures import CANARY, FIXED, NOW, PLAN, Harness, grant, intents, offline, receipts, reply, tp229_pack  # noqa: F401
+from crew_fixtures import CANARY, CANARY_HARD, FIXED, NOW, PLAN, Harness, grant, intents, offline, receipts, reply, tp229_pack  # noqa: F401
 from timepitch.chronicles.azure.budget import maximum_liability
 from timepitch.crew import cli
 from timepitch.crew.ledger import (CONTEXT_CEILING_TOKENS, CrewLedger, EnvelopeRefused, call_reservation,
@@ -69,7 +69,7 @@ def test_resume_replays_receipts_at_no_cost(offline, tmp_path):
     seed.ledger.record_receipt(rh, 'analyst', model='gpt-4.1-mini', request_id='req-old', input_tokens=800,
                                output_tokens=60, cost=Decimal('0.000416'), output=json.dumps(PLAN), error=None)
     seed.ledger.close()
-    fake = offline([reply(CANARY), reply(FIXED)])
+    fake = offline([reply(CANARY_HARD), reply(FIXED)])
     h = Harness(tmp_path)
     before = h.ledger.exposure()
     report = run(offline, h)

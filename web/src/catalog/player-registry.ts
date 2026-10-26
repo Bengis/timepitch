@@ -1,6 +1,7 @@
 // G12 · Fichas públicas de jugador (subconjunto de los equipos de la demo) y enlaces revisados fila de fuente → QID.
 // Fichas: `public/data/players/<club>-<season>.json`, solo campos de Wikidata (CC0) y del artículo de temporada de la
 // Wikipedia inglesa (CC BY-SA 4.0). Nunca Transfermarkt, FPL, epldata ni StatsBomb. Identidad solo por QID.
+import { fictional, fictionalPlayer } from './fictional';
 import linksJson from './player-links.json';
 import { assertNoTransfermarkt, isAssetSource } from '../presentation/registry-schema';
 import type { PlayerLink, PlayerRecord } from '../presentation/types';
@@ -70,5 +71,7 @@ export async function loadSquad(teamKey: string, signal: AbortSignal): Promise<r
   const response = await fetch(url, { signal });
   if (response.status === 404) return [];
   if (!response.ok) throw new Error(`Player cards ${teamKey}: HTTP ${response.status}`);
-  return parseSquad(await response.json());
+  const squad = parseSquad(await response.json());
+  // TP259: en la liga ficticia la ficha lleva el nombre inventado y no la nacionalidad ni la fecha de nacimiento reales.
+  return fictional() ? squad.map(r => ({ ...r, display: fictionalPlayer(r.display), nation: null, dob: null, nationBasis: null })) : squad;
 }

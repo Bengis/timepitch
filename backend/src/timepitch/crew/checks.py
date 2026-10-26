@@ -143,8 +143,10 @@ def _support(pack: FactPack, allowed: set[str], code: str, sentence: ProseSenten
         for name in {n for f in pack.facts for n in f.player_names} - named:
             if re.search(r'(?<!\w)' + re.escape(name) + r'(?!\w)', text):  # exact recorded form only
                 match = [f.id for f in pack.facts if name in f.player_names and f.id in allowed]
-                if len(match) != 1:
+                if not match:
                     return None
+                # crew-fixer-3 (TP260): a player named in several facts (two goals) is supported by any of them; cite
+                # the first. Before, more than one match left the sentence for a revision that often came back unchanged.
                 add.append(match[0])
         return list(dict.fromkeys(add)) or None
     return None

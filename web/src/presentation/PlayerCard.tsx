@@ -5,6 +5,7 @@
 import { useEffect, useId, useRef, type CSSProperties, type ReactNode } from 'react';
 import type { PlayerSeason, Statistic } from '../api';
 import { TeamCrest } from '../catalog/TeamCrest';
+import { fictional } from '../catalog/fictional';
 import type { PlayerCardRecord } from '../catalog/player-registry';
 import { useLanguage } from '../i18n';
 import type { MetricView, PlayerView, ViewProvenance } from '../match-centre/session';
@@ -33,6 +34,7 @@ const TEXT = {
     minutes: 'Minutes', goals: 'Goals', assists: 'Assists', assistsFpl: 'Assists (Fantasy)', source: 'Source',
     attributes: 'Attributes', attributesNote: 'Model estimates, not measured ratings.',
     sources: 'Sources', chips: { hist: 'Historical', est: 'Estimated', sim: 'Simulated' } as Record<Chip, string>,
+    sourcesFictional: 'Fictional league: invented name. Number, position and season statistics come from public records; see the licences page.',
     fields: { display: 'Name', number: 'Number', position: 'Position', nation: 'Nationality', citizenship: 'Citizenship', dob: 'Date of birth', heightCm: 'Height' } as Record<string, string>,
     rev: 'rev', back: 'Back to broadcast',
     appearance: { generic: 'Appearance pending', hand_assigned: 'Unsourced features · assigned by hand' },
@@ -56,6 +58,7 @@ const TEXT = {
     minutes: 'Minutos', goals: 'Goles', assists: 'Asistencias', assistsFpl: 'Asistencias (Fantasy)', source: 'Fuente',
     attributes: 'Atributos', attributesNote: 'Estimaciones del modelo, no valoraciones medidas.',
     sources: 'Fuentes', chips: { hist: 'Histórico', est: 'Estimado', sim: 'Simulado' } as Record<Chip, string>,
+    sourcesFictional: 'Liga ficticia: nombre inventado. Dorsal, posición y estadísticas de temporada salen de registros públicos; ver la página de licencias.',
     fields: { display: 'Nombre', number: 'Dorsal', position: 'Posición', nation: 'Nacionalidad', citizenship: 'Ciudadanía', dob: 'Fecha de nacimiento', heightCm: 'Altura' } as Record<string, string>,
     rev: 'rev', back: 'Volver a la emisión',
     appearance: { generic: 'Apariencia pendiente', hand_assigned: 'Rasgos sin fuente · asignados a mano' },
@@ -333,8 +336,9 @@ export function PlayerCard({ player, entry, kit, seasonLabel, teamKey, teamName,
 
       {fieldEntries.length > 0 && <section className="tp-pc-blk tp-pc-sources" aria-labelledby={`${idBase}-src`}>
         <div className="tp-pc-blk-h"><h3 id={`${idBase}-src`}>{t.sources}</h3></div>
-        <ul>{fieldEntries.map(([field, source]) =>
-          <li key={field}><span className="k">{t.fields[field] ?? field}</span> {sourceText(source, t)}</li>)}</ul>
+        {/* TP259: en la liga ficticia las fuentes por ficha (artículo de la temporada, QID) delatarían al jugador real. */}
+        {fictional() ? <p>{t.sourcesFictional}</p> : <ul>{fieldEntries.map(([field, source]) =>
+          <li key={field}><span className="k">{t.fields[field] ?? field}</span> {sourceText(source, t)}</li>)}</ul>}
       </section>}
     </div>
     </div>

@@ -23,6 +23,7 @@ import urllib.request
 from xml.sax.saxutils import escape
 
 from ..chronicles.models import fact_pack_hash
+from ..fictional import fictional_pack
 from .cloud import ACCOUNT, QUEUE, REPORTS, FetchRejected, build_request, fetch
 from .ledger import MAX_ENVELOPE_BYTES, EnvelopeRefused, _private_file, parse_grant
 from .models import CrewReport, default_binding, request_hash
@@ -159,10 +160,13 @@ class LiveCrew:
         return max(0, grant.max_reports - len(self._load()['requests']))
 
     # -- API --
-    def _pack(self, engine: str, match_id: str, owner: str):
+    def _pack(self, engine: str, match_id: str, owner: str, names: str = 'real'):
         if engine not in ENGINES:
             raise KeyError(engine)
-        return self.source(engine, match_id, owner)
+        pack = self.source(engine, match_id, owner)
+        # TP259: in the fictional league the report must name what the viewer sees; the swap happens before the
+        # request hash, so each naming mode is its own report.
+        return fictional_pack(pack) if names == 'fictional' else pack
 
     @staticmethod
     def _client_key(state: dict, client: str | None) -> str | None:
@@ -171,11 +175,12 @@ class LiveCrew:
         salt = state.setdefault('salt', secrets.token_hex(16))
         return hmac.new(bytes.fromhex(salt), client.encode(), 'sha256').hexdigest()[:32]
 
-    def request(self, engine: str, match_id: str, owner: str, locale: str, client: str | None = None) -> dict:
+    def request(self, engine: str, match_id: str, owner: str, locale: str, client: str | None = None,
+                names: str = 'real', audience: str = 'fan') -> dict:
         if not self.available():
             raise LiveCrewUnavailable('disabled')
-        pack = self._pack(engine, match_id, owner)
-        rh = request_hash(fact_pack_hash(pack), locale, self.binding)
+        pack = self._pack(engine, match_id, owner, names)
+        rh = request_hash(fact_pack_hash(pack), locale, self.binding, audience)
         with self._lock:
             state = self._load()
             known = state['requests'].get(rh)
@@ -193,16 +198,16 @@ class LiveCrew:
             grant = self._grant()
             if len(state['requests']) >= grant.max_reports:
                 raise LiveCrewBusy('budget_exhausted')
-            body, rh = build_request(pack, locale, self._envelope(), self.binding, now=self.now)
+            body, rh = build_request(pack, locale, self._envelope(), self.binding, now=self.now, audience=audience)
             self.queue().send(body)
             state['requests'][rh] = {'owner': owner, 'client': key, 'at': now, 'engine': engine, 'match_id': match_id,
                                      'locale': locale}
             self._save(state)
         return {'status': 'pending', 'request_hash': rh}
 
-    def status(self, engine: str, match_id: str, owner: str, locale: str) -> dict:
-        pack = self._pack(engine, match_id, owner)
-        rh = request_hash(fact_pack_hash(pack), locale, self.binding)
+    def status(self, engine: str, match_id: str, owner: str, locale: str, names: str = 'real', audience: str = 'fan') -> dict:
+        pack = self._pack(engine, match_id, owner, names)
+        rh = request_hash(fact_pack_hash(pack), locale, self.binding, audience)
         cached = self.dir / 'reports' / f'{rh}.json.gz'
         if cached.is_file():
             return {'status': 'ready', 'request_hash': rh,
@@ -213,12 +218,13 @@ class LiveCrew:
         if not self.available():
             raise LiveCrewUnavailable('disabled')
         try:
-            result = fetch(pack=pack, locale=locale, reports=self.blobs(), out_dir=self.dir / 'reports', binding=self.binding)
+            result = fetch(pack=pack, locale=locale, reports=self.blobs(), out_dir=self.dir / 'reports', binding=self.binding,
+                           audience=audience)
         except FetchRejected as error:
             return self._done(rh, {'status': 'failed', 'request_hash': rh, 'code': error.code})
         if result['status'] == 'fetched':
             self._done(rh, {})
-            return self.status(engine, match_id, owner, locale)
+            return self.status(engine, match_id, owner, locale, names, audience)
         if result['status'] == 'failed':
             return self._done(rh, {'status': 'failed', 'request_hash': rh, 'code': result['code']})
         if self.now() - known['at'] > PENDING_TIMEOUT_S:

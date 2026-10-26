@@ -29,7 +29,13 @@ import {useVersusText} from './versus/messages';
 import {DEFAULT_RENDERER,pitchStorage,readPitchPreferences,writePitchPreferences} from './match/renderers/preferences';
 import type {SelectableRendererId} from './match/renderers/types';
 // TP215/TP240: portada propia dentro del build (asset con hash).
-import coverArt from './assets/timepitch-premier.webp';
+import premierArt from './assets/timepitch-premier.webp';
+import conceptArt from './assets/timepitch-concept.webp';
+import { fictional } from './catalog/fictional';
+import { NamesToggle } from './catalog/NamesToggle';
+
+// TP259: la liga ficticia usa la ilustración de jugadores genéricos; la otra recuerda a jugadores reales.
+const coverArt = fictional() ? conceptArt : premierArt;
 
 function TeamPanel({ side, selection,grf }: { side: 'home' | 'away'; selection: TeamSelection;grf:boolean }) {
   const { t } = useLanguage();
@@ -189,7 +195,7 @@ export default function App() {
       <button disabled={busy} aria-current={page==='setup'?'page':undefined} onClick={()=>setPage('setup')}>{c.newMatch}</button>
       <button disabled={busy||!active} aria-current={page==='match'?'page':undefined} onClick={()=>setPage('match')}>{c.matchCentre}</button>
       <button disabled={busy} aria-current={page==='library'?'page':undefined} onClick={()=>setPage('library')}>{c.library}</button>
-    </nav><div className="topbar-right">{isLocalPreview()&&<span className="local-label"><b />{t.local}</span>}<LanguageSelector /></div></header>}
+    </nav><div className="topbar-right">{isLocalPreview()&&<span className="local-label"><b />{t.local}</span>}<NamesToggle /><LanguageSelector /></div></header>}
     <main>
       {twoModes&&<>
         {route.mode==='reconstruction'&&(!(historicalCapabilities?.reconstruction_enabled&&historicalCapabilities.dataset_version)?<p role="alert" className="historical-workspace">{h.unavailable}</p>:!route.matchId?<HistoricalExplorer route={route} datasetVersion={historicalCapabilities.dataset_version} onNavigate={navigate}/>:null)}
@@ -204,7 +210,7 @@ export default function App() {
       <section className="setup-view" hidden={page!=='setup'}>
       {/* TP240 («vuelve a la de ayer»): otra vez la portada con la ilustración y las cifras del catálogo. */}
       <section className="hero vs-hero">
-        <figure className="vs-hero-banner"><img src={coverArt} alt={t.coverAlt} width={1672} height={941} /><figcaption className="art-caption">{t.coverNote}</figcaption></figure>
+        <figure className="vs-hero-banner"><img src={coverArt} alt={fictional() ? t.coverAltFictional : t.coverAlt} width={1672} height={941} /><figcaption className="art-caption">{t.coverNote}</figcaption></figure>
         <div className="hero-copy"><p className="eyebrow">{t.phase}</p><h1>{t.title}</h1><p className="intro">{t.intro}</p></div>
         {teams && <div className="catalog-numbers"><div><strong>{new Set(teams.map(team => team.season_start)).size}</strong><span>{t.seasons}</span></div><div><strong>{new Set(teams.map(team => team.club)).size}</strong><span>{t.clubs}</span></div><div><strong>{teams.length}</strong><span>{t.combinations}</span></div></div>}
       </section>

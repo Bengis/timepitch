@@ -4,7 +4,7 @@ export type Locale = 'en' | 'es';
 const en = {
   language: 'Language', local: 'LOCAL PREVIEW', phase: 'HISTORICAL MATCH SIMULATOR',
   title: 'Football, across eras.', intro: 'Pick any two Premier League teams since 1992/93 and watch them play each other.',
-  coverAlt: 'TimePitch: artwork of Thierry Henry and Erling Haaland', coverNote: 'Generated artwork · not a photograph', matchup: 'Matchup', rosterSource: 'Squad source', resultsSource: 'Results source',
+  coverAlt: 'TimePitch: artwork of Thierry Henry and Erling Haaland', coverAltFictional: 'TimePitch: artwork of two footballers from different eras', coverNote: 'Generated artwork · not a photograph', matchup: 'Matchup', rosterSource: 'Squad source', resultsSource: 'Results source',
   seasons: 'complete seasons', clubs: 'clubs', combinations: 'team-seasons',
   home: 'Home team', away: 'Away team', search: 'Search club or season', searchPlaceholder: 'Arsenal, Manchester, 2003…',
   season: 'Season', allSeasons: 'All seasons', teamSeason: 'Team and season', choose: 'Choose a team…',
@@ -35,7 +35,7 @@ type Messages = { [K in keyof typeof en]: string };
 const es: Messages = {
   language: 'Idioma', local: 'VISTA LOCAL', phase: 'SIMULADOR DE PARTIDOS HISTÓRICOS',
   title: 'Fútbol entre épocas.', intro: 'Elige dos equipos cualesquiera de la Premier League desde 1992/93 y míralos jugar entre ellos.',
-  coverAlt: 'TimePitch: ilustración de Thierry Henry y Erling Haaland', coverNote: 'Ilustración generada · no es una fotografía', matchup: 'Enfrentamiento', rosterSource: 'Fuente de plantilla', resultsSource: 'Fuente de resultados',
+  coverAlt: 'TimePitch: ilustración de Thierry Henry y Erling Haaland', coverAltFictional: 'TimePitch: ilustración de dos futbolistas de épocas distintas', coverNote: 'Ilustración generada · no es una fotografía', matchup: 'Enfrentamiento', rosterSource: 'Fuente de plantilla', resultsSource: 'Fuente de resultados',
   seasons: 'temporadas completas', clubs: 'clubes', combinations: 'equipos-temporada',
   home: 'Equipo local', away: 'Equipo visitante', search: 'Buscar club o temporada', searchPlaceholder: 'Arsenal, Manchester, 2003…',
   season: 'Temporada', allSeasons: 'Todas las temporadas', teamSeason: 'Equipo y temporada', choose: 'Elige un equipo…',

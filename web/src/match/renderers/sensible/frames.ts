@@ -3,6 +3,7 @@
 // nunca crea eventos, no mueve a nadie de su posición grabada y no deduce la altura del balón.
 import type { VisualCue } from '../../retroScene';
 import atlasJson from './atlas.json';
+import { fictionalAbbr } from '../../../catalog/fictional';
 import pitchJson from './pitch.json';
 
 export const DIRECTIONS = ['E', 'SE', 'S', 'SW', 'W', 'NW', 'N', 'NE'] as const;
@@ -390,6 +391,8 @@ export function ballInNet<T extends Readonly<{ x: number; y: number; z: number }
 const PREFIXES = new Set(['MANCHESTER', 'SHEFFIELD', 'WEST', 'NOTTINGHAM', 'QUEENS']);
 /** Sigla de 3 letras para el marcador (Manchester United → MUN, Arsenal → ARS). Solo letras A–Z y cifras. */
 export function teamTag(name: string): string {
+  const made = fictionalAbbr(name);
+  if (made) return made;
   const words = name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9 ]/g, ' ').split(/\s+/)
     .filter(w => w && w !== 'AFC' && w !== 'FC');
   if (!words.length) return '---';

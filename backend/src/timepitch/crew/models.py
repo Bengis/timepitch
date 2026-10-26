@@ -15,10 +15,10 @@ from ..chronicles.azure.models import VALIDATOR_VERSION, ChronicleDraft, Money, 
 from ..chronicles.models import FACT_VERSION, Digest, Identifier, Locale, StrictModel, canonical_bytes
 
 CREW_VERSION = 'crew-1'
-ANALYST_PROMPT_VERSION = 'crew-analyst-2'
-WRITER_PROMPT_VERSION = 'crew-writer-6'  # TP253: marcador solo en el titular, local–visitante también si gana el visitante
+ANALYST_PROMPT_VERSION = 'crew-analyst-3'  # TP260: plan always includes the recorded team comparisons
+WRITER_PROMPT_VERSION = 'crew-writer-7'  # TP260: audience (fan or analyst) and a comparisons paragraph on how it was won
 VERIFIER_VERSION = 'crew-verifier-5'
-FIXER_VERSION = 'crew-fixer-2'
+FIXER_VERSION = 'crew-fixer-3'
 EVALUATION_VERSION = 'crew-eval-1'
 FALLBACK_VERSION = 'crew-fallback-3'
 REPORT_VERSION = 'crew-report-2'
@@ -93,8 +93,11 @@ def crew_versions() -> dict[str, str]:
             'fallback': FALLBACK_VERSION, 'max_output_tokens': str(MAX_OUTPUT_TOKENS)}
 
 
-def request_hash(fact_hash: str, locale: str, binding: CrewBinding) -> str:
-    raw = json.dumps({'fact_hash': fact_hash, 'locale': locale, 'versions': crew_versions(),
+Audience = Literal['fan', 'analyst']  # TP260: who the report is written for
+
+
+def request_hash(fact_hash: str, locale: str, binding: CrewBinding, audience: str = 'fan') -> str:
+    raw = json.dumps({'fact_hash': fact_hash, 'locale': locale, 'audience': audience, 'versions': crew_versions(),
                       'deployment': binding.deployment, 'expected_model': binding.expected_model},
                      sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()
     return sha256(raw).hexdigest()
@@ -196,6 +199,7 @@ class CrewReport(CrewModel):
     report_version: Literal['crew-report-2'] = REPORT_VERSION
     source: CrewSource
     locale: Locale
+    audience: Audience = 'fan'
     versions: dict[str, str]
     provenance: Literal['crew_ai_draft_checked', 'deterministic_fallback']
     semantic_verified: Literal[False] = False

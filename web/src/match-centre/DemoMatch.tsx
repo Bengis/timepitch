@@ -3,6 +3,7 @@
 // versionado y verificadas por SHA-256; el selector cambia solo la grabación y conserva parte y reloj.
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../i18n';
+import { fictional, showClub } from '../catalog/fictional';
 import { MatchCentre } from './MatchCentre';
 import { elapsedForPlayhead, movementOptions, movementText, playheadAt, type MovementMatch, type MovementOption, type Playhead } from './adapters/movement-selector';
 import { httpReplayReader, loadRecordedReplay, TRACKED_REPLAY_INDEX, type RecordedReplayIndex } from './adapters/recorded-replay';
@@ -18,12 +19,12 @@ import './broadcast-layout.css';
 export const DEMO_MATCH: MovementMatch = Object.freeze({ home_key: 'arsenal:2003', away_key: 'mancity:2024', seed: 43 });
 
 const TEXT = {
-  en: { demo: 'Demo', title: 'Arsenal 2003/04 v Manchester City 2024/25', fictional: 'Fictional cross-era simulation',
+  en: { demo: 'Demo', title: `${showClub('Arsenal 2003/04')} v ${showClub('Manchester City 2024/25')}`, fictional: 'Fictional cross-era simulation',
     note: 'Synthetic movement recorded from a football engine with estimated attributes. Not a real match and not historical tracking.',
     loading: 'Loading recording', failed: 'Recording unavailable', back: 'Back',
     syntheticMovement: 'Synthetic movement', simulatedEvents: 'Simulated events', provenance: ['Simulated match', ''],
     reasons: { no_recording: 'no recording for this match and seed' } as Record<string, string> },
-  es: { demo: 'Demo', title: 'Arsenal 2003/04 – Manchester City 2024/25', fictional: 'Simulación ficticia entre épocas',
+  es: { demo: 'Demo', title: `${showClub('Arsenal 2003/04')} – ${showClub('Manchester City 2024/25')}`, fictional: 'Simulación ficticia entre épocas',
     note: 'Movimiento sintético grabado de un motor de fútbol con atributos estimados. No es un partido real ni seguimiento histórico.',
     loading: 'Cargando grabación', failed: 'Grabación no disponible', back: 'Volver',
     syntheticMovement: 'Movimiento sintético', simulatedEvents: 'Acontecimientos simulados', provenance: ['Partido simulado', ''],
@@ -116,7 +117,8 @@ export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read,
     {failure && <p className="demo-status" role="alert">{text.failed} · {failure}</p>}
     {loaded && <MatchCentre key={`${loaded.adapter.identity.id}#${loaded.load}`} adapter={loaded.adapter} visible={visible} onBack={onBack}
       matchLabel={text.fictional} initialElapsedMs={loaded.startMs} analysis={loaded.analysis} autoplay={autoplay && loaded.load === 1} rendererLocked={rendererLocked}
-      sideReport={({ revealed, reveal }) => <CrewReportPanel traceHash={loaded.track.traceHash} locale={language} open={revealed || focusReport} onOpen={reveal} />} />}
+      // TP259: las crónicas ya escritas nombran a los jugadores reales; en la liga ficticia no se muestran.
+      sideReport={fictional() ? undefined : ({ revealed, reveal }) => <CrewReportPanel traceHash={loaded.track.traceHash} locale={language} open={revealed || focusReport} onOpen={reveal} />} />}
   </section>;
 }
 

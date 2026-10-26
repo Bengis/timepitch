@@ -41,12 +41,13 @@ class CrewRuntime:
     gate: SendGate
     agents: CrewAgents | None
     tracer: CrewTracer = field(default_factory=CrewTracer)
+    audience: str = 'fan'
     request_hash: str = field(init=False)
 
     def __post_init__(self):
         if self.locale not in self.grant.locales:
             raise ValueError('Locale outside envelope')
-        self.request_hash = request_hash(fact_pack_hash(self.pack), self.locale, self.binding)
+        self.request_hash = request_hash(fact_pack_hash(self.pack), self.locale, self.binding, self.audience)
 
     angle: str | None = None
 
@@ -111,7 +112,7 @@ class WriterExecutor(Executor):
     async def _write(self, ctx, step: str, attempt: int, revision) -> None:
         state = _state(ctx)
         rt = self.rt
-        draft, record = await rt.llm_step(step, writer_instructions(rt.locale, planned_pack(rt.pack, state.plan)), writer_payload(rt.pack, state.plan, revision),
+        draft, record = await rt.llm_step(step, writer_instructions(rt.locale, planned_pack(rt.pack, state.plan), rt.audience), writer_payload(rt.pack, state.plan, revision),
                                           'chronicle_prose', writer_schema(), lambda text: parse_draft(text, attempt))
         names = []
         if draft is not None:
@@ -203,7 +204,7 @@ class PublisherExecutor(Executor):
             source=CrewSource(engine=rt.pack.engine, trace_hash=rt.pack.trace_hash, fact_hash=fact_pack_hash(rt.pack),
                               dataset_version=rt.pack.dataset_version, binding_hash=digest(rt.binding),
                               grant_sha256=rt.grant_sha256, request_hash=rt.request_hash),
-            locale=rt.locale, versions={**crew_versions(), **library_versions()}, provenance=provenance,
+            locale=rt.locale, audience=rt.audience, versions={**crew_versions(), **library_versions()}, provenance=provenance,
             draft=state.drafts[-1].draft if accepted else None, fallback_text=fallback_text, steps=state.steps,
             coverage_notes=validate_draft(rt.pack, state.drafts[-1].draft, rt.locale).coverage_notes if accepted else [],
             total_cost=sum((s.cost for s in state.steps), Decimal(0))))

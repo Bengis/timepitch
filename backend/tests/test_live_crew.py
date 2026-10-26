@@ -14,6 +14,7 @@ from timepitch.chronicles.live_facts import from_grf_physical
 from timepitch.chronicles.models import fact_pack_hash
 from timepitch.chronicles.recorded_facts import from_recorded
 from timepitch.crew.cloud import build_request, failed_name, report_name, run_job_once
+from timepitch.fictional import club_name
 from timepitch.crew.live import CLIENT_DAILY, LiveCrew, LiveCrewBusy, LiveCrewSettings, report_view
 from timepitch.crew.models import request_hash
 
@@ -108,6 +109,19 @@ def test_request_queues_one_message_for_the_match_and_is_idempotent(tmp_path):
     assert len(crew._queue.sent) == 1
     assert crew.status('grf', 'physical-1', 'owner-a', 'es')['status'] == 'pending'
 
+
+
+def test_fictional_league_reports_name_what_the_viewer_sees(tmp_path):
+    crew, _ = service(tmp_path, g=grant(max_reports=5, locales=['en', 'es']))
+    real = crew.request('grf', 'physical-1', 'owner-a', 'en')['request_hash']
+    made = crew.request('grf', 'physical-1', 'owner-b', 'en', names='fictional')['request_hash']
+    assert made != real  # its own report, never the real-name one
+    sent = json.loads(crew._queue.sent[-1])['fact_pack']
+    pack = tp229_pack()
+    assert sent['home_name'] == club_name(pack.home_name) and sent['away_name'] == club_name(pack.away_name)
+    names = {n for f in sent['facts'] for n in f['player_names']}
+    assert names and names.isdisjoint({n for f in pack.facts for n in f.player_names})
+    assert crew.status('grf', 'physical-1', 'owner-b', 'en', names='fictional')['request_hash'] == made
 
 def test_one_in_flight_per_owner_a_daily_limit_and_the_envelope_cap(tmp_path):
     packs = {}

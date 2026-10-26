@@ -1,0 +1,474 @@
+{
+ "version": "fictional-league-1",
+ "note": "TP259. Fictional club and player names for the hackathon demo. Same file as web/src/catalog/fictional-league.json (a test keeps them identical). Clubs are keyed by the catalogue club name in lower case; player names come from the two lists through FNV-1a of the real name.",
+ "clubs": {
+  "arsenal": {
+   "name": "North London Reds",
+   "abbr": "NLR"
+  },
+  "aston villa": {
+   "name": "Aston Claret",
+   "abbr": "ACL"
+  },
+  "barnsley": {
+   "name": "Oakwell Reds",
+   "abbr": "OAK"
+  },
+  "birmingham city": {
+   "name": "Second City Blues",
+   "abbr": "SCB"
+  },
+  "blackburn rovers": {
+   "name": "Ewood Halves",
+   "abbr": "EWH"
+  },
+  "blackpool": {
+   "name": "Seafront Orange",
+   "abbr": "SFO"
+  },
+  "bolton wanderers": {
+   "name": "Moorland Whites",
+   "abbr": "MOW"
+  },
+  "bournemouth": {
+   "name": "Dorset Stripes",
+   "abbr": "DOR"
+  },
+  "afc bournemouth": {
+   "name": "Dorset Stripes",
+   "abbr": "DOR"
+  },
+  "bradford city": {
+   "name": "West Riding Claret",
+   "abbr": "WRC"
+  },
+  "brentford": {
+   "name": "West London Stripes",
+   "abbr": "WLS"
+  },
+  "brighton & hove albion": {
+   "name": "Downs Blues",
+   "abbr": "DOW"
+  },
+  "brighton and hove albion": {
+   "name": "Downs Blues",
+   "abbr": "DOW"
+  },
+  "burnley": {
+   "name": "Lancashire Claret",
+   "abbr": "LCL"
+  },
+  "cardiff city": {
+   "name": "Welsh Capital Blues",
+   "abbr": "WCB"
+  },
+  "charlton athletic": {
+   "name": "Valley Reds",
+   "abbr": "VAL"
+  },
+  "chelsea": {
+   "name": "West London Blues",
+   "abbr": "WLB"
+  },
+  "coventry city": {
+   "name": "Midlands Sky",
+   "abbr": "MSK"
+  },
+  "crystal palace": {
+   "name": "South London Stripes",
+   "abbr": "SLS"
+  },
+  "derby county": {
+   "name": "Peak Whites",
+   "abbr": "PKW"
+  },
+  "everton": {
+   "name": "Merseyside Blues",
+   "abbr": "MSB"
+  },
+  "fulham": {
+   "name": "Riverside Whites",
+   "abbr": "RVW"
+  },
+  "huddersfield town": {
+   "name": "Pennine Stripes",
+   "abbr": "PEN"
+  },
+  "hull city": {
+   "name": "Humber Ambers",
+   "abbr": "HUM"
+  },
+  "ipswich town": {
+   "name": "Suffolk Blues",
+   "abbr": "SUF"
+  },
+  "leeds united": {
+   "name": "Yorkshire Whites",
+   "abbr": "YKW"
+  },
+  "leicester city": {
+   "name": "Soar Valley Blues",
+   "abbr": "SVB"
+  },
+  "liverpool": {
+   "name": "Merseyside Reds",
+   "abbr": "MSR"
+  },
+  "luton town": {
+   "name": "Chiltern Orange",
+   "abbr": "CHI"
+  },
+  "manchester city": {
+   "name": "Mancunian Sky",
+   "abbr": "MSY"
+  },
+  "manchester united": {
+   "name": "Mancunian Reds",
+   "abbr": "MRD"
+  },
+  "middlesbrough": {
+   "name": "Teesside Reds",
+   "abbr": "TEE"
+  },
+  "newcastle united": {
+   "name": "Tyneside Stripes",
+   "abbr": "TYN"
+  },
+  "norwich city": {
+   "name": "Broads Yellows",
+   "abbr": "BRY"
+  },
+  "nottingham forest": {
+   "name": "Trent Reds",
+   "abbr": "TRR"
+  },
+  "oldham athletic": {
+   "name": "Boundary Blues",
+   "abbr": "BOB"
+  },
+  "portsmouth": {
+   "name": "Solent Blues",
+   "abbr": "SOL"
+  },
+  "queens park rangers": {
+   "name": "Shepherd's Bush Hoops",
+   "abbr": "SBH"
+  },
+  "reading": {
+   "name": "Berkshire Blues",
+   "abbr": "BRK"
+  },
+  "sheffield united": {
+   "name": "Steel City Reds",
+   "abbr": "SCR"
+  },
+  "sheffield wednesday": {
+   "name": "Hillsborough Blues",
+   "abbr": "HIL"
+  },
+  "southampton": {
+   "name": "Itchen Reds",
+   "abbr": "ITC"
+  },
+  "stoke city": {
+   "name": "Potteries Stripes",
+   "abbr": "POT"
+  },
+  "sunderland": {
+   "name": "Wearside Stripes",
+   "abbr": "WEA"
+  },
+  "swansea city": {
+   "name": "Gower Whites",
+   "abbr": "GOW"
+  },
+  "swindon town": {
+   "name": "Wiltshire Reds",
+   "abbr": "WIL"
+  },
+  "tottenham hotspur": {
+   "name": "North London Whites",
+   "abbr": "NLW"
+  },
+  "watford": {
+   "name": "Vicarage Yellows",
+   "abbr": "VIC"
+  },
+  "west bromwich albion": {
+   "name": "Black Country Stripes",
+   "abbr": "BCS"
+  },
+  "west ham united": {
+   "name": "East London Claret",
+   "abbr": "ELC"
+  },
+  "wigan athletic": {
+   "name": "Pier Blues",
+   "abbr": "PIE"
+  },
+  "wimbledon": {
+   "name": "Merton Blues",
+   "abbr": "MER"
+  },
+  "wolverhampton wanderers": {
+   "name": "Black Country Gold",
+   "abbr": "BCG"
+  }
+ },
+ "first_names": [
+  "Aaron",
+  "Adam",
+  "Aiden",
+  "Alan",
+  "Albie",
+  "Alex",
+  "Alfie",
+  "Andy",
+  "Archie",
+  "Arlo",
+  "Arthur",
+  "Ashley",
+  "Barney",
+  "Ben",
+  "Billy",
+  "Blake",
+  "Bobby",
+  "Brandon",
+  "Brendan",
+  "Callum",
+  "Calvin",
+  "Cameron",
+  "Carl",
+  "Charlie",
+  "Chris",
+  "Colin",
+  "Connor",
+  "Craig",
+  "Dale",
+  "Damon",
+  "Danny",
+  "Darren",
+  "Dean",
+  "Declan",
+  "Dennis",
+  "Dexter",
+  "Dominic",
+  "Dylan",
+  "Eddie",
+  "Elliot",
+  "Ethan",
+  "Evan",
+  "Felix",
+  "Finley",
+  "Frankie",
+  "Freddie",
+  "Gareth",
+  "Gavin",
+  "George",
+  "Glen",
+  "Grant",
+  "Harley",
+  "Harry",
+  "Harvey",
+  "Hugo",
+  "Isaac",
+  "Jack",
+  "Jake",
+  "Jamie",
+  "Jason",
+  "Jay",
+  "Joel",
+  "Jordan",
+  "Josh",
+  "Jude",
+  "Kai",
+  "Keith",
+  "Kieran",
+  "Kyle",
+  "Lee",
+  "Leo",
+  "Lewis",
+  "Liam",
+  "Logan",
+  "Louis",
+  "Luca",
+  "Luke",
+  "Marcus",
+  "Mark",
+  "Martin",
+  "Mason",
+  "Matt",
+  "Max",
+  "Miles",
+  "Nathan",
+  "Neil",
+  "Nico",
+  "Noah",
+  "Oliver",
+  "Ollie",
+  "Oscar",
+  "Owen",
+  "Paul",
+  "Reece",
+  "Rhys",
+  "Ricky",
+  "Robbie",
+  "Ronan",
+  "Rory",
+  "Ross",
+  "Ryan",
+  "Sam",
+  "Scott",
+  "Sean",
+  "Seb",
+  "Shane",
+  "Simon",
+  "Stuart",
+  "Theo",
+  "Toby",
+  "Tom",
+  "Tommy",
+  "Tyler",
+  "Wayne",
+  "Wes",
+  "Will",
+  "Zach",
+  "Zane"
+ ],
+ "surnames": [
+  "Abbott",
+  "Ainsworth",
+  "Akers",
+  "Ambrose",
+  "Ashby",
+  "Atherton",
+  "Bailey",
+  "Barnard",
+  "Baxter",
+  "Beckford",
+  "Birch",
+  "Blackwood",
+  "Bradshaw",
+  "Brennan",
+  "Brook",
+  "Buckley",
+  "Burrows",
+  "Calloway",
+  "Carver",
+  "Chadwick",
+  "Chapman",
+  "Clayton",
+  "Coleby",
+  "Colville",
+  "Cowan",
+  "Crane",
+  "Croft",
+  "Dalton",
+  "Darby",
+  "Davenport",
+  "Dawes",
+  "Drake",
+  "Dunmore",
+  "Eastwood",
+  "Ellison",
+  "Emery",
+  "Fairbrother",
+  "Farley",
+  "Fenwick",
+  "Fielding",
+  "Fletcher",
+  "Forde",
+  "Foxley",
+  "Galloway",
+  "Garner",
+  "Gilmour",
+  "Goodwin",
+  "Gorman",
+  "Granger",
+  "Greaves",
+  "Hadley",
+  "Halliday",
+  "Hammond",
+  "Harding",
+  "Hartley",
+  "Hawkins",
+  "Haywood",
+  "Holloway",
+  "Horton",
+  "Howell",
+  "Ingram",
+  "Jarvis",
+  "Jenner",
+  "Kemp",
+  "Kendall",
+  "Kirby",
+  "Knowles",
+  "Lacey",
+  "Langley",
+  "Lawton",
+  "Lockwood",
+  "Maddox",
+  "Marlow",
+  "Marsh",
+  "Maxwell",
+  "Mayhew",
+  "McAllister",
+  "McCrae",
+  "Moffat",
+  "Morley",
+  "Munro",
+  "Nash",
+  "Newbury",
+  "Norris",
+  "Oakley",
+  "Ogden",
+  "Oldfield",
+  "Osborne",
+  "Padgett",
+  "Parkin",
+  "Penrose",
+  "Prescott",
+  "Quinlan",
+  "Radford",
+  "Ramsden",
+  "Rawlings",
+  "Redfern",
+  "Ridley",
+  "Rowe",
+  "Rushton",
+  "Salter",
+  "Sawyer",
+  "Seddon",
+  "Sharples",
+  "Shelton",
+  "Shore",
+  "Sinclair",
+  "Slater",
+  "Somerville",
+  "Stanton",
+  "Stokes",
+  "Sutcliffe",
+  "Swift",
+  "Talbot",
+  "Tanner",
+  "Thorne",
+  "Tilley",
+  "Towers",
+  "Trafford",
+  "Tunstall",
+  "Underwood",
+  "Vance",
+  "Varley",
+  "Wakefield",
+  "Walsh",
+  "Warburton",
+  "Webster",
+  "Wheeler",
+  "Whitlock",
+  "Wilde",
+  "Winstanley",
+  "Woodward",
+  "Yardley",
+  "York"
+ ]
+}

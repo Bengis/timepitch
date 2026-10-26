@@ -274,7 +274,24 @@ def parse_plan(pack: FactPack, text: str) -> CrewPlan:
     coverage = {f.id for f in pack.facts if f.kind == 'coverage'}
     if any(i in coverage for p in plan.paragraphs for i in p):
         raise ValueError('Plan puts coverage in prose')
-    return plan
+    return with_comparisons(pack, plan)
+
+
+def with_comparisons(pack: FactPack, plan: CrewPlan) -> CrewPlan:
+    """crew-analyst-3: a plan without any team comparison gets up to two of the recorded ones, so the report can show
+    how the result was reached. Deterministic: the order of the fact pack, never a model choice."""
+    used = {i for p in plan.paragraphs for i in p}
+    compare = [f.id for f in pack.facts if f.kind == 'team_compare' and f.availability != 'unavailable' and f.id not in used]
+    if any(f.kind == 'team_compare' and f.id in used for f in pack.facts) or not compare:
+        return plan
+    paragraphs = [list(p) for p in plan.paragraphs]
+    if len(paragraphs) < 3:
+        paragraphs.append(compare[:2])
+    elif len(paragraphs[-1]) < 4:
+        paragraphs[-1] += compare[:4 - len(paragraphs[-1])][:2]
+    else:
+        return plan
+    return plan.model_copy(update={'paragraphs': paragraphs})
 
 
 def planned_pack(pack: FactPack, plan: CrewPlan) -> FactPack:
@@ -294,12 +311,25 @@ def capitals_example(pack: FactPack) -> str:
     return f'{pack.home_name} meet {pack.away_name}.'
 
 
-def writer_instructions(locale: Locale, pack: FactPack | None = None) -> str:
+# TP260 (crew-writer-7): who the report is for, and a paragraph on how the result was reached from the comparisons.
+AUDIENCE_STYLE = {
+    'fan': 'Write for a casual fan: plain everyday words, no jargon, and when you cite a comparison say in simple terms '
+           'which side had more of it.',
+    'analyst': 'Write for an analyst: compact and precise, lead each paragraph with the cited figures and compare the two '
+               'sides directly.',
+}
+HOW_IT_WAS_WON = ('When the plan includes team comparisons, give them their own paragraph that shows how the result was '
+                  'reached by setting the two sides side by side (for example one side had more shots or more of the ball). '
+                  'State the recorded figures and the contrast only: no causes, verdicts or claims beyond the cited facts.')
+
+
+def writer_instructions(locale: Locale, pack: FactPack | None = None, audience: str = 'fan') -> str:
     example = ('' if pack is None else ' Capitalisation example (style only, not a fact to reuse): "'
                + capitals_example(pack) + '"')
     # Version crew-writer-4: prose instructions, proper-noun rule, lively style and the checker's explicit rules.
-    return (prose_instructions(locale) + ' ' + PROPER_NOUN_RULE + ' ' + LIVELY_STYLE + ' ' + writer_rules(locale) +
-            example + ' Follow the supplied paragraph plan and cite only facts present in the payload.')
+    return (prose_instructions(locale) + ' ' + PROPER_NOUN_RULE + ' ' + LIVELY_STYLE + ' ' + AUDIENCE_STYLE[audience] + ' ' +
+            HOW_IT_WAS_WON + ' ' + writer_rules(locale) + example +
+            ' Follow the supplied paragraph plan and cite only facts present in the payload.')
 
 
 def writer_payload(pack: FactPack, plan: CrewPlan, revision: tuple[Draft, Verdict] | None = None) -> dict:

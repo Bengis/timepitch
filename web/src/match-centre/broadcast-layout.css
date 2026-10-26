@@ -262,6 +262,11 @@ body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
 .crew-report .crew-report-teaser { color: var(--tp-ink2); }
 .crew-report-open { justify-self: start; padding: 8px 14px; border-radius: 999px; border: 0; background: var(--tp-sim); color: #10091f; font: 700 13px var(--tp-ui); cursor: pointer; }
 .crew-report-open:hover, .crew-report-open:focus-visible { filter: brightness(1.12); }
+/* TP260: público de la crónica (aficionados o analistas). */
+.crew-audience { display: flex; align-items: center; gap: 6px; font: 600 12px var(--tp-ui); color: var(--tp-muted, #9aa3b8); }
+.crew-audience button { padding: 4px 10px; border-radius: 999px; border: 1px solid #ffffff2a; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.crew-audience button[aria-pressed="true"] { background: var(--tp-sim); color: #10091f; border-color: transparent; }
+.crew-audience button:disabled { opacity: .5; cursor: default; }
 .crew-report-notes { margin: 0; padding-left: 18px; font-size: 11px; color: var(--tp-ink3); }
 .crew-report-foot { display: grid; gap: 4px; padding-top: 8px; border-top: 1px solid var(--tp-line); }
 .crew-report-foot p { font-size: 11px; color: var(--tp-ink2); }

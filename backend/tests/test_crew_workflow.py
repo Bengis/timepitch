@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from crew_fixtures import CANARY, FIXED, LIVELY, PLAN, Harness, intents, offline, receipts, reply, tp229_pack  # noqa: F401
+from crew_fixtures import CANARY, CANARY_HARD, FIXED, LIVELY, PLAN, Harness, intents, offline, receipts, reply, tp229_pack  # noqa: F401
 from timepitch.chronicles.azure.models import VALIDATOR_VERSION, ChronicleDraft
 from timepitch.chronicles.azure.validation import DraftRejected, locate_rejection, validate_draft
 from timepitch.crew.fallback import crew_fallback_text
@@ -66,24 +66,25 @@ def test_analyst_schema_is_fact_id_enums_without_numbers():
 
 
 def test_tp229_headline_rejection_is_revised_then_accepted(offline, tmp_path):
-    fake = offline([reply(PLAN), reply(CANARY), reply(FIXED, request_id='req-fixed')])
+    fake = offline([reply(PLAN), reply(CANARY_HARD), reply(FIXED, request_id='req-fixed')])
     h = Harness(tmp_path)
     report = run(offline, h)
-    # The Fixer cites result for the 1-0 in p1s1 (literal support); the uncited name needs the Writer.
+    # The Fixer cites the goal for the headline name and result for the 1-0 in p1s1; the uncited statistic needs the Writer.
     # crew-fixer-2 first writes the names of p2s1 as recorded, with no model call.
     assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('fixer', 'fixed'), ('verifier', 'rejected'), ('fixer', 'fixed'),
                              ('verifier', 'rejected'), ('writer_revision', 'ok'), ('verifier', 'accepted'),
                              ('publisher', 'crew_ai_draft_checked')]
     assert report.steps[2].reason == 'names' and report.steps[2].fixes == ['p2s1:names']
-    assert report.steps[4].fixes == ['p1s1+result']
+    assert report.steps[4].fixes == ['headline+goal:grf:134', 'p1s1+result']
     rejected = report.steps[5]
-    assert (rejected.reason, rejected.location) == ('uncited_entity', 'headline')
+    # After the Fixer cites the goal, the headline still names a statistic it does not cite: only the Writer can fix it.
+    assert (rejected.reason, rejected.location) == ('unsupported_metric', 'headline')
     assert report.provenance == 'crew_ai_draft_checked' and report.semantic_verified is False
     assert report.draft == ChronicleDraft.model_validate(FIXED) and report.fallback_text is None
     assert verify_report(report)
     assert report.steps[6].request_id == 'req-fixed' and report.steps[6].model == 'gpt-4.1-mini'
     assert report.versions['agent-framework-core'] == '1.22.0' and report.versions['agent-framework-openai'] == '1.17.0'
-    assert report.versions['writer_prompt'] == 'crew-writer-6'
+    assert report.versions['writer_prompt'] == 'crew-writer-7'
     # Three real requests, all bounded, unstored and gated.
     assert len(fake.requests) == 3 == h.gate.admitted == h.gate.attempted == len(intents(h.ledger))
     assert all(b['max_output_tokens'] == 1024 and b['store'] is False and b['model'] == 'gpt-4.1-mini' for b in fake.requests)
@@ -93,13 +94,13 @@ def test_tp229_headline_rejection_is_revised_then_accepted(offline, tmp_path):
     assert planned == {'result', 'goal:grf:134', 'leader:goals', 'comparison:team_possession_pct', 'comparison:shots',
                        'comparison:pass_received', 'comparison:recoveries'}
     first = user_payload(revision)['revision_request']['failures'][0]
-    assert (first['failed_check'], first['location'], first['sentence']) == ('uncited_entity', 'headline', CANARY['headline']['text'])
+    assert (first['failed_check'], first['location'], first['sentence']) == ('unsupported_metric', 'headline', CANARY_HARD['headline']['text'])
     assert first['fix_options'] and first['rule']
     assert report.total_cost == sum(s.cost for s in report.steps) > 0
 
 
 def test_second_rejection_goes_to_deterministic_fallback(offline, tmp_path):
-    fake = offline([reply(PLAN), reply(CANARY), reply(CANARY)])
+    fake = offline([reply(PLAN), reply(CANARY_HARD), reply(CANARY_HARD)])
     h = Harness(tmp_path)
     report = run(offline, h)
     assert codes(report) == [('analyst', 'ok'), ('writer', 'ok'), ('fixer', 'fixed'), ('verifier', 'rejected'), ('fixer', 'fixed'),

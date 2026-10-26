@@ -3,6 +3,7 @@
 import type { SceneFrame, VisualCue } from '../../match/retroScene';
 import { cursorAt, type EventView, type MatchSource, type MotionInterval, type PanelData, type PlayerView, type SessionSnapshot } from '../session';
 import { available, blankSnapshot, clamp, descriptor, detail, emptyPanel, ns } from './base';
+import { showPlayer } from '../../catalog/fictional';
 import { savedSession } from './saved';
 import { fail, type RecordedPlayer, type RecordedTrack, type Side, type XY } from './recorded-track';
 import { alignRecordedEvent, type RecordedEvent, type RecordedEventKind, type RecordedEvents } from './recorded-events';
@@ -49,7 +50,7 @@ export function createRecordedSession(id: string, track: RecordedTrack, recorded
     const active = (p: RecordedPlayer) => (p.side === 'home' ? s.homeActive : s.awayActive)?.[p.slot] !== false;
     return { clock_ms: index * track.intervalMs, period: s.period, score: { home: s.score[0], away: s.score[1] },
       possession: s.owner?.side ?? null, carrier: owner ? key(owner) : null, ball,
-      players: track.players.filter(active).map(p => ({ ...point((p.side === 'home' ? s.home : s.away)[p.slot]), key: key(p), name: p.name, role: p.role, side: p.side })) };
+      players: track.players.filter(active).map(p => ({ ...point((p.side === 'home' ? s.home : s.away)[p.slot]), key: key(p), name: showPlayer(p.name), role: p.role, side: p.side })) };
   }
   function interval(time: number): MotionInterval {
     const i = Math.min(track.sampleCount - 1, Math.floor(time / track.intervalMs)), last = i === track.sampleCount - 1;
@@ -113,7 +114,7 @@ export function createRecordedSession(id: string, track: RecordedTrack, recorded
   events.sort((x, y) => x.elapsedMs! - y.elapsedMs! || x.sourceIndex - y.sourceIndex);
 
   const players: PlayerView[] = track.players.map(p => ({
-    id: key(p), name: p.name, side: p.side as Side, sourceRefs: [p.id, p.sourceKey],
+    id: key(p), name: showPlayer(p.name), side: p.side as Side, sourceRefs: [p.id, p.sourceKey],
     role: { value: p.role, provenance: 'estimated', refs: [] }, jersey: { value: null, provenance: 'unavailable', refs: [] },
     intervals: { value: null, provenance: 'unavailable', refs: [] }, estimatedAttributes: [], metrics: [], availability: available(),
     details: { slot: p.slot, teamKey: track[p.side].key, sourceKey: p.sourceKey, nativeId: p.nativeId, engine: track.engine },

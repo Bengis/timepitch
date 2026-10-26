@@ -5,7 +5,7 @@ import json
 import pytest
 from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
 
-from crew_fixtures import CANARY, FIXED, LIVELY, PLAN, Harness, grant, offline, reply  # noqa: F401
+from crew_fixtures import CANARY, CANARY_HARD, FIXED, LIVELY, PLAN, Harness, grant, offline, reply  # noqa: F401
 from timepitch.crew.tracing import CrewTracer, read_connection, setup_tracing
 from timepitch.crew.workflow import run_crew
 
@@ -36,20 +36,20 @@ def test_run_and_step_spans_carry_codes_not_text(offline, tmp_path):
     exporter = InMemorySpanExporter()
     tracer = setup_tracing(exporter=exporter, simple=True)
     assert tracer.enabled
-    report = traced_run(offline, tmp_path, [reply(PLAN), reply(CANARY), reply(FIXED, request_id='req-fixed')], tracer)
+    report = traced_run(offline, tmp_path, [reply(PLAN), reply(CANARY_HARD), reply(FIXED, request_id='req-fixed')], tracer)
     spans = [s for s in exporter.get_finished_spans() if s.name.startswith('crew.')]
     run = [s for s in spans if s.name == 'crew.run']
     assert len(run) == 1
     attrs = run[0].attributes
     assert attrs['crew.request_hash'] == report.source.request_hash and attrs['crew.outcome'] == 'crew_ai_draft_checked'
-    assert attrs['crew.angle'] == 'narrow_win' and attrs['crew.version.writer_prompt'] == 'crew-writer-6'
+    assert attrs['crew.angle'] == 'narrow_win' and attrs['crew.version.writer_prompt'] == 'crew-writer-7'
     assert attrs['crew.version.agent-framework-core'] == '1.22.0'
     steps = [s.attributes for s in spans if s.name == 'crew.step']
     assert [(a['crew.role'], a['crew.code']) for a in steps] == [(s.role, s.code) for s in report.steps]
     names = next(a for a in steps if a['crew.role'] == 'fixer')
     assert names['crew.reason'] == 'names'  # crew-fixer-2 writes names as recorded first
     fixer = next(a for a in steps if a['crew.role'] == 'fixer' and a['crew.reason'] != 'names')
-    assert list(fixer['crew.fixes']) == ['p1s1+result']
+    assert list(fixer['crew.fixes']) == ['headline+goal:grf:134', 'p1s1+result']
     revision = next(a for a in steps if a['crew.role'] == 'writer_revision')
     assert revision['crew.provider_request_id'] == 'req-fixed' and revision['crew.tokens.input'] == 900
     assert revision['crew.model'] == 'gpt-4.1-mini' and revision['crew.cost_usd'] > 0
