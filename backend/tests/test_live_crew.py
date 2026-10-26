@@ -92,6 +92,7 @@ def service(tmp_path, *, g=None, clock=None, blobs=None, source=None):
     tmp_path.mkdir(parents=True, exist_ok=True)
     env = tmp_path / 'envelope.json'
     env.write_bytes((g or grant(max_reports=3, locales=['en', 'es'])).model_dump_json().encode())
+    env.chmod(0o600)  # the service only reads private envelope files
     clock = clock or [NOW]
     pack = tp229_pack()
     crew = LiveCrew(source or (lambda engine, match_id, owner: pack), LiveCrewSettings(mode='on', envelope=env),

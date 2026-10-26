@@ -151,6 +151,7 @@ def test_cli_refuses_without_valid_envelope(tmp_path, monkeypatch, capsys):
     assert cli.main(['run', '--local', str(source), 'en']) == 2
     bad = tmp_path / 'bad.json'
     bad.write_text('{"id": "x"}')
+    bad.chmod(0o600)  # private, so the refusal is about the content
     args = ['run', '--local', str(source), 'en', '--envelope', str(bad), '--credential', str(tmp_path / 'key'),
             '--ledger', str(tmp_path / 'l.sqlite'), '--out', str(tmp_path / 'r.json')]
     assert cli.main(args) == 2

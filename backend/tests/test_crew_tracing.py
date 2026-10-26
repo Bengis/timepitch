@@ -94,9 +94,11 @@ def test_connection_file_tolerates_bom_and_crlf(tmp_path):
     for raw in (value.encode(), b'\xef\xbb\xbf' + value.encode() + b'\r\n', b'  ' + value.encode() + b'\n\n'):
         path = tmp_path / 'conn'
         path.write_bytes(raw)
+        path.chmod(0o600)  # the connection string must be a private file
         assert read_connection(path) == value
     for raw in (value.encode() + b'\nsecond line', 'InstrumentationKey=ñ'.encode()):
         path.write_bytes(raw)
+        path.chmod(0o600)
         with pytest.raises(ValueError):
             read_connection(path)
 
