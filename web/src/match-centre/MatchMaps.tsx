@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react';
+import { defineTexts } from '../i18n-catalog';
 import type { PlotView, TableCell } from './session';
 import { usePlayerText } from './player-messages';
 import { PitchLines, SimChip, StatBar, type TimelineContext } from './analysis/RecordedAnalysisViews';
@@ -7,7 +8,7 @@ import { useLanguage } from '../i18n';
 type Side = 'home' | 'away';
 /** TP249: equipos (nombre, siglas y color) y jugadores para dibujar los mapas de los simulados como los de la demo. */
 type MapsContext = Pick<TimelineContext, 'teams' | 'player' | 'engineLabel' | 'onPlayer'>;
-const MAP_TEXT = {
+const MAP_TEXT = defineTexts('maps', {
   en: { half: (n: string) => n === '1' ? '1st half' : n === '2' ? '2nd half' : n, shots: (n: number) => `${n} shot${n === 1 ? '' : 's'}`, goals: (n: number) => `${n} goal${n === 1 ? '' : 's'}`,
     goalKey: 'Filled: goal', shotKey: 'Ring: other shot', shotNote: 'Each team attacks towards the side of its name. Dot: where the shot was taken.',
     length: 'Team length', width: 'Team width', positionsNote: 'Dots: average position of each player in that half. Lines: passes between them (thicker, more passes).',
@@ -16,7 +17,7 @@ const MAP_TEXT = {
     goalKey: 'Relleno: gol', shotKey: 'Aro: otro tiro', shotNote: 'Cada equipo ataca hacia el lado de su nombre. Punto: dónde se tiró.',
     length: 'Longitud del equipo', width: 'Anchura del equipo', positionsNote: 'Puntos: posición media de cada jugador en esa parte. Líneas: pases entre ellos (más gruesa, más pases).',
     heatNote: 'Cuadros más intensos: donde más tiempo estuvo el equipo.', team: 'Equipo', halfGroup: 'Parte' },
-};
+});
 const sideOf = (scope?: Readonly<Record<string, TableCell>>): Side | null => scope?.side === 'home' || scope?.side === 'away' ? scope.side : null;
 
 export function MatchRecordTable({ columns, rows, title, onSeek }: { columns: readonly string[]; rows: readonly Readonly<Record<string, TableCell>>[]; title: string; onSeek?: (ms: number) => void }) {
@@ -55,7 +56,7 @@ function PlotGraphic({ plot, lines = false }: { plot: PlotView; lines?: boolean 
 }
 
 function MatchPlot({ plot, onSeek, simple = false, ctx }: { plot: PlotView; onSeek: (ms: number) => void; simple?: boolean; ctx?: MapsContext }) {
-  const { locale } = useLanguage(), x = MAP_TEXT[locale === 'es' ? 'es' : 'en'];
+  const { locale } = useLanguage(), x = MAP_TEXT(locale);
   // TP249: en los simulados, posiciones, red de pases y forma del equipo se ven por partes (los equipos cambian de campo).
   const phased = simple && ['occupancy', 'average_positions', 'pass_network', 'team_shape'].includes(plot.kind) && plot.rows.some(r => r.phase != null);
   const t = usePlayerText(), [query, setQuery] = useState(''), [team, setTeam] = useState(plot.kind === 'occupancy' ? String(plot.rows[0]?.side ?? plot.rows[0]?.team ?? '') : ''), [player, setPlayer] = useState(''), [phase, setPhase] = useState(plot.kind === 'occupancy' ? String(plot.rows[0]?.phase ?? plot.rows[0]?.period ?? '') : '');
@@ -120,7 +121,7 @@ export function MatchMaps({ plots, onSeek, simple = false, ctx }: { plots: reado
  * los simulados con el mismo campo verde de la demo, los colores de cada equipo y leyenda.
  */
 function SimpleGraphic({ plot, rows, ctx }: { plot: PlotView; rows: readonly Readonly<Record<string, TableCell>>[]; ctx: MapsContext }) {
-  const { locale } = useLanguage(), x = MAP_TEXT[locale === 'es' ? 'es' : 'en'], teams = ctx.teams;
+  const { locale } = useLanguage(), x = MAP_TEXT(locale), teams = ctx.teams;
   const colour = (scope?: Readonly<Record<string, TableCell>>) => { const side = sideOf(scope); return side ? teams[side].colour : 'currentColor'; };
   const pitch = (body: ReactNode, label: string, arrows = false) => <svg className="tpa-pitch" viewBox="-2 -2 109 72" role="img" aria-label={label}><PitchLines />
     {arrows && <><text x="2" y="4" className="tpa-dir">← {teams.away.abbr}</text><text x="103" y="4" className="tpa-dir" textAnchor="end">{teams.home.abbr} →</text></>}{body}</svg>;

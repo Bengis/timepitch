@@ -3,6 +3,7 @@
 // partido, fichas). Mismo fichero y misma regla que backend/src/timepitch/fictional (la crónica en vivo nombra lo
 // mismo que se ve). El modo se lee una vez al arrancar: cambiarlo guarda la preferencia y recarga la página.
 import league from './fictional-league.json';
+import crests from './fictional-crests.json';
 
 export type NamesMode = 'fictional' | 'real';
 const KEY = 'timepitch.names';
@@ -61,4 +62,10 @@ export function fictionalAbbr(name: string): string | null {
 
 /** Nombre que se muestra según el modo activo. */
 export const showClub = (real: string): string => (fictional() ? fictionalClub(real) : real);
+
+/** TP264: escudo propio de la liga ficticia para `club:season_start` (generado por scripts/fictional_crests.py). */
+export function fictionalCrestSrc(teamKey: string): string | null {
+  const file = (crests.files as Record<string, string>)[teamKey.split(':')[0]];
+  return file ? `/assets/crests-fictional/${file}` : null;
+}
 export const showPlayer = (real: string): string => (fictional() ? fictionalPlayer(real) : real);

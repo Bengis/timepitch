@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { defineTexts } from '../i18n-catalog';
 import { useLanguage } from '../i18n';
 import { PLAYBACK_SPEEDS, type PlaybackState } from './playback';
 import type { SessionDescriptor, MatchCursor } from './session';
@@ -10,14 +11,14 @@ import './playback-controls.css';
 export type TransportMark = { id: string; atMs: number; seekMs: number; label: string; kind: string; icon?: ReactNode };
 
 // Textos propios de la barra (player-messages.ts es del armazón).
-const TEXT = {
+const TEXT = defineTexts('playback', {
   es: { previous: 'Evento anterior', next: 'Evento siguiente', back: 'Retroceder 10 s', forward: 'Avanzar 10 s', start: "0'", halftime: 'Descanso',
     minute: 'Minuto', left: 'quedan', lasts: (speed: string, total: string) => `${speed}×: el partido dura ${total}`,
     halfLength: 'Cada parte', half: (min: string, total: string) => `Partes de ${min} min: el partido dura ${total} min` },
   en: { previous: 'Previous event', next: 'Next event', back: 'Back 10 s', forward: 'Forward 10 s', start: "0'", halftime: 'Half-time',
     minute: 'Minute', left: 'left', lasts: (speed: string, total: string) => `${speed}×: the match lasts ${total}`,
     halfLength: 'Each half', half: (min: string, total: string) => `${min}-minute halves: the match lasts ${total} min` },
-};
+});
 
 // TP251 (25-oct: «los tiempos no casan en general»): la grabación de cada motor dura distinto (TouchLines y GRF
 // en vivo van comprimidos: 5:00 para 90'; la demo, 96:51). Las velocidades multiplican la grabación, así que se muestran
@@ -63,7 +64,7 @@ export function PlaybackControls({ state, descriptor, cursor, onPlay, onPause, o
   /** TP251: reloj del partido. Con él, la barra va en minutos de partido y las velocidades dicen cuánto dura el partido. */
   clock?: { now: string; end: string };
 }) {
-  const t = usePlayerText(), { locale, t: app } = useLanguage(), x = TEXT[locale === 'es' ? 'es' : 'en'];
+  const t = usePlayerText(), { locale, t: app } = useLanguage(), x = TEXT(locale);
   const duration = descriptor.durationMs, current = state.pendingSeekMs ?? state.elapsedMs, halves = Math.max(1, descriptor.periods.length);
   const pct = (ms: number) => duration ? Math.max(0, Math.min(100, ms / duration * 100)) : 0;
   const at = (ms: number) => ({ '--pbk-at': `${pct(ms)}%` }) as CSSProperties;

@@ -1,4 +1,5 @@
 import { useLanguage } from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 const en={engine:'Simulation engine',experimental:'Google Research Football · experimental',grfName:'Google Research Football',touchlinesName:'TouchLines',touchlinesNote:'TouchLines · arcade engine: each half lasts 150 real seconds and the clock runs fast. AGPL-3.0, source available.',checking:'Checking local GRF availability…',
   physicalUnavailable:'Physical GRF replays are not yet available in this browser. The match stays in your library; you can return to a new match.',
   unavailable:'GRF is unavailable in this local installation.',missing_runtime:'The GRF runtime is not installed.',missing_assets:'Required GRF files are missing.',unsupported_native_binary:'This GRF build is not supported.',
@@ -23,4 +24,5 @@ const es:{[K in keyof typeof en]:string}={engine:'Motor de simulación',experime
   matchClock:'Tiempo de partido',firstHalf:'Primera parte',secondHalf:'Segunda parte',fullTime:'Final del partido',replay:'Ver de nuevo',legacyEnd:'Fin de la repetición experimental',
   noMetricsFull:'Las estadísticas avanzadas y el análisis de IA aún no están disponibles para este motor. El tiempo de partido procede de GRF; el de reproducción controla la animación grabada.',
 };
-export function useGrfText(){const {locale}=useLanguage();return locale==='es'?es:en;}
+const TEXTS = defineTexts('grf', { en, es });
+export function useGrfText(){const {locale}=useLanguage();return TEXTS(locale);}

@@ -1,6 +1,6 @@
 // TP213 · Textos EN/ES de la pantalla VERSUS.
 import { useLanguage } from '../i18n';
-import { showPlayer } from '../catalog/fictional';
+import { defineTexts } from '../i18n-catalog';
 
 const ordinalEn = (n: number) => {
   const s = ['th', 'st', 'nd', 'rd'], v = n % 100;
@@ -52,7 +52,7 @@ const en = {
   results: (n: number, total: number) => `${n} of ${total} team-seasons`, noResults: 'No team-season matches these filters.',
   more: (n: number) => `Show more (${n} left)`, selected: 'selected',
   options: 'Tactics', moreDetails: 'More details', detailsNote: 'Historical data unless marked Estimated; each team lists its sources.',
-  demoKicker: 'Featured demo', demoTitle: `${showPlayer('Thierry Henry')} vs ${showPlayer('Erling Haaland')}`, demoOpen: 'Watch the demo',
+  demoKicker: 'Featured demo', demoTitle: (a: string, b: string) => `${a} vs ${b}`, demoOpen: 'Watch the demo',
   prepare: 'Line-ups and seed', prepareNote: 'Play match uses them as set here.',
   // TP225: pantalla compacta; las tarjetas abren el selector.
   changeTeam: 'Change team', chooseTeam: 'Choose team', goalsForAgainst: 'GF-GA', pts: 'pts', kitShort: 'Kit',
@@ -107,7 +107,7 @@ const es: Text = {
   results: (n: number, total: number) => `${n} de ${total} equipos-temporada`, noResults: 'Ningún equipo-temporada coincide con estos filtros.',
   more: (n: number) => `Mostrar más (quedan ${n})`, selected: 'elegido',
   options: 'Táctica', moreDetails: 'Más detalles', detailsNote: 'Datos históricos salvo los marcados como Estimado; cada equipo indica sus fuentes.',
-  demoKicker: 'Demo destacada', demoTitle: `${showPlayer('Thierry Henry')} contra ${showPlayer('Erling Haaland')}`, demoOpen: 'Ver la demo',
+  demoKicker: 'Demo destacada', demoTitle: (a: string, b: string) => `${a} contra ${b}`, demoOpen: 'Ver la demo',
   prepare: 'Alineaciones y semilla', prepareNote: '«Jugar partido» las usa tal como estén aquí.',
   changeTeam: 'Cambiar equipo', chooseTeam: 'Elegir equipo', goalsForAgainst: 'GF-GC', pts: 'pts', kitShort: 'Equipación',
   sourcesMore: 'Fuentes', seeMore: 'Ver más', seeLess: 'Ver menos', close: 'Cerrar',
@@ -116,9 +116,10 @@ const es: Text = {
 };
 
 export type VersusText = Text;
+const TEXTS = defineTexts('versus', { en, es });
 export function useVersusText(): VersusText {
   const { locale } = useLanguage();
-  return locale === 'es' ? es : en;
+  return TEXTS(locale);
 }
 
 /** Nombre legible de las fuentes de resultados. */

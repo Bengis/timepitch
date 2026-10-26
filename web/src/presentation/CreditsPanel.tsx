@@ -2,6 +2,7 @@ import { useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import statsbombIcon from '../assets/statsbomb.svg?no-inline';
 import { useLanguage } from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 import type { AttributionLine } from './attribution';
 import './tokens.css';
 import './credits.css';
@@ -16,7 +17,7 @@ const LICENCE_URLS: Readonly<Record<string, string>> = {
 };
 
 // TP221: rótulos del panel en inglés y español; las líneas llegan ya traducidas desde `attributionsFor`.
-const TEXTS = {
+const TEXTS = defineTexts('credits', {
   en: { title: 'Credits and licences', close: 'Close',
     // TP234: nota de inspiración y originalidad de Capitán Hane (nombrar la inspiración es atribución, no uso).
     // TP235: los primeros planos de la demo son de FLUX.2-pro (solo rasgos del avatar, revisados uno a uno).
@@ -25,13 +26,13 @@ const TEXTS = {
   es: { title: 'Créditos y licencias', close: 'Cerrar',
     inspirationTitle: 'Inspiración y originalidad',
     inspiration: 'Capitán Hane está inspirado en el anime deportivo de los años 80 y 90 y en los juegos de Captain Tsubasa de Tecmo. Los nombres de los movimientos, los sonidos, la rotulación y los gráficos de la escena son originales y los genera el código de TimePitch. Los primeros planos de los jugadores de la demo están generados con IA (FLUX.2-pro en Azure AI Foundry) solo a partir de los rasgos de su avatar (sin nombres ni fotos), y cada imagen se revisó; el resto de jugadores lleva retratos dibujados por código.' },
-} as const;
+});
 
 /** Pie con enlace «Créditos y licencias» y diálogo con las líneas de `attributionsFor`. */
 export function CreditsPanel({ lines }: { lines: readonly AttributionLine[] }) {
   const [open, setOpen] = useState(false);
   const titleId = useId();
-  const t = TEXTS[useLanguage().locale];
+  const t = TEXTS(useLanguage().locale);
   return (
     <footer className="tp-credits">
       <button type="button" className="tp-credits-link" onClick={() => setOpen(true)}>{t.title}</button>

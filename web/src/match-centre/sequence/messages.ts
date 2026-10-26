@@ -1,4 +1,5 @@
 import { useLanguage } from '../../i18n';
+import { defineTexts } from '../../i18n-catalog';
 const en={thisPlay:'This play',details:'Match details',replay:'Replay sequence',next:'Next moment',position:'Sequence position',
   evidence:'View evidence',source:'Recorded events · Synthetic movement',start:'Watch how the play develops.',quality:'Shot quality · StatsBomb xG',
   unavailable:'Movement unavailable for this interval',loading:'Preparing the saved sequence…',pilotUnavailable:'Sequence preview unavailable. The ordinary viewer remains available.',
@@ -9,4 +10,5 @@ const es:Record<keyof typeof en,string>={thisPlay:'Esta jugada',details:'Detalle
   unavailable:'Movimiento no disponible en este intervalo',loading:'Preparando la secuencia guardada…',pilotUnavailable:'Vista de secuencia no disponible. Puedes usar el visor habitual.',
   retry:'Reintentar',sequence:'Esta secuencia',clipEnd:'Fin de la secuencia',continue:'Empezar la segunda parte',first:'1.ª parte',second:'2.ª parte',full:'Final del partido',
   settings:'Ajustes de imagen',players:'Ver jugador',context:'Movimiento ilustrativo; el análisis utiliza eventos registrados.',historical:'Reconstrucción histórica',boundary:'Comprobación del descanso'};
-export function useSequenceText(){return useLanguage().locale==='es'?es:en;}
+const TEXTS = defineTexts('sequence', { en, es });
+export function useSequenceText(){return TEXTS(useLanguage().locale);}

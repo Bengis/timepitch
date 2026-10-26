@@ -11,6 +11,6 @@ export function GrfMatchView({ id, record, onBack, visible = true, tab, onSectio
   const { locale } = useLanguage();
   // TP253: crónica IA en vivo (el servidor sabe leer los partidos GRF comprimidos y los físicos).
   return <div data-match-id={id} data-engine-version={record.engine_version}><MatchCentre adapter={adapter} visible={visible} onBack={onBack} initialSection={tab} onSectionChange={onSectionChange} autoplay={autoplay} rendererLocked
-    sideReport={({ revealed, halfTime }) => <><LiveCrewPanel engine="grf" matchId={id} locale={locale === 'es' ? 'es' : 'en'} ended={revealed} halfTime={halfTime} />
-      <MatchQuestions engine="grf" matchId={id} locale={locale === 'es' ? 'es' : 'en'} ended={revealed} /></>} /></div>;
+    sideReport={({ revealed, halfTime }) => <><LiveCrewPanel engine="grf" matchId={id} locale={locale} ended={revealed} halfTime={halfTime} />
+      <MatchQuestions engine="grf" matchId={id} locale={locale} ended={revealed} /></>} /></div>;
 }

@@ -4,6 +4,7 @@
 // el informe entero antes de servirlo y aplica el tope de gasto; aquí solo se pide, se espera y se muestra.
 // TP262: también al descanso, una crónica de la primera parte con los hechos hasta ese momento.
 import { useEffect, useRef, useState } from 'react';
+import { defineTexts, type Locale } from '../i18n-catalog';
 import { AzurePipeline, noteIn, type CrewReportView } from './CrewReportPanel';
 import { namesMode } from '../catalog/fictional';
 
@@ -11,7 +12,7 @@ type Engine = 'grf' | 'touchlines';
 type Period = 'half_time' | 'full_time';
 type Live = { status: 'none' | 'pending' | 'ready' | 'failed'; code?: string; report?: CrewReportView & { headline: string | null; provenance?: string } };
 
-const TEXT = {
+const TEXT = defineTexts('live-crew', {
   en: { title: 'AI match report', badge: 'Agent Framework · Azure AI Foundry',
     before: 'At half-time and when the match ends, AI agents on Azure will write a report from what the engine recorded.',
     pending: 'AI agents on Azure are writing the report… it usually takes 1–2 minutes.',
@@ -32,7 +33,7 @@ const TEXT = {
     fallback: 'El borrador de la IA no pasó la comprobación, así que estos son los datos del partido tal cual.',
     retry: 'Reintentar', audience: 'Crónica para', fan: 'Aficionados', analyst: 'Analistas',
     how: 'Escrita por agentes de IA en Azure y comprobada línea a línea con los datos del partido.' },
-} as const;
+});
 
 const POLL_MS = 6000, MAX_POLLS = 50;
 
@@ -44,7 +45,7 @@ async function call(url: string, init?: RequestInit): Promise<{ ok: boolean; sta
 }
 
 /** Pide una vez la crónica de un periodo y la consulta cada pocos segundos hasta que llega. */
-function useCrewReport(active: boolean, engine: Engine, matchId: string, locale: 'en' | 'es', audience: 'fan' | 'analyst', period: Period, attempt: number) {
+function useCrewReport(active: boolean, engine: Engine, matchId: string, locale: Locale, audience: 'fan' | 'analyst', period: Period, attempt: number) {
   const [live, setLive] = useState<Live>({ status: 'none' });
   const requested = useRef(false);
   // TP259: la crónica nombra lo que se ve en pantalla (liga ficticia o nombres reales).
@@ -79,8 +80,8 @@ function useCrewReport(active: boolean, engine: Engine, matchId: string, locale:
   return live;
 }
 
-function ReportBody({ live, locale }: { live: Live; locale: 'en' | 'es' }) {
-  const t = TEXT[locale], report = live.report;
+function ReportBody({ live, locale }: { live: Live; locale: Locale }) {
+  const t = TEXT(locale), report = live.report;
   if (!report) return null;
   return <>
     {report.headline && <h3 className="crew-report-headline">{report.headline}</h3>}
@@ -94,8 +95,8 @@ function ReportBody({ live, locale }: { live: Live; locale: 'en' | 'es' }) {
   </>;
 }
 
-export function LiveCrewPanel({ engine, matchId, locale, ended, halfTime = false }: { engine: Engine; matchId: string; locale: 'en' | 'es'; ended: boolean; halfTime?: boolean }) {
-  const t = TEXT[locale];
+export function LiveCrewPanel({ engine, matchId, locale, ended, halfTime = false }: { engine: Engine; matchId: string; locale: Locale; ended: boolean; halfTime?: boolean }) {
+  const t = TEXT(locale);
   const [available, setAvailable] = useState<boolean | null>(null);
   const [attempt, setAttempt] = useState(0);
   // TP260: la misma crónica escrita para aficionados (por defecto) o para analistas; cada público es un informe aparte.

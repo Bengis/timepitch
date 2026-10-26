@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { defineTexts } from '../i18n-catalog';
 import { useLanguage } from '../i18n';
 import type { CameraMode } from './retroScene';
 import './pitch-hud.css';
@@ -15,7 +16,8 @@ const es: typeof en = {
   camera: 'Cámara', broadcast: 'Emisión', tactical: 'Táctica',
   scene: 'Escena ilustrativa', note: 'Movimiento sintético del motor · no es seguimiento real',
 };
-export function usePitchHudText() { const { locale } = useLanguage(); return locale === 'es' ? es : en; }
+const TEXTS = defineTexts('pitch-hud', { en, es });
+export function usePitchHudText() { const { locale } = useLanguage(); return TEXTS(locale); }
 
 // 'Cenital' no existe en el renderizador 3D (solo follow/overview): no se ofrece.
 const CAMERA_TABS: readonly { mode: CameraMode; label: 'broadcast' | 'tactical' }[] = [

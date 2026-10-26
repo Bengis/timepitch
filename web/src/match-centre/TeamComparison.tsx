@@ -2,6 +2,7 @@
 // en una retransmisión: una fila por dato, local a la izquierda, visitante a la derecha y barra comparada. Solo métricas
 // de equipo con nombre en lenguaje llano y con valor en los dos equipos; el resto sigue en la tabla técnica plegada.
 import type { EventView, MetricView } from './session';
+import { defineTexts, definePairs, intlTag, isLocale } from '../i18n-catalog';
 import { metricLabel } from '../match/statistics/messages';
 import { useLanguage } from '../i18n';
 import { usePlayerText } from './player-messages';
@@ -17,13 +18,13 @@ const ORDER = ['goals', 'possession_pct', 'possession', 'shots', 'shots_on_targe
 
 // TP249 («POSSESSION PCT», y en español salía «GOALS»): nombres de retransmisión en los dos idiomas; el resto,
 // con el nombre del catálogo de métricas.
-const LABELS: Record<string, [string, string]> = {
+const LABELS = definePairs('broadcast-stats', {
   goals: ['Goals', 'Goles'], possession_pct: ['Possession', 'Posesión'], possession: ['Possession', 'Posesión'], shots: ['Shots', 'Tiros'],
   shots_on_target: ['Shots on target', 'Tiros a puerta'], simulated_xg: ['Expected goals (xG)', 'Goles esperados (xG)'], xg: ['Expected goals (xG)', 'Goles esperados (xG)'],
   saves: ['Saves', 'Paradas'], passes: ['Passes', 'Pases'], completed_passes: ['Completed passes', 'Pases completados'], passes_completed: ['Completed passes', 'Pases completados'],
   tackles: ['Tackles', 'Entradas'], box_entries: ['Box entries', 'Entradas al área'], corners: ['Corners', 'Córners'], fouls: ['Fouls', 'Faltas'],
-};
-const label = (id: string, locale: string) => LABELS[id]?.[locale === 'es' ? 1 : 0] ?? metricLabel(id, locale);
+});
+const label = (id: string, locale: string) => (isLocale(locale) ? LABELS(locale, id) : undefined) ?? metricLabel(id, locale);
 const POSSESSION = new Set(['possession_pct', 'possession']);
 /** Unidad pegada al número: «%» en vez de «percent»; los recuentos, sin unidad. */
 const unitText = (unit: string) => unit === 'percent' || unit === '%' ? '%' : !unit || ['count', 'goals', 'xG', 'xg'].includes(unit) ? '' : ` ${unit}`;
@@ -85,7 +86,7 @@ export function TeamComparison({ metrics, teams, events = [], score = null }: { 
   events?: readonly EventView[]; score?: Readonly<{ home: number; away: number }> | null }) {
   const t = usePlayerText(), { locale } = useLanguage();
   const rows = comparisonRows(metrics, teams, locale, 10, countedRows(events, score, locale));
-  const n = (v: number, id: string) => new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-GB', { maximumFractionDigits: /xg/.test(id) ? 2 : 1 }).format(v);
+  const n = (v: number, id: string) => new Intl.NumberFormat(intlTag(locale), { maximumFractionDigits: /xg/.test(id) ? 2 : 1 }).format(v);
   return <section className="tpa-panel tp-team-stats" aria-label={t.teamStats} data-team-comparison>
     <header className="tpa-panel-h"><h3>{t.teamStats}</h3></header>
     <div className="tpa-teams" aria-hidden="true"><b style={{ borderColor: teams.home.colour }}>{teams.home.abbr}</b><b style={{ borderColor: teams.away.colour }}>{teams.away.abbr}</b></div>
@@ -99,11 +100,8 @@ export function TeamComparison({ metrics, teams, events = [], score = null }: { 
         <span className={`tpa-v${lead === 'home' ? ' tpa-trail' : ''}`}>{n(r.away, r.id)}{r.unit}</span>
       </div>;
     })}</div>}
-    {rows.some(r => POSSESSION.has(r.id)) && <p className="tpa-note">{SHARE_NOTE[locale === 'es' ? 'es' : 'en']}</p>}
+    {rows.some(r => POSSESSION.has(r.id)) && <p className="tpa-note">{SHARE_NOTE(locale).note}</p>}
   </section>;
 }
 
-const SHARE_NOTE = {
-  en: 'Possession: share of the time either team had the ball (loose balls are left out, so the two add up to 100%).',
-  es: 'Posesión: reparto del tiempo en que algún equipo tenía el balón (sin contar el balón suelto, por eso suman 100 %).',
-};
+const SHARE_NOTE = defineTexts('team-comparison', { en: { note: 'Possession: share of the time either team had the ball (loose balls are left out, so the two add up to 100%).' }, es: { note: 'Posesión: reparto del tiempo en que algún equipo tenía el balón (sin contar el balón suelto, por eso suman 100 %).' } });

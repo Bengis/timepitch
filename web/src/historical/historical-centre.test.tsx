@@ -21,7 +21,7 @@ it('places the primary playback action before the field and toggles it accessibl
   const view=mount();await ready();const play=screen.getByRole('button',{name:'Play'}),pitch=view.container.querySelector('canvas')!;
   expect(play.compareDocumentPosition(pitch)&Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();expect(play).toHaveClass('unified-play');
   fireEvent.click(play);expect(screen.getByRole('button',{name:'Pause'})).toBeEnabled();
-  fireEvent.click(screen.getByRole('button',{name:'Pause'}));fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));
+  fireEvent.click(screen.getByRole('button',{name:'Pause'}));fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });
   expect(screen.getByRole('button',{name:'Reproducir'})).toBeEnabled();
 });
 it('keeps the notice on every tab and language, final score requires explicit reveal',async()=>{
@@ -29,7 +29,7 @@ it('keeps the notice on every tab and language, final score requires explicit re
   expect(screen.queryByText('Final result: 2 : 0')).not.toBeInTheDocument();
   for(const name of ['Players','Maps','Effort','Data','Summary']){fireEvent.click(screen.getByRole('tab',{name}));expect(screen.getByRole('note')).toHaveTextContent('synthetic tracking');}
   fireEvent.click(screen.getByRole('button',{name:'Reveal final analysis'}));expect(await screen.findByText(/Final result: 2 : 0/)).toBeVisible();expect(score()).toHaveTextContent('0–0');
-  fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));expect(screen.getByRole('note')).toHaveTextContent('tracking sintético');
+  fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });expect(screen.getByRole('note')).toHaveTextContent('tracking sintético');
 });
 it('does not display a late match after identity changes',async()=>{
   let resolve!:(value:api.HistoricalMatch)=>void;const f=sourceReaders();vi.mocked(api.readMatch).mockReturnValueOnce(new Promise(r=>resolve=r));

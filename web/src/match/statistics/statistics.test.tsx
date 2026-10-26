@@ -27,7 +27,7 @@ it('queries only explicitly, retains numbers across language and clears on rewin
   fireEvent.click(screen.getByRole('button',{name:'Inspect current statistics'}));
   await waitFor(()=>expect(screen.getByTestId('statistics-result')).toHaveAttribute('data-end-ms','1800250'));
   expect(getStatistics).toHaveBeenCalledTimes(1);
-  fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));
+  fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });
   expect(screen.getByTestId('statistics-result')).toHaveAttribute('data-trace-hash','same-hash');
   expect(screen.getByText('xG simulado')).toBeInTheDocument();
   expect(getStatistics).toHaveBeenCalledTimes(1);
@@ -44,7 +44,7 @@ it('ignores a late response from another time, identity or request language',asy
   await act(async()=>resolve(bundle(1800250)));
   expect(screen.queryByTestId('statistics-result')).not.toBeInTheDocument();
   fireEvent.click(screen.getByRole('button',{name:'Inspect current statistics'}));
-  fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));
+  fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });
   await act(async()=>resolve(bundle(1000000)));
   expect(screen.queryByTestId('statistics-result')).not.toBeInTheDocument();
 });

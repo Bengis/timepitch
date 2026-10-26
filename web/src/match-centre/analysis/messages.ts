@@ -1,5 +1,6 @@
 // Textos del análisis de partidos grabados (TP203), en inglés y español.
 import { useLanguage } from '../../i18n';
+import { defineTexts } from '../../i18n-catalog';
 
 const es = {
   timeline: 'Cronología', summary: 'Resumen', analysis: 'Análisis', simulated: 'Simulado', notRecorded: 'No grabado',
@@ -54,5 +55,6 @@ const en: Text = {
   noShots: 'No recorded shots up to here.', events: 'Technical event log',
   onTargetNote: '*On target: goals and saved shots recorded by the engine.', timelineFilter: 'Timeline filter',
 };
-export const useAnalysisText = (): Text => useLanguage().locale === 'es' ? es : en;
+const TEXTS = defineTexts('analysis', { en, es });
+export const useAnalysisText = (): Text => TEXTS(useLanguage().locale);
 export type AnalysisText = Text;

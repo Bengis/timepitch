@@ -82,7 +82,7 @@ it('opens delayed GRF history and survives a language change without querying th
   await waitFor(()=>expect(screen.getByRole('radio',{name:/Google Research Football/})).toBeEnabled());
   fireEvent.click(screen.getByRole('button',{name:'Library'}));
   fireEvent.click(await screen.findByRole('button',{name:/Saved home — Saved away/}));
-  fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));
+  fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });
   await act(async()=>resolveJob(job));
   await screen.findByText('Native replay opened');
   expect(api.getGrfReplay).toHaveBeenCalledWith('saved-native',expect.any(AbortSignal));

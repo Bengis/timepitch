@@ -2,17 +2,18 @@
 // el resultado final»): rótulos de las fases del partido sobre el campo. La salida lleva un rótulo inferior; el
 // descanso y el final, una tarjeta con marcador, goleadores y las estadísticas hasta ese momento.
 import type { ReactNode } from 'react';
+import { defineTexts } from '../i18n-catalog';
 import { useLanguage } from '../i18n';
 
 export type MatchPhase = 'walkout' | 'halftime' | 'fulltime';
 export type BreakScorer = Readonly<{ id: string; name: string; minute: string; ownGoal: boolean }>;
 
-const TEXT = {
+const TEXT = defineTexts('match-break', {
   en: { walkout: 'The teams walk out', skip: 'Skip to kick-off', halftime: 'Half-time', fulltime: 'Full-time', second: 'Start the second half',
     again: 'Watch again', close: 'Close', og: 'og', stats: 'Match statistics', report: 'Read the AI match report', motm: 'Player of the match' },
   es: { walkout: 'Salen los equipos', skip: 'Ir al saque inicial', halftime: 'Descanso', fulltime: 'Final del partido', second: 'Empezar la segunda parte',
     again: 'Ver otra vez', close: 'Cerrar', og: 'p.p.', stats: 'Estadísticas del partido', report: 'Leer la crónica IA', motm: 'Jugador del partido' },
-};
+});
 
 export function MatchBreak({ phase, home, away, score, scorers, stats, onContinue, onReplay, onClose, onReport, best, lineups }: {
   phase: MatchPhase; home: string; away: string; score: Readonly<{ home: number; away: number }> | null;
@@ -23,7 +24,7 @@ export function MatchBreak({ phase, home, away, score, scorers, stats, onContinu
   /** TP250: alineaciones durante la salida de los equipos (dorsal y nombre, portero primero). */
   lineups?: Readonly<{ home: readonly string[]; away: readonly string[] }>;
 }) {
-  const { locale } = useLanguage(), t = TEXT[locale === 'es' ? 'es' : 'en'];
+  const { locale } = useLanguage(), t = TEXT(locale);
   if (phase === 'walkout') return <div className="tp-break tp-break-walkout" data-match-phase="walkout" role="status">
     <div className="tp-break-lower"><span className="tp-break-kicker">{t.walkout}</span><strong>{home}</strong><span className="tp-break-vs">v</span><strong>{away}</strong>
       {lineups && (lineups.home.length > 0 || lineups.away.length > 0) && <div className="tp-break-lineups">

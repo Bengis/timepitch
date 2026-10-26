@@ -35,7 +35,7 @@ it('shows the illustrated cover with one Play button; engine and graphics (no Ca
   expect(engine.closest('details')).toBeNull();
   expect(within(engine).getByRole('radio',{name:/Google Research Football/})).toBeInTheDocument();
   expect(screen.getByText('Tactics').closest('details')).not.toHaveAttribute('open');
-  fireEvent.click(screen.getByRole('button',{name:/Español/}));
+  fireEvent.change(screen.getByRole('combobox',{name:'Language'}),{target:{value:'es'}});
   expect(within(hero).getByText(/desde 1992\/93 y míralos jugar/i)).toBeInTheDocument();
 });
 

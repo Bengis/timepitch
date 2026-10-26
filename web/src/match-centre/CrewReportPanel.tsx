@@ -4,6 +4,7 @@
 // texto lo comprobó frase a frase un verificador determinista contra los hechos grabados, y la evaluación de Foundry
 // (juez gpt-4.1-mini) se muestra cuando existe. Sin informe para la grabación elegida, una nota lo dice.
 import { useEffect, useRef, useState } from 'react';
+import { defineTexts, lookup, sourceLocale, type Locale } from '../i18n-catalog';
 
 export type CrewReportView = Readonly<{
   trace_hash: string; locale: 'en' | 'es'; engine: string; headline: string; paragraphs: readonly (readonly string[])[];
@@ -14,7 +15,7 @@ export type CrewReportIndex = Readonly<{ version: 'crew-demo-reports-1'; reports
 
 export const CREW_REPORTS_URL = () => `${import.meta.env.BASE_URL ?? '/'}data/crew/reports.json`;
 
-const TEXT = {
+const TEXT = defineTexts('crew-report', {
   en: { title: 'AI match report', badge: 'Agent Framework · Azure AI Foundry',
     teaser: 'Written on Azure after the match, from the engine recording: AI agents draft it and a verifier checks every sentence against the recorded facts.',
     facts: (model: string, cost: string) => `${model} · ${cost} USD`, judged: 'Foundry evaluation',
@@ -43,20 +44,20 @@ const TEXT = {
     how: 'Escrita por agentes de IA en Azure al acabar el partido y comprobada línea a línea con los datos del partido.',
     evaluation: 'Evaluación de Foundry', groundedness: 'fundamentación', coherence: 'coherencia', fluency: 'fluidez',
     otherEngine: 'Crónica IA: elige la grabación de GRF de este partido para leerla.' },
-} as const;
+});
 
 // TP250 (jueces: notas en inglés dentro de la crónica española): traducción de las notas fijas del verificador.
-const NOTES_ES: Record<string, string> = {
+export const NOTES_ES: Record<string, string> = {
   'Physical GRF recording: goals and scorers come from engine telemetry.': 'Grabación física de GRF: goles y goleadores salen de la telemetría del motor.',
   'Pass outcomes, recoveries and possession were not exported and are left out.': 'El resultado de los pases, las recuperaciones y la posesión no se exportaron y quedan fuera.',
   'Fictional cross-era simulation: this match never took place.': 'Simulación ficticia entre épocas: este partido nunca se jugó.',
   'TouchLines recording: goals and scorers come from the engine events.': 'Grabación de TouchLines: goles y goleadores salen de los eventos del motor.',
 };
-export const noteIn = (note: string, locale: 'en' | 'es') => locale === 'es' ? NOTES_ES[note] ?? note : note;
+export const noteIn = (note: string, locale: Locale) => locale === 'es' ? NOTES_ES[note] ?? note : locale === 'en' ? note : lookup(locale, 'crew-notes', note) ?? note;
 
 /** TP250 (juez del hackathon: «no veo nada que ocurra en la nube»): el camino real de la crónica, paso a paso. */
-export function AzurePipeline({ locale }: { locale: 'en' | 'es' }) {
-  const t = TEXT[locale];
+export function AzurePipeline({ locale }: { locale: Locale }) {
+  const t = TEXT(locale);
   return <details className="crew-how" data-crew-how>
     <summary>{t.howTitle}</summary>
     <ol>{t.steps.map((step, i) => <li key={i}>{step}</li>)}</ol>
@@ -75,13 +76,13 @@ export function pickReport(index: CrewReportIndex | null, traceHash: string, loc
  * el resultado, así que respeta el «Revelar análisis final» del centro); abierta, la crónica entera.
  */
 export function CrewReportPanel({ traceHash, locale, open = false, onOpen, load = defaultLoad }: {
-  traceHash: string; locale: 'en' | 'es'; load?: (signal: AbortSignal) => Promise<CrewReportIndex>;
+  traceHash: string; locale: Locale; load?: (signal: AbortSignal) => Promise<CrewReportIndex>;
   /** Resultado ya revelado, o demo abierta desde «Crónica IA de ejemplo». */
   open?: boolean;
   /** Revela el resultado en el centro del partido (y con ello abre la crónica). */
   onOpen?: () => void;
 }) {
-  const text = TEXT[locale];
+  const text = TEXT(locale);
   const [index, setIndex] = useState<CrewReportIndex | null>(null);
   const section = useRef<HTMLElement>(null), focused = useRef(false);
   useEffect(() => {
@@ -89,7 +90,7 @@ export function CrewReportPanel({ traceHash, locale, open = false, onOpen, load 
     load(controller.signal).then(value => { if (!controller.signal.aborted) setIndex(value); }).catch(() => { /* sin informes: no se muestra nada */ });
     return () => controller.abort();
   }, [load]);
-  const report = pickReport(index, traceHash, locale);
+  const report = pickReport(index, traceHash, sourceLocale(locale));
   useEffect(() => {
     if (!open || !report || focused.current) return;
     focused.current = true; section.current?.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
@@ -97,7 +98,7 @@ export function CrewReportPanel({ traceHash, locale, open = false, onOpen, load 
   if (!index) return null;
   // Sin informe para esta grabación: si la demo lo tiene con otro motor, se dice dónde está.
   if (!report) return index.reports.length > 0 ? <p className="crew-report-note" data-crew-report="other-engine">{text.otherEngine}</p> : null;
-  const t = TEXT[report.locale];
+  const t = TEXT(report.locale);
   // La evaluación de Foundry se hizo sobre la crónica inglesa de la misma grabación: se muestra diciéndolo.
   const judged = report.evaluation ? { scores: report.evaluation, other: false }
     : (() => { const e = index.reports.find(r => r.trace_hash === report.trace_hash && r.evaluation)?.evaluation; return e ? { scores: e, other: true } : null; })();

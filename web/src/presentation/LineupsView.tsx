@@ -3,6 +3,7 @@
 // Porta `lineupTeam` de la maqueta objetivo (.local/mockup/v1-2d.html, l.781–818): camisetas con dorsal en el campo
 // y lista «dorsal · nombre · POS · país». El país solo aparece si la ficha lo trae; nunca se inventa.
 import { useId, useState } from 'react';
+import { defineTexts } from '../i18n-catalog';
 import { useLanguage } from '../i18n';
 import type { Announcement, AnnouncementKind } from '../match-centre/announcements/announcements';
 import type { PlayerView } from '../match-centre/session';
@@ -12,14 +13,14 @@ import { usePresentationText } from './messages';
 import type { CastEntry, CrestRef, KitSpec, MatchCast } from './types';
 import './lineups.css';
 
-const TEXT = {
+const TEXT = defineTexts('lineups', {
   en: { formation: 'Formation', formationOf: (team: string | undefined, f: string) => team ? `${team} formation ${f}` : `Formation ${f}`,
     noFormation: 'Formation not in source', starters: 'Starting XI', bench: 'Substitutes', none: 'None in source',
     home: 'Home', away: 'Away', crest: (team: string) => `${team} crest` },
   es: { formation: 'Formación', formationOf: (team: string | undefined, f: string) => team ? `${team} formación ${f}` : `Formación ${f}`,
     noFormation: 'Formación no disponible en la fuente', starters: 'Once inicial', bench: 'Suplentes', none: 'Sin datos en la fuente',
     home: 'Local', away: 'Visitante', crest: (team: string) => `Escudo ${team}` },
-} as const;
+});
 
 /** Profundidad (0 portero … 5 delantero) y lado (-1 izquierda … 1 derecha) de un puesto StatsBomb o de motor. */
 function slot(role: string | null): { depth: number; lateral: number } {
@@ -122,7 +123,7 @@ function TeamCrest({ crest, name, label }: { crest: CrestRef | null | undefined;
 /** Alineación de un equipo (G13): mini campo con la formación, once inicial y suplentes. */
 export function LineupsView({ side, formation, players, cast, announcements, onSelect, teamName, crest }: LineupsViewProps) {
   const { locale } = useLanguage();
-  const t = TEXT[locale === 'es' ? 'es' : 'en'];
+  const t = TEXT(locale);
   const pt = usePresentationText();
   const ids = useId();
   const shade = `tp-lu-shade-${ids.replace(/[^\w-]/g, '')}`;

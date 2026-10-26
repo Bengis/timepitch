@@ -1,4 +1,5 @@
 import {useLanguage} from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 const en={reconstruction:'Reconstruction',simulation:'Simulation',library:'Library',archive:'Historical archive',mySimulations:'My simulations',
   title:'Football, as it happened.',intro:'Explore recorded matches. Follow the events, inspect the evidence and distinguish what was observed from what we reconstruct.',
   notice:'Real match events · Synthetic tracking',localOnly:'Local research preview · publication pending permission',
@@ -49,4 +50,5 @@ const es:typeof en={reconstruction:'Reconstrucción',simulation:'Simulación',li
   chooseSaved:'Elige una simulación guardada en la biblioteca o prepara un partido nuevo.',
   intervals:'Intervalos de posición en la fuente (final)',
 };
-export function useHistoricalText(){return useLanguage().locale==='es'?es:en;}
+const TEXTS = defineTexts('historical', { en, es });
+export function useHistoricalText(){return TEXTS(useLanguage().locale);}

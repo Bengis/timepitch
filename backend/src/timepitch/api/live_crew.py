@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from ..crew.ledger import EnvelopeRefused
+from ..crew.translate import Language
 from ..crew.live import LiveCrewBusy, LiveCrewUnavailable
 from ..security import owner_session
 
@@ -12,7 +13,7 @@ from ..security import owner_session
 class LiveCrewRequest(BaseModel):
     engine: Literal['grf', 'touchlines']
     match_id: str = Field(min_length=1, max_length=120)
-    locale: Literal['en', 'es']
+    locale: Language
     names: Literal['fictional', 'real'] = 'real'  # TP259: fictional league or real names
     audience: Literal['fan', 'analyst'] = 'fan'  # TP260: who the report is written for
     period: Literal['full_time', 'half_time'] = 'full_time'  # TP262: half-time report from the first half
@@ -50,7 +51,7 @@ def live_crew_router():
             raise HTTPException(503, 'Live AI match reports are unavailable') from None
 
     @router.get('')
-    def read(engine: Literal['grf', 'touchlines'], match_id: str, locale: Literal['en', 'es'], request: Request, owner: Owner,
+    def read(engine: Literal['grf', 'touchlines'], match_id: str, locale: Language, request: Request, owner: Owner,
              names: Literal['fictional', 'real'] = 'real', audience: Literal['fan', 'analyst'] = 'fan',
              period: Literal['full_time', 'half_time'] = 'full_time'):
         crew = service(request)

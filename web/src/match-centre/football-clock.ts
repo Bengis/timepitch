@@ -1,15 +1,16 @@
 import { cursorAt, type SessionSnapshot } from './session';
+import { L, type Locale } from '../i18n-catalog';
 import type { ClockView, PlaybackStop } from './sequence/types';
 
 const mmss = (ms: number) => `${String(Math.floor(ms/60000)).padStart(2,'0')}:${String(Math.floor(ms/1000)%60).padStart(2,'0')}`;
-export function clockFor(s: SessionSnapshot, stop: PlaybackStop|null, locale: 'en'|'es'): ClockView {
+export function clockFor(s: SessionSnapshot, stop: PlaybackStop|null, locale: Locale): ClockView {
   const cursor = s.presentedCursor;
-  const unavailable: ClockView = {state:'unavailable',period:cursor.period,text:locale === 'es' ? 'Reloj no disponible' : 'Clock unavailable'};
+  const unavailable: ClockView = {state:'unavailable',period:cursor.period,text:L(locale, 'Clock unavailable', 'Reloj no disponible')};
   if (s.clockMs === null || !Number.isFinite(s.clockMs) || s.clockMs < 0 || cursor.period <= 0) return unavailable;
   if (stop?.kind === 'halftime') {
     const end = cursorAt(s.descriptor,stop.atMs,stop.endingPeriod);
     if (!end.period || end.period !== cursor.period || cursor.elapsedMs !== stop.atMs) return unavailable;
-    return {state:'halftime',period:end.period,text:locale === 'es' ? 'Descanso' : 'Half-time'};
+    return {state:'halftime',period:end.period,text:L(locale, 'Half-time', 'Descanso')};
   }
   const full = s.descriptor.durationMs !== null && cursor.elapsedMs === s.descriptor.durationMs;
   if (s.descriptor.identity.source !== 'historical') return {state:full ? 'fulltime' : 'playing',period:cursor.period,text:mmss(s.clockMs)};

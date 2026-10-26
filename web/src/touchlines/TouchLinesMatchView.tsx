@@ -28,6 +28,6 @@ export function TouchLinesMatchView({ id, record, onBack, visible = true, tab, o
   const { locale } = useLanguage();
   return <div data-match-id={id} data-engine-version="touchlines-5c5c71a-native"><MatchCentre adapter={adapter} visible={visible} onBack={onBack}
     initialSection={tab} onSectionChange={onSectionChange} autoplay={autoplay} rendererLocked liveSimulation
-    sideReport={({ revealed, halfTime }) => <><LiveCrewPanel engine="touchlines" matchId={id} locale={locale === 'es' ? 'es' : 'en'} ended={revealed} halfTime={halfTime} />
-      <MatchQuestions engine="touchlines" matchId={id} locale={locale === 'es' ? 'es' : 'en'} ended={revealed} /></>} /></div>;
+    sideReport={({ revealed, halfTime }) => <><LiveCrewPanel engine="touchlines" matchId={id} locale={locale} ended={revealed} halfTime={halfTime} />
+      <MatchQuestions engine="touchlines" matchId={id} locale={locale} ended={revealed} /></>} /></div>;
 }

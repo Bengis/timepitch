@@ -1,4 +1,5 @@
 import { useLanguage } from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 const en = {
   match: 'Match', summary: 'Summary', players: 'Players', maps: 'Maps', effort: 'Effort', data: 'Data',
   back: 'Back', download: 'Export replay', play: 'Play', pause: 'Pause', replay: 'Replay', speed: 'Speed', phase: 'Phase', position: 'Match position', matchClock: 'Match clock', playbackTime: 'Playback',
@@ -57,7 +58,8 @@ const es: Text = {
   noStatsYet: 'Aún no hay estadísticas: se van llenando según avanza el partido.', mapEmpty: 'Todavía no hay nada que dibujar en este momento del partido.', asTable: 'Ver como tabla',
   plotTitles: { shots: 'Mapa de tiros', xg: 'xG a lo largo del partido', actions: 'Mapa de acciones', pass_network: 'Red de pases', occupancy: 'Mapa de calor', occupancy_1: 'Mapa de calor · 1.ª parte', occupancy_2: 'Mapa de calor · 2.ª parte', effort: 'Esfuerzo', average_positions: 'Posiciones medias', team_shape: 'Forma del equipo' } as Record<string, string>,
 };
-export const usePlayerText = () => useLanguage().locale === 'es' ? es : en;
+const TEXTS = defineTexts('player', { en, es });
+export const usePlayerText = () => TEXTS(useLanguage().locale);
 export function matchTime(ms: number | null): string {
   if (ms === null) return '—';
   const seconds = Math.max(0, Math.floor(ms / 1000));

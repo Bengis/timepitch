@@ -1,4 +1,5 @@
 import { useLanguage } from '../../i18n';
+import { defineTexts } from '../../i18n-catalog';
 
 const en = {
   graphics: 'Graphics', style3d: '3D · players in relief, TV camera', styleRetro16: '2D · classic 16-bit console look',
@@ -39,4 +40,5 @@ const es: typeof en = {
 };
 /** Para pruebas (p. ej. la lista de bloqueo del nombre del modo, TP234). */
 export const GRAPHICS_TEXT = { en, es } as const;
-export function useGraphicsText() { return useLanguage().locale === 'es' ? es : en; }
+const TEXTS = defineTexts('graphics', { en, es });
+export function useGraphicsText() { return TEXTS(useLanguage().locale); }

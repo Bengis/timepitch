@@ -1,5 +1,5 @@
 import {resolveHistoricalCrest} from '../../catalog/crests';
-import { fictional, showClub } from '../../catalog/fictional';
+import { fictional, fictionalCrestSrc, showClub } from '../../catalog/fictional';
 import type { MatchSection, SessionDescriptor, SessionIdentity, SessionSnapshot, Availability, PanelData, ViewProvenance, TableCell, MotionInterval } from '../session';
 
 export const sections: readonly MatchSection[] = ['match','summary','players','maps','effort','data'];
@@ -39,8 +39,8 @@ export function store(initial: SessionSnapshot) {
   };
 }
 export function descriptor(identity: SessionIdentity, home: {id:string;name:string}, away: {id:string;name:string}, durationMs: number | null, exportHref: string | null): SessionDescriptor {
-  // TP259: en la liga ficticia, nombre inventado y sin escudo real.
-  const side = (t: {id:string;name:string}) => ({ ...t, name: showClub(t.name), crestUrl: fictional() ? null : resolveHistoricalCrest(t.id)?.src ?? null });
+  // TP259: en la liga ficticia, nombre inventado y sin escudo real; TP264: con su escudo inventado.
+  const side = (t: {id:string;name:string}) => ({ ...t, name: showClub(t.name), crestUrl: fictional() ? fictionalCrestSrc(t.id) : resolveHistoricalCrest(t.id)?.src ?? null });
   return { identity, home:side(home),away:side(away),periods:[],durationMs,
     export:{href:exportHref,availability:exportHref ? available() : missing('no_export')},capabilities:{sections,playerDetails:true,events:true,layers:[]} };
 }

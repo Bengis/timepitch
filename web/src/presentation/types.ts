@@ -10,7 +10,7 @@ export type AssetSource = Readonly<{
   licence: string; note?: string;
 }>;
 
-export type CrestRef = Readonly<{ src: string; kind: 'hd' | 'hfk' | 'none'; source: AssetSource | null }>;
+export type CrestRef = Readonly<{ src: string; kind: 'hd' | 'hfk' | 'fictional' | 'none'; source: AssetSource | null }>;
 
 export type PatternFamily =
   | 'plain' | 'stripes' | 'hoops' | 'halves' | 'sash' | 'pinstripes' | 'side_panels' | 'unknown';

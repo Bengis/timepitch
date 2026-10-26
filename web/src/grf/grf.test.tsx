@@ -12,6 +12,6 @@ it('starts with TimePitch and shows a disabled GRF choice while capabilities are
 it('explains unavailable GRF in both languages without enabling the option',()=>{
   render(<LanguageProvider><LanguageSelector/><EngineSelector value="timepitch" capabilities={[{id:'timepitch',available:true},{id:'grf',available:false,reason:'missing_runtime'}]} disabled={false} onChange={()=>{}}/></LanguageProvider>);
   expect(screen.getByText(/GRF runtime is not installed/)).toBeVisible();
-  fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));
+  fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });
   expect(screen.getByText(/entorno GRF no está instalado/)).toBeVisible();
 });

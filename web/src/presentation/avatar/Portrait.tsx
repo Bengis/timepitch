@@ -1,13 +1,14 @@
 import { useId, useMemo } from 'react';
+import { defineTexts } from '../../i18n-catalog';
 import { useLanguage } from '../../i18n';
 import { GENERIC_APPEARANCE, type AppearanceParams, type KitSpec } from '../types';
 import { NEUTRAL_KIT, portraitSvg } from './portrait-svg';
 import './portrait.css';
 
-const TEXT = {
+const TEXT = defineTexts('portrait', {
   en: { notice: 'Stylised avatar, not a portrait', handAssigned: 'Unsourced features · assigned by hand', generic: 'Generic avatar' },
   es: { notice: 'Avatar estilizado, no es un retrato', handAssigned: 'Rasgos sin fuente · asignados a mano', generic: 'Avatar genérico' },
-} as const;
+});
 
 export type PortraitProps = Readonly<{
   /** `null`/ausente → `GENERIC_APPEARANCE` (mismo aspecto neutro para todo jugador sin registro). */
@@ -28,7 +29,7 @@ export type PortraitProps = Readonly<{
 /** Avatar estilizado (G05): busto para la ficha o medallón para alineaciones, con aviso accesible fijo. */
 export function Portrait({ appearance, appearanceSource, kit, number, size = 'card', label, note = true }: PortraitProps) {
   const { locale } = useLanguage();
-  const t = TEXT[locale === 'es' ? 'es' : 'en'];
+  const t = TEXT(locale);
   const prefix = `pt${useId()}`;
   const look = appearance ?? GENERIC_APPEARANCE;
   const generic = !appearance || appearanceSource !== 'hand_assigned';

@@ -1,7 +1,7 @@
 // Créditos y licencias construidos con la procedencia de lo que realmente se muestra (spec §8).
 // TP221: textos en inglés y español. Quedan literales los nombres de licencia, los títulos de archivo y artículo, los
 // avisos de copyright y la frase de permiso de HFK, que se reproduce tal como la exige su autor.
-import type { Locale } from '../i18n';
+import { defineTexts, type Locale } from '../i18n-catalog';
 import type { MatchSource } from '../match-centre/session';
 import type { AssetSource, CrestRef, MatchCast, MatchKits } from './types';
 
@@ -22,7 +22,7 @@ const HFK_URL = 'https://www.historicalkits.co.uk/';
 /** Frase de permiso de Historical Football Kits: no se traduce. */
 export const HFK_PERMISSION = 'Copyright Historical Football Kits and reproduced by kind permission.';
 
-const TEXTS = {
+const TEXTS = defineTexts('attribution', {
   en: {
     kit: 'Kit', playerFields: 'Shirt number, position and nationality',
     revision: (rev: string | number) => ` (revision ${rev})`,
@@ -65,8 +65,8 @@ const TEXTS = {
     ownArtLicence: 'Arte propio de TimePitch',
     retro16Art: 'Gráficos Retro 16 bits: pixel art propio de TimePitch (jugadores, peinados, letra de dorsales, estadio); no procede de ningún juego. Árbitro y asistentes son figurantes ilustrativos colocados por reglas fijas: no están en los datos del motor.',
   },
-} as const;
-type Texts = (typeof TEXTS)[Locale];
+});
+type Texts = ReturnType<typeof TEXTS>;
 
 function wikipediaLine(s: AssetSource, what: string, t: Texts): AttributionLine | null {
   if ((s.kind !== 'wikipedia' && s.kind !== 'commons') || !s.title) return null;
@@ -106,7 +106,7 @@ function crestLine(c: CrestRef, t: Texts): AttributionLine | null {
 
 /** Líneas de créditos en el idioma pedido; por defecto español, como antes de TP221. */
 export function attributionsFor(input: AttributionInput, locale: Locale = 'es'): AttributionLine[] {
-  const t = TEXTS[locale];
+  const t = TEXTS(locale);
   const out = new Map<string, AttributionLine>();
   const add = (l: AttributionLine | null) => { if (l && !out.has(l.id)) out.set(l.id, l); };
 

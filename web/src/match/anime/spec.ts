@@ -1,7 +1,7 @@
 // Del acontecimiento grabado a la escena dibujable de Capitán Hane (TP234). Puro. Solo lee identidad visual
 // (equipación, rasgos del avatar, dorsal identificado) y la habilidad ya calculada; el resultado de la escena es el
 // del acontecimiento (`cut.kind`), nunca otro.
-import type { Locale } from '../../i18n';
+import type { SourceLocale as Locale } from '../../i18n-catalog';
 import type { EventView, PlayerView } from '../../match-centre/session';
 import { GENERIC_APPEARANCE, type MatchCast } from '../../presentation/types';
 import { NEUTRAL_KIT } from '../../presentation/avatar/portrait-svg';

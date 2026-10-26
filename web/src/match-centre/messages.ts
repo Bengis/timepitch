@@ -1,4 +1,5 @@
 import {useLanguage} from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 
 const en={workspace:'Workspace',newMatch:'New match',matchCentre:'Match centre',library:'Library',
   libraryNote:'Saved matches keep their original engine, season, seed and replay.',
@@ -28,4 +29,5 @@ const es:typeof en={workspace:'Espacio de trabajo',newMatch:'Nuevo partido',matc
     pass_attempts:'Int.',pass_received:'Conf.',confirmed_receipt_pct:'Conf. %',fouls:'Faltas',offsides:'F. j.'},
   abbreviations:'Int. = intentos de pase · Conf. = recepciones confirmadas · Asist. = asistencias · Recup. = recuperaciones · F. j. = fueras de juego.',
 };
-export function useCentreText(){return useLanguage().locale==='es'?es:en;}
+const TEXTS = defineTexts('centre', { en, es });
+export function useCentreText(){return TEXTS(useLanguage().locale);}

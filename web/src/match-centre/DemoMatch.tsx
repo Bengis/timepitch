@@ -2,6 +2,7 @@
 // (decisión del 22-oct). El movimiento sale de grabaciones previas de tres motores, cargadas por el índice
 // versionado y verificadas por SHA-256; el selector cambia solo la grabación y conserva parte y reloj.
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { defineTexts, isLocale, sourceLocale, type Locale } from '../i18n-catalog';
 import { useLanguage } from '../i18n';
 import { fictional, showClub } from '../catalog/fictional';
 import { MatchCentre } from './MatchCentre';
@@ -18,25 +19,25 @@ import './broadcast-layout.css';
 /** Partido y semilla de la demo; las grabaciones de otra semilla salen «no disponible» (ver TP193). */
 export const DEMO_MATCH: MovementMatch = Object.freeze({ home_key: 'arsenal:2003', away_key: 'mancity:2024', seed: 43 });
 
-const TEXT = {
-  en: { demo: 'Demo', title: `${showClub('Arsenal 2003/04')} v ${showClub('Manchester City 2024/25')}`, fictional: 'Fictional cross-era simulation',
+const TEXT = defineTexts('demo', {
+  en: { demo: 'Demo', title: (home: string, away: string) => `${home} v ${away}`, fictional: 'Fictional cross-era simulation',
     note: 'Synthetic movement recorded from a football engine with estimated attributes. Not a real match and not historical tracking.',
     loading: 'Loading recording', failed: 'Recording unavailable', back: 'Back',
     syntheticMovement: 'Synthetic movement', simulatedEvents: 'Simulated events', provenance: ['Simulated match', ''],
     reasons: { no_recording: 'no recording for this match and seed' } as Record<string, string> },
-  es: { demo: 'Demo', title: `${showClub('Arsenal 2003/04')} – ${showClub('Manchester City 2024/25')}`, fictional: 'Simulación ficticia entre épocas',
+  es: { demo: 'Demo', title: (home: string, away: string) => `${home} – ${away}`, fictional: 'Simulación ficticia entre épocas',
     note: 'Movimiento sintético grabado de un motor de fútbol con atributos estimados. No es un partido real ni seguimiento histórico.',
     loading: 'Cargando grabación', failed: 'Grabación no disponible', back: 'Volver',
     syntheticMovement: 'Movimiento sintético', simulatedEvents: 'Acontecimientos simulados', provenance: ['Partido simulado', ''],
     reasons: { no_recording: 'sin grabación para este partido y semilla' } as Record<string, string> },
-} as const;
+});
 
 type Loaded = { engine: RecordedEngineId; track: RecordedTrack; adapter: MatchSessionAdapter; startMs: number; analysis: RecordedAnalysisModel; load: number };
 
 export function MovementSelector({ options, value, onChange, language }: {
-  options: readonly MovementOption[]; value: RecordedEngineId | null; onChange: (engine: RecordedEngineId) => void; language: 'en' | 'es';
+  options: readonly MovementOption[]; value: RecordedEngineId | null; onChange: (engine: RecordedEngineId) => void; language: Locale;
 }) {
-  const m = movementText(language), reasons = TEXT[language].reasons;
+  const m = movementText(sourceLocale(language)), reasons = TEXT(language).reasons;
   return <fieldset className="movement-selector" data-movement-selector>
     <legend><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 17c3-6 6 2 9-4s5-3 7-5" /><circle cx="4" cy="17" r="1.6" fill="currentColor" /><circle cx="20" cy="8" r="1.6" fill="currentColor" /></svg><span className="movement-legend-text">{m.title}</span></legend>
     {options.map(o => <button key={o.engine} type="button" aria-pressed={o.engine === value} disabled={o.status !== 'available'}
@@ -56,7 +57,7 @@ export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read,
   rendererLocked?: boolean;
   read?: (file: string, signal: AbortSignal) => Promise<ArrayBuffer>;
 }) {
-  const { locale } = useLanguage(), language = locale === 'es' ? 'es' : 'en', text = TEXT[language];
+  const { locale } = useLanguage(), language = locale, text = TEXT(language);
   const options = useMemo(() => movementOptions(index, DEMO_MATCH), [index]);
   const [engine, setEngine] = useState<RecordedEngineId | null>(() => options.find(o => o.status === 'available')?.engine ?? null);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
@@ -108,7 +109,7 @@ export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read,
       <button type="button" className="demo-back" onClick={onBack} aria-label={text.back} title={text.back}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
       </button>
-      <span className="demo-crumbs"><span className="demo-crumb-demo">{text.demo}</span><span aria-hidden="true">·</span><h1>{text.title}</h1></span>
+      <span className="demo-crumbs"><span className="demo-crumb-demo">{text.demo}</span><span aria-hidden="true">·</span><h1>{demoTitle(text)}</h1></span>
       <DemoProvenance text={text} />
       <span className="demo-spacer" />
       <MovementSelector options={options} value={engine} onChange={choose} language={language} />
@@ -124,7 +125,7 @@ export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read,
 
 /** Chip único de procedencia (TP211): «Ficticio · simulado». Su ventana explica la ficción y queda siempre en el DOM
  *  (descripción del chip para lectores); se abre al pasar el ratón, con el foco del teclado o al pulsarlo. */
-function DemoProvenance({ text }: { text: (typeof TEXT)[keyof typeof TEXT] }) {
+function DemoProvenance({ text }: { text: ReturnType<typeof TEXT> }) {
   const [open, setOpen] = useState(false);
   const id = useId(), root = useRef<HTMLSpanElement>(null);
   useEffect(() => {
@@ -148,11 +149,15 @@ function DemoProvenance({ text }: { text: (typeof TEXT)[keyof typeof TEXT] }) {
 
 /** Acceso a la demo desde la portada y la biblioteca, siempre con el rótulo de ficción. */
 /** Título y aviso de la demo para la tarjeta destacada de la pantalla VERSUS (TP213). */
-export function demoEntryText(locale: string) { const text = TEXT[locale === 'es' ? 'es' : 'en']; return { title: text.title, fictional: text.fictional }; }
+// TP266: los nombres van como huecos de la plantilla, no dentro del texto: el catálogo no debe fijar ningún nombre.
+const demoTitle = (text: { title: (home: string, away: string) => string }) =>
+  text.title(showClub('Arsenal 2003/04'), showClub('Manchester City 2024/25'));
+
+export function demoEntryText(locale: string) { const text = TEXT(isLocale(locale) ? locale : 'en'); return { title: demoTitle(text), fictional: text.fictional }; }
 
 export function DemoEntry({ onOpen }: { onOpen: () => void }) {
-  const { locale } = useLanguage(), text = TEXT[locale === 'es' ? 'es' : 'en'];
+  const { locale } = useLanguage(), text = TEXT(locale);
   return <section className="demo-entry" data-demo-entry>
-    <button type="button" onClick={onOpen}><strong>{text.demo}: {text.title}</strong> <span className="chip ph">{text.fictional}</span></button>
+    <button type="button" onClick={onOpen}><strong>{text.demo}: {demoTitle(text)}</strong> <span className="chip ph">{text.fictional}</span></button>
   </section>;
 }

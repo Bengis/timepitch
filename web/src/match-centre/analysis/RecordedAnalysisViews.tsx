@@ -2,6 +2,7 @@
 // lateral con Resumen y Cronología, y secciones de análisis (dominio, tiros, mapas, esfuerzo). Todo es simulado:
 // cada panel lleva el chip «Simulado · <motor>» y lo que el motor no graba sale «No grabado», nunca 0.
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { intlTag } from '../../i18n-catalog';
 import type { EventView, MatchSource } from '../session';
 import { minuteLabel } from '../announcements/announcements';
 import { HEAT_COLS, HEAT_ROWS, type MatchAnalysis, type PlayerAnalysis, type TeamAnalysis } from './recorded-analysis';
@@ -12,7 +13,7 @@ import { initialTimelineFilter, timelineKinds } from './timeline-rules';
 
 /** Números con la coma o el punto decimal del idioma. */
 function useNumber() {
-  const { locale } = useLanguage(), tag = locale === 'es' ? 'es-ES' : 'en-GB';
+  const { locale } = useLanguage(), tag = intlTag(locale);
   return (v: number, digits = 1) => v.toLocaleString(tag, { minimumFractionDigits: 0, maximumFractionDigits: digits });
 }
 import './analysis.css';

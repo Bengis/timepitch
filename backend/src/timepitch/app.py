@@ -80,6 +80,7 @@ def create_app(dataset_path: Path | None = None, runtime_dir: Path | None = None
             # TP263: preguntas al partido terminado (agente con herramientas en Azure AI Foundry); apagado sin su modo.
             from .crew.ask import AskService, AskSettings
             app.state.ask = AskService(live_source(grf, touchlines), AskSettings.from_env(), runtime / 'ask')
+            app.state.live_crew.translator = app.state.ask  # TP265: the report in the other languages
             def runner_factory():
                 if model != 'qwen2.5-1.5b': raise RuntimeError('Explicit local model activation required')
                 runner = LocalAgentRunner(model)

@@ -164,6 +164,11 @@ label { color:var(--muted); font-size:13px; }
 .language-flags .language-flag svg { display:block; width:20px; height:14px; border-radius:2px; box-shadow:0 0 0 1px #0003; }
 .language-flags .language-flag:hover:not(:disabled) { background:var(--soft); opacity:.85; }
 .language-flags .language-flag[aria-pressed=true] { background:var(--soft); opacity:1; filter:none; }
+/* TP266: selector de idioma con todos los catálogos */
+.language-select { display:inline-flex; align-items:center; gap:4px; padding:2px 6px; border-radius:8px; border:1px solid var(--line); }
+.language-select select { min-height:0; padding:2px 4px; border:0; background:transparent; color:inherit; font:600 12px var(--tp-ui, inherit); cursor:pointer; }
+.language-select select option { color:#111; }
+.language-globe { font-size:13px; line-height:1; }
 .workspace-nav { display:flex; gap:2px; }
 .workspace-nav button { background:transparent; color:var(--muted); border-color:transparent; border-radius:8px; min-height:34px; padding:5px 12px; font-size:13px; font-weight:600; }
 .workspace-nav button[aria-current=page] { background:var(--soft); color:var(--text); }

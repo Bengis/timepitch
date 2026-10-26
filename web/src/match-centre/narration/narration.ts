@@ -4,12 +4,13 @@
 // No se narra cada toque (TimePitch graba ~1300 por partido): pases largos, conducciones largas, robos, tiros, paradas,
 // goles, balón parado y los hitos del partido.
 import type { EventView } from '../session';
+import { defineTexts, type Locale } from '../../i18n-catalog';
 
 export type NarrationKind = 'goal' | 'own_goal' | 'save' | 'miss' | 'shot' | 'pass' | 'carry' | 'won' | 'set_piece' | 'offside' | 'mark';
 export type NarrationLine = Readonly<{ id: string; atMs: number; source: EventView; kind: NarrationKind; side: 'home' | 'away' | null;
   actorId: string | null; text: string }>;
 export type NarrationContext = Readonly<{
-  locale: 'es' | 'en';
+  locale: Locale;
   name: (id: string | null) => string | null;
   teams: Readonly<Record<'home' | 'away', string>>;
   /** Porteros: deciden si quien toca tras un tiro de GRF lo ha parado. */
@@ -31,7 +32,7 @@ const OFFSIDE_FK_MS = 15000;
 /** TouchLines (TP243): un pase que el rival recupera en ≤ 3 s no se narra como pase; recuperaciones, una cada 20 s. */
 const TL_LOST_MS = 3000, TL_WON_GAP_MS = 20000;
 
-const TEXT = {
+const TEXT = defineTexts('narration', {
   es: {
     kickoff: (t: string) => `Empieza el partido. Saca el ${t}.`, start: (h: string, a: string) => `Empieza el partido: ${h} contra ${a}.`,
     secondHalf: 'Empieza la segunda parte.',
@@ -64,7 +65,7 @@ const TEXT = {
     offside: (a: string | null) => a ? `${a} is offside.` : 'Offside.',
     player: 'a player',
   },
-} as const;
+});
 
 const timed = (e: EventView): e is EventView & { elapsedMs: number } => e.elapsedMs !== null && Number.isFinite(e.elapsedMs);
 const num = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
@@ -84,7 +85,7 @@ function grfMetres(a: EventView, b: EventView): number | null {
 const GRF_TOUCH = /pass|ball_control|trap|deflect|^other$|^shot$/;
 
 export function narrate(events: readonly EventView[], ctx: NarrationContext): NarrationLine[] {
-  const t = TEXT[ctx.locale], list = events.filter(timed).sort((a, b) => a.elapsedMs - b.elapsedMs || a.sourceIndex - b.sourceIndex);
+  const t = TEXT(ctx.locale), list = events.filter(timed).sort((a, b) => a.elapsedMs - b.elapsedMs || a.sourceIndex - b.sourceIndex);
   const who = (id: string | null) => ctx.name(id) ?? t.player;
   const out: NarrationLine[] = [];
   const goals = { home: 0, away: 0 };

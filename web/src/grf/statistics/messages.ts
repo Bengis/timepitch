@@ -1,4 +1,5 @@
 import {useLanguage} from '../../i18n';
+import { defineTexts } from '../../i18n-catalog';
 const en={title:'Post-match statistics',show:'Show full-time statistics',showEpisode:'Show episode statistics',
   sections:'Match sections',tabs:{match:'Match',summary:'Summary',players:'Players',maps:'Maps',effort:'Effort',data:'Data'},playerPassNote:'Player passing outcomes refer to passes made by that player, not passes they received.',
   playerGroup:'Player metric group',playerTeam:'Player team',allTeams:'Both teams',overview:'Overview',passing:'Passing',defending:'Defending',role:'Role',
@@ -66,4 +67,5 @@ const es:typeof en={title:'Estadísticas pospartido',show:'Ver estadísticas fin
     recoveries:'Recuperaciones confirmadas',fouls:'Faltas admitidas',offsides:'Fueras de juego',corners:'Córners concedidos',penalties:'Penaltis concedidos',
     team_possession_pct:'Posesión de equipo',possession_pct:'Control directo del balón',team_length_m:'Longitud del equipo',team_width_m:'Anchura del equipo'},
 };
-export function useGrfStatsText(){return useLanguage().locale==='es'?es:en;}
+const TEXTS = defineTexts('grf-statistics', { en, es });
+export function useGrfStatsText(){return TEXTS(useLanguage().locale);}

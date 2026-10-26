@@ -1,4 +1,5 @@
 import {useLanguage} from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 const en={highlights:'Standout performances',criterion:'Highest recorded count in this simulated match; ties are shared. No overall player rating.',shared:'Shared lead',none:'No attributable actions recorded in this category.',
   playerCard:'Player card:',historical:'Historical season',performance:'Simulated performance',attributes:'Estimated engine attributes',attributeNote:'Native input scale 0–1. Estimates, not measured historical skills.',noAttributes:'This replay does not store individual engine attributes.',
   noHistory:'Historical data unavailable',loading:'Loading historical season…',changed:'The installed catalogue version differs from this replay. These historical records are from the current catalogue.',close:'Close player card',
@@ -19,4 +20,5 @@ const es:typeof en={highlights:'Actuaciones destacadas',criterion:'Mayor cantida
   event:{pass:'Pase',shot:'Tiro',goal:'Gol',save:'Parada',recovery:'Recuperación',tackle:'Entrada'},
   outcome:{received:'Recepción confirmada',intercepted:'Control rival',interrupted:'Interrumpido',same_actor:'Mismo jugador',unresolved:'Sin resolver',own_goal:'Autogol',goal:'Gol',scored:'Marcado',complete:'Completado',saved:'Parado',missed:'Fuera',won_ball:'Balón recuperado',off_target:'Fuera de portería',incomplete:'Incompleto',held:'Retenido'},
   attribute:{physical_velocity:'Velocidad',technical_shot:'Remate',technical_shortpass:'Pase corto'}};
-export function useExtrasText(){return useLanguage().locale==='es'?es:en;}
+const TEXTS = defineTexts('extras', { en, es });
+export function useExtrasText(){return TEXTS(useLanguage().locale);}

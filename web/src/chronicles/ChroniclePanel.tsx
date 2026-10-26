@@ -1,5 +1,6 @@
 import { useEffect,useRef,useState } from 'react';
 import type { Locale } from '../i18n';
+import { sourceLocale } from '../i18n-catalog';
 import type { SessionIdentity } from '../match-centre/session';
 import { ChronicleHttpError,createChronicle,getChronicle,getChronicleStatus,lookupChronicle,type AzureJobView,type AzureStatus,type ChronicleRequest } from './api';
 import { chronicleText } from './messages';
@@ -19,7 +20,7 @@ export function ChroniclePanel({identity,locale,completed,revealed,onSeekEvidenc
     if(!revealed)return;
     const controller=new AbortController();let timer:ReturnType<typeof setTimeout>|undefined;
     const valid=()=>!controller.signal.aborted&&current.current.identity===identity&&current.current.locale===locale&&current.current.completed&&current.current.revealed;
-    const request:ChronicleRequest={engine:identity.source,match_id:identity.id,trace_hash:identity.revision,locale};
+    const request:ChronicleRequest={engine:identity.source,match_id:identity.id,trace_hash:identity.revision,locale:sourceLocale(locale)};
     const fail=(error:unknown)=>{if(valid())setView(old=>old?{...old,job:null,error:error instanceof ChronicleHttpError?error.status:0,loading:false,posting:false}:old);};
     const accept=(job:AzureJobView|null)=>{
       if(!valid())return;
@@ -47,7 +48,7 @@ export function ChroniclePanel({identity,locale,completed,revealed,onSeekEvidenc
     const ctx=context.current;
     if(!ctx||!ctx.valid()||ctx.busy||!v?.capability?.generation_allowed||v.error!==null||v.job||identity.source==='historical'||identity.source==='recorded')return;
     ctx.busy=true;setView(old=>old?{...old,posting:true}:old);
-    void createChronicle({engine:identity.source,match_id:identity.id,trace_hash:identity.revision,locale},ctx.controller.signal)
+    void createChronicle({engine:identity.source,match_id:identity.id,trace_hash:identity.revision,locale:sourceLocale(locale)},ctx.controller.signal)
       .then(ctx.accept).catch(ctx.fail).finally(()=>{ctx.busy=false;});
   };
   const gate=identity.source==='historical'?text.historical:!completed?text.unfinished:!revealed?text.unrevealed:null;

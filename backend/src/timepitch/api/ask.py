@@ -6,13 +6,14 @@ from pydantic import BaseModel, Field
 
 from ..crew.ask import QUESTION_MAX, AskBusy, AskUnavailable
 from ..crew.ledger import EnvelopeRefused
+from ..crew.translate import Language
 from ..security import owner_session
 
 
 class AskRequest(BaseModel):
     engine: Literal['grf', 'touchlines']
     match_id: str = Field(min_length=1, max_length=120)
-    locale: Literal['en', 'es']
+    locale: Language
     names: Literal['fictional', 'real'] = 'real'
     question: str = Field(min_length=3, max_length=QUESTION_MAX)
 

@@ -1,4 +1,5 @@
 import { useLanguage } from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 const en = {
   fixedSeed: 'Use a fixed seed', automaticSeed: 'Automatic',
   automaticSeedNote: 'A new seed is chosen for each match.', fixedSeedNote: 'Same teams, XI, settings and seed reproduce the same match in the same engine version.',
@@ -53,4 +54,5 @@ const es: { [K in keyof typeof en]: string } = {
   interval: 'Intervalo', in_play: 'En juego', won_ball: 'Balón recuperado', held: 'Posesión conservada', scored: 'Marcado', finished: 'Terminado',
   none: 'Ninguno', versions: 'Versiones de repetición', open: 'Abrir', retry: 'Reintentar', match: 'Partido', lineupMissing: 'Selecciona once jugadores distintos en posiciones válidas.',
 };
-export function useMatchText() { const { locale } = useLanguage(); return locale === 'es' ? es : en; }
+const TEXTS = defineTexts('match', { en, es });
+export function useMatchText() { const { locale } = useLanguage(); return TEXTS(locale); }

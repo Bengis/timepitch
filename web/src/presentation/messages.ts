@@ -1,5 +1,6 @@
 // Textos del rótulo de anuncios y del marcador de emisión (EN por defecto, ES).
 import { useLanguage } from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 import type { AnnouncementKind } from '../match-centre/announcements/announcements';
 
 type Titles = Readonly<Record<AnnouncementKind, string>>;
@@ -43,7 +44,8 @@ const es: PresentationMessages = {
   noCrest: 'Escudo no disponible',
 };
 
+const TEXTS = defineTexts('presentation', { en, es });
 export function usePresentationText(): PresentationMessages {
   const { locale } = useLanguage();
-  return locale === 'es' ? es : en;
+  return TEXTS(locale);
 }

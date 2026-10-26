@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createExplanation, getExplanation, getWindows, type ExplanationJob, type MatchWindow } from '../api';
 import { useLanguage } from '../i18n';
+import { sourceLocale } from '../i18n-catalog';
 import { clockLabel } from './replay';
 import type {EventView} from '../match-centre/session';
 import { useMatchText } from './messages';
@@ -20,7 +21,7 @@ const text = {
 };
 
 export function Explanations({ id, revision, homeName, awayName, events, time, visible = true, hideFullMatch = false }: { id: string; revision: string; homeName: string; awayName: string; events: readonly EventView[]; time: number; visible?: boolean; hideFullMatch?: boolean }) {
-  const { locale } = useLanguage(), m = useMatchText(), s = text[locale];
+  const { locale: uiLocale } = useLanguage(), locale = sourceLocale(uiLocale), m = useMatchText(), s = text[locale];
   const [windows, setWindows] = useState<MatchWindow[]>([]), [failed, setFailed] = useState(false);
   const windowsLoaded = useRef(false);
   const [mode, setMode] = useState<'fan' | 'analyst'>('fan'), [selected, setSelected] = useState('');

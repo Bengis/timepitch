@@ -163,3 +163,33 @@ describe('sanitizeSvgText', () => {
     expect(sanitizeSvgText('<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient id="g"/></defs><rect fill="url(#g)" opacity="0.5"/><use xlink:href="#g"/><image href="data:image/png;base64,AAAA"/></svg>')).toEqual({ ok: true });
   });
 });
+
+describe('fictional league crests (TP264)', () => {
+  type Fs = { readFileSync(p: string): Uint8Array & { toString(enc: string): string }; existsSync(p: string): boolean };
+  let fs: Fs, dir: string;
+  beforeAll(async () => {
+    const fsName = 'node:fs', processName = 'node:process';
+    fs = await import(/* @vite-ignore */ fsName) as Fs;
+    const proc = await import(/* @vite-ignore */ processName) as { cwd(): string };
+    dir = `${proc.cwd()}/public`;
+  });
+
+  it('every club has a generated crest that passes the SVG safety filter', async () => {
+    const { default: index } = await import('./fictional-crests.json');
+    const files = Object.entries(index.files as Record<string, string>);
+    expect(files.length).toBe(51);
+    for (const [club, file] of files) {
+      const path = `${dir}/assets/crests-fictional/${file}`;
+      expect(fs.existsSync(path), club).toBe(true);
+      expect(sanitizeSvgText(fs.readFileSync(path).toString('utf8')), club).toEqual({ ok: true });
+    }
+  });
+
+  it('the fictional league shows its own crest, the real names the real one', async () => {
+    const fictional = await import('./fictional');
+    expect(fictional.fictionalCrestSrc('arsenal:2003')).toBe('/assets/crests-fictional/arsenal.svg');
+    expect(fictional.fictionalCrestSrc('nonexistent:2003')).toBeNull();
+    // test-setup.ts fixes the real names: the resolver keeps the real crest chain there.
+    expect(resolveCrest('arsenal:2003').kind).not.toBe('fictional');
+  });
+});

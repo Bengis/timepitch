@@ -40,15 +40,13 @@ describe('catalogue interactions', () => {
     render(<LanguageProvider><LanguageSelector /><TeamSelector side="away" teams={[summary]} value={summary.key} onChange={() => {}} /></LanguageProvider>);
     expect(screen.getByText('Away team')).toBeInTheDocument();
     expect(document.documentElement.lang).toBe('en');
-    fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));
+    fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });
     expect(screen.getByText('Equipo visitante')).toBeInTheDocument();
     expect(document.documentElement.lang).toBe('es');
     expect(localStorage.getItem('timepitch.locale')).toBe('es');
-    // TP211: banderas como botones con estado pulsado y nombre accesible en el idioma activo.
-    expect(screen.getByRole('group', { name: 'Idioma' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Idioma: Español' })).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByRole('button', { name: 'Idioma: English' })).toHaveAttribute('aria-pressed', 'false');
-    fireEvent.click(screen.getByRole('button', { name: 'Idioma: English' }));
+    // TP266: selector con todos los idiomas, con nombre accesible en el idioma activo.
+    expect(screen.getByRole('combobox', { name: 'Idioma' })).toHaveValue('es');
+    fireEvent.change(screen.getByRole('combobox', { name: 'Idioma' }), { target: { value: 'en' } });
     expect(document.documentElement.lang).toBe('en');
   });
 

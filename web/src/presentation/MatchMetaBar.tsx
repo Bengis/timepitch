@@ -2,6 +2,7 @@
 // escudo pequeño, marcador en display, datos del partido y chips de procedencia. Solo pinta lo que trae la
 // fuente: sin fecha, estadio ni árbitro inventados. Los datos llegan ya resueltos (ver `matchMetaFromDescriptor`).
 import { useState } from 'react';
+import { defineTexts, isLocale, type Locale } from '../i18n-catalog';
 import { useLanguage } from '../i18n';
 import type { SessionDescriptor } from '../match-centre/session';
 import type { CrestRef, MatchKits } from './types';
@@ -19,14 +20,13 @@ export type MatchMetaBarProps = Readonly<{
   chips?: readonly MetaChip[];
 }>;
 
-const TEXT = {
+const TEXT = defineTexts('match-meta', {
   en: { label: 'Match details', engine: 'Engine', seed: 'Seed', season: 'Season', lineups: (s: string) => `Lineups · ${s}`,
     simulated: 'Simulated', provisionalKits: 'Provisional colours, source pending', crest: (n: string) => `${n} crest` },
   es: { label: 'Datos del partido', engine: 'Motor', seed: 'Semilla', season: 'Temporada', lineups: (s: string) => `Alineaciones ${s}`,
     simulated: 'Simulado', provisionalKits: 'Colores provisionales, pendiente de fuente', crest: (n: string) => `Escudo ${n}` },
-} as const;
-type Locale = keyof typeof TEXT;
-const pick = (locale: string): Locale => locale === 'es' ? 'es' : 'en';
+});
+const pick = (locale: string): Locale => isLocale(locale) ? locale : 'en';
 
 const text = (v: unknown): string | null => typeof v === 'string' && v.trim() ? v.trim() : typeof v === 'number' ? String(v) : null;
 
@@ -35,7 +35,7 @@ const text = (v: unknown): string | null => typeof v === 'string' && v.trim() ? 
  *  `fictional` (texto del shell) añade el chip ph de ficción; `kits.choice === 'estimated'`, el de colores provisionales. */
 export function matchMetaFromDescriptor(d: Pick<SessionDescriptor, 'metadata'>, locale: string,
   opts: Readonly<{ fictional?: string | null; kits?: Pick<MatchKits, 'choice'> | null }> = {}): { facts: MetaFact[]; chips: MetaChip[] } {
-  const t = TEXT[pick(locale)];
+  const t = TEXT(pick(locale));
   const m = d.metadata ?? {};
   const facts: MetaFact[] = [];
   const chips: MetaChip[] = [];
@@ -70,7 +70,7 @@ function SmallCrest({ crest, name, label }: { crest: CrestRef | null | undefined
 /** Barra de datos del partido sobre las alineaciones. */
 export function MatchMetaBar({ home, away, score = null, facts = [], chips = [] }: MatchMetaBarProps) {
   const { locale } = useLanguage();
-  const t = TEXT[pick(locale)];
+  const t = TEXT(pick(locale));
   const shown = facts.filter(f => text(f.value));
   const short = (team: MetaTeam) => team.short ?? team.name;
   return (

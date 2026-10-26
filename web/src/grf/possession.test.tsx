@@ -26,7 +26,7 @@ it('uses the same team split in both bars and reports unassigned exposure separa
   expect(screen.getByText(/Unassigned in-play time: 25 %/)).toBeVisible();
   fireEvent.click(screen.getByText('Additional team statistics',{selector:'summary'}));
   expect(screen.getByRole('rowheader',{name:'Direct ball control'})).toBeVisible();
-  fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));
+  fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });
   expect(screen.getByRole('rowheader',{name:'Posesión de equipo'})).toBeVisible();
 });
 

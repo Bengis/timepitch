@@ -2,12 +2,13 @@
 // de la equipación. Nombre y dorsal salen del reparto (MatchCast), los mismos que usan la cronología y las alineaciones;
 // sin entrada en el reparto, los de la fila de la fuente. Nada se inventa: sin dorsal, un guion.
 import { useLanguage } from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 import type { PlayerView } from '../match-centre/session';
 import type { KitSpec, MatchCast } from './types';
 import './tokens.css';
 import './player-card.css';
 
-const TEXT = { en: { label: 'Choose player' }, es: { label: 'Elegir jugador' } } as const;
+const TEXT = defineTexts('player-picker', { en: { label: 'Choose player' }, es: { label: 'Elegir jugador' } });
 
 const KEEPER = /^(gk|goalkeeper|portero)$/i;
 const NEUTRAL = { shirt: '#3a4150', ink: '#ffffff' } as const;
@@ -46,7 +47,7 @@ export type PlayerPickerProps = Readonly<{
 
 export function PlayerPicker({ options, selectedId, onSelect }: PlayerPickerProps) {
   const { locale } = useLanguage();
-  const t = TEXT[locale === 'es' ? 'es' : 'en'];
+  const t = TEXT(locale);
   return <nav className="tp-pc-picker" aria-label={t.label}>
     {options.map(o => <button key={o.id} type="button" aria-pressed={o.id === selectedId} onClick={() => onSelect(o.id)}>
       <span className="n" aria-hidden={o.number == null} style={{ background: o.shirt, color: o.ink }}>{o.number ?? '–'}</span>

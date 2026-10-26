@@ -31,7 +31,7 @@ it('explains a physical history entry in both languages without opening a compre
   expect(container.querySelector('.grf-match-view')).toBeNull();
   expect(within(nav).getByRole('button',{name:'Match centre'})).toBeDisabled();
   expect(screen.getByRole('button',{name:/Saved home — Saved away/})).toBeEnabled();
-  fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));
+  fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });
   expect(screen.getByRole('alert')).toHaveTextContent(/físic.*no.*disponible.*navegador/i);
   fireEvent.click(screen.getByRole('button',{name:'Nuevo partido'}));
   expect(screen.getByRole('button',{name:'Jugar partido'})).toBeVisible();

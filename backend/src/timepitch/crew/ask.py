@@ -202,6 +202,22 @@ def ask_gate(ledger: CrewLedger, request_hash: str):
     return AskGate()
 
 
+async def run_translator(client, sentences: list[str], language: str) -> AgentAnswer:
+    """TP265: one request, no tools; the checked sentences in, the same count out (see translate.py)."""
+    from agent_framework import Agent
+    from .agents import _count, _response_model
+    from .translate import TRANSLATE_VERSION, translation_schema, translator_instructions
+    agent = Agent(client=client, name='match_report_translator', instructions=translator_instructions(language),
+                  default_options={'max_tokens': MAX_OUTPUT_TOKENS, 'store': False, 'temperature': 0})
+    response = await agent.run(json.dumps({'version': TRANSLATE_VERSION, 'sentences': sentences}, ensure_ascii=False), options={
+        'tool_choice': 'none',
+        'response_format': {'type': 'json_schema', 'json_schema': {'name': 'translation', 'strict': True,
+                                                                     'schema': translation_schema(len(sentences))}}})
+    usage = response.usage_details or {}
+    return AgentAnswer(text=response.text, model=_response_model(response),
+                       input_tokens=_count(usage.get('input_token_count')), output_tokens=_count(usage.get('output_token_count')))
+
+
 async def run_agent(client, tools: MatchTools, locale: str, question: str) -> AgentAnswer:
     from agent_framework import Agent
     from .agents import _count, _response_model
@@ -406,21 +422,70 @@ class AskService:
                     state['questions'][rh]['answer'] = answer
                 self._save(state)
 
+    def translate(self, sentences: list[str], names: list[str], language: str) -> dict:
+        """TP265: checked sentences in another language; each one keeps its source unless its data match (cached)."""
+        from .translate import TRANSLATE_VERSION
+        if not sentences:
+            return {'sentences': [], 'language': language, 'translated': 0, 'total': 0}
+        key = sha256(json.dumps({'version': TRANSLATE_VERSION, 'language': language, 'sentences': sentences},
+                                ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+        path = self.dir / 'translations' / f'{key}.json'
+        if path.is_file():
+            return json.loads(path.read_text(encoding='utf-8'))
+        result, complete = asyncio.run(self._translate(key, sentences, names, language))
+        if complete:  # a provider failure is not cached: the next view tries again
+            path.parent.mkdir(parents=True, exist_ok=True)
+            tmp = path.with_suffix('.tmp')
+            tmp.write_text(json.dumps(result, ensure_ascii=False), encoding='utf-8')
+            os.replace(tmp, path)
+        return result
+
+    async def _translate(self, key: str, sentences: list[str], names: list[str], language: str) -> tuple[dict, bool]:
+        from .translate import apply_translation
+        grant, grant_sha = self._grant()
+        self.dir.mkdir(parents=True, exist_ok=True)
+        ledger = CrewLedger(self.dir / f'ask-ledger-{grant_sha[:16]}.sqlite', grant, grant_sha, now=self.now)
+        try:
+            known = ledger.receipt(key, 'ask-1')
+            if known is not None and known.output:  # already paid for: replay at no cost
+                out, kept = apply_translation(sentences, known.output, names)
+                return {'sentences': out, 'language': language, 'translated': kept, 'total': len(sentences)}, True
+            gate = ask_gate(ledger, key)
+            error, result = None, None
+            try:
+                result = await run_translator(self._client(gate), sentences, language)
+            except Exception:
+                error = 'provider_error'
+            cost = self._receipts(ledger, gate, key, grant, result, error)
+            ok = result is not None and _identifier(result.model) in self.binding.accepted_models
+            out, kept = apply_translation(sentences, result.text if ok else '', names)
+            return {'sentences': out, 'language': language, 'translated': kept, 'total': len(sentences), 'cost': str(cost)}, ok
+        finally:
+            ledger.close()
+
     def ask(self, engine: str, match_id: str, owner: str, locale: str, question: str, client: str | None = None,
             names: str = 'real') -> dict:
         if not self.available():
             raise AskUnavailable('disabled')
+        from .translate import native_locale
+        language, locale = locale, native_locale(locale)
         question = _normalise(question)
         if not 3 <= len(question) <= QUESTION_MAX:
             raise ValueError('question_length')
         pack, first = self._packs(engine, match_id, owner, names)
-        rh = sha256(json.dumps({'version': ASK_VERSION, 'fact_hash': fact_pack_hash(pack), 'locale': locale,
+        rh = sha256(json.dumps({'version': ASK_VERSION, 'fact_hash': fact_pack_hash(pack), 'locale': locale, 'language': language,
                                 'question': question.casefold()}, sort_keys=True).encode()).hexdigest()
         cached = self._admit(rh, owner, client)
         if cached is not None:
             return cached
         try:
             answer = asyncio.run(self._answer(rh, pack, first, locale, question))
+            answer['language'] = locale
+            if language != locale and answer['sentences']:
+                from .checks import recorded_names
+                done = self.translate([s['text'] for s in answer['sentences']], recorded_names(pack), language)
+                answer['sentences'] = [{**s, 'text': t} for s, t in zip(answer['sentences'], done['sentences'])]
+                answer['language'], answer['translated'] = language, f"{done['translated']}/{done['total']}"
         except Exception:
             self._finish(rh, None)
             raise

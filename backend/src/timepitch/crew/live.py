@@ -124,8 +124,10 @@ def report_view(report: CrewReport) -> dict:
 
 
 class LiveCrew:
-    def __init__(self, source, settings: LiveCrewSettings, state_dir: Path, *, queue=None, blobs=None, now=time.time):
+    def __init__(self, source, settings: LiveCrewSettings, state_dir: Path, *, queue=None, blobs=None, now=time.time,
+                 translator=None):
         self.source, self.settings, self.now = source, settings, now
+        self.translator = translator  # TP265: the server-side agent service (AskService) that translates checked text
         self.binding = default_binding()
         self.dir = Path(state_dir)
         self._queue, self._blobs = queue, blobs
@@ -190,6 +192,8 @@ class LiveCrew:
                 names: str = 'real', audience: str = 'fan', period: str = 'full_time') -> dict:
         if not self.available():
             raise LiveCrewUnavailable('disabled')
+        from .translate import native_locale
+        locale = native_locale(locale)  # TP265: the crew writes in English or Spanish; the rest is translated
         pack = self._pack(engine, match_id, owner, names, period)
         rh = request_hash(fact_pack_hash(pack), locale, self.binding, audience)
         with self._lock:
@@ -220,6 +224,35 @@ class LiveCrew:
 
     def status(self, engine: str, match_id: str, owner: str, locale: str, names: str = 'real', audience: str = 'fan',
                period: str = 'full_time') -> dict:
+        from .translate import native_locale
+        language, locale = locale, native_locale(locale)
+        result = self._status(engine, match_id, owner, locale, names, audience, period)
+        if language != locale and result.get('status') == 'ready':
+            result['report'] = self._translated(result['report'], self._pack(engine, match_id, owner, names, period), language)
+        return result
+
+    def _translated(self, view: dict, pack, language: str) -> dict:
+        """TP265: the checked report in another language; without the translator it stays in its checked language."""
+        translator = self.translator
+        if translator is None or not translator.available():
+            return view
+        from .checks import recorded_names
+        sentences = ([view['headline']] if view.get('headline') else []) + [s for p in view['paragraphs'] for s in p]
+        try:
+            done = translator.translate(sentences, recorded_names(pack), language)
+        except Exception:
+            return view
+        out = list(done['sentences'])
+        headline = out.pop(0) if view.get('headline') else None
+        paragraphs = []
+        for p in view['paragraphs']:
+            paragraphs.append(out[:len(p)])
+            out = out[len(p):]
+        return {**view, 'headline': headline, 'paragraphs': paragraphs, 'language': language,
+                'translated': f"{done['translated']}/{done['total']}"}
+
+    def _status(self, engine: str, match_id: str, owner: str, locale: str, names: str = 'real', audience: str = 'fan',
+                period: str = 'full_time') -> dict:
         pack = self._pack(engine, match_id, owner, names, period)
         rh = request_hash(fact_pack_hash(pack), locale, self.binding, audience)
         cached = self.dir / 'reports' / f'{rh}.json.gz'
@@ -238,7 +271,7 @@ class LiveCrew:
             return self._done(rh, {'status': 'failed', 'request_hash': rh, 'code': error.code})
         if result['status'] == 'fetched':
             self._done(rh, {})
-            return self.status(engine, match_id, owner, locale, names, audience, period)
+            return self._status(engine, match_id, owner, locale, names, audience, period)
         if result['status'] == 'failed':
             return self._done(rh, {'status': 'failed', 'request_hash': rh, 'code': result['code']})
         if self.now() - known['at'] > PENDING_TIMEOUT_S:

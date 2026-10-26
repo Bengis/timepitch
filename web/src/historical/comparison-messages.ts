@@ -1,4 +1,5 @@
 import {useLanguage} from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 const en={prepare:'Simulate this matchup',preparing:'Resolving recorded club identities…',clubsOnly:'Club and season selection loaded. The editable season lineup is not the recorded starting XI.',exact:'Copy verified starting XI',exactCopied:'Verified starting XI applied. Tactics and ratings remain simulator settings.',notExact:'The exact historical XI is unavailable.',edited:'The selection has been edited.',failed:'Preparation could not be applied to the current catalogue. Review the selection.',
   source:'Historical preparation',formation:'Source formation',comparison:'Compare a saved simulation',choose:'Choose a saved match…',historical:'Recorded match',simulated:'Simulation',home:'Home',away:'Away',delta:'Simulation − recorded',
   comparable:'Comparable',different_definition:'Different definitions',unavailable:'Not available',goals:'Goals',shots:'Shot attempts',xg:'Expected goals',completed_passes:'Completed passes',
@@ -19,4 +20,5 @@ const es:typeof en={prepare:'Simular este enfrentamiento',preparing:'Resolviendo
   unsupported_source_formation:'La formación registrada no está admitida para este equipo-temporada en los simuladores.',unverified_player_identities:'No hay correspondencias de IDs de jugadores verificadas entre fuentes; el nombre no establece identidad.',unmapped_club_season:'Sin correspondencia verificada de club y temporada.',source_formation_unavailable:'Formación inicial registrada no disponible.',mapped_roles_incompatible:'Los jugadores verificados no encajan en los puestos del simulador.',
   home_formation_differs:'La formación local difiere.',away_formation_differs:'La formación visitante difiere.',home_xi_unverified:'No se puede verificar el once local entre fuentes.',away_xi_unverified:'No se puede verificar el once visitante entre fuentes.',home_xi_differs:'El once local difiere.',away_xi_differs:'El once visitante difiere.',
 };
-export function useComparisonText(){return useLanguage().locale==='es'?es:en;}
+const TEXTS = defineTexts('historical-comparison', { en, es });
+export function useComparisonText(){return TEXTS(useLanguage().locale);}

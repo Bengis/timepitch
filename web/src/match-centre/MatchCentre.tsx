@@ -29,6 +29,7 @@ import { matchTime, usePlayerText } from './player-messages';
 import { Explanations } from '../match/Explanations';
 import { ChroniclePanel } from '../chronicles/ChroniclePanel';
 import { useLanguage } from '../i18n';
+import { defineTexts } from '../i18n-catalog';
 import { clockFor } from './football-clock';
 import type { SequencePresentation } from './sequence/types';
 import { SequenceExperience } from './sequence/SequenceExperience';
@@ -117,7 +118,7 @@ export function autoplaySpeedFor(durationMs: number | null): number {
   return Math.min(120, Math.max(1, durationMs / TARGET_MATCH_MS));
 }
 /** Nombre del botón grande (distinto de «Reproducir» de la barra, que sigue presente). */
-const BIG_PLAY = { en: 'Play the match', es: 'Reproducir el partido' } as const;
+const BIG_PLAY = defineTexts('centre-play', { en: { play: 'Play the match' }, es: { play: 'Reproducir el partido' } });
 const prefersReducedMotion = () => typeof window !== 'undefined' && (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false);
 
 export function MatchCentre(props: MatchCentreProps) {
@@ -405,7 +406,7 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
       hud={sequence||bannerBelow||pause||walking?undefined:banner('overlay')} renderOverlay={projection => sequence?null:<MatchLayers layers={snapshot.layers} projection={projection} elapsedMs={elapsed} showAnchors={showAnchors}/>}
       /* 25-oct: «veo términos repetidos». TP250: sobre el campo, solo las cámaras; la procedencia va en la cabecera. */
       {...(shell&&hudEngine?{cameraTabs:true}:{})}
-      overlay={phaseOverlay??(bigPlay&&!state.wantsPlay&&!sequence?<button type="button" className="tp-big-play" data-big-play aria-label={BIG_PLAY[locale === 'es' ? 'es' : 'en']} title={BIG_PLAY[locale === 'es' ? 'es' : 'en']}
+      overlay={phaseOverlay??(bigPlay&&!state.wantsPlay&&!sequence?<button type="button" className="tp-big-play" data-big-play aria-label={BIG_PLAY(locale).play} title={BIG_PLAY(locale).play}
         disabled={!autoplayReady} onClick={()=>{playback.setSpeed(autoplaySpeedFor(snapshot.descriptor.durationMs));playback.play();setBigPlay(false);}}>
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M7 4.5v15a1 1 0 001.5.86l12-7.5a1 1 0 000-1.72l-12-7.5A1 1 0 007 4.5z"/></svg><span>{t.play}</span></button>:undefined)} />
     {sequence&&!motionReady&&<p className="sequence-unavailable" role="status">{state.status==='buffering'?q.loading:q.unavailable}</p>}

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { useLanguage } from '../../i18n';
+import { sourceLocale } from '../../i18n-catalog';
 import { momentsAt } from './analysis';
 import { PlayCard } from './PlayCard';
 import { SequenceRail } from './SequenceRail';
@@ -10,7 +11,7 @@ export function SequenceExperience({sequence,elapsed,pitch,transport,details,det
   onDetails:(open:boolean)=>void;onPlayer:(id:string)=>void;onMoment:(ms:number)=>void;
 }){
   const {locale}=useLanguage(),t=useSequenceText();
-  const reached=sequence.kind==='actions'?momentsAt(sequence.source,elapsed,locale):[];
+  const reached=sequence.kind==='actions'?momentsAt(sequence.source,elapsed,sourceLocale(locale)):[];
   return <div className="sequence-experience">
     <div className="sequence-main"><div className="sequence-stage">{pitch}{transport}</div>
       {ready&&sequence.kind==='actions'&&<PlayCard key={`${sequence.source.key}/${reached.at(-1)?.id??'start'}`} source={sequence.source} moment={reached.at(-1)??null} onPlayer={onPlayer}/>}</div>

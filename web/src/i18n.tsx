@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { defineTexts, isLocale, LOCALES, type Locale } from './i18n-catalog';
 
-export type Locale = 'en' | 'es';
+export type { Locale } from './i18n-catalog';
 const en = {
   language: 'Language', local: 'LOCAL PREVIEW', phase: 'HISTORICAL MATCH SIMULATOR',
   title: 'Football, across eras.', intro: 'Pick any two Premier League teams since 1992/93 and watch them play each other.',
@@ -62,19 +63,23 @@ const es: Messages = {
   sound: 'Sonido', soundMute: 'Silenciar el sonido del partido', soundUnmute: 'Activar el sonido del partido',
 };
 
+// TP266: los demás idiomas salen del catálogo (espacio «app»), con el inglés donde falte.
+const APP = defineTexts('app', { en: { ...en, documentTitle: 'TimePitch — Football across eras' } as Messages & { documentTitle: string },
+  es: { ...es, documentTitle: 'TimePitch — Fútbol entre épocas' } });
+
 type LanguageState = { locale: Locale; setLocale: (locale: Locale) => void; t: Messages };
 const LanguageContext = createContext<LanguageState>({ locale: 'en', setLocale: () => {}, t: en });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>(() => {
-    try { return localStorage.getItem('timepitch.locale') === 'es' ? 'es' : 'en'; } catch { return 'en'; }
+    try { const saved = localStorage.getItem('timepitch.locale'); return isLocale(saved) ? saved : 'en'; } catch { return 'en'; }
   });
   useEffect(() => {
     document.documentElement.lang = locale;
-    document.title = locale === 'es' ? 'TimePitch — Fútbol entre épocas' : 'TimePitch — Football across eras';
+    document.title = APP(locale).documentTitle;
     try { localStorage.setItem('timepitch.locale', locale); } catch { /* Private browser storage can be unavailable. */ }
   }, [locale]);
-  return <LanguageContext.Provider value={{ locale, setLocale, t: locale === 'es' ? es : en }}>{children}</LanguageContext.Provider>;
+  return <LanguageContext.Provider value={{ locale, setLocale, t: APP(locale) }}>{children}</LanguageContext.Provider>;
 }
 
 export const useLanguage = () => useContext(LanguageContext);
@@ -85,30 +90,15 @@ export function isLocalPreview(hostname: string = typeof window === 'undefined' 
   return host === 'localhost' || host === '127.0.0.1' || host === '::1' || host === '[::1]' || host.endsWith('.localhost');
 }
 
-/* Banderas en SVG propio (Windows no pinta los emoji de bandera). Decorativas: el nombre accesible va en el botón. */
-const FLAGS: Record<Locale, ReactNode> = {
-  en: <svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-    <clipPath id="tp-flag-uk"><path d="M30 15h30v15zv15H0zH0V0zV0h30z" /></clipPath>
-    <path d="M0 0v30h60V0z" fill="#012169" />
-    <path d="M0 0l60 30m0-30L0 30" stroke="#fff" strokeWidth="6" />
-    <path d="M0 0l60 30m0-30L0 30" clipPath="url(#tp-flag-uk)" stroke="#C8102E" strokeWidth="4" />
-    <path d="M30 0v30M0 15h60" stroke="#fff" strokeWidth="10" />
-    <path d="M30 0v30M0 15h60" stroke="#C8102E" strokeWidth="6" />
-  </svg>,
-  es: <svg viewBox="0 0 30 20" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-    <path d="M0 0h30v20H0z" fill="#AA151B" /><path d="M0 5h30v10H0z" fill="#F1BF00" />
-  </svg>,
-};
-const LANGUAGE_NAMES: Record<Locale, string> = { en: 'English', es: 'Español' };
-
-/** Selector de idioma compacto (TP211): dos banderas pulsables, con nombre accesible «Language: English». */
+/** Selector de idioma (TP266): todos los idiomas con catálogo, por su nombre propio. */
 export function LanguageSelector() {
   const { locale, setLocale, t } = useLanguage();
-  return <div className="language-control language-flags" role="group" aria-label={t.language}>
-    {(['en', 'es'] as const).map(value => <button key={value} type="button" className="language-flag" lang={value}
-      aria-pressed={locale === value} aria-label={`${t.language}: ${LANGUAGE_NAMES[value]}`} title={LANGUAGE_NAMES[value]}
-      onClick={() => setLocale(value)}>{FLAGS[value]}</button>)}
-  </div>;
+  return <label className="language-control language-select">
+    <span className="language-globe" aria-hidden="true">🌐</span>
+    <select aria-label={t.language} value={locale} onChange={e => { if (isLocale(e.target.value)) setLocale(e.target.value); }}>
+      {LOCALES.map(l => <option key={l.code} value={l.code} lang={l.code}>{l.name}</option>)}
+    </select>
+  </label>;
 }
 
 export function useFlagText() {

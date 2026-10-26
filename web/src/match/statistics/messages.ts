@@ -1,4 +1,5 @@
 import { useLanguage } from '../../i18n';
+import { defineTexts, definePairs, isLocale } from '../../i18n-catalog';
 import { clockLabel } from '../replay';
 const en={title:'Advanced match statistics',final:'Final match statistics',inspect:'Inspect current statistics',
   through:'Statistics through',loading:'Loading statistics…',error:'Could not load these statistics. Try again.',
@@ -54,7 +55,7 @@ export const metricGroups={
     'defensive_line_height_m_in_possession','defensive_line_height_m_out_of_possession','def_mid_gap_m_in_possession','def_mid_gap_m_out_of_possession','mid_fwd_gap_m_in_possession','mid_fwd_gap_m_out_of_possession'],
   effort:['distance_m','distance_km_per90','metres_per_minute','hsr_distance_m','sprint_distance_m','sprint_count','sprint_duration_s','max_speed_kmh','high_acceleration_count','high_deceleration_count'],
 } as const;
-const labels:Record<string,[string,string]>={
+const labels=definePairs('metrics',{
   simulated_xg:['Simulated xG','xG simulado'],simulated_xga:['Simulated xGA','xGA simulado'],simulated_xgd:['Simulated xG difference','Diferencia de xG simulado'],
   simulated_xg_per_shot:['Simulated xG per shot','xG simulado por tiro'],goals_minus_xg:['Goals minus simulated xG','Goles menos xG simulado'],
   key_passes:['Key passes TP','Pases clave TP'],xg_assisted:['xG Assisted TP','xG Assisted TP'],
@@ -76,16 +77,17 @@ const labels:Record<string,[string,string]>={
   high_acceleration_count:['High accelerations (≥1 s)','Aceleraciones intensas (≥1 s)'],high_deceleration_count:['High decelerations (≥1 s)','Frenadas intensas (≥1 s)'],
   xg:['Recorded xG (FPL)','xG registrado (FPL)'],xa:['Recorded xA (FPL)','xA registrado (FPL)'],starts:['Recorded starts','Titularidades registradas'],
   tackles:['Recorded tackles','Entradas registradas'],recoveries:['Recorded recoveries','Recuperaciones registradas'],cbi:['Clearances, blocks and interceptions','Despejes, bloqueos e intercepciones'],
-};
+});
+const TEXTS = defineTexts('statistics', { en, es });
 export function metricLabel(id:string,locale:string):string {
   const phase=['_out_of_possession','_in_possession'].find(s=>id.endsWith(s));
   if(phase) return metricLabel(id.slice(0,-phase.length),locale)+' · '+(locale==='es'?(phase==='_in_possession'?'con balón':'sin balón'):(phase==='_in_possession'?'in possession':'out of possession'));
-  return labels[id]?.[locale==='es'?1:0]??id.replaceAll('_',' ');
+  return (isLocale(locale)?labels(locale,id):undefined)??id.replaceAll('_',' ');
 }
-export function useStatsText(){const {locale}=useLanguage();return locale==='es'?es:en;}
+export function useStatsText(){const {locale}=useLanguage();return TEXTS(locale);}
 export function unitLabel(unit:string,locale:string){return locale!=='es'?unit:({'count':'recuento','goals':'goles','xG/shot':'xG/tiro','passes/sequence':'pases/secuencia','passes/intervention':'pases/intervención'} as Record<string,string>)[unit]??unit;}
 export function statisticsClock(ms:number,locale:string){const rest=ms%1000;return clockLabel(ms)+(rest?(locale==='es'?',':'.')+String(rest).padStart(3,'0'):'');}
-export function reasonText(reason:string|null|undefined,locale:string){const t=locale==='es'?es:en;return reason==='legacy_no_motion'?t.noMotion:reason==='legacy_no_context'?t.noContext:reason==='zero_denominator'?t.zero:reason==='insufficient_samples'?t.insufficient:reason==='missing_supplement'?t.missing:reason==='partial_field_coverage'?t.partialNote:t.notCovered;}
+export function reasonText(reason:string|null|undefined,locale:string){const t=TEXTS(isLocale(locale)?locale:'en');return reason==='legacy_no_motion'?t.noMotion:reason==='legacy_no_context'?t.noContext:reason==='zero_denominator'?t.zero:reason==='insufficient_samples'?t.insufficient:reason==='missing_supplement'?t.missing:reason==='partial_field_coverage'?t.partialNote:t.notCovered;}
 export function metricHelp(id:string,locale:string){
   const es=locale==='es';
   if(id.startsWith('simulated_')||id==='goals_minus_xg')return es?'Probabilidades generativas del motor, sumadas una vez por tiro. No es un modelo independiente de xG de proveedor.':'Engine generative probabilities, summed once per shot. This is not an independent provider xG model.';

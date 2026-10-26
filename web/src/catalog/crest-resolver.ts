@@ -2,7 +2,7 @@
 import hdRegistry from './crests-hd.json';
 import historical from './historical-crests.json';
 import { resolveHistoricalCrest } from './crests';
-import { fictional } from './fictional';
+import { fictional, fictionalCrestSrc } from './fictional';
 import { isAssetSource } from '../presentation/registry-schema';
 import type { AssetSource, CrestRef } from '../presentation/types';
 
@@ -60,10 +60,20 @@ export function createCrestResolver(registry: CrestHdRegistry) {
 const defaultResolver = createCrestResolver(hdRegistry as unknown as CrestHdRegistry);
 
 /** Escudo a mostrar para `club:season_start`: HD revisado, si no HFK, si no neutro. */
-export function resolveCrest(teamKey: string): CrestRef { return fictional() ? NO_CREST : defaultResolver(teamKey); }
+export function resolveCrest(teamKey: string): CrestRef { return fictional() ? fictionalCrest(teamKey) : defaultResolver(teamKey); }
+
+/** TP264: en la liga ficticia, su escudo inventado (sin fuente que acreditar: es arte propio). */
+function fictionalCrest(teamKey: string): CrestRef {
+  const src = fictionalCrestSrc(teamKey);
+  return src ? Object.freeze({ src, kind: 'fictional', source: null }) : NO_CREST;
+}
 
 /** Orden de reserva para la carga de imágenes: `[hd, hfk]`, `[hfk]` o `[]`. */
-export function crestChain(teamKey: string): CrestRef[] { return fictional() ? [] : defaultResolver.chain(teamKey); }
+export function crestChain(teamKey: string): CrestRef[] {
+  if (!fictional()) return defaultResolver.chain(teamKey);
+  const crest = fictionalCrest(teamKey);
+  return crest.kind === 'none' ? [] : [crest];
+}
 
 const SAFE_DATA = /^data:image\/(?:png|jpe?g|gif|webp);/i;
 

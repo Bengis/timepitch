@@ -2,6 +2,7 @@
 // consulta con herramientas los hechos grabados que necesita. Cada frase de la respuesta se comprueba en el servidor
 // contra esos hechos antes de llegar aquí; si no pasa, llegan los hechos tal cual. Aquí solo se pregunta y se muestra.
 import { useEffect, useState, type FormEvent } from 'react';
+import { defineTexts, type Locale } from '../i18n-catalog';
 import { namesMode } from '../catalog/fictional';
 
 type Engine = 'grf' | 'touchlines';
@@ -9,7 +10,7 @@ type Sentence = { text: string; fact_ids: string[] };
 type Answer = { status: 'answered' | 'facts_only' | 'off_topic'; sentences: Sentence[]; fetched: string[]; cost: string };
 type Entry = { question: string; answer?: Answer; error?: string };
 
-const TEXT = {
+const TEXT = defineTexts('ask', {
   en: { title: 'Ask the match', badge: 'AI agent · tools · Azure AI Foundry', placeholder: 'Ask about this match…', ask: 'Ask',
     suggestions: ['Who scored, and when?', 'Which side had more shots?', 'How did the first half compare?'],
     thinking: 'The agent is looking up the recorded facts…',
@@ -28,10 +29,10 @@ const TEXT = {
     busy: 'Todavía estoy respondiendo tu pregunta anterior.', limit: 'Has llegado a las preguntas de hoy.',
     budget: 'Se ha agotado el presupuesto de preguntas de la demo.', failed: 'Esta vez no se pudo responder la pregunta.',
     how: 'Un agente de IA (Microsoft Agent Framework) usa herramientas para consultar los hechos grabados que necesita; cada frase se comprueba antes de mostrarla.' },
-} as const;
+});
 
-export function MatchQuestions({ engine, matchId, locale, ended }: { engine: Engine; matchId: string; locale: 'en' | 'es'; ended: boolean }) {
-  const t = TEXT[locale];
+export function MatchQuestions({ engine, matchId, locale, ended }: { engine: Engine; matchId: string; locale: Locale; ended: boolean }) {
+  const t = TEXT(locale);
   const [available, setAvailable] = useState(false);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [draft, setDraft] = useState('');

@@ -3,6 +3,7 @@
 // Identidad desde la ficha pública (QID → Wikidata/Wikipedia); sin ficha, solo los datos de la fila de la fuente.
 // Cada cifra lleva su procedencia: Histórico (fuente), Estimado o Simulado. Nada se rellena ni se inventa.
 import { useEffect, useId, useRef, type CSSProperties, type ReactNode } from 'react';
+import { defineTexts, intlTag } from '../i18n-catalog';
 import type { PlayerSeason, Statistic } from '../api';
 import { TeamCrest } from '../catalog/TeamCrest';
 import { fictional } from '../catalog/fictional';
@@ -20,7 +21,7 @@ type Chip = 'hist' | 'est' | 'sim';
 export type PlayerCardAbility = Readonly<{ title: string; name: string; source: string; chip: Chip; note: string }>;
 type PositionCode = 'GK' | 'DF' | 'MF' | 'FW';
 
-const TEXT = {
+const TEXT = defineTexts('player-card', {
   en: {
     dialog: 'Player card', close: 'Close', facts: 'Player facts', number: 'Number', position: 'Position',
     nation: { sport: 'Nationality (national team)', citizenship: 'Nationality (citizenship)', manual: 'Nationality (corrected by hand)' },
@@ -69,8 +70,8 @@ const TEXT = {
     noMovement: 'Movimiento no disponible en esta grabación.',
     movementNote: 'Derivado del movimiento sintético que graba el motor: no es tracking real ni comparable con datos físicos medidos.',
   },
-};
-type Text = typeof TEXT.en;
+});
+type Text = ReturnType<typeof TEXT>;
 
 /** Movimiento del jugador en la grabación (análisis grabado, hasta el cursor). `null` en un campo = el motor no lo graba. */
 export type PlayerMovement = Readonly<{
@@ -172,7 +173,7 @@ function StatGrid({ cells, className }: { cells: readonly Cell[]; className?: st
 
 export function PlayerCard({ player, entry, kit, seasonLabel, teamKey, teamName, season, matchLabel, variant = 'drawer', picker, movement, ability, onClose }: PlayerCardProps) {
   const { locale } = useLanguage();
-  const t = TEXT[locale === 'es' ? 'es' : 'en'];
+  const t = TEXT(locale);
   const inline = variant === 'inline';
   const close = useRef<HTMLButtonElement>(null);
   const idBase = `tp-pc-${useId().replace(/[^A-Za-z0-9_-]/g, '')}`;
@@ -211,7 +212,7 @@ export function PlayerCard({ player, entry, kit, seasonLabel, teamKey, teamName,
     }
     if (card && card.citizenship.length > 0) facts.push({ k: t.citizenship, v: card.citizenship.join(' / ') });
     if (record.dob) {
-      const date = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+      const date = new Intl.DateTimeFormat(intlTag(locale), { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
         .format(new Date(`${record.dob}T00:00:00Z`)).replace('.', '');
       const age = ageOnFirstAugust(record.dob, seasonLabel);
       facts.push({ k: t.born, v: age != null && seasonYear ? `${date} · ${t.age(age, Number(seasonYear))}` : date });

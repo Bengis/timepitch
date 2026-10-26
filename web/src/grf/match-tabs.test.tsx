@@ -29,7 +29,7 @@ it('retains all team and player passing/defending metrics with honest missing ef
 it('preserves filter controls through language and cutoff updates and reuses final reads across tabs',async()=>{
   const view=open();fireEvent.click(tab('Maps'));fireEvent.click(screen.getByRole('button',{name:'Reveal final analysis'}));await screen.findByText('Shot map',{selector:'h3'});
   const map=view.container.querySelector('[data-plot-id=shots]') as HTMLElement;const filter=within(map).getByLabelText('Filter map rows');fireEvent.change(filter,{target:{value:'home'}});filter.focus();
-  fireEvent.click(screen.getByRole('button', { name: 'Language: Español' }));expect(within(map).getByLabelText('Filtrar filas del mapa')).toHaveValue('home');expect(filter).toHaveFocus();
+  fireEvent.change(screen.getByRole('combobox', { name: 'Language' }), { target: { value: 'es' } });expect(within(map).getByLabelText('Filtrar filas del mapa')).toHaveValue('home');expect(filter).toHaveFocus();
   fireEvent.click(tab('Alineaciones'));fireEvent.click(tab('Resumen'));expect(getGrfStatistics).toHaveBeenCalledTimes(1);
 });
 it('supports keyboard tabs and inspection without forced tab switches',async()=>{
