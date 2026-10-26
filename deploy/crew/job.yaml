@@ -1,0 +1,43 @@
+# Azure Container Apps job for the TimePitch AI crew (event-driven, KEDA azure-queue scaler).
+# Apply with: az containerapp job create -g <rg> -n timepitch-crew-job --yaml deploy/crew/job.yaml
+# Replace the <...> placeholders; no secrets live in this file or in the job: it signs in with its system identity.
+location: swedencentral
+identity:
+  type: SystemAssigned
+properties:
+  environmentId: /subscriptions/<subscription-id>/resourceGroups/<rg>/providers/Microsoft.App/managedEnvironments/<environment>
+  configuration:
+    triggerType: Event
+    replicaTimeout: 300          # one crew run (analyst, writer, verifier, at most one revision) must finish in 5 min
+    replicaRetryLimit: 0         # the crew never re-sends a model call; a stuck message is retried from the queue instead
+    registries:
+      - server: <registry>.azurecr.io
+        identity: system         # AcrPull through the job identity, no registry password
+    eventTriggerConfig:
+      parallelism: 1
+      replicaCompletionCount: 1
+      scale:
+        minExecutions: 0         # scales to zero: nothing runs, and nothing is paid, while the queue is empty
+        maxExecutions: 1         # one report at a time keeps spending inside the envelope
+        pollingInterval: 5
+        rules:
+          - name: crew-queue
+            type: azure-queue
+            identity: system     # KEDA reads the queue length with the same identity
+            metadata:
+              accountName: <storage-account>
+              queueName: crew-requests
+              queueLength: "1"
+              queueLengthStrategy: visibleonly
+  template:
+    containers:
+      - name: crew
+        image: <registry>.azurecr.io/timepitch-crew:<tag>   # built from deploy/crew/Dockerfile
+        resources:
+          cpu: 1.0
+          memory: 2Gi
+        env:
+          - name: TIMEPITCH_CREW_STORAGE_ACCOUNT
+            value: <storage-account>
+          - name: TIMEPITCH_CREW_ALLOWED_ENVELOPES   # sha256 of the spending envelopes this job accepts
+            value: <envelope-sha256>
