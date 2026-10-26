@@ -84,7 +84,7 @@ def test_tp229_headline_rejection_is_revised_then_accepted(offline, tmp_path):
     assert verify_report(report)
     assert report.steps[6].request_id == 'req-fixed' and report.steps[6].model == 'gpt-4.1-mini'
     assert report.versions['agent-framework-core'] == '1.22.0' and report.versions['agent-framework-openai'] == '1.17.0'
-    assert report.versions['writer_prompt'] == 'crew-writer-7'
+    assert report.versions['writer_prompt'] == 'crew-writer-8'
     # Three real requests, all bounded, unstored and gated.
     assert len(fake.requests) == 3 == h.gate.admitted == h.gate.attempted == len(intents(h.ledger))
     assert all(b['max_output_tokens'] == 1024 and b['store'] is False and b['model'] == 'gpt-4.1-mini' for b in fake.requests)

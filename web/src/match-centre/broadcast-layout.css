@@ -266,6 +266,23 @@ body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
 .crew-audience { display: flex; align-items: center; gap: 6px; font: 600 12px var(--tp-ui); color: var(--tp-muted, #9aa3b8); }
 .crew-audience button { padding: 4px 10px; border-radius: 999px; border: 1px solid #ffffff2a; background: transparent; color: inherit; font: inherit; cursor: pointer; }
 .crew-audience button[aria-pressed="true"] { background: var(--tp-sim); color: #10091f; border-color: transparent; }
+/* TP262: crónica del descanso y del final */
+.crew-report-period { margin: 6px 0 0; font: 700 11px var(--tp-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--tp-sim); }
+.crew-report-half { margin-top: 10px; border-top: 1px solid #ffffff1a; padding-top: 8px; }
+.crew-report-half summary { cursor: pointer; font: 600 12px var(--tp-ui); color: var(--tp-muted, #9aa3b8); }
+/* TP263: Pregúntale al partido */
+.match-questions { margin-top: 12px; }
+.match-questions-suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.match-questions-suggestions button { padding: 5px 10px; border-radius: 999px; border: 1px solid #ffffff2a; background: transparent; color: inherit; font: 600 12px var(--tp-ui); cursor: pointer; }
+.match-questions-suggestions button:hover { border-color: var(--tp-sim); }
+.match-questions-list { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 10px; }
+.match-questions-q { margin: 0; font: 700 13px var(--tp-ui); color: var(--tp-sim); }
+.match-questions-a { margin: 4px 0 0; }
+.match-questions-check { margin: 4px 0 0; font: 600 11px var(--tp-ui); color: #5be39b; }
+.match-questions-form { display: flex; gap: 6px; margin-top: 8px; }
+.match-questions-form input { flex: 1; min-width: 0; padding: 7px 10px; border-radius: 8px; border: 1px solid #ffffff2a; background: #0b1222; color: inherit; font: 13px var(--tp-ui); }
+.match-questions-form button { padding: 7px 14px; border-radius: 8px; border: 0; background: var(--tp-sim); color: #10091f; font: 700 13px var(--tp-ui); cursor: pointer; }
+.match-questions-form button:disabled { opacity: .5; cursor: default; }
 .crew-audience button:disabled { opacity: .5; cursor: default; }
 .crew-report-notes { margin: 0; padding-left: 18px; font-size: 11px; color: var(--tp-ink3); }
 .crew-report-foot { display: grid; gap: 4px; padding-top: 8px; border-top: 1px solid var(--tp-line); }

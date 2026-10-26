@@ -46,11 +46,13 @@ def from_grf_physical(manifest, chunks) -> FactPack:
 
 def live_source(grf, touchlines):
     """``(engine, match_id, owner) -> FactPack`` over the owner's stored matches; KeyError if not theirs or not ready."""
-    def resolve(engine: str, match_id: str, owner: str) -> FactPack:
+    def resolve(engine: str, match_id: str, owner: str, period: str = 'full_time') -> FactPack:
         if engine == 'touchlines':
             repo = touchlines.repository
-            return from_recorded(repo.blob(match_id, owner, 'record'), repo.blob(match_id, owner, 'events'), 'touchlines')
+            return from_recorded(repo.blob(match_id, owner, 'record'), repo.blob(match_id, owner, 'events'), 'touchlines', period)
         if engine == 'grf' and match_id.startswith('physical-'):
+            if period != 'full_time':
+                raise ValueError('No recorded half-time')
             manifest = grf.get_match(match_id, owner)
             return from_grf_physical(manifest, grf.physical_repository.iter_physical_chunks(match_id, owner))
         if engine == 'grf':
@@ -60,6 +62,6 @@ def live_source(grf, touchlines):
             record = grf.get_match(match_id, owner)
             if not isinstance(record, (GrfReplay, GrfFullMatchReplay, GrfStatisticsReplay)):
                 raise KeyError(match_id)
-            return from_grf(record, grf.get_statistics(match_id, owner))
+            return from_grf(record, grf.get_statistics(match_id, owner), period)
         raise KeyError(match_id)
     return resolve

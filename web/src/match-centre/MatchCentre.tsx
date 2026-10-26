@@ -100,7 +100,7 @@ export type MatchCentreProps = { adapter: MatchSessionAdapter; sequence?: Sequen
   /** TP243: grabación de motor jugada en vivo (TouchLines): lleva el armazón de partido simulado, no el de la demo. */
   liveSimulation?: boolean;
   /** TP246: pieza de la columna lateral (crónica IA de la demo); recibe si el resultado ya se reveló y cómo revelarlo. */
-  sideReport?: (reveal: Readonly<{ revealed: boolean; reveal: () => void }>) => ReactNode };
+  sideReport?: (reveal: Readonly<{ revealed: boolean; reveal: () => void; halfTime?: boolean }>) => ReactNode };
 
 /** TP239: métricas que enseña «Esfuerzo» en los partidos simulados (distancia, carrera intensa, sprints, velocidad). */
 const EFFORT_METRIC = /distance|hsr|sprint|speed|accel|decel|metres_per_minute/;
@@ -270,6 +270,8 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
   const [pause, setPause] = useState<'halftime' | 'fulltime' | null>(null);
   const walkedOut = useRef(false), kickoff = useRef<SceneFrame | null>(null), lastElapsed = useRef(elapsed);
   const htMs = halftimeMs(d.periods, d.durationMs ?? null);
+  // TP262: la crónica IA del descanso se pide al llegar al descanso (o al pasarlo).
+  const halfTime = htMs !== null && state.elapsedMs >= htMs;
   // Al arrancar desde el saque inicial: pausa, salida de los equipos y, al terminar (o al saltarla), el partido.
   useEffect(() => {
     if (!phasesOn || walkedOut.current || !state.wantsPlay || elapsed > 2000 || !view?.frame.players.length) return;
@@ -430,7 +432,7 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
       <div className={`unified-match-area${shell?' tpa-stage':''}`} hidden={section!=='match'}>{!sequence&&<div className="unified-stage-main">{(!shell||filtersUseful)&&<div className="unified-filters" aria-label={t.layers}><label><input type="checkbox" checked={showSynthetic} disabled={!historicalMotion} onChange={e => setSynthetic(e.target.checked)} />{t.synthetic}</label><label><input type="checkbox" checked={showAnchors} disabled={!snapshot.layers} onChange={e => setAnchors(e.target.checked)} />{t.anchors}</label></div>}{field}<MatchLayerEvidence layers={snapshot.layers}/></div>}
         {analysisCtx&&analysisModel?<aside className="tpa-side" data-analysis-side>
           {scoreInSide&&scoreboard}
-          {sideReport?.({ revealed, reveal: () => { setReveal(true); setAnalysisScope('final'); } })}
+          {sideReport?.({ revealed, halfTime, reveal: () => { setReveal(true); setAnalysisScope('final'); } })}
           <SummaryMini ctx={analysisCtx}/>
           <TimelinePanel ctx={analysisCtx} events={analysisModel.events} untilMs={finalRequested?d.durationMs??elapsed:elapsed} onSeek={seek}/>
           {scopeBar(true)}
@@ -438,7 +440,7 @@ function SessionCentre({ adapter, visible, onBack, initialSection = 'match', onS
           {technical}
         </aside>:shell?<aside className="tpa-side tp-sim-side" data-simulated-side>{scoreInSide&&scoreboard}
           {/* TP253: crónica IA en vivo (crew en Azure) al acabar el partido simulado. */}
-          {sideReport?.({ revealed, reveal: () => { setReveal(true); setAnalysisScope('final'); } })}
+          {sideReport?.({ revealed, halfTime, reveal: () => { setReveal(true); setAnalysisScope('final'); } })}
           {/* TP241 («la acción debería verla narrada»): narración en frases llanas en vez de la cronología de TP239;
               el registro sigue plegado. */}
           {timelineCtx&&<NarrationPanel ctx={timelineCtx} events={narrationEvents} keepers={keeperIds} untilMs={finalRequested?d.durationMs??elapsed:elapsed} onSeek={seek}/>}

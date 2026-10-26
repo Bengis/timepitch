@@ -15,12 +15,12 @@ from ..chronicles.azure.models import VALIDATOR_VERSION, ChronicleDraft, Money, 
 from ..chronicles.models import FACT_VERSION, Digest, Identifier, Locale, StrictModel, canonical_bytes
 
 CREW_VERSION = 'crew-1'
-ANALYST_PROMPT_VERSION = 'crew-analyst-3'  # TP260: plan always includes the recorded team comparisons
-WRITER_PROMPT_VERSION = 'crew-writer-7'  # TP260: audience (fan or analyst) and a comparisons paragraph on how it was won
-VERIFIER_VERSION = 'crew-verifier-5'
+ANALYST_PROMPT_VERSION = 'crew-analyst-4'  # TP262: half-time packs (first half only)
+WRITER_PROMPT_VERSION = 'crew-writer-8'  # TP262: half-time report rule (TP260: audience and comparisons)
+VERIFIER_VERSION = 'crew-verifier-6'  # TP263: a team's number is that team's
 FIXER_VERSION = 'crew-fixer-3'
 EVALUATION_VERSION = 'crew-eval-1'
-FALLBACK_VERSION = 'crew-fallback-3'
+FALLBACK_VERSION = 'crew-fallback-4'  # TP262: half-time result sentence
 REPORT_VERSION = 'crew-report-2'
 MAX_OUTPUT_TOKENS = 1024
 CALLS_PER_REPORT = 3

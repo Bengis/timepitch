@@ -77,6 +77,9 @@ def create_app(dataset_path: Path | None = None, runtime_dir: Path | None = None
             from .chronicles.live_facts import live_source
             from .crew.live import LiveCrew, LiveCrewSettings
             app.state.live_crew = LiveCrew(live_source(grf, touchlines), LiveCrewSettings.from_env(), runtime / 'live-crew')
+            # TP263: preguntas al partido terminado (agente con herramientas en Azure AI Foundry); apagado sin su modo.
+            from .crew.ask import AskService, AskSettings
+            app.state.ask = AskService(live_source(grf, touchlines), AskSettings.from_env(), runtime / 'ask')
             def runner_factory():
                 if model != 'qwen2.5-1.5b': raise RuntimeError('Explicit local model activation required')
                 runner = LocalAgentRunner(model)
@@ -135,6 +138,8 @@ def create_app(dataset_path: Path | None = None, runtime_dir: Path | None = None
     app.include_router(touchlines_router())
     from .api.live_crew import live_crew_router
     app.include_router(live_crew_router())
+    from .api.ask import ask_router
+    app.include_router(ask_router())
     app.state.chronicles_settings=chronicles_settings
     app.state.azure_chronicles_settings=azure_settings
     app.state.azure_chronicles_config_error=azure_config_error

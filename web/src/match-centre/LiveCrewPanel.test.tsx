@@ -34,7 +34,7 @@ it('before the end it says what will happen; at the end it requests once, waits 
     'GET /api/crew/live': [[200, { status: 'none' }], [200, { status: 'pending' }], [200, ready]],
     'POST /api/crew/live': [[202, { status: 'pending', request_hash: 'h' }]] });
   const view = render(<LiveCrewPanel engine="touchlines" matchId="tl-1" locale="en" ended={false} />);
-  expect(await screen.findByText(/When the match ends, AI agents on Azure will write its report/)).toBeInTheDocument();
+  expect(await screen.findByText(/At half-time and when the match ends, AI agents on Azure will write a report/)).toBeInTheDocument();
   expect(calls.filter(c => c.startsWith('POST'))).toHaveLength(0);
   vi.useFakeTimers({ shouldAdvanceTime: true });
   view.rerender(<LiveCrewPanel engine="touchlines" matchId="tl-1" locale="en" ended />);
@@ -53,4 +53,24 @@ it('explains the limits instead of failing silently', async () => {
   render(<LiveCrewPanel engine="grf" matchId="physical-1" locale="es" ended />);
   expect(await screen.findByText('Se ha agotado el presupuesto de crónicas IA de la demo.')).toBeInTheDocument();
   expect(screen.queryByRole('button', { name: 'Reintentar' })).toBeNull();
+});
+
+it('at half-time it asks for the first-half report, and keeps it under the full-time one', async () => {
+  const half = { ...ready, report: { ...ready.report, headline: 'At the break Home Town lead 1–0', report_sha256: 'h1' } };
+  const posts: string[] = [];
+  vi.spyOn(globalThis, 'fetch').mockImplementation(async (input, init) => {
+    const url = String(input);
+    if (url.startsWith('/api/crew/live/status')) return new Response(JSON.stringify({ available: true, remaining: 40 }), { status: 200 });
+    if (init?.method === 'POST') { posts.push(JSON.parse(String(init.body)).period); return new Response('{}', { status: 202 }); }
+    const period = new URL(url, 'http://x').searchParams.get('period');
+    return new Response(JSON.stringify(period === 'half_time' ? half : ready), { status: 200 });
+  });
+  const view = render(<LiveCrewPanel engine="grf" matchId="g-1" locale="en" ended={false} halfTime />);
+  expect(await screen.findByRole('heading', { name: 'At the break Home Town lead 1–0' })).toBeInTheDocument();
+  expect(screen.getByText('Half-time report')).toBeInTheDocument();
+  view.rerender(<LiveCrewPanel engine="grf" matchId="g-1" locale="en" ended halfTime />);
+  expect(await screen.findByRole('heading', { name: 'Home Town win 2–1' })).toBeInTheDocument();
+  expect(screen.getByText('Full-time report')).toBeInTheDocument();
+  expect(screen.getByText('Half-time report', { selector: 'summary' })).toBeInTheDocument();
+  expect(posts).toEqual([]);
 });

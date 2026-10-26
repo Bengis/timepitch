@@ -34,6 +34,16 @@ OWNER_DAILY = 6
 CLIENT_DAILY = 5  # por IP (TP261): una red no agota el sobre compartido; los jueces siguen cabiendo
 
 
+def _match(record: dict) -> tuple:
+    return record.get('engine'), record.get('match_id')
+
+
+def _matches_today(records, now: float, current: tuple) -> int:
+    """Distinct matches with a report asked in the last 24 h; a match already counted does not count again."""
+    seen = {_match(r) for r in records if now - r['at'] < 86400}
+    return 0 if current in seen else len(seen)
+
+
 class LiveCrewUnavailable(RuntimeError):
     pass
 
@@ -160,10 +170,11 @@ class LiveCrew:
         return max(0, grant.max_reports - len(self._load()['requests']))
 
     # -- API --
-    def _pack(self, engine: str, match_id: str, owner: str, names: str = 'real'):
+    def _pack(self, engine: str, match_id: str, owner: str, names: str = 'real', period: str = 'full_time'):
         if engine not in ENGINES:
             raise KeyError(engine)
-        pack = self.source(engine, match_id, owner)
+        # TP262: the half-time report reads the first half only; the full-time call stays as before.
+        pack = self.source(engine, match_id, owner, period) if period != 'full_time' else self.source(engine, match_id, owner)
         # TP259: in the fictional league the report must name what the viewer sees; the swap happens before the
         # request hash, so each naming mode is its own report.
         return fictional_pack(pack) if names == 'fictional' else pack
@@ -176,10 +187,10 @@ class LiveCrew:
         return hmac.new(bytes.fromhex(salt), client.encode(), 'sha256').hexdigest()[:32]
 
     def request(self, engine: str, match_id: str, owner: str, locale: str, client: str | None = None,
-                names: str = 'real', audience: str = 'fan') -> dict:
+                names: str = 'real', audience: str = 'fan', period: str = 'full_time') -> dict:
         if not self.available():
             raise LiveCrewUnavailable('disabled')
-        pack = self._pack(engine, match_id, owner, names)
+        pack = self._pack(engine, match_id, owner, names, period)
         rh = request_hash(fact_pack_hash(pack), locale, self.binding, audience)
         with self._lock:
             state = self._load()
@@ -187,13 +198,15 @@ class LiveCrew:
             if known:
                 return {'status': 'pending', 'request_hash': rh}
             now = self.now()
+            match = (engine, match_id)
             mine = [r for r in state['requests'].values() if r['owner'] == owner]
-            if any(not r.get('done') and now - r['at'] < PENDING_TIMEOUT_S for r in mine):
+            # TP262: the half-time and full-time reports (and each audience) of one match count as that match once.
+            if any(not r.get('done') and now - r['at'] < PENDING_TIMEOUT_S and _match(r) != match for r in mine):
                 raise LiveCrewBusy('one_in_flight')
-            if sum(1 for r in mine if now - r['at'] < 86400) >= OWNER_DAILY:
+            if _matches_today(mine, now, match) >= OWNER_DAILY:
                 raise LiveCrewBusy('daily_limit')
             key = self._client_key(state, client)
-            if key and sum(1 for r in state['requests'].values() if r.get('client') == key and now - r['at'] < 86400) >= CLIENT_DAILY:
+            if key and _matches_today([r for r in state['requests'].values() if r.get('client') == key], now, match) >= CLIENT_DAILY:
                 raise LiveCrewBusy('daily_limit')
             grant = self._grant()
             if len(state['requests']) >= grant.max_reports:
@@ -201,12 +214,13 @@ class LiveCrew:
             body, rh = build_request(pack, locale, self._envelope(), self.binding, now=self.now, audience=audience)
             self.queue().send(body)
             state['requests'][rh] = {'owner': owner, 'client': key, 'at': now, 'engine': engine, 'match_id': match_id,
-                                     'locale': locale}
+                                     'locale': locale, 'period': period}
             self._save(state)
         return {'status': 'pending', 'request_hash': rh}
 
-    def status(self, engine: str, match_id: str, owner: str, locale: str, names: str = 'real', audience: str = 'fan') -> dict:
-        pack = self._pack(engine, match_id, owner, names)
+    def status(self, engine: str, match_id: str, owner: str, locale: str, names: str = 'real', audience: str = 'fan',
+               period: str = 'full_time') -> dict:
+        pack = self._pack(engine, match_id, owner, names, period)
         rh = request_hash(fact_pack_hash(pack), locale, self.binding, audience)
         cached = self.dir / 'reports' / f'{rh}.json.gz'
         if cached.is_file():
@@ -224,7 +238,7 @@ class LiveCrew:
             return self._done(rh, {'status': 'failed', 'request_hash': rh, 'code': error.code})
         if result['status'] == 'fetched':
             self._done(rh, {})
-            return self.status(engine, match_id, owner, locale, names, audience)
+            return self.status(engine, match_id, owner, locale, names, audience, period)
         if result['status'] == 'failed':
             return self._done(rh, {'status': 'failed', 'request_hash': rh, 'code': result['code']})
         if self.now() - known['at'] > PENDING_TIMEOUT_S:

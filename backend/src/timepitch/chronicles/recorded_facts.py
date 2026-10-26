@@ -27,7 +27,7 @@ def from_grf_recorded(recording_gz: bytes, sidecar_gz: bytes) -> FactPack:
     return from_recorded(recording_gz, sidecar_gz, 'grf')
 
 
-def from_recorded(recording_gz: bytes, sidecar_gz: bytes, engine: str) -> FactPack:
+def from_recorded(recording_gz: bytes, sidecar_gz: bytes, engine: str, period: str = 'full_time') -> FactPack:
     """TP253: GRF or TouchLines. A served recording binds its sidecar by sha256; a live TouchLines match (stored by
     the service, sidecar ``recording.sha256`` null) binds it by trace hash only, as the service wrote both together."""
     if engine not in ('grf', 'touchlines'):
@@ -48,8 +48,17 @@ def from_recorded(recording_gz: bytes, sidecar_gz: bytes, engine: str) -> FactPa
     sides = {p['id']: p['side'] for p in inp['players']}
     final = record['samples'][-1]
     score = list(final['score'])
+    clock = final['match_time_ms']
+    recorded = events['events']
+    if period == 'half_time':
+        # TP262: the first half only, from the events the engine tagged with their period.
+        breaks = [e for e in recorded if e['kind'] == 'halftime']
+        if not breaks or any('period' not in e for e in recorded):
+            raise ValueError('No recorded half-time')
+        recorded = [e for e in recorded if e['period'] == 1]
+        clock = breaks[0]['match_ms']
     goals, scored = [], Counter()
-    for e in sorted((e for e in events['events'] if e['kind'] in ('goal', 'own_goal')), key=lambda e: (e['match_ms'], e['t_ms'])):
+    for e in sorted((e for e in recorded if e['kind'] in ('goal', 'own_goal')), key=lambda e: (e['match_ms'], e['t_ms'])):
         credited = (e.get('extra') or {}).get('credited_side', e['side'])
         if credited not in ('home', 'away'):
             raise ValueError('Goal without credited side')
@@ -58,14 +67,16 @@ def from_recorded(recording_gz: bytes, sidecar_gz: bytes, engine: str) -> FactPa
         goals.append((f"{engine}:{e['sample_index']}", credited, actor if actor in players else None, own, e['match_ms']))
         if actor in players and not own:
             scored[actor] += 1
+    if period == 'half_time':
+        score = [sum(1 for g in goals if g[1] == s) for s in ('home', 'away')]
     if [sum(1 for g in goals if g[1] == s) for s in ('home', 'away')] != score:
         raise ValueError('Recorded goals do not match the final score')
-    if engine == 'grf' and score != list(record.get('grf_physical', {}).get('score', score)):
+    if period == 'full_time' and engine == 'grf' and score != list(record.get('grf_physical', {}).get('score', score)):
         raise ValueError('Final score differs from the physical manifest')
     # Shot touches are recorded per side; equal counts are dropped by _assemble.
-    shots = Counter(e['side'] for e in events['events'] if e['kind'] == 'shot' and e['side'] in ('home', 'away'))
+    shots = Counter(e['side'] for e in recorded if e['kind'] == 'shot' and e['side'] in ('home', 'away'))
     team = {s: {'shots': float(shots[s])} for s in ('home', 'away')}
     metrics = {pid: {'goals': float(n)} for pid, n in scored.items()}
     coverage = Coverage(events_complete=False, native_clock=True, notes=list(_NOTES if engine == 'grf' else _TOUCHLINES_NOTES))
     return _assemble(engine, record['trace_hash'], inp['dataset_version'], inp['home_name'], inp['away_name'],
-                     score, final['match_time_ms'], coverage, goals, players, metrics, team)
+                     score, clock, coverage, goals, players, metrics, team, period=period)

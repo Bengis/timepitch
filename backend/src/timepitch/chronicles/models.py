@@ -2,7 +2,7 @@
 import json
 from hashlib import sha256
 from typing import Annotated, Literal
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, model_serializer, model_validator
 
 PROTOCOL = 'timepitch-ai-worker-1'
 FACT_VERSION = 'chronicle-facts-1'
@@ -75,6 +75,16 @@ class FactPack(StrictModel):
     coverage: Coverage
     facts: list[ChronicleFact] = Field(min_length=1, max_length=16)
     events: list[EventDescriptor] = Field(default_factory=list, max_length=8)
+    # TP262: a half-time pack holds the first half only (score, goals and comparisons at the break).
+    period: Literal['full_time', 'half_time'] = 'full_time'
+
+    @model_serializer(mode='wrap')
+    def _full_time_unchanged(self, handler):
+        # A full-time pack serialises exactly as before TP262, so its hash and the reports sealed with it stay valid.
+        data = handler(self)
+        if data.get('period') == 'full_time':
+            data.pop('period')
+        return data
 
     @model_validator(mode='after')
     def bounded(self):

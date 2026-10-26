@@ -106,6 +106,66 @@ def coverage_failures(pack: FactPack, draft: ChronicleDraft) -> list[tuple[str, 
             if coverage & set(s.fact_ids) or _COVERAGE_WORDS.search(s.text)]
 
 
+# ---- a team's number is that team's (crew-verifier-6, TP263) -----------------------------------
+# The chronicle validator checks that every number is held by a cited fact, not whose it is: a draft could give one
+# side's figure to the other («Mancunian Sky received 13 passes compared to North London Reds' 0»). Here, the first
+# number after a team name, within its clause, must be one that cited facts hold for that team.
+
+_CLAUSE_END = re.compile(r'[;()]|[.,](?!\d)|\s(?:while|whereas|but|and|versus|vs|compared|against|than|mientras|frente|pero|que|contra|y|e)\s', re.I)
+_TEAM_NUMBER = re.compile(r'(?<![\w:])(\d+(?:[.,]\d+)?)(?![\d:])')
+
+
+def _value(token: str) -> float:
+    return float(token.replace(',', '.'))
+
+
+def _held(token: str, values: set[float]) -> bool:
+    """The figure as written, allowing the rounding the validator allows (51.2 for 51.17)."""
+    decimals = len(re.split(r'[.,]', token)[1]) if re.search(r'[.,]', token) else 0
+    return any(round(v, decimals) == _value(token) for v in values)
+
+
+def side_values(pack: FactPack, cited) -> dict[str, set[float]]:
+    values = {'home': set(), 'away': set()}
+    for f in cited:
+        if f.kind == 'team_compare':
+            values['home'].add(float(f.value))
+            values['away'].add(float(f.comparison_value))
+        elif f.kind == 'result':
+            values['home'].add(float(pack.score[0]))
+            values['away'].add(float(pack.score[1]))
+        elif f.kind == 'actor_stat' and f.value is not None:
+            for side in values:  # a player of either side may be named right after the team
+                values[side].add(float(f.value))
+    return values
+
+
+def team_number_failure(pack: FactPack, text: str, cited) -> bool:
+    """True when the first number after a team name (same clause) is not one the cited facts hold for that team.
+    Only sentences that cite a team comparison are checked; clocks (mm:ss) are not numbers here."""
+    if not any(f.kind == 'team_compare' for f in cited):
+        return False
+    values = side_values(pack, cited)
+    for side, name in (('home', pack.home_name), ('away', pack.away_name)):
+        for match in re.finditer(r'(?<!\w)' + re.escape(name) + r'(?!\w)', text):
+            rest = text[match.end():]
+            end = _CLAUSE_END.search(rest)
+            clause = rest[:end.start()] if end else rest
+            number = _TEAM_NUMBER.search(clause)
+            # «A outshot B 7 to 5» reads the pair from the subject: a pair is left to the validator's pair check.
+            if number and re.match(r'\s*(?:to|a|–|-)\s*\d', clause[number.end():]):
+                continue
+            if number and not _held(number.group(1), values[side]):
+                return True
+    return False
+
+
+def team_number_failures(pack: FactPack, draft: ChronicleDraft) -> list[tuple[str, str]]:
+    facts = {f.id: f for f in pack.facts}
+    return [('team_number_mismatch', where) for where, s in sentences(draft)
+            if team_number_failure(pack, s.text, [facts[i] for i in s.fact_ids if i in facts])]
+
+
 # ---- deterministic Fixer ----------------------------------------------------------------------
 
 FIXABLE = frozenset({'unsupported_score', 'unsupported_clock', 'uncited_entity'})
@@ -216,6 +276,9 @@ RULES = {
     'unplanned_fact': ('A cited fact is not in the paragraph plan.', ['cite only planned facts']),
     'possessive_name': ('A recorded name carries a possessive ("Arsenal\'s").',
                         ['rephrase with "for" or "of" and the full recorded name']),
+    'team_number_mismatch': ('A team is given a figure that belongs to the other team or to no cited fact.',
+                             ["write each team's own figure right after its name", 'or name the figures without '
+                              'repeating the team names']),
     'coverage_in_prose': ('The prose must not talk about data coverage or cite the coverage fact; the server adds '
                           'its own coverage line.', ['delete the coverage sentence or the coverage words',
                                                      'and remove the coverage fact from its citations']),

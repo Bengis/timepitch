@@ -15,6 +15,7 @@ class LiveCrewRequest(BaseModel):
     locale: Literal['en', 'es']
     names: Literal['fictional', 'real'] = 'real'  # TP259: fictional league or real names
     audience: Literal['fan', 'analyst'] = 'fan'  # TP260: who the report is written for
+    period: Literal['full_time', 'half_time'] = 'full_time'  # TP262: half-time report from the first half
 
 
 def live_crew_router():
@@ -38,7 +39,7 @@ def live_crew_router():
         crew = service(request)
         try:
             return crew.request(body.engine, body.match_id, owner, body.locale, request.client.host if request.client else None,
-                                body.names, body.audience)
+                                body.names, body.audience, body.period)
         except KeyError:
             raise HTTPException(404, 'Match not found or not finished') from None
         except LiveCrewBusy as error:
@@ -50,10 +51,11 @@ def live_crew_router():
 
     @router.get('')
     def read(engine: Literal['grf', 'touchlines'], match_id: str, locale: Literal['en', 'es'], request: Request, owner: Owner,
-             names: Literal['fictional', 'real'] = 'real', audience: Literal['fan', 'analyst'] = 'fan'):
+             names: Literal['fictional', 'real'] = 'real', audience: Literal['fan', 'analyst'] = 'fan',
+             period: Literal['full_time', 'half_time'] = 'full_time'):
         crew = service(request)
         try:
-            return crew.status(engine, match_id, owner, locale, names, audience)
+            return crew.status(engine, match_id, owner, locale, names, audience, period)
         except KeyError:
             raise HTTPException(404, 'Match not found or not finished') from None
         except (LiveCrewUnavailable, OSError, ValueError):

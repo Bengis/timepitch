@@ -7,7 +7,8 @@ from ..grf.statistics_models import GrfStatisticsSummary
 from .models import FactPack, ChronicleFact, EventDescriptor, Coverage, fact_pack_hash
 
 
-def _assemble(engine, trace, dataset, home, away, score, full_time, coverage, goals, players, metrics, team_metrics):
+def _assemble(engine, trace, dataset, home, away, score, full_time, coverage, goals, players, metrics, team_metrics,
+              period='full_time'):
     facts = [ChronicleFact(id='result', kind='result'), ChronicleFact(id='coverage', kind='coverage')]
     descriptors = []
     coverage.omitted_events = max(0, len(goals) - 8)
@@ -33,10 +34,10 @@ def _assemble(engine, trace, dataset, home, away, score, full_time, coverage, go
         facts.append(ChronicleFact(id='comparison:' + metric, kind='team_compare', side='home', metric_id=metric,
             value=float(values[0]), comparison_value=float(values[1]), unit=unit, availability='derived'))
     return FactPack(engine=engine, trace_hash=trace, dataset_version=dataset, home_name=home, away_name=away,
-        score=list(score), full_time_ms=full_time, coverage=coverage, facts=facts, events=descriptors)
+        score=list(score), full_time_ms=full_time, coverage=coverage, facts=facts, events=descriptors, period=period)
 
 
-def from_grf(record: GrfRecord, summary: GrfStatisticsSummary) -> FactPack:
+def from_grf(record: GrfRecord, summary: GrfStatisticsSummary, period: str = 'full_time') -> FactPack:
     if not isinstance(record, (GrfReplay, GrfFullMatchReplay, GrfStatisticsReplay)):
         raise ValueError('Unsupported GRF replay')
     if (summary.trace_hash != record.trace_hash or summary.replay_version != record.schema_version or
@@ -46,12 +47,39 @@ def from_grf(record: GrfRecord, summary: GrfStatisticsSummary) -> FactPack:
     expected_clock = None if record.schema_version == 'grf-experimental-1' else record.samples[-1].match_time_ms
     if summary.full_time_ms != expected_clock: raise ValueError('Statistics clock mismatch')
     players = {p.id:p.name for p in record.input.players}
+    coverage = Coverage(events_complete=summary.coverage.events_complete, native_clock=summary.coverage.native_clock_available,
+        notes=summary.coverage.warnings[:8])
+    if period == 'half_time':
+        return _grf_half_time(record, summary, players, coverage)
     goals = [(f'grf:{g.seq}', g.side, g.actor_id, g.own_goal, g.match_time_ms) for g in sorted(summary.goals, key=lambda g:(g.match_time_ms,g.seq))]
     metrics = {id:{k:m.value for k,m in row.items() if m.availability == 'measured'} for id,row in summary.by_player.items()}
     team = {s:{k:m.value for k,m in row.items() if m.availability in ('measured','derived')} for s,row in summary.by_team.items()}
     return _assemble('grf', record.trace_hash, record.input.dataset_version, record.input.home_name, record.input.away_name,
-        summary.score, expected_clock, Coverage(events_complete=summary.coverage.events_complete, native_clock=summary.coverage.native_clock_available,
-            notes=summary.coverage.warnings[:8]), goals, players, metrics, team)
+        summary.score, expected_clock, coverage, goals, players, metrics, team)
+
+
+def _grf_half_time(record, summary, players, coverage):
+    """TP262: the first half only. Goals, shots and completed passes come from the recorded first-half events;
+    recoveries and possession have no per-half record, so they are left out rather than estimated."""
+    if summary.halftime_ms is None:
+        raise ValueError('No recorded half-time')
+    first = sorted((g for g in summary.goals if g.phase == 1), key=lambda g: (g.match_time_ms, g.seq))
+    goals = [(f'grf:{g.seq}', g.side, g.actor_id, g.own_goal, g.match_time_ms) for g in first]
+    score = [sum(1 for g in first if g.side == s) for s in ('home', 'away')]
+    metrics = {}
+    for g in first:
+        if g.actor_id and not g.own_goal:
+            metrics.setdefault(g.actor_id, {}).setdefault('goals', 0.)
+            metrics[g.actor_id]['goals'] += 1
+    team = {s: {'shots': float(sum(1 for x in summary.shots if x.phase == 1 and x.side == s)),
+                'pass_received': float(sum(1 for x in summary.passes if x.phase == 1 and x.side == s and x.outcome == 'received'))}
+            for s in ('home', 'away')}
+    for x in summary.passes:
+        if x.phase == 1 and x.outcome == 'received':
+            metrics.setdefault(x.actor_id, {}).setdefault('pass_received', 0.)
+            metrics[x.actor_id]['pass_received'] += 1
+    return _assemble('grf', record.trace_hash, record.input.dataset_version, record.input.home_name, record.input.away_name,
+        score, summary.halftime_ms, coverage, goals, players, metrics, team, period='half_time')
 
 
 def from_timepitch(record: ReplayRecord) -> FactPack:
