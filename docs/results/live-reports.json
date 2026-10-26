@@ -1,0 +1,1636 @@
+[
+ {
+  "published_at": "2026-10-24T09:43:33+00:00",
+  "request_hash": "966275c2bb6ca1f1",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-4",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.003351",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1493,
+    "output_tokens": 60,
+    "cost": "0.000694"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2168,
+    "output_tokens": 231,
+    "cost": "0.001237"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "p2s1",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2620,
+    "output_tokens": 232,
+    "cost": "0.001420"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T13:35:20+00:00",
+  "request_hash": "23a8a1cf0720efeb",
+  "engine": "grf",
+  "locale": "es",
+  "versions": {
+   "writer_prompt": "crew-writer-4",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.004115",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1800,
+    "output_tokens": 76,
+    "cost": "0.000842"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2453,
+    "output_tokens": 278,
+    "cost": "0.001426"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 3536,
+    "output_tokens": 270,
+    "cost": "0.001847"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T18:26:37+00:00",
+  "request_hash": "faba9c83f3732489",
+  "engine": "touchlines",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-4",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.002973",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1172,
+    "output_tokens": 42,
+    "cost": "0.000536"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1837,
+    "output_tokens": 221,
+    "cost": "0.001089"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_score",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2505,
+    "output_tokens": 216,
+    "cost": "0.001348"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_score",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "unsupported_score",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T18:33:20+00:00",
+  "request_hash": "758a04c2ca5ce042",
+  "engine": "touchlines",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-5",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.003090",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1172,
+    "output_tokens": 42,
+    "cost": "0.000536"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1879,
+    "output_tokens": 224,
+    "cost": "0.00111"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_score",
+    "location": "p1s2",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2688,
+    "output_tokens": 230,
+    "cost": "0.001444"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_score",
+    "location": "p1s2",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "unsupported_score",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T18:38:12+00:00",
+  "request_hash": "629d99cd271955f4",
+  "engine": "touchlines",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.002797",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1172,
+    "output_tokens": 42,
+    "cost": "0.000536"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1878,
+    "output_tokens": 140,
+    "cost": "0.000976"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "uncited_entity",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2543,
+    "output_tokens": 167,
+    "cost": "0.001285"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_score",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "unsupported_score",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T19:04:25+00:00",
+  "request_hash": "1266f14a9b7d7847",
+  "engine": "touchlines",
+  "locale": "es",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.003072",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1172,
+    "output_tokens": 42,
+    "cost": "0.000536"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1863,
+    "output_tokens": 218,
+    "cost": "0.001094"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2749,
+    "output_tokens": 214,
+    "cost": "0.001442"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T19:08:01+00:00",
+  "request_hash": "00ca015a673be79f",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.002942",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1386,
+    "output_tokens": 46,
+    "cost": "0.000628"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1825,
+    "output_tokens": 188,
+    "cost": "0.001031"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_score",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2443,
+    "output_tokens": 191,
+    "cost": "0.001283"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "name_not_as_recorded",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T20:41:33+00:00",
+  "request_hash": "d030df176c7bc693",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.003224",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1513,
+    "output_tokens": 49,
+    "cost": "0.000684"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1987,
+    "output_tokens": 221,
+    "cost": "0.001149"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2593,
+    "output_tokens": 221,
+    "cost": "0.001391"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T20:44:56+00:00",
+  "request_hash": "0cdabd4544d0ca54",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.002942",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1096,
+    "output_tokens": 43,
+    "cost": "0.000508"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1800,
+    "output_tokens": 198,
+    "cost": "0.001037"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_metric",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2764,
+    "output_tokens": 182,
+    "cost": "0.001397"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_number",
+    "location": "p1s1",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "unsupported_number",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T20:46:28+00:00",
+  "request_hash": "789a31121d6e03d2",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.003303",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1435,
+    "output_tokens": 60,
+    "cost": "0.00067"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2145,
+    "output_tokens": 222,
+    "cost": "0.001214"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "possessive_name",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2646,
+    "output_tokens": 225,
+    "cost": "0.001419"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T20:48:30+00:00",
+  "request_hash": "588c08293899eafa",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.003179",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1608,
+    "output_tokens": 55,
+    "cost": "0.000732"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2084,
+    "output_tokens": 194,
+    "cost": "0.001144"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unsupported_score",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2480,
+    "output_tokens": 194,
+    "cost": "0.001303"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T20:51:32+00:00",
+  "request_hash": "3411c9aa8cc469ea",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.003606",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1778,
+    "output_tokens": 57,
+    "cost": "0.000803"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2104,
+    "output_tokens": 237,
+    "cost": "0.001221"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 3027,
+    "output_tokens": 232,
+    "cost": "0.001582"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "possessive_name",
+    "location": "p3s1",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "possessive_name",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T21:04:57+00:00",
+  "request_hash": "b0ce06c67579a6e3",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.003120",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1169,
+    "output_tokens": 44,
+    "cost": "0.000538"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1871,
+    "output_tokens": 207,
+    "cost": "0.001080"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2841,
+    "output_tokens": 228,
+    "cost": "0.001502"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "unknown_fact_reference",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "unknown_fact_reference",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T21:22:28+00:00",
+  "request_hash": "27d05fa3d1cee3d2",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.003035",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1752,
+    "output_tokens": 41,
+    "cost": "0.000767"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1868,
+    "output_tokens": 182,
+    "cost": "0.001039"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "possessive_name",
+    "location": "p2s1",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2331,
+    "output_tokens": 185,
+    "cost": "0.001229"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T21:48:11+00:00",
+  "request_hash": "8c0e727636554fe3",
+  "engine": "touchlines",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.000278",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "invalid_result",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 622,
+    "output_tokens": 18,
+    "cost": "0.000278"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "invalid_result",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T22:04:57+00:00",
+  "request_hash": "943e9a02e448b9e2",
+  "engine": "touchlines",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.003329",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1417,
+    "output_tokens": 55,
+    "cost": "0.000655"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2124,
+    "output_tokens": 221,
+    "cost": "0.001204"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2790,
+    "output_tokens": 221,
+    "cost": "0.001470"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T22:22:45+00:00",
+  "request_hash": "0b530e4d71b791f9",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-4",
+   "fixer": "crew-fixer-1",
+   "fallback": "crew-fallback-2"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.002770",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1079,
+    "output_tokens": 43,
+    "cost": "0.000501"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1783,
+    "output_tokens": 177,
+    "cost": "0.000997"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2500,
+    "output_tokens": 170,
+    "cost": "0.001272"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "possessive_name",
+    "location": "p1s1",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "possessive_name",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T22:57:58+00:00",
+  "request_hash": "703e8caf7b28896b",
+  "engine": "touchlines",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-5",
+   "fixer": "crew-fixer-2",
+   "fallback": "crew-fallback-3"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.002056",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1566,
+    "output_tokens": 63,
+    "cost": "0.000728"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2275,
+    "output_tokens": 261,
+    "cost": "0.001328"
+   },
+   {
+    "role": "fixer",
+    "code": "fixed",
+    "reason": "names",
+    "location": null,
+    "fixes": [
+     "headline:names"
+    ],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T23:01:29+00:00",
+  "request_hash": "d22c3daaef66a13a",
+  "engine": "touchlines",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-5",
+   "fixer": "crew-fixer-2",
+   "fallback": "crew-fallback-3"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.000281",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "invalid_result",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 621,
+    "output_tokens": 20,
+    "cost": "0.000281"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "invalid_result",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-25T23:26:29+00:00",
+  "request_hash": "bcfbca7ffa761289",
+  "engine": "touchlines",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-5",
+   "fixer": "crew-fixer-2",
+   "fallback": "crew-fallback-3"
+  },
+  "provenance": "deterministic_fallback",
+  "total_cost_usd": "0.002720",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1220,
+    "output_tokens": 43,
+    "cost": "0.000557"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1925,
+    "output_tokens": 143,
+    "cost": "0.000999"
+   },
+   {
+    "role": "fixer",
+    "code": "fixed",
+    "reason": "names",
+    "location": null,
+    "fixes": [
+     "headline:names",
+     "p1s1:names",
+     "p2s1:names"
+    ],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "name_not_as_recorded",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "writer_revision",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 2350,
+    "output_tokens": 140,
+    "cost": "0.001164"
+   },
+   {
+    "role": "verifier",
+    "code": "rejected",
+    "reason": "uncited_entity",
+    "location": "headline",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "deterministic_fallback",
+    "reason": "uncited_entity",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ },
+ {
+  "published_at": "2026-10-26T00:00:30+00:00",
+  "request_hash": "6c9110cae79fd1a2",
+  "engine": "grf",
+  "locale": "en",
+  "versions": {
+   "writer_prompt": "crew-writer-6",
+   "verifier": "crew-verifier-5",
+   "fixer": "crew-fixer-2",
+   "fallback": "crew-fallback-3"
+  },
+  "provenance": "crew_ai_draft_checked",
+  "total_cost_usd": "0.001706",
+  "steps": [
+   {
+    "role": "analyst",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1440,
+    "output_tokens": 47,
+    "cost": "0.000652"
+   },
+   {
+    "role": "writer",
+    "code": "ok",
+    "reason": null,
+    "location": null,
+    "fixes": [],
+    "model": "gpt-4.1-mini-2025-04-14",
+    "input_tokens": 1914,
+    "output_tokens": 180,
+    "cost": "0.001054"
+   },
+   {
+    "role": "fixer",
+    "code": "fixed",
+    "reason": "names",
+    "location": null,
+    "fixes": [
+     "headline:names",
+     "p1s1:names",
+     "p2s1:names",
+     "p2s2:names"
+    ],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "verifier",
+    "code": "accepted",
+    "reason": "passed",
+    "location": "none",
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   },
+   {
+    "role": "publisher",
+    "code": "crew_ai_draft_checked",
+    "reason": "passed",
+    "location": null,
+    "fixes": [],
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost": "0"
+   }
+  ]
+ }
+]
