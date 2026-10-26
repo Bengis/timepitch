@@ -16,7 +16,7 @@ from ..chronicles.models import FACT_VERSION, Digest, Identifier, Locale, Strict
 
 CREW_VERSION = 'crew-1'
 ANALYST_PROMPT_VERSION = 'crew-analyst-4'  # TP262: half-time packs (first half only)
-WRITER_PROMPT_VERSION = 'crew-writer-8'  # TP262: half-time report rule (TP260: audience and comparisons)
+WRITER_PROMPT_VERSION = 'crew-writer-9'  # TP263: whose figure is value / comparison_value (TP262: half-time)
 VERIFIER_VERSION = 'crew-verifier-6'  # TP263: a team's number is that team's
 FIXER_VERSION = 'crew-fixer-3'
 EVALUATION_VERSION = 'crew-eval-1'

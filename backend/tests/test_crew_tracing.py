@@ -42,7 +42,7 @@ def test_run_and_step_spans_carry_codes_not_text(offline, tmp_path):
     assert len(run) == 1
     attrs = run[0].attributes
     assert attrs['crew.request_hash'] == report.source.request_hash and attrs['crew.outcome'] == 'crew_ai_draft_checked'
-    assert attrs['crew.angle'] == 'narrow_win' and attrs['crew.version.writer_prompt'] == 'crew-writer-8'
+    assert attrs['crew.angle'] == 'narrow_win' and attrs['crew.version.writer_prompt'] == 'crew-writer-9'
     assert attrs['crew.version.agent-framework-core'] == '1.22.0'
     steps = [s.attributes for s in spans if s.name == 'crew.step']
     assert [(a['crew.role'], a['crew.code']) for a in steps] == [(s.role, s.code) for s in report.steps]

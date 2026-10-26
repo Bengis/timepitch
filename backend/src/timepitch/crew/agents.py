@@ -78,7 +78,9 @@ def writer_rules(locale: Locale) -> str:
         'goals, shots, passes, recoveries or possession only in a sentence that cites that statistic or a goal fact. '
         '(7) Every sentence in the requested language. '
         '(8) Do not write about data coverage, telemetry, exported or omitted data, or completeness at all, and never '
-        'cite the coverage fact: the server adds its own coverage line.')
+        'cite the coverage fact: the server adds its own coverage line. '
+        "(9) In a team_compare fact, value is the home team's figure and comparison_value is the away team's figure "
+        '(home_name and away_name in the fact pack); give each team its own figure and never swap them.')
 
 
 def _identifier(value):
