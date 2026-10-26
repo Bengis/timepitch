@@ -31,7 +31,7 @@ from .models import CrewReport, default_binding, request_hash
 ENGINES = ('grf', 'touchlines')
 PENDING_TIMEOUT_S = 15 * 60
 OWNER_DAILY = 6
-CLIENT_DAILY = 10  # por IP: varias sesiones tras una misma red (una oficina, los jueces) siguen cabiendo
+CLIENT_DAILY = 5  # por IP (TP261): una red no agota el sobre compartido; los jueces siguen cabiendo
 
 
 class LiveCrewUnavailable(RuntimeError):
