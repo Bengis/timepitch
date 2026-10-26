@@ -123,7 +123,8 @@ class MatchTools:
             """Goals with scorer, team and match clock (mm:ss), in order."""
             chosen = [f for f in pack.facts if f.kind == 'goal'
                       and (half == 'all' or (f.id in self.first) == (half == 'first'))]
-            return self._give(chosen)
+            # No goal recorded: the result is the fact that answers it (a 0–0, say), so the agent has one to cite.
+            return self._give(chosen or [f for f in pack.facts if f.kind == 'result'])
 
         def top_players() -> str:
             """Players who led the recorded statistics (goals, completed passes, recoveries)."""

@@ -140,3 +140,11 @@ def test_the_ledger_refuses_a_fourth_request_for_one_question(tmp_path):
     from timepitch.crew.ledger import EnvelopeRefused
     with pytest.raises(EnvelopeRefused, match='calls_exhausted'):
         asyncio.run(gate.before_request(request))
+
+
+def test_with_no_goals_the_goals_tool_hands_out_the_result():
+    full = tp229_pack()
+    pack = full.model_copy(update={'score': [0, 0], 'events': [],
+                                   'facts': [f for f in full.facts if f.kind != 'goal' and f.id != 'leader:goals']})
+    t = MatchTools(pack, set())
+    assert [g['fact_id'] for g in json.loads(t.functions()[1]('all'))] == ['result']
