@@ -6,8 +6,19 @@
 
 **What would happen if Arsenal 2003/04 played Manchester City 2024/25?** TimePitch lets you pick Premier League team-seasons from any era between 1992/93 and 2025/26 and watch them play a full match, in a stylised 3D broadcast. It can also replay real recorded matches from open event data, so you can compare what a simulator does with what actually happened.
 
-- **Video (under 2 min):** _link to be added_
+- **Video (under 2 min):** https://youtu.be/Xhn5GIPvaCs
+- **Live demo:** https://timepitch.livelywater-efc07e50.swedencentral.azurecontainerapps.io
 - **Source code:** https://github.com/Bengis/timepitch (this repository, AGPL-3.0-or-later)
+
+## Hackathon entry: Inside the Game (Microsoft + Premier League)
+
+Challenge: *The Synthetic Match Insights Engine for Premier League Studio*.
+
+- **Synthetic match data.** In the hackathon demo every match event is produced by a football engine (TimePitch, Google Research Football or TouchLines). No real match events, tracking data or footage are used. Historical season statistics only seed the simulation. The mode that replays real recorded matches is switched off in the hackathon demo.
+- **Agent crew on Azure.** When a match ends, the recorded facts go to an Azure Storage queue. A KEDA-scaled Azure Container Apps job (managed identity, no keys) runs a Microsoft Agent Framework crew on Azure AI Foundry (gpt-4.1-mini): an analyst picks the facts, a writer drafts the report and a deterministic verifier checks every sentence. Failures go back for one revision, and otherwise the report falls back to text built only from facts. The server re-checks the sealed report before showing it. Code: `backend/src/timepitch/crew`.
+- **Whole app on Azure.** Web, API and the three engines run on Azure Container Apps (`deploy/azure-app`).
+- **Measured.** 21 live reports: the first draft was rejected in 17, no unverified sentence was published, and 10 were published as verified AI prose. Cost averages $0.0028 per report. Azure AI evaluation gave groundedness 5/5 on two reports. About 2,400 backend tests.
+- **History.** This repository is the public release of a private development repository (400+ commits since 16 October 2026). Each public commit groups several development cases, so the history here is short by design.
 
 ## Try it
 
