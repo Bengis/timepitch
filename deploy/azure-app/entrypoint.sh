@@ -7,7 +7,8 @@ umask 077
 SECRETS=/home/ignacio/secrets
 mkdir -p "$SECRETS" "${TIMEPITCH_RUNTIME_DIR:-/home/ignacio/.local/share/timepitch/preview/runtime}"
 if [ -d /mnt/secrets ]; then
-  for name in crew-envelope crew-queue-sas crew-reports-sas; do
+  # TP263: also ask-envelope (the questions' spending envelope).
+  for name in crew-envelope crew-queue-sas crew-reports-sas ask-envelope; do
     if [ -e "/mnt/secrets/$name" ]; then cat "/mnt/secrets/$name" > "$SECRETS/$name"; fi
   done
 fi
