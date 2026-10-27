@@ -1,4 +1,17 @@
 {
+ "replay-audio-test": {"label":"Tonalités de test locales · NI Azure Speech NI une voix","loading":"Chargement de l’audio de test…","ready":"Audio de test prêt","unavailable":"Aucun audio de test compatible","speed":"Audio de test coupé hors de 1×","language":"Langue de l’audio de test","volume":"Volume de l’audio de test","mute":"Couper l’audio de test","unmute":"Rétablir l’audio de test"},
+ "report-presentation": {"names":"Noms adaptés à la ligue fictive pour l’affichage. Le rapport enregistré reste inchangé ; la vérification et l’évaluation concernent le texte original."},
+ "narration-voice": {"on":"Voix activée","off":"Voix désactivée","voice":"Voix du commentateur","unavailable":"Aucune voix locale compatible. Installez-en une dans les réglages de votre appareil.","failed":"La voix n’a pas pu démarrer. Réactivez-la pour réessayer.","note":"Voix de l’appareil · aucune requête Azure. La narration suit la langue de la voix ; l’expressivité dépend de la voix installée.","provider":"Source audio","device":"Voix de l’appareil","test":"Tonalités de test locales","testOn":"Audio de test activé","testOff":"Audio de test désactivé"},
+ "highlights": {
+  "summary": "Résumé",
+  "full": "Match complet",
+  "restart": "Recommencer le résumé",
+  "natural": "1× · actions à vitesse naturelle ; passages intermédiaires sautés",
+  "jump": "Saut du replay : {0} → {1}"
+ },
+
+ "director": {"showReplay":"Afficher la rediffusion","hideReplay":"Masquer la rediffusion","commentary":"Commentaire du match","showCommentary":"Afficher le commentaire","hideCommentary":"Masquer le commentaire"},
+ "studio-theme": {"toLight":"Passer au thème clair","toDark":"Passer au thème sombre"},
  "analysis": {
   "analysis": "Analyse",
   "averagePositions": "Positions moyennes et dispositif",
@@ -106,7 +119,7 @@
   "historical": "Données historiques",
   "historicalNote": "Les enregistrements et estimations des sources sont affichés séparément. Les résultats d’équipe utilisent la source des résultats de match audités.",
   "home": "Équipe à domicile",
-  "intro": "Choisissez deux équipes de Premier League depuis 1992/93 et regardez-les s’affronter.",
+  "intro": "Choisissez deux effectifs basés sur des statistiques de saison et regardez un match simulé.",
   "language": "Langue",
   "loadError": "Impossible de charger le catalogue local.",
   "loading": "Chargement des données historiques…",
@@ -123,7 +136,7 @@
   "outsideFilters": "Votre équipe sélectionnée est hors de ces filtres.",
   "partial": "Partiel",
   "participants": "participants au championnat",
-  "phase": "SIMULATEUR DE MATCHS HISTORIQUES",
+  "phase": "FOOTBALL ENTRE LES ÉPOQUES · ANALYSE DU MATCH",
   "played": "Matchs joués",
   "player": "Joueur",
   "position": "Poste",
@@ -153,6 +166,8 @@
   "xg_partial_2022": "Le xG par match 2022/23 commence à la journée 16 ; les zéros avant ne sont pas des mesures."
  },
  "ask": {
+  "aiNotice": "Réponses de l’IA à partir du match enregistré.",
+  "howTitle": "Comment les réponses sont vérifiées",
   "ask": "Poser la question",
   "badge": "Agent IA · outils · Azure AI Foundry",
   "budget": "Le budget de questions pour la démo est épuisé.",
@@ -168,7 +183,12 @@
   "suggestions.1": "Quelle équipe a eu le plus de tirs ?",
   "suggestions.2": "Comment s'est déroulée la première mi-temps ?",
   "thinking": "L'agent recherche les faits enregistrés…",
-  "title": "Interrogez le match"
+  "title": "Interrogez le match",
+  "references": "Identifiants des faits pour cette phrase",
+  "evidence": "Faits consultés par l’agent",
+  "identifiersOnly": "Identifiants renvoyés par l’API ; le texte des faits sources et les instants des événements ne sont pas inclus.",
+  "cost": "Coût de la réponse : {0} USD",
+  "verificationLimit": "Les contrôles comparent les noms et les chiffres aux faits cités. Ils ne garantissent pas l’interprétation du match."
  },
  "attribution": {
   "commonsFile": "Fichier Wikimedia Commons",
@@ -264,6 +284,7 @@
   "TouchLines recording: goals and scorers come from the engine events.": "Enregistrement TouchLines : buts et buteurs issus des événements du moteur."
  },
  "crew-report": {
+  "verificationLimit": "Les contrôles comparent les noms et les chiffres aux faits cités. Ils ne garantissent pas l’interprétation du match.",
   "badge": "Agent Framework · Azure AI Foundry",
   "coherence": "cohérence",
   "evalOf": "(Rapport en anglais)",
@@ -282,7 +303,9 @@
   "steps.3": "Un vérificateur déterministe contrôle chaque phrase par rapport aux faits ; si une phrase échoue, le rédacteur la corrige.",
   "steps.4": "Le rapport scellé est publié en fichier statique et noté avec l’évaluation Azure AI (fondement, cohérence, fluidité). Les visiteurs ne déclenchent aucun appel AI.",
   "teaser": "Rédigé sur Azure après le match, à partir de l’enregistrement du moteur : des agents AI le rédigent et un vérificateur contrôle chaque phrase par rapport aux faits enregistrés.",
-  "title": "Rapport AI du match"
+  "title": "Rapport AI du match",
+  "processNote": "Ceci explique le processus, pas la progression en direct de chaque agent.",
+  "liveStep": "Le serveur vérifie le compte rendu demandé pour ce match et le renvoie à ce panneau. Une demande peut lancer un travail IA sur Azure, dans les limites de la démo."
  },
  "demo": {
   "back": "Retour",
@@ -736,13 +759,16 @@
   "fallback": "Le brouillon IA n'a pas passé la vérification des faits, voici donc les faits bruts du match.",
   "fan": "Supporters",
   "fullTitle": "Rapport de fin de match",
-  "halfPending": "Les agents AI sur Azure rédigent le rapport de mi-temps…",
+  "halfPending": "Compte rendu de la mi-temps demandé sur Azure. En attente de la réponse du serveur…",
   "halfTitle": "Rapport de mi-temps",
   "how": "Rédigé par des agents IA sur Azure et vérifié ligne par ligne avec les données du match.",
   "limit": "Vous avez atteint le nombre de rapports IA autorisés aujourd'hui.",
-  "pending": "Les agents AI sur Azure rédigent le rapport… cela prend généralement 1–2 minutes.",
+  "pending": "Compte rendu demandé sur Azure. En attente de la réponse du serveur… cela prend généralement 1 à 2 minutes.",
   "retry": "Réessayer",
-  "title": "Rapport AI du match"
+  "title": "Rapport AI du match",
+  "pollingPaused": "La vérification automatique est en pause. Utilisez Vérifier à nouveau pour consulter ce même compte rendu.",
+  "checkedAt": "Dernière vérification : {0}",
+  "checkAgain": "Vérifier à nouveau"
  },
  "maps": {
   "goalKey": "Plein : but",
@@ -864,7 +890,9 @@
   "second": "Début de la seconde mi-temps",
   "skip": "Passer au coup d'envoi",
   "stats": "Statistiques du match",
-  "walkout": "Les équipes entrent sur le terrain"
+  "walkout": "Les équipes entrent sur le terrain",
+  "halfReport": "Lire le compte rendu de la mi-temps",
+  "finalAnalysis": "Analyser le match"
  },
  "match-meta": {
   "crest": "Blason de {0}",
@@ -937,6 +965,9 @@
   "real": "Noms réels"
  },
  "narration": {
+  "longPassAttempt": "{0} tente une longue passe.",
+  "highPassAttempt": "{0} tente une passe aérienne.",
+  "shotAttempt": "{0} tire.",
   "carry": "{0} avance avec le ballon sur {1} mètres.",
   "corner": "Corner pour {0}.",
   "freeKick": "Coup franc pour {0}.",
@@ -985,7 +1016,8 @@
   "minute": "Minute",
   "next": "Événement suivant",
   "previous": "Événement précédent",
-  "start": "0'"
+  "start": "0'",
+  "eventSelect": "Choisir un événement"
  },
  "player": {
   "all": "Tous",
@@ -1369,7 +1401,7 @@
   "goalsForAgainst": "BP-BC",
   "graphicsTitle": "Graphismes",
   "grfHint": "Google Research Football",
-  "grfLabel": "Réaliste · 90 minutes",
+  "grfLabel": "Match de 90 minutes",
   "h2hFailed": "Confrontations indisponibles.",
   "h2hLoading": "Chargement des confrontations…",
   "handAssigned": "Caractéristiques non sourcées · assignées manuellement",
@@ -1442,6 +1474,14 @@
   "touchlinesLabel": "Rapide · arcade",
   "unknownRole": "Position non enregistrée",
   "vs": "VS",
-  "wins": "{0} victoires"
+  "wins": "{0} victoires",
+  "teamDetails": "Bilan de la saison et vedette",
+  "teamUpdated": "Équipe mise à jour",
+  "fictionalProvenance": "Noms fictifs · statistiques historiques · résultat simulé. Les attributs des joueurs sont estimés.",
+  "realProvenance": "Noms réels des clubs et joueurs · statistiques historiques · résultat simulé. Les attributs des joueurs sont estimés.",
+  "engineAndAi": "Le moteur joue. Les agents IA expliquent les faits enregistrés dans les comptes rendus et les réponses ; ils ne décident pas des buts.",
+  "grfDuration": "90 minutes de jeu. Lecture réglable : choisissez la durée de visionnage après la génération du match.",
+  "touchlinesDuration": "Match arcade. Lecture réglable : choisissez la durée de visionnage après la génération du match.",
+  "playbackDuration": "Lecture réglable après génération. Le temps du match et le temps de visionnage sont différents."
  }
 }

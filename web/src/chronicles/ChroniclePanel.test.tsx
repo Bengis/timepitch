@@ -144,7 +144,7 @@ it('ready evidence reuses the existing player and focuses its controls',async()=
   const region=screen.getByRole('region',{name:'Match chronicle'});
   const detail=region.querySelectorAll('details')[1];fireEvent.click(within(detail as HTMLElement).getByText(/Evidence/));
   fireEvent.click(screen.getByRole('button',{name:'Watch cited event'}));
-  await waitFor(()=>expect(screen.getByRole('tab',{name:'Match'})).toHaveAttribute('aria-selected','true'));
+  await waitFor(()=>expect(screen.getByRole('tab',{name:'Live broadcast'})).toHaveAttribute('aria-selected','true'));
   await waitFor(()=>expect(screen.getByRole('button',{name:'Play'})).toHaveFocus());expect(posts).toBe(0);
 });
 

@@ -1,7 +1,16 @@
 import * as THREE from 'three';
 import { describe, expect, it } from 'vitest';
-import { ballHeight, ballVelocity, BROADCAST_TILT_DEG, cameraShot, framingFor, isMassReposition, type CameraShot } from './camera';
+import { ballHeight, ballVelocity, BROADCAST_TILT_DEG, cameraShot, framingFor, isMassReposition, walkoutShot, type CameraShot } from './camera';
 import type { SceneFrame } from '../retroScene';
+
+it('centres the entrance actors and opens the shot as the team line grows',()=>{
+  const close=walkoutShot(frame(0,[['h',51.1,70],['a',53.9,70]]),16/9);
+  const wide=walkoutShot(frame(0,[['h',35,63],['a',70,63]]),16/9);
+  expect(close.target).toEqual([52.5,0,70]);
+  expect(wide.target).toEqual([52.5,0,63]);
+  expect(wide.fov).toBeGreaterThan(close.fov);
+  expect(walkoutShot(frame(0,[]),16/9).fov).toBeGreaterThan(0);
+});
 
 function frame(clock: number, players: [string, number, number][], ball: { x: number; y: number } | null = { x: 50, y: 30 }, period = 1): SceneFrame {
   return { clock_ms: clock, period, score: { home: 0, away: 0 }, carrier: null, possession: null, ball,

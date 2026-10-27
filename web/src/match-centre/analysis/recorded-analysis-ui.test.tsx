@@ -21,16 +21,48 @@ async function recorded(engine: RecordedEngineId) {
 const slider = () => screen.getByRole('slider', { name: 'Match position' });
 
 describe('recorded match analysis in the Match Centre', () => {
-  it('shows Summary and Timeline beside the pitch, up to the cursor, labelled as simulated', async () => {
+  it('defaults saved matches to natural highlights and leaves the montage without losing the paused cursor',async()=>{
+    const {adapter,analysis}=await recorded('touchlines');
+    render(<MatchCentre adapter={adapter} visible onBack={()=>{}} analysis={analysis}/>);
+    expect(screen.getByRole('button',{name:'Highlights'})).toHaveAttribute('aria-pressed','true');
+    expect(screen.queryByRole('group',{name:'Each half'})).toBeNull();
+    fireEvent.change(slider(),{target:{value:'160'}});
+    await waitFor(()=>expect(slider()).toHaveValue('160'));
+    fireEvent.click(screen.getByRole('button',{name:'Full match'}));
+    await waitFor(()=>expect(slider()).toHaveValue('160'));
+    expect(screen.getByRole('button',{name:'Play'})).toBeInTheDocument();
+    expect(screen.getByRole('group',{name:'Each half'})).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button',{name:'Restart highlights'}));
+    await waitFor(()=>expect(slider()).toHaveValue('0'));
+  });
+  it('shows running plain-language commentary for saved matches instead of only the Key timeline',async()=>{
+    const {adapter,analysis}=await recorded('touchlines');
+    render(<MatchCentre adapter={adapter} visible onBack={()=>{}} analysis={analysis}/>);
+    const commentary=screen.getByRole('region',{name:'Commentary'});
+    expect(commentary).toBeVisible();
+    expect(screen.getByRole('group',{name:'Timeline filter'})).not.toBeVisible();
+    fireEvent.change(slider(),{target:{value:'160'}});
+    await waitFor(()=>expect(commentary).toHaveTextContent('home 9 shoots… and away 0 saves!'));
+    expect(commentary).not.toHaveTextContent('GOAL');
+    fireEvent.change(slider(),{target:{value:'300'}});
+    await waitFor(()=>expect(commentary).toHaveTextContent('GOAL'));
+    expect(commentary.querySelector('.is-now')).toHaveTextContent('GOAL');
+  });
+  it('keeps Timeline and progressively disclosed Summary up to the cursor, labelled as simulated', async () => {
     const { adapter, analysis } = await recorded('touchlines');
     render(<MatchCentre adapter={adapter} visible onBack={() => {}} analysis={analysis} />);
+    fireEvent.click(screen.getByText('Timeline',{selector:'summary'}));
     const side = document.querySelector('[data-analysis-side]') as HTMLElement;
     expect(side).toBeInTheDocument();
-    const summary = within(side).getByRole('region', { name: 'Summary' }), timeline = within(side).getByRole('region', { name: 'Timeline' });
-    expect(within(summary).getByText('Simulated · TouchLines')).toBeInTheDocument();
+    const timeline = within(side).getByRole('region', { name: 'Timeline' });
+    expect(within(side).queryByRole('region', { name: 'Summary' })).toBeNull();
     expect(within(timeline).getByText('Nothing has happened yet in this recording.')).toBeInTheDocument();
     // Tras el gol (muestra 2): marcador del resumen, fila de gol con dorsal/nombre y marca en la barra.
     fireEvent.change(slider(), { target: { value: '300' } });
+    await waitFor(()=>expect(side.querySelector('.tp-side-summary')).not.toBeNull());
+    fireEvent.click(within(side).getByText('Summary', { selector: 'summary' }));
+    const summary = within(side).getByRole('region', { name: 'Summary' });
+    expect(within(summary).getByText('Simulated · TouchLines')).toBeInTheDocument();
     await waitFor(() => expect(summary.querySelector('[data-stat="goals"]')).toHaveTextContent(/^1Goals0$/));
     expect(summary.querySelector('[data-stat="on_target"]')).toHaveTextContent(/^2On target0$/);
     const goal = timeline.querySelector('li[data-kind="goal"]') as HTMLElement;
@@ -55,6 +87,7 @@ describe('recorded match analysis in the Match Centre', () => {
   it('seeks to a timeline event a few seconds before it', async () => {
     const { adapter, analysis } = await recorded('touchlines');
     render(<MatchCentre adapter={adapter} visible onBack={() => {}} analysis={analysis} />);
+    fireEvent.click(screen.getByText('Timeline',{selector:'summary'}));
     fireEvent.change(slider(), { target: { value: '700' } });
     const button = await screen.findByRole('button', { name: /^Go to Goal, 1'$/ });
     fireEvent.click(button);
@@ -64,6 +97,7 @@ describe('recorded match analysis in the Match Centre', () => {
   it('opens the player card from the player named in a timeline row without seeking', async () => {
     const { adapter, analysis } = await recorded('touchlines');
     render(<MatchCentre adapter={adapter} visible onBack={() => {}} analysis={analysis} />);
+    fireEvent.click(screen.getByText('Timeline',{selector:'summary'}));
     fireEvent.change(slider(), { target: { value: '700' } });
     fireEvent.click(await screen.findByRole('button', { name: "Open home 9's player card" }));
     expect(await screen.findByRole('dialog')).toBeInTheDocument();
@@ -76,6 +110,7 @@ describe('recorded match analysis in the Match Centre', () => {
     const { adapter, analysis } = await recorded('open-football');
     const goalless = { ...analysis, events: analysis.events.filter(e => e.kind !== 'goal') };
     render(<MatchCentre adapter={adapter} visible onBack={() => {}} analysis={goalless} />);
+    fireEvent.click(screen.getByText('Timeline',{selector:'summary'}));
     const timeline = await waitFor(() => within(document.querySelector('[data-analysis-side]') as HTMLElement).getByRole('region', { name: 'Timeline' }));
     expect(within(timeline).getByRole('button', { name: 'Chances' })).toHaveAttribute('aria-pressed', 'true');
   });

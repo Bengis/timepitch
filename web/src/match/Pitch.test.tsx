@@ -12,6 +12,37 @@ import type { PitchRenderInput, RendererFailure } from './renderers/types';
 import type { MatchCast } from '../presentation/types';
 
 const graphics = vi.hoisted(() => ({ failures: [] as ((reason: RendererFailure) => void)[] }));
+it('offers live Retro/3D beside camera even when the old settings picker is locked',async()=>{
+  const {container}=render(<LanguageProvider><Pitch frame={syntheticFrame({clock_ms:4300})} home="H" away="A" cameraTabs rendererLocked settingsLabel="Display settings"/></LanguageProvider>);
+  const group=screen.getByRole('group',{name:'Graphics'}),camera=screen.getByRole('group',{name:'Camera'});
+  expect(group.parentElement).toBe(camera.parentElement);
+  fireEvent.click(within(camera).getByRole('button',{name:'Tactical'}));
+  fireEvent.click(within(group).getByRole('button',{name:'Retro'}));
+  expect(container.querySelector('.pitch-section')).toHaveAttribute('data-requested-renderer','retro16-1');
+  expect(within(group).getByRole('button',{name:'Retro'})).toHaveAttribute('aria-pressed','true');
+  fireEvent.click(within(group).getByRole('button',{name:'3D'}));
+  expect(container.querySelector('.pitch-section')).toHaveAttribute('data-requested-renderer','stylized-3d-1');
+  expect(within(camera).getByRole('button',{name:'Tactical'})).toHaveAttribute('aria-pressed','true');
+  expect(JSON.parse(localStorage.getItem('timepitch.pitch.v1')!)).toMatchObject({renderer:'stylized-3d-1',camera:'overview',rendererChosen:true});
+});
+
+it('live graphics changes retain the paused match cursor and controller without extra source reads',async()=>{
+  const f=screenFixture('grf');
+  render(<MatchCentre adapter={f.adapter} visible onBack={()=>{}} rendererLocked/>);
+  fireEvent.change(screen.getByRole('slider'),{target:{value:'4300'}});
+  await waitFor(()=>expect(screen.getByRole('slider')).toHaveValue('4300'));
+  await act(async()=>{});
+  const slider=screen.getByRole('slider'),play=screen.getByRole('button',{name:'Play'}),before=JSON.stringify(f.initial);
+  const readers=[f.adapter.ensure,f.adapter.loadPanel,f.adapter.loadEvents].map(fn=>vi.mocked(fn).mock.calls.length);
+  const group=screen.getByRole('group',{name:'Graphics'});
+  fireEvent.click(within(group).getByRole('button',{name:'Retro'}));
+  fireEvent.click(within(group).getByRole('button',{name:'3D'}));
+  await act(async()=>{});
+  expect(screen.getByRole('slider')).toBe(slider);expect(slider).toHaveValue('4300');
+  expect(screen.getByRole('button',{name:'Play'})).toBe(play);
+  expect([f.adapter.ensure,f.adapter.loadPanel,f.adapter.loadEvents].map(fn=>vi.mocked(fn).mock.calls.length)).toEqual(readers);
+  expect(JSON.stringify(f.initial)).toBe(before);
+});
 it.each([undefined,'Display settings'])('graphics offer only Retro 16-bit (default) and 3D, never Captain Hane or the retired 2D styles (settings %s)',settingsLabel=>{
   localStorage.removeItem('timepitch.pitch.v1');
   render(<LanguageProvider><Pitch frame={syntheticFrame()} home="H" away="A" settingsLabel={settingsLabel}/></LanguageProvider>);
@@ -105,7 +136,7 @@ it('controlled value governs highlight while local fallback still supports the h
   view.unmount();
   render(<LanguageProvider><Pitch frame={frame} home="Home" away="Away" /></LanguageProvider>);
   fireEvent.change(screen.getByRole('combobox', { name: 'Inspect player' }), { target: { value: 'test:home:1' } });
-  expect(screen.getByRole('combobox', { name: 'Inspect player' })).toHaveValue('test:home:1');
+  expect(screen.getByLabelText('Inspect player')).toHaveValue('test:home:1');
 });
 
 it('hidden_renderer_disposes_and_resumes_same_cursor, camera and selection with a fresh canvas', () => {
@@ -139,7 +170,11 @@ it.each(['historical', 'grf', 'timepitch'] as const)('switch_preserves_controlle
   await waitFor(() => expect(f.adapter.loadPanel).toHaveBeenCalled());
   // TP226: GRF y TimePitch usan el armazón de emisión: elegir jugador abre «Ficha» y la cámara va en las pestañas del HUD.
   const shell = source !== 'historical';
-  fireEvent.change(screen.getByRole('combobox', { name: 'Inspect player' }), { target: { value: 'test:home:1' } });
+  if(shell){
+    await waitFor(()=>expect(view.container.querySelector('[data-renderer-status="ready"]')).toHaveAttribute('data-effective-renderer','stylized-3d-1'));
+    vi.spyOn(view.container.querySelector('.pitch-canvas-container')!,'getBoundingClientRect').mockReturnValue(new DOMRect(0,0,384,256));
+    fireEvent.click(view.container.querySelector('canvas')!,{clientX:30,clientY:20});
+  }else fireEvent.change(screen.getByRole('combobox', { name: 'Inspect player' }), { target: { value: 'test:home:1' } });
   if (shell) fireEvent.click(screen.getByRole('tab', { name: 'Live broadcast' }));
   // TP254: en la emisión no hay velocidades sueltas (se elige la duración de cada parte); se comprueba en el histórico.
   if (!shell) fireEvent.click(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^20×/ }));
@@ -153,10 +188,12 @@ it.each(['historical', 'grf', 'timepitch'] as const)('switch_preserves_controlle
   if (!shell) expect(within(screen.getByRole('group', { name: 'Speed' })).getByRole('button', { name: /^20×/ })).toHaveAttribute('aria-pressed', 'true');
   if (shell) expect(screen.getByRole('button', { name: 'Tactical' })).toHaveAttribute('aria-pressed', 'true');
   else expect(screen.getByRole('combobox', { name: 'Camera' })).toHaveValue('overview');
-  expect(screen.getByRole('combobox', { name: 'Inspect player' })).toHaveValue('test:home:1');
+  expect(screen.getByLabelText('Inspect player')).toHaveValue('test:home:1');
   expect(screen.queryByText('Full match')).not.toBeInTheDocument();
-  fireEvent.change(screen.getByRole('combobox', { name: 'Lighting' }), { target: { value: 'floodlights' } });
-  fireEvent.change(screen.getByRole('combobox', { name: 'Detail' }), { target: { value: 'low' } });
+  if(!shell){
+    fireEvent.change(screen.getByRole('combobox', { name: 'Lighting' }), { target: { value: 'floodlights' } });
+    fireEvent.change(screen.getByRole('combobox', { name: 'Detail' }), { target: { value: 'low' } });
+  }
   act(() => graphics.failures.at(-1)!('context_lost'));
   expect(view.container.querySelector('[data-renderer-status="fallback"]')).toHaveAttribute('data-effective-renderer', 'retro-1');
   expect(JSON.parse(localStorage.getItem('timepitch.pitch.v1')!).renderer).toBe('stylized-3d-1');
@@ -195,6 +232,10 @@ it('changing graphics during playback preserves playback intent without an expli
   const pause = screen.getByRole('button', { name: 'Pause' }), slider = screen.getByRole('slider');
   const reads = vi.mocked(f.adapter.ensure).mock.calls.length;
   await waitFor(() => expect(view.container.querySelector('canvas')).toHaveAttribute('data-renderer', 'stylized-3d-1'));
+  const graphicsGroup=screen.getByRole('group',{name:'Graphics'});
+  fireEvent.click(within(graphicsGroup).getByRole('button',{name:'Retro'}));
+  expect(view.container.querySelector('.pitch-section')).toHaveAttribute('data-requested-renderer','retro16-1');
+  fireEvent.click(within(graphicsGroup).getByRole('button',{name:'3D'}));
   expect(screen.getByRole('button', { name: 'Pause' })).toBe(pause); expect(screen.getByRole('slider')).toBe(slider);
   expect(vi.mocked(f.adapter.ensure).mock.calls.slice(reads).some(call => call[2]?.explicitSeek)).toBe(false);
   fireEvent.click(pause);

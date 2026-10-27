@@ -15,12 +15,12 @@ import { inspectorOptions } from './inspector-options';
 import { PitchHud } from './PitchHud';
 
 
-export function Pitch({ frame, previous = frame, cue, restarting = false, home, away, displayClockMs, displayClockLabel, ariaLabel, fieldClassName='', renderOverlay, showPlayerRole=true, playerDisplayRoles, onPlayerSelect, selectedPlayerKey, active = true, fieldFocus,defaultCamera,settingsLabel,settingsTarget, cast = null, hud, hudTopLeft, sceneCaption, cameraTabs = false, overlay, renderAnime, onRendererChange, rendererLocked = false }: {
+export function Pitch({ frame, previous = frame, cue, restarting = false, home, away, displayClockMs, displayClockLabel, ariaLabel, fieldClassName='', renderOverlay, showPlayerRole=true, playerDisplayRoles, onPlayerSelect, selectedPlayerKey, active = true, fieldFocus,presentation,defaultCamera,settingsLabel,settingsTarget, cast = null, hud, hudTopLeft, sceneCaption, cameraTabs = false, overlay, renderAnime, onRendererChange, onRendererStatus, rendererLocked = false }: {
   frame: SceneFrame; previous?: SceneFrame; cue?: VisualCue; restarting?: boolean; home: string; away: string; displayClockMs?:number;
   displayClockLabel?:string; ariaLabel?:string; fieldClassName?:string; renderOverlay?:(projection:PitchProjection)=>ReactNode; showPlayerRole?:boolean;
   playerDisplayRoles?:ReadonlyMap<string,{value:string|null;provenance:string}>; onPlayerSelect?:(key:string|null)=>void;
   selectedPlayerKey?:string|null; active?:boolean;
-  fieldFocus?:Readonly<{x:number;y:number}>|null;defaultCamera?:CameraMode;settingsLabel?:string;settingsTarget?:Element|null;
+  fieldFocus?:Readonly<{x:number;y:number}>|null;presentation?:'walkout';defaultCamera?:CameraMode;settingsLabel?:string;settingsTarget?:Element|null;
   /** Identidad visual (equipaciones, dorsales, apariencia) para los renderizadores que la usan (G16/G17). */
   cast?: MatchCast | null;
   /** Capa de emisión superpuesta al campo (marcador y rótulos); no recibe clics. */
@@ -37,7 +37,9 @@ export function Pitch({ frame, previous = frame, cue, restarting = false, home, 
   renderAnime?: (options: { scenes: AnimeScenesSetting; reducedMotion: boolean }) => ReactNode;
   /** Avisa del gráfico elegido (el centro lo usa para la habilidad de la ficha en Capitán Hane). */
   onRendererChange?: (id: SelectableRendererId) => void;
-  /** TP237: el modo gráfico se eligió al lanzar (simulación y demo); aquí no se ofrece cambiarlo. */
+  /** TP247: estado del dibujo del campo (para no arrancar la salida de los equipos mientras carga). */
+  onRendererStatus?: (status: string) => void;
+  /** Locks the legacy settings picker; the live broadcast HUD can still switch graphics. */
   rendererLocked?: boolean;
 }) {
   const [reducedMotion,setReducedMotion]=useState(()=>typeof window!=='undefined'&&(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false));
@@ -59,11 +61,12 @@ export function Pitch({ frame, previous = frame, cue, restarting = false, home, 
   useEffect(() => { writePitchPreferences(pitchStorage(), preferences); }, [preferences]);
   const m = useMatchText(), g = useGraphicsText(), { t } = useLanguage();
   const clock = displayClockLabel ?? clockLabel(displayClockMs ?? frame.clock_ms);
-  const input = useMemo<PitchRenderInput>(() => ({ frame, previous, cue, restarting, selectedPlayerKey: selected, camera:reducedMotion?'overview':camera, fieldFocus,
+  const input = useMemo<PitchRenderInput>(() => ({ frame, previous, cue, restarting, selectedPlayerKey: selected, camera:reducedMotion?'overview':camera, fieldFocus,presentation,
     appearance, detail, labels: { home, away, clock, goal: m.goal }, cast, style: anime ? 'hane' : null }),
-  [frame, previous, cue, restarting, selected, camera, reducedMotion, fieldFocus, appearance, detail, home, away, clock, m.goal, cast, anime]);
+  [frame, previous, cue, restarting, selected, camera, reducedMotion, fieldFocus,presentation, appearance, detail, home, away, clock, m.goal, cast, anime]);
   const container = useRef<HTMLDivElement>(null);
   const graphics = usePitchRenderer({ container, active, requested: drawn, input });
+  useEffect(() => { onRendererStatus?.(graphics.status); }, [graphics.status, onRendererStatus]);
   useLayoutEffect(() => {
     const canvas = container.current?.querySelector('canvas');
     if (canvas) { canvas.setAttribute('role', 'img'); canvas.setAttribute('aria-label', ariaLabel ?? m.pitch); }
@@ -112,7 +115,8 @@ export function Pitch({ frame, previous = frame, cue, restarting = false, home, 
       {active && graphics.projection && renderOverlay?.(graphics.projection)}
       {active && broadcastHud && <PitchHud topLeft={hudTopLeft}
         caption={sceneCaption ? { clock, note: typeof sceneCaption === 'string' ? sceneCaption : undefined } : null}
-        camera={cameraTabs ? { value: camera, onChange: mode => change({ camera: mode }) } : null} />}
+        camera={cameraTabs ? { value: camera, onChange: mode => change({ camera: mode }) } : null}
+        graphics={cameraTabs ? { value: requested, onChange: renderer => change({ renderer, rendererChosen: true }) } : null} />}
       {active && hud && <div className="pitch-hud">{hud}</div>}
       {active && overlay}
       {/* TP239 (jueces: la tarjeta tapaba el campo al empezar): etiqueta fija y pequeña; la explicación, al pasar el ratón y para lectores de pantalla. */}

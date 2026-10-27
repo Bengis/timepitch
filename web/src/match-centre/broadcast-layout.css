@@ -211,10 +211,9 @@ body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
   .tp-shell[data-fit] .unified-match-area.tpa-stage { --tp-field-ratio: 1.5; grid-template-columns: minmax(0, calc(var(--tp-fit-h) * var(--tp-field-ratio))) minmax(300px, 1fr); }
   .tp-shell[data-fit] .unified-match-area.tpa-stage:has(.pitch-section[data-effective-renderer="stylized-3d-1"]) { --tp-field-ratio: 1.7778; }
   .tp-shell[data-fit] .tpa-stage > .tpa-side { max-height: var(--tp-fit-h); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
-  /* Barra de reproducción en una sola fila: controles y reloj/parte/repetir a la derecha. */
-  .tp-shell .tp-playback-panel .pbk.unified-transport { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 16px; padding: 6px 12px; }
-  .tp-shell .tp-playback-panel .pbk-meta { flex-wrap: nowrap; gap: 10px; }
-  .tp-shell .tp-playback-panel .pbk-meta :is(select, button) { min-height: 0; }
+  /* The rail owns the full width, independently of the number of half-length options. */
+  .tp-shell .tp-playback-panel .pbk.unified-transport { grid-template-columns: auto minmax(88px, auto) minmax(0, 1fr); align-items: center; padding: 6px 12px; }
+  .tp-shell .tp-playback-panel .pbk-meta { gap: 10px; }
   .tp-shell .tp-playback-panel .pbk .pbk-replay { margin-left: 0; }
   .tp-shell .tp-playback-panel .pbk p[role="status"] { grid-column: 1 / -1; }
 }
@@ -369,3 +368,41 @@ body:has(.demo-match:not([hidden])) { min-height: 100vh; color: var(--tp-ink);
 .crew-live-spinner { width: 14px; height: 14px; flex: none; border-radius: 50%; border: 2px solid rgba(185, 166, 255, .35); border-top-color: #b9a6ff; animation: crew-spin 1s linear infinite; }
 @keyframes crew-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .crew-live-spinner { animation: none; } }
+
+/* Context follows the recorded phase; ordering does not remount a report or restart its requests. */
+.tp-shell .tpa-side > * { order: 4; }
+.tp-shell .tpa-side > .unified-scoreboard { order: -1; }
+.tp-shell .tpa-side > :is(.tpa-timeline, .tp-narration) { order: 0; }
+.tp-shell .tpa-side > .tp-side-summary { order: 1; }
+.tp-shell .tpa-side > .tp-side-report { order: 2; min-width: 0; grid-column: 1 / -1; }
+.tp-shell[data-side-priority="report"] .tpa-side > .tp-side-report { order: 0; }
+.tp-shell[data-side-priority="report"] .tpa-side > :is(.tpa-timeline, .tp-narration) { order: 2; }
+.tp-side-report:empty { display: none; }
+.tp-side-report:focus { outline: 2px solid var(--tp-sim); outline-offset: 3px; border-radius: 14px; }
+.tp-side-summary { color: var(--tp-ink2); font-size: 12px; border: 1px solid var(--tp-line); border-radius: 12px; }
+.tp-side-summary > summary { cursor: pointer; min-height: 44px; padding: 12px; }
+.tp-shell .tp-side-summary .tpa-summary { display: block; }
+.tp-shell .tp-screen-tabs button { transition: background-color 150ms ease, color 150ms ease; }
+.tp-break-actions button { min-height: 44px; }
+.tp-break-actions .tp-break-primary { background: #ffd24a; border-color: #ffd24a; color: #151008; }
+@container (max-width: 600px) {
+  .tp-shell .tp-screen-tabs { gap: 4px; }
+  .tp-shell .tp-tabs-main { padding: 2px; }
+  .tp-shell .tp-tabs-main button { min-height: 44px; padding: 4px; }
+  /* Analysis remains directly reachable with one compact row; no fixed bar covers the pitch. */
+  .tp-shell .tp-tabs-analysis { padding: 0; border: 0; background: transparent; gap: 2px; }
+  .tp-shell .tp-tabs-analysis button { flex: 1; min-height: 36px; padding: 4px 8px; font-size: 12px; }
+  .tp-shell .tp-tabs-label { font-size: 10px; padding-inline: 4px; }
+  .tp-shell .unified-score-meta { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .tp-shell .tp-screen-tabs button { transition: none; } }
+@media (max-width: 600px) {
+  .app-shell:has(.tp-shell:not([hidden])) .topbar { gap: 4px 8px; padding-block: 4px; }
+  .app-shell:has(.tp-shell:not([hidden])) .topbar-right { gap: 4px; }
+  .app-shell:has(.tp-shell:not([hidden])) .language-control select { min-height: 36px; padding: 4px; }
+  .demo-match:has(.tp-shell:not([hidden])) { padding-top: 6px; gap: 6px; }
+  .demo-match:has(.tp-shell:not([hidden])) .demo-appbar { gap: 4px; }
+  .demo-match:has(.tp-shell:not([hidden])) .movement-selector { flex: 0 1 auto; padding: 2px; }
+  .demo-match:has(.tp-shell:not([hidden])) .movement-selector legend { display: none; }
+  .demo-match:has(.tp-shell:not([hidden])) .movement-selector button { padding-inline: 4px; font-size: 10px; }
+}

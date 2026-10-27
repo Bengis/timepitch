@@ -1,4 +1,17 @@
 {
+ "replay-audio-test": {"label":"Toni di prova locali · NON Azure Speech né una voce","loading":"Caricamento audio di prova…","ready":"Audio di prova pronto","unavailable":"Nessun audio di prova compatibile","speed":"Audio di prova silenziato fuori da 1×","language":"Lingua dell’audio di prova","volume":"Volume dell’audio di prova","mute":"Silenzia audio di prova","unmute":"Riattiva audio di prova"},
+ "report-presentation": {"names":"Nomi adattati alla lega fittizia solo per la visualizzazione. Il rapporto salvato resta invariato; verifica e valutazione riguardano il testo originale."},
+ "narration-voice": {"on":"Voce attiva","off":"Voce disattivata","voice":"Voce del commentatore","unavailable":"Nessuna voce locale compatibile. Installane una nelle impostazioni del dispositivo.","failed":"Impossibile riprodurre la voce. Riattivala per riprovare.","note":"Voce del dispositivo · nessuna richiesta Azure. La cronaca segue la lingua della voce; l’espressività dipende dalla voce installata.","provider":"Sorgente audio","device":"Voce del dispositivo","test":"Toni di prova locali","testOn":"Audio di prova attivo","testOff":"Audio di prova disattivato"},
+ "highlights": {
+  "summary": "Sintesi",
+  "full": "Partita completa",
+  "restart": "Ricomincia la sintesi",
+  "natural": "1× · azioni a velocità naturale; intervalli saltati",
+  "jump": "Salto del replay: {0} → {1}"
+ },
+
+ "director": {"showReplay":"Mostra il replay","hideReplay":"Nascondi il replay","commentary":"Cronaca della partita","showCommentary":"Mostra cronaca","hideCommentary":"Nascondi cronaca"},
+ "studio-theme": {"toLight":"Passa al tema chiaro","toDark":"Passa al tema scuro"},
  "analysis": {
   "analysis": "Analisi",
   "averagePositions": "Posizioni medie e modulo",
@@ -106,7 +119,7 @@
   "historical": "Dati storici",
   "historicalNote": "Record e stime delle fonti sono mostrati separatamente. I risultati delle squadre usano la fonte dei risultati verificati.",
   "home": "Squadra in casa",
-  "intro": "Scegli due squadre di Premier League dal 1992/93 e guardale sfidarsi.",
+  "intro": "Scegli due rose basate sulle statistiche stagionali e guarda una partita simulata.",
   "language": "Lingua",
   "loadError": "Impossibile caricare il catalogo locale.",
   "loading": "Caricamento dati storici…",
@@ -123,7 +136,7 @@
   "outsideFilters": "La squadra selezionata è fuori da questi filtri.",
   "partial": "Parziale",
   "participants": "partecipanti al campionato",
-  "phase": "SIMULATORE DI PARTITE STORICHE",
+  "phase": "CALCIO TRA EPOCHE · ANALISI DELLA PARTITA",
   "played": "Giocate",
   "player": "Giocatore",
   "position": "Ruolo",
@@ -153,6 +166,8 @@
   "xg_partial_2022": "L'xG a livello di partita 2022/23 inizia dalla giornata 16; gli zero precedenti non sono misurazioni."
  },
  "ask": {
+  "aiNotice": "Risposte IA basate sulla registrazione della partita.",
+  "howTitle": "Come vengono verificate le risposte",
   "ask": "Chiedi",
   "badge": "Agente AI · strumenti · Azure AI Foundry",
   "budget": "Il budget per le domande della demo è esaurito.",
@@ -168,7 +183,12 @@
   "suggestions.1": "Quale squadra ha tirato di più?",
   "suggestions.2": "Com’è andato il primo tempo?",
   "thinking": "L’agente sta cercando i fatti registrati…",
-  "title": "Chiedi sulla partita"
+  "title": "Chiedi sulla partita",
+  "references": "ID dei fatti per questa frase",
+  "evidence": "Fatti consultati dall’agente",
+  "identifiersOnly": "Identificatori restituiti dall’API; il testo dei fatti originali e i tempi degli eventi non sono inclusi.",
+  "cost": "Costo della risposta: {0} USD",
+  "verificationLimit": "I controlli confrontano nomi e numeri con i fatti citati. Non garantiscono l’interpretazione della partita."
  },
  "attribution": {
   "commonsFile": "File Wikimedia Commons",
@@ -264,6 +284,7 @@
   "TouchLines recording: goals and scorers come from the engine events.": "Registrazione TouchLines: gol e marcatori provengono dagli eventi del motore."
  },
  "crew-report": {
+  "verificationLimit": "I controlli confrontano nomi e numeri con i fatti citati. Non garantiscono l’interpretazione della partita.",
   "badge": "Agent Framework · Azure AI Foundry",
   "coherence": "coerenza",
   "evalOf": "(Report in inglese)",
@@ -282,7 +303,9 @@
   "steps.3": "Un verificatore deterministico controlla ogni frase rispetto ai fatti; se una non corrisponde, lo scrittore la corregge.",
   "steps.4": "Il report sigillato viene pubblicato come file statico e valutato con Azure AI (accuratezza, coerenza, fluidità). I visitatori non attivano chiamate AI.",
   "teaser": "Scritto su Azure dopo la partita, dai dati registrati dal motore: agenti AI lo redigono e un verificatore controlla ogni frase rispetto ai fatti registrati.",
-  "title": "Report AI della partita"
+  "title": "Report AI della partita",
+  "processNote": "Questo spiega il processo, non l’avanzamento in diretta dei singoli agenti.",
+  "liveStep": "Il server verifica la cronaca richiesta per questa partita e la restituisce a questo pannello. Una richiesta può avviare lavoro IA su Azure, entro i limiti della demo."
  },
  "demo": {
   "back": "Indietro",
@@ -736,13 +759,16 @@
   "fallback": "La bozza AI non ha superato il controllo fatti, ecco i dati grezzi della partita.",
   "fan": "Tifosi",
   "fullTitle": "Report finale",
-  "halfPending": "Gli agenti AI su Azure stanno scrivendo il report di metà tempo…",
+  "halfPending": "Cronaca del primo tempo richiesta su Azure. In attesa della risposta del server…",
   "halfTitle": "Report di metà tempo",
   "how": "Scritto da agenti AI su Azure e verificato riga per riga con i dati della partita.",
   "limit": "Hai raggiunto il limite di report AI per oggi.",
-  "pending": "Gli agenti AI su Azure stanno scrivendo il report… ci vogliono solitamente 1–2 minuti.",
+  "pending": "Cronaca richiesta su Azure. In attesa della risposta del server… di solito richiede 1–2 minuti.",
   "retry": "Riprova",
-  "title": "Report AI della partita"
+  "title": "Report AI della partita",
+  "pollingPaused": "Il controllo automatico è in pausa. Usa Controlla di nuovo per consultare questa stessa cronaca.",
+  "checkedAt": "Ultimo controllo: {0}",
+  "checkAgain": "Controlla di nuovo"
  },
  "maps": {
   "goalKey": "Pieno: gol",
@@ -864,7 +890,9 @@
   "second": "Inizio secondo tempo",
   "skip": "Salta al calcio d’inizio",
   "stats": "Statistiche della partita",
-  "walkout": "Le squadre entrano in campo"
+  "walkout": "Le squadre entrano in campo",
+  "halfReport": "Leggi la cronaca del primo tempo",
+  "finalAnalysis": "Analizza la partita"
  },
  "match-meta": {
   "crest": "Stemma {0}",
@@ -937,6 +965,9 @@
   "real": "Nomi reali"
  },
  "narration": {
+  "longPassAttempt": "{0} tenta un passaggio lungo.",
+  "highPassAttempt": "{0} tenta un passaggio alto.",
+  "shotAttempt": "{0} tira.",
   "carry": "{0} conduce palla per {1} metri.",
   "corner": "Calcio d’angolo per {0}.",
   "freeKick": "Calcio di punizione per {0}.",
@@ -985,7 +1016,8 @@
   "minute": "Minuto",
   "next": "Evento successivo",
   "previous": "Evento precedente",
-  "start": "0'"
+  "start": "0'",
+  "eventSelect": "Scegli un evento"
  },
  "player": {
   "all": "Tutti",
@@ -1369,7 +1401,7 @@
   "goalsForAgainst": "GF-GS",
   "graphicsTitle": "Grafica",
   "grfHint": "Google Research Football",
-  "grfLabel": "Realistico · 90 minuti",
+  "grfLabel": "Partita di 90 minuti",
   "h2hFailed": "Testa a testa non disponibile.",
   "h2hLoading": "Caricamento testa a testa…",
   "handAssigned": "Caratteristiche non fonte ufficiale · assegnate manualmente",
@@ -1442,6 +1474,14 @@
   "touchlinesLabel": "Veloce · arcade",
   "unknownRole": "Ruolo non registrato",
   "vs": "VS",
-  "wins": "{0} vittorie"
+  "wins": "{0} vittorie",
+  "teamDetails": "Bilancio stagionale e stella",
+  "teamUpdated": "Squadra aggiornata",
+  "fictionalProvenance": "Nomi fittizi · statistiche storiche · risultato simulato. Gli attributi dei giocatori sono stimati.",
+  "realProvenance": "Nomi reali di club e giocatori · statistiche storiche · risultato simulato. Gli attributi dei giocatori sono stimati.",
+  "engineAndAi": "Il motore gioca. Gli agenti IA spiegano i fatti registrati nelle cronache e nelle risposte; non decidono i gol.",
+  "grfDuration": "90 minuti di gioco. Riproduzione regolabile: scegli quanto guardare dopo la generazione della partita.",
+  "touchlinesDuration": "Partita arcade. Riproduzione regolabile: scegli quanto guardare dopo la generazione della partita.",
+  "playbackDuration": "Riproduzione regolabile dopo la generazione. Tempo di gioco e tempo di visione sono diversi."
  }
 }

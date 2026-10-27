@@ -12,6 +12,20 @@ const ctx = (locale: 'es' | 'en' = 'es'): NarrationContext => ({ locale, name: i
 const texts = (events: EventView[], locale: 'es' | 'en' = 'es') => narrate(events, ctx(locale)).map(l => l.text);
 
 describe('narration (TP241)', () => {
+  it('narrates recorded GRF pass attempts and shots without inventing a recipient, distance or save',()=>{
+    const events=[
+      ev('p','pass',1000,'home','vieira',{}, {engine:'grf',native:'touch:long_pass',subtype:'long_pass'}),
+      ev('short','pass',2000,'home','henry',{}, {engine:'grf',native:'touch:short_pass',subtype:'short_pass'}),
+      ev('s','shot',3000,'home','henry',{}, {engine:'grf',native:'touch:shot'}),
+      ev('next','pass',4000,'away','ederson',{}, {engine:'grf',native:'touch:short_pass',subtype:'short_pass'}),
+      ev('off','offside',5000,'away','haaland',{}, {engine:'grf',native:'decision:offside:awarded'}),
+    ];
+    const lines=texts(events,'en');
+    expect(lines).toContain('Patrick Vieira attempts a long pass.');
+    expect(lines).toContain('Thierry Henry shoots.');
+    expect(lines).toContain('Erling Haaland is offside.');
+    expect(lines.join(' ')).not.toMatch(/metres|saves|pass to/);
+  });
   it('TimePitch: long passes with metres and receiver; short passes are not narrated', () => {
     const long = ev('p1', 'pass', 1000, 'home', 'vieira', { outcome: 'complete', participantIds: ['vieira', 'henry'] }, { origin_mm: [40000, 30000], end_mm: [70000, 30000] });
     const short = ev('p2', 'pass', 2000, 'home', 'henry', { outcome: 'complete', participantIds: ['henry', 'vieira'] }, { origin_mm: [70000, 30000], end_mm: [75000, 30000] });

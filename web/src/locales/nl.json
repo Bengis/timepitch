@@ -1,4 +1,17 @@
 {
+ "replay-audio-test": {"label":"Lokale testtonen · GEEN Azure Speech of stem","loading":"Testaudio laden…","ready":"Testaudio gereed","unavailable":"Geen compatibele testaudio","speed":"Testaudio gedempt buiten 1×","language":"Taal van testaudio","volume":"Volume van testaudio","mute":"Testaudio dempen","unmute":"Testaudio hoorbaar maken"},
+ "report-presentation": {"names":"Namen voor de weergave aangepast aan de fictieve competitie. Het opgeslagen verslag blijft ongewijzigd; controle en beoordeling gelden voor de oorspronkelijke tekst."},
+ "narration-voice": {"on":"Stem aan","off":"Stem uit","voice":"Commentatorstem","unavailable":"Geen ondersteunde lokale stem. Installeer er een via de apparaatinstellingen.","failed":"De stem kon niet worden afgespeeld. Schakel deze opnieuw in.","note":"Apparaatstem · geen Azure-verzoek. Het commentaar volgt de taal van de stem; de expressiviteit hangt af van de geïnstalleerde stem.","provider":"Audiobron","device":"Apparaatstem","test":"Lokale testtonen","testOn":"Testaudio aan","testOff":"Testaudio uit"},
+ "highlights": {
+  "summary": "Hoogtepunten",
+  "full": "Hele wedstrijd",
+  "restart": "Hoogtepunten opnieuw starten",
+  "natural": "1× · natuurlijk tempo; tussenliggende stukken worden overgeslagen",
+  "jump": "Sprong in de herhaling: {0} → {1}"
+ },
+
+ "director": {"showReplay":"Herhaling tonen","hideReplay":"Herhaling verbergen","commentary":"Wedstrijdcommentaar","showCommentary":"Commentaar tonen","hideCommentary":"Commentaar verbergen"},
+ "studio-theme": {"toLight":"Naar licht thema","toDark":"Naar donker thema"},
  "analysis": {
   "analysis": "Analyse",
   "averagePositions": "Gemiddelde posities en formatie",
@@ -106,7 +119,7 @@
   "historical": "Historische data",
   "historicalNote": "Bronrecords en schattingen worden apart getoond. Teamresultaten gebruiken de gecontroleerde wedstrijdresultatenbron.",
   "home": "Thuisteam",
-  "intro": "Kies twee Premier League-teams sinds 1992/93 en zie ze tegen elkaar spelen.",
+  "intro": "Kies twee selecties op basis van seizoensstatistieken en bekijk een gesimuleerde wedstrijd.",
   "language": "Taal",
   "loadError": "Kon de lokale catalogus niet laden.",
   "loading": "Historische data laden…",
@@ -123,7 +136,7 @@
   "outsideFilters": "Je gekozen team valt buiten deze filters.",
   "partial": "Gedeeltelijk",
   "participants": "competitiedeelnemers",
-  "phase": "HISTORISCHE WEDSTRIJD SIMULATOR",
+  "phase": "VOETBAL DOOR DE TIJD · WEDSTRIJDANALYSE",
   "played": "Gespeeld",
   "player": "Speler",
   "position": "Positie",
@@ -153,6 +166,8 @@
   "xg_partial_2022": "xG op wedstrijdniveau 2022/23 start vanaf speelronde 16; eerdere nullen zijn geen metingen."
  },
  "ask": {
+  "aiNotice": "AI-antwoorden op basis van de wedstrijdopname.",
+  "howTitle": "Hoe antwoorden worden gecontroleerd",
   "ask": "Vraag",
   "badge": "AI-agent · tools · Azure AI Foundry",
   "budget": "Het vraagbudget voor de demo is opgebruikt.",
@@ -168,7 +183,12 @@
   "suggestions.1": "Welke ploeg had meer schoten?",
   "suggestions.2": "Hoe vergeleek de eerste helft?",
   "thinking": "De agent zoekt de vastgelegde feiten op…",
-  "title": "Vraag het de wedstrijd"
+  "title": "Vraag het de wedstrijd",
+  "references": "Feit-ID’s voor deze zin",
+  "evidence": "Door de agent opgezochte feiten",
+  "identifiersOnly": "Identificatoren uit de API; de oorspronkelijke feittekst en tijdstippen van gebeurtenissen zijn niet inbegrepen.",
+  "cost": "Kosten van het antwoord: {0} USD",
+  "verificationLimit": "De controles vergelijken namen en cijfers met de aangehaalde feiten. Ze garanderen de interpretatie van de wedstrijd niet."
  },
  "attribution": {
   "commonsFile": "Wikimedia Commons-bestand",
@@ -264,6 +284,7 @@
   "TouchLines recording: goals and scorers come from the engine events.": "TouchLines-opname: doelpunten en makers komen uit engine-gebeurtenissen."
  },
  "crew-report": {
+  "verificationLimit": "De controles vergelijken namen en cijfers met de aangehaalde feiten. Ze garanderen de interpretatie van de wedstrijd niet.",
   "badge": "Agent Framework · Azure AI Foundry",
   "coherence": "samenhang",
   "evalOf": "(Engels verslag)",
@@ -282,7 +303,9 @@
   "steps.3": "Een deterministische controleur verifieert elke zin aan de feiten; bij fouten corrigeert de schrijver deze.",
   "steps.4": "Het verzegelde verslag wordt als statisch bestand gepubliceerd en beoordeeld met Azure AI evaluatie (grondigheid, samenhang, vloeiendheid). Bezoekers activeren geen AI-aanroepen.",
   "teaser": "Geschreven op Azure na de wedstrijd, gebaseerd op de engine-opname: AI-agents stellen het op en een controleur verifieert elke zin aan de hand van de opgenomen feiten.",
-  "title": "AI-wedstrijdverslag"
+  "title": "AI-wedstrijdverslag",
+  "processNote": "Dit verklaart het proces, niet de livevoortgang van afzonderlijke agenten.",
+  "liveStep": "De server controleert het voor deze wedstrijd aangevraagde verslag en toont het in dit paneel. Een aanvraag kan binnen de demolimieten AI-werk op Azure starten."
  },
  "demo": {
   "back": "Terug",
@@ -736,13 +759,16 @@
   "fallback": "De AI-ontwerptekst is niet door de feitelijke controle gekomen, dit zijn de kale wedstrijdfeiten.",
   "fan": "Fans",
   "fullTitle": "Eindverslag",
-  "halfPending": "AI-agents op Azure schrijven het rustverslag…",
+  "halfPending": "Verslag van de eerste helft aangevraagd op Azure. Wachten op het antwoord van de server…",
   "halfTitle": "Rustverslag",
   "how": "Geschreven door AI-agents op Azure en zin voor zin gecontroleerd aan de hand van de wedstrijddata.",
   "limit": "Je hebt het aantal AI-verslagen voor vandaag bereikt.",
-  "pending": "AI-agents op Azure schrijven het verslag… dit duurt meestal 1–2 minuten.",
+  "pending": "Verslag aangevraagd op Azure. Wachten op het antwoord van de server… dit duurt meestal 1–2 minuten.",
   "retry": "Probeer opnieuw",
-  "title": "AI-wedstrijdverslag"
+  "title": "AI-wedstrijdverslag",
+  "pollingPaused": "Automatisch controleren is gepauzeerd. Gebruik Opnieuw controleren om hetzelfde verslag op te vragen.",
+  "checkedAt": "Laatst gecontroleerd: {0}",
+  "checkAgain": "Opnieuw controleren"
  },
  "maps": {
   "goalKey": "Gevuld: doelpunt",
@@ -864,7 +890,9 @@
   "second": "Start de tweede helft",
   "skip": "Sla door naar aftrap",
   "stats": "Wedstrijdstatistieken",
-  "walkout": "De teams komen het veld op"
+  "walkout": "De teams komen het veld op",
+  "halfReport": "Verslag van de eerste helft lezen",
+  "finalAnalysis": "Wedstrijd analyseren"
  },
  "match-meta": {
   "crest": "Wapen van {0}",
@@ -937,6 +965,9 @@
   "real": "Echte namen"
  },
  "narration": {
+  "longPassAttempt": "{0} probeert een lange pass.",
+  "highPassAttempt": "{0} probeert een hoge pass.",
+  "shotAttempt": "{0} schiet.",
   "carry": "{0} dribbelt {1} meter.",
   "corner": "Corner voor {0}.",
   "freeKick": "Vrije trap voor {0}.",
@@ -985,7 +1016,8 @@
   "minute": "Minuut",
   "next": "Volgende gebeurtenis",
   "previous": "Vorige gebeurtenis",
-  "start": "0'"
+  "start": "0'",
+  "eventSelect": "Kies een gebeurtenis"
  },
  "player": {
   "all": "Alles",
@@ -1369,7 +1401,7 @@
   "goalsForAgainst": "GS-TS",
   "graphicsTitle": "Beeld",
   "grfHint": "Google Research Football",
-  "grfLabel": "Realistisch · 90 minuten",
+  "grfLabel": "Wedstrijd van 90 minuten",
   "h2hFailed": "Head-to-head niet beschikbaar.",
   "h2hLoading": "Head-to-head laden…",
   "handAssigned": "Onbekende bron · handmatig toegewezen",
@@ -1442,6 +1474,14 @@
   "touchlinesLabel": "Snel · arcade",
   "unknownRole": "Positie niet geregistreerd",
   "vs": "VS",
-  "wins": "{0} overwinningen"
+  "wins": "{0} overwinningen",
+  "teamDetails": "Seizoensbalans en sterspeler",
+  "teamUpdated": "Team bijgewerkt",
+  "fictionalProvenance": "Fictieve namen · historische statistieken · gesimuleerde uitslag. Spelerskenmerken zijn schattingen.",
+  "realProvenance": "Echte club- en spelersnamen · historische statistieken · gesimuleerde uitslag. Spelerskenmerken zijn schattingen.",
+  "engineAndAi": "De engine speelt. AI-agenten verklaren de vastgelegde feiten in verslagen en antwoorden; zij bepalen geen doelpunten.",
+  "grfDuration": "90 speelminuten. Instelbaar afspelen: kies na het genereren van de wedstrijd hoe lang je kijkt.",
+  "touchlinesDuration": "Arcadewedstrijd. Instelbaar afspelen: kies na het genereren van de wedstrijd hoe lang je kijkt.",
+  "playbackDuration": "Instelbaar afspelen na generatie. Speeltijd en kijktijd verschillen."
  }
 }

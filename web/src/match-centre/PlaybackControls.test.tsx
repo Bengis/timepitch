@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { fireEvent, render, screen, within } from '@testing-library/react';
-import { PlaybackControls, realDuration, type TransportMark } from './PlaybackControls';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
+import { PlaybackControls, realDuration, transportMarkGroups, type TransportMark } from './PlaybackControls';
 import { LanguageProvider } from '../i18n';
 import type { PlaybackState } from './playback';
 import type { SessionDescriptor } from './session';
@@ -16,6 +16,46 @@ function setup(props: { s?: PlaybackState; d?: SessionDescriptor; marks?: Transp
 }
 
 describe('PlaybackControls (barra de emisión)', () => {
+  it('shows zero time left once ended even when the presented frame trails the playback clock', () => {
+    const view = render(<PlaybackControls state={state({ status: 'ended', isMatchEnd: true, elapsedMs: 119_990 })} descriptor={descriptor()}
+      cursor={{ elapsedMs: 119_990, period: 2, periodMs: 59_990 }} clock={{ now: '93:05', end: "90'" }}
+      onPlay={vi.fn()} onPause={vi.fn()} onSeek={vi.fn()} onSpeed={vi.fn()} onReplay={vi.fn()} />);
+    expect(view.container.querySelector('.unified-playback-time')).toHaveTextContent('93:05 · left 0 s');
+    expect(realDuration(0, 1)).toBe('0 s');
+  });
+  it('separates half-time from nearby goals and preserves every clustered event destination', () => {
+    const close: TransportMark[] = [
+      { id: 'g44', atMs: 44_000, seekMs: 41_000, label: "Goal 44'", kind: 'goal' },
+      { id: 'g44b', atMs: 44_500, seekMs: 41_500, label: "Goal 44.5'", kind: 'goal' },
+      { id: 'ht', atMs: 45_000, seekMs: 45_000, label: 'Half-time', kind: 'halftime' },
+      { id: 'g80', atMs: 80_000, seekMs: 77_000, label: "Goal 80'", kind: 'goal' },
+    ];
+    const groups = transportMarkGroups(close, 90_000, 280);
+    expect(groups.map(g => g.marks.map(m => m.id))).toEqual([['g44', 'g44b'], ['g80']]);
+    for (let i = 1; i < groups.length; i++) expect((groups[i].atMs - groups[i - 1].atMs) / 90_000 * 280).toBeGreaterThanOrEqual(44);
+    const { view, onSeek } = setup({ marks: close, d: descriptor({ durationMs: 90_000 }) });
+    expect(view.container.querySelector('.pbk-marks [data-kind="halftime"]')).toBeNull();
+    expect(view.container.querySelector('.pbk-meta')).toContainElement(screen.getByRole('button', { name: 'Half-time' }));
+    const select = screen.getByRole('combobox', { name: 'Choose an event' });
+    fireEvent.change(select, { target: { value: 'g44' } }); expect(onSeek).toHaveBeenLastCalledWith(41_000);
+    fireEvent.change(select, { target: { value: 'g44b' } }); expect(onSeek).toHaveBeenLastCalledWith(41_500);
+    fireEvent.click(screen.getByRole('button', { name: 'Half-time' })); expect(onSeek).toHaveBeenLastCalledWith(45_000);
+  });
+  it('puts the rail before the transport actions and briefly confirms real event seeks', () => {
+    vi.useFakeTimers();
+    try {
+      const { onSeek, view } = setup({ marks });
+      const rail = view.container.querySelector('.pbk-scrub')!, buttons = view.container.querySelector('.pbk-btns')!;
+      expect(rail.compareDocumentPosition(buttons) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(view.container.querySelector('.pbk-feedback')).toBeNull();
+      fireEvent.click(screen.getByRole('button', { name: "Goal 20'" }));
+      expect(onSeek).toHaveBeenLastCalledWith(17_000);
+      expect(view.container.querySelector('.pbk-feedback')).toHaveTextContent("Goal 20'");
+      expect(view.container.querySelector('.unified-playback-time')).toHaveAttribute('data-seek-feedback');
+      act(() => { vi.advanceTimersByTime(700); });
+      expect(view.container.querySelector('.pbk-feedback')).toBeNull();
+    } finally { vi.useRealTimers(); }
+  });
   it('icon buttons keep accessible names: play/pause, ±10 s and previous/next event over the marks', () => {
     const { onPlay, onSeek } = setup({ marks });
     fireEvent.click(screen.getByRole('button', { name: 'Play' })); expect(onPlay).toHaveBeenCalledOnce();
@@ -100,4 +140,5 @@ it('TP254: halfOptions offers FIFA-style half lengths that fit the recording, pl
   const { halfOptions } = await import('./PlaybackControls');
   expect(halfOptions(5_811_700, 2).map(o => o.minutes)).toEqual([2, 2.5, 3, 5, 10, 48]); // 48: la demo a 1×
   expect(halfOptions(300_000, 2).map(o => [o.minutes, o.speed])).toEqual([[2, 1.25], [2.5, 1]]);
+  expect(halfOptions(308_000, 2).map(o => o.minutes)).toEqual([2, 2.5]); // 2:34 por parte: sin un «2,6» casi igual
 });

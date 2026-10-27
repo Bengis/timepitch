@@ -1,10 +1,10 @@
 // Partido de demostración (G17): Arsenal 2003/04 contra Manchester City 2024/25, simulación ficticia entre épocas
-// (decisión del 22-oct). El movimiento sale de grabaciones previas de tres motores, cargadas por el índice
+// (decisión de 22-oct). El movimiento sale de grabaciones previas de tres motores, cargadas por el índice
 // versionado y verificadas por SHA-256; el selector cambia solo la grabación y conserva parte y reloj.
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { defineTexts, isLocale, sourceLocale, type Locale } from '../i18n-catalog';
 import { useLanguage } from '../i18n';
-import { fictional, showClub } from '../catalog/fictional';
+import { fictional, showClub, showPlayer, namesMode } from '../catalog/fictional';
 import { MatchCentre } from './MatchCentre';
 import { elapsedForPlayhead, movementOptions, movementText, playheadAt, type MovementMatch, type MovementOption, type Playhead } from './adapters/movement-selector';
 import { httpReplayReader, loadRecordedReplay, TRACKED_REPLAY_INDEX, type RecordedReplayIndex } from './adapters/recorded-replay';
@@ -14,6 +14,11 @@ import { prepareRecordedAnalysis, type RecordedAnalysisModel } from './analysis/
 import { RecordingError, type RecordedEngineId, type RecordedTrack } from './adapters/recorded-track';
 import type { MatchSessionAdapter } from './session';
 import { CrewReportPanel } from './CrewReportPanel';
+import {recordedSpeechIdentity} from './narration/azure-cues';
+import type {ReplayAudioSource} from './narration/ReplayAudio';
+import {resolveSummaryDisplaySource} from './narration/summary-source';
+import {summaryScope,type SummaryCorrection} from './narration/summary-corrections';
+import type {BuiltMatchCast} from '../presentation/cast';
 import './broadcast-layout.css';
 
 /** Partido y semilla de la demo; las grabaciones de otra semilla salen «no disponible» (ver TP193). */
@@ -32,7 +37,7 @@ const TEXT = defineTexts('demo', {
     reasons: { no_recording: 'sin grabación para este partido y semilla' } as Record<string, string> },
 });
 
-type Loaded = { engine: RecordedEngineId; track: RecordedTrack; adapter: MatchSessionAdapter; startMs: number; analysis: RecordedAnalysisModel; load: number };
+type Loaded = { engine: RecordedEngineId; track: RecordedTrack; adapter: MatchSessionAdapter; startMs: number; analysis: RecordedAnalysisModel; load: number; testAudio?:ReplayAudioSource;savedAudio?:ReplayAudioSource;savedAudioCast?:BuiltMatchCast;speechCorrections?:readonly SummaryCorrection[] };
 
 export function MovementSelector({ options, value, onChange, language }: {
   options: readonly MovementOption[]; value: RecordedEngineId | null; onChange: (engine: RecordedEngineId) => void; language: Locale;
@@ -80,13 +85,30 @@ export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read,
       if (!controller.signal.aborted) console.warn(`recorded events unavailable for ${entry.id}:`, error);
       return null;
     });
-    Promise.all([loadRecordedReplay(entry, reader, controller.signal), events]).then(([track, recorded]) => {
+    Promise.all([loadRecordedReplay(entry, reader, controller.signal), events]).then(async([track, recorded]) => {
       if (controller.signal.aborted) return;
       const adapter = createRecordedSession(entry.id, track, recorded);
       // Análisis (TP203): una pasada sobre la grabación y los acontecimientos de la sesión; sin sidecar, solo posiciones y goles.
       const analysis = prepareRecordedAnalysis({ track, events: adapter.resolveFrame(track.durationMs).events, passes: recorded?.events.filter(e => e.kind === 'pass') ?? [] });
+      const test=import.meta.env.DEV&&typeof location!=='undefined'&&['127.0.0.1','localhost','[::1]'].includes(location.hostname)&&new URL(location.href).searchParams.get('speechTest')==='1'&&entry.engine==='grf';
+      const preview=import.meta.env.DEV&&typeof location!=='undefined'&&['127.0.0.1','localhost','[::1]'].includes(location.hostname)&&new URL(location.href).searchParams.get('speechPreview')==='1'&&entry.engine==='grf';
+      const summaryPreview=import.meta.env.DEV&&typeof location!=='undefined'&&['127.0.0.1','localhost','[::1]'].includes(location.hostname)&&new URL(location.href).searchParams.get('speechSummaryPreview')==='1'&&entry.engine==='grf'&&namesMode()==='fictional';
+      const testAudio=test&&!preview&&!summaryPreview?{manifestUrl:`/speech-test/${namesMode()}.json`,expectedSource:await recordedSpeechIdentity(entry,track,namesMode())}:undefined;
+      let savedAudio=preview?{manifestUrl:'/speech-preview/manifest.json',expectedSource:await recordedSpeechIdentity(entry,track,namesMode())}:undefined;
+      let speechCorrections:readonly SummaryCorrection[]|undefined;
+      let savedAudioCast:BuiltMatchCast|undefined;
+      if(summaryPreview){
+        const resolved=await resolveSummaryDisplaySource(entry,track,adapter.snapshot().panels.data?.players??[],async file=>{
+          const response=await fetch('/data/players/'+file,{signal:controller.signal,credentials:'omit'});
+          if(!response.ok)throw new Error('Summary display identities unavailable');return response.json();
+        });
+        savedAudio={manifestUrl:'/speech-summary-preview/manifest.json',expectedSource:resolved.source};
+        speechCorrections=summaryScope(resolved.source,'en');
+        savedAudioCast=resolved.cast;
+      }
+      if(controller.signal.aborted){adapter.dispose();return;}
       current.current?.dispose(); current.current = adapter;
-      setLoaded({ engine: entry.engine, track, adapter, startMs: playhead ? elapsedForPlayhead(track, playhead) : 0, analysis, load: ++loads.current });
+      setLoaded({ engine: entry.engine, track, adapter, startMs: playhead ? elapsedForPlayhead(track, playhead) : 0, analysis, load: ++loads.current,testAudio,savedAudio,savedAudioCast,speechCorrections });
     }).catch(error => {
       if (controller.signal.aborted) return;
       setFailure(error instanceof RecordingError ? `${error.code}: ${error.message}` : String(error));
@@ -117,9 +139,10 @@ export function DemoMatch({ visible, onBack, index = TRACKED_REPLAY_INDEX, read,
     {busy && <p className="demo-status" role="status">{text.loading}…</p>}
     {failure && <p className="demo-status" role="alert">{text.failed} · {failure}</p>}
     {loaded && <MatchCentre key={`${loaded.adapter.identity.id}#${loaded.load}`} adapter={loaded.adapter} visible={visible} onBack={onBack}
-      matchLabel={text.fictional} initialElapsedMs={loaded.startMs} analysis={loaded.analysis} autoplay={autoplay && loaded.load === 1} rendererLocked={rendererLocked}
-      // TP259: las crónicas ya escritas nombran a los jugadores reales; en la liga ficticia no se muestran.
-      sideReport={fictional() ? undefined : ({ revealed, reveal }) => <CrewReportPanel traceHash={loaded.track.traceHash} locale={language} open={revealed || focusReport} onOpen={reveal} />} />}
+      matchLabel={text.fictional} initialElapsedMs={loaded.startMs} analysis={loaded.analysis} autoplay={autoplay && loaded.load === 1&&!loaded.savedAudio} rendererLocked={rendererLocked} testAudio={loaded.testAudio} savedAudio={loaded.savedAudio} savedAudioCast={loaded.savedAudioCast} speechCorrections={loaded.speechCorrections}
+      // Same sealed recording and report; only displayed identities change, explicitly labelled in the panel.
+      sideReport={loaded.savedAudio?undefined:({ revealed, reveal, onAvailability }) => <CrewReportPanel traceHash={loaded.track.traceHash} locale={language} open={revealed || focusReport} onOpen={reveal} onAvailability={onAvailability}
+        displayNames={fictional() ? [[loaded.track.home.name, showClub(loaded.track.home.name)], [loaded.track.away.name, showClub(loaded.track.away.name)], ...loaded.track.players.map(p=>[p.name,showPlayer(p.name)] as const)] : []} />} />}
   </section>;
 }
 

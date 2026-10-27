@@ -7,6 +7,7 @@ import type { EventView } from '../session';
 import { eventMinute, Panel, type TimelineContext } from '../analysis/RecordedAnalysisViews';
 import { narrate, type NarrationLine } from './narration';
 import './narration.css';
+import {applySummaryCorrections,type SummaryCorrection} from './summary-corrections';
 
 const TEXT = defineTexts('narration-panel', {
   es: { title: 'Narración', empty: 'El partido aún no ha empezado.', seek: (m: string) => `Ver la jugada del ${m}` },
@@ -15,11 +16,11 @@ const TEXT = defineTexts('narration-panel', {
 /** Frases visibles en la lista: suficientes para seguir el partido sin cargar la columna. */
 const SHOWN = 40;
 
-export function NarrationPanel({ ctx, events, untilMs, keepers, onSeek }: { ctx: TimelineContext; events: readonly EventView[]; untilMs: number;
-  keepers: ReadonlySet<string>; onSeek: (ms: number) => void }) {
+export function NarrationPanel({ ctx, events, untilMs, keepers, onSeek,speechCorrections=[] }: { ctx: TimelineContext; events: readonly EventView[]; untilMs: number;
+  keepers: ReadonlySet<string>; onSeek: (ms: number) => void;speechCorrections?:readonly SummaryCorrection[] }) {
   const { locale } = useLanguage(), t = TEXT(locale);
-  const all = useMemo(() => narrate(events, { locale, keepers, name: id => ctx.player(id)?.name ?? null,
-    teams: { home: ctx.teams.home.name, away: ctx.teams.away.name } }), [events, locale, keepers, ctx]);
+  const all = useMemo(() => applySummaryCorrections(narrate(events, { locale, keepers, name: id => ctx.player(id)?.name ?? null,
+    teams: { home: ctx.teams.home.name, away: ctx.teams.away.name } }),locale==='en'?speechCorrections:[]), [events, locale, keepers, ctx,speechCorrections]);
   const shown = useMemo(() => all.filter(l => l.atMs <= untilMs).slice(-SHOWN).reverse(), [all, untilMs]);
   const line = (l: NarrationLine, now: boolean) => {
     const minute = l.kind === 'mark' && l.source.kind === 'halftime' ? '' : eventMinute(l.source, ctx.source), team = l.side ? ctx.teams[l.side] : null;

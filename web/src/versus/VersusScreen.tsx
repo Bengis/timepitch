@@ -7,6 +7,8 @@ import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, 
 import { createPortal } from 'react-dom';
 import type { PlayerSeason, Statistic, TeamSeason, TeamSummary } from '../api';
 import { TeamCrest } from '../catalog/TeamCrest';
+import { fictional } from '../catalog/fictional';
+import type { Engine } from '../grf/EngineSelector';
 import { resolveKits } from '../catalog/kits';
 import { linkFor, loadSquad, recordFor, type PlayerCardRecord } from '../catalog/player-registry';
 import { appearanceFor } from '../catalog/appearance';
@@ -33,6 +35,8 @@ export type VersusScreenProps = Readonly<{
   playDisabled?: boolean;
   playControls?: ReactNode;
   playStatus?: ReactNode;
+  /** Duración deportiva del motor elegido; no estima la espera para generarlo ni la de replays guardados. */
+  engine?: Engine;
   /** TP237: alineaciones y semilla, dentro del único plegable «Más detalles». */
   moreDetails?: ReactNode;
 }>;
@@ -130,6 +134,19 @@ function SideCard({ side, sel, summary, record, open, onChoose, t, buttonRef }: 
   side: Side; sel: VersusSide; summary: TeamSummary | undefined; record: Load<TeamSeasonRecord>; open: boolean; onChoose: () => void; t: VersusText;
   buttonRef: (el: HTMLButtonElement | null) => void;
 }) {
+  const [expanded, setExpanded] = useState(false);
+  const [updated, setUpdated] = useState(false);
+  const previousKey = useRef(sel.key);
+  useEffect(() => {
+    if (previousKey.current === sel.key) return;
+    previousKey.current = sel.key;
+    setExpanded(false);
+    setUpdated(true);
+    const timer = setTimeout(() => setUpdated(false), 650);
+    return () => clearTimeout(timer);
+  }, [sel.key]);
+  const detailsOpen = expanded;
+  const detailsId = `vs-team-details-${side}`;
   const kits = resolveKits(sel.key);
   const kit = kits.home;
   const shirt = isHex(kit?.shirt) ? kit!.shirt : '#3a4150';
@@ -144,9 +161,8 @@ function SideCard({ side, sel, summary, record, open, onChoose, t, buttonRef }: 
     if ((event.target as Element).closest('a, button, summary, details, input, select')) return;
     onChoose();
   };
-  return <section className={`vs-side vs-side--${side}${open ? ' is-active' : ''}`} style={style}
+  return <section className={`vs-side vs-side--${side}${open ? ' is-active' : ''}${updated ? ' is-updated' : ''}`} style={style}
     aria-label={`${sideName}: ${name} ${seasonLabelOf(sel.key)}`} onClick={cardClick}>
-    <div className="vs-side-band" aria-hidden="true" />
     <header className="vs-side-head">
       <span className="vs-crest"><TeamCrest teamKey={sel.key} /></span>
       <div className="vs-side-id">
@@ -158,10 +174,11 @@ function SideCard({ side, sel, summary, record, open, onChoose, t, buttonRef }: 
       <button type="button" ref={buttonRef} className="vs-change" aria-haspopup="dialog" aria-expanded={open} onClick={onChoose}>
         <span aria-hidden="true">⇄ </span>{sel.key ? t.changeTeam : t.chooseTeam}</button>
     </header>
-    {/* TP240 («vuelve a la de ayer y límpiala»): balance y estrella siempre a la vista; sin etiquetas de
-        procedencia ni desplegable de fuentes en la portada. */}
-    <div className="vs-side-body">
-      <div className="vs-side-record"><RecordLine record={record} t={t} /></div>
+    <p className="vs-selection-status" role="status">{updated ? t.teamUpdated : ''}</p>
+    <div className="vs-side-record"><RecordLine record={record} t={t} /></div>
+    <button type="button" className="vs-team-details-toggle" aria-expanded={detailsOpen} aria-controls={detailsId}
+      onClick={() => setExpanded(value => !value)}>{t.star} <span aria-hidden="true">{detailsOpen ? '−' : '+'}</span></button>
+    <div className="vs-side-body" id={detailsId} hidden={!detailsOpen}>
       {sel.failed ? <p className="vs-muted vs-star-missing">{t.starUnavailable}</p>
         : team ? <StarBlock team={team} teamKey={sel.key} t={t} side={side} />
           : <p className="vs-muted vs-star-missing" role="status">…</p>}
@@ -274,7 +291,7 @@ function TeamPicker({ teams, side, setSide, home, away, onClose, t }: {
  * Primera visita (decisión TP225): el enfrentamiento de la demo, Arsenal 2003/04 contra Manchester City 2024/25, viene
  * preseleccionado (lo fija `App`); así la pantalla nunca abre vacía y cada tarjeta ya invita a «Cambiar equipo».
  */
-export function VersusScreen({ teams, home, away, onPlay, onOpenAiReport, playDisabled, playControls, playStatus, moreDetails }: VersusScreenProps) {
+export function VersusScreen({ teams, home, away, onPlay, onOpenAiReport, playDisabled, playControls, playStatus, moreDetails, engine }: VersusScreenProps) {
   const t = useVersusText();
   const [picking, setPicking] = useState<Side | null>(null);
   const opener = useRef<Record<Side, HTMLButtonElement | null>>({ home: null, away: null });
@@ -302,21 +319,25 @@ export function VersusScreen({ teams, home, away, onPlay, onOpenAiReport, playDi
     <div className="vs-stage">
       <SideCard side="home" sel={home} summary={byKey.get(home.key)} record={homeRecord} open={picking === 'home'} onChoose={() => open('home')} t={t}
         buttonRef={el => { opener.current.home = el; }} />
-      <div className="vs-badge" aria-hidden="true"><span>{t.vs}</span></div>
       <SideCard side="away" sel={away} summary={byKey.get(away.key)} record={awayRecord} open={picking === 'away'} onChoose={() => open('away')} t={t}
         buttonRef={el => { opener.current.away = el; }} />
     </div>
     {/* TP240 («quitar todo lo que sobre»): un solo botón; motor, gráficos, alineaciones y semilla, en «Opciones».
         Sin demo, rivalidad ni «Más detalles». */}
     <div className="vs-launch">
-      <div className="vs-shortcuts">
-        <button type="button" onClick={swap} disabled={!ready}><span aria-hidden="true">⇄</span> {t.swap}</button>
-        <button type="button" onClick={random} disabled={teams.length < 2}><span aria-hidden="true">🎲</span> {t.random}</button>
-      </div>
       {/* TP248: motor y gráficos a la vista, encima de «Jugar partido». */}
       {playControls}
       <button type="button" className="vs-cta" disabled={!ready || playDisabled} onClick={onPlay}>{t.play} <span aria-hidden="true">▸</span></button>
       {playStatus ?? (!ready && <p className="vs-muted">{t.playWaiting}</p>)}
+      <div className="vs-explainer">
+        <p className="vs-duration">{engine === 'grf' ? t.grfDuration : engine === 'touchlines' ? t.touchlinesDuration : t.playbackDuration}</p>
+        <p className="vs-identity">{fictional() ? t.fictionalProvenance : t.realProvenance}</p>
+        <p className="vs-ai-promise"><span aria-hidden="true">✦ </span>{t.engineAndAi}</p>
+      </div>
+      <div className="vs-shortcuts">
+        <button type="button" onClick={swap} disabled={!ready}><span aria-hidden="true">⇄</span> {t.swap}</button>
+        <button type="button" onClick={random} disabled={teams.length < 2}><span aria-hidden="true">🎲</span> {t.random}</button>
+      </div>
       {/* TP250 («no se entiende para qué sirve»): dice qué abre y cuándo se escribe la crónica. */}
       {onOpenAiReport && <button type="button" className="vs-ai-link" onClick={onOpenAiReport}><span className="vs-ai-icon" aria-hidden="true">✦</span>
         <span className="vs-ai-text"><span>{t.aiReport} <span aria-hidden="true">→</span></span><small>{t.aiReportNote}</small></span></button>}

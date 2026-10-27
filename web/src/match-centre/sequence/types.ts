@@ -22,8 +22,10 @@ export type PlayMoment = Readonly<{
   title: string; explanation: string; shotXg: number | null;
 }>;
 export type PlaybackPolicy = Readonly<{
-  id: 'ayew-equaliser-1' | 'halftime-check-1'; fromMs: number; toMs: number; speeds: readonly number[];
+  id: 'ayew-equaliser-1' | 'halftime-check-1' | 'match-highlights-1'; fromMs: number; toMs: number; speeds: readonly number[];
   pauseAt: readonly Readonly<{ atMs: number; endingPeriod: number }>[];
+  /** Optional source windows: play footage at 1× and cut the gaps. */
+  windows?: readonly Readonly<{fromMs:number;toMs:number}>[];
 }>;
 export type PlaybackStop = { kind: 'clip-end'; atMs: number } | { kind: 'halftime'; atMs: number; endingPeriod: number };
 export type ClockView = Readonly<{ state: 'playing' | 'halftime' | 'fulltime' | 'unavailable'; period: number; text: string }>;

@@ -19,6 +19,53 @@ afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 function frame(ms: number) { act(() => { now += ms; const batch = [...callbacks.values()]; callbacks.clear(); batch.forEach(cb => cb(now)); }); }
 
 describe('shared playback lifecycle', () => {
+  it('publishes one coherent state, frame cursor and demand even while the wall clock advances on reads',async()=>{
+    const f=syntheticAdapter();
+    const {result}=renderHook(()=>useMatchPlayback(f.adapter,true),{wrapper:StrictMode});
+    act(()=>result.current.play());
+    vi.mocked(performance.now).mockImplementation(()=>now+=.1);
+    frame(32);
+    expect(result.current.view!.cursor.elapsedMs).toBe(result.current.state.elapsedMs);
+  });
+  it('does not advance the controller during a React rerender between published ticks',()=>{
+    const f=syntheticAdapter();
+    const {result,rerender}=renderHook(()=>useMatchPlayback(f.adapter,true),{wrapper:StrictMode});
+    act(()=>result.current.play());frame(32);
+    const presented=result.current.state.elapsedMs;
+    now+=7;rerender();
+    expect(result.current.state.elapsedMs).toBe(presented);
+    frame(32);expect(result.current.state.elapsedMs).toBeGreaterThan(presented);
+  });
+  it('retains confirmed user seek provenance even if the clock advances before its render',async()=>{
+    const f=syntheticAdapter();
+    f.adapter.ensure=vi.fn(async(ms,_signal,demand)=>{
+      const next=syntheticSnapshot();next.requestedCursor=next.presentedCursor=cursorAt(next.descriptor,ms,demand?.endingPeriod);f.publish(next);
+    });
+    const {result}=renderHook(()=>useMatchPlayback(f.adapter,true));
+    let revision:unknown;
+    act(()=>{revision=result.current.seek(0);result.current.play();});
+    expect(result.current).toMatchObject({seekState:{revision:1,targetMs:0,status:'pending'}});
+    await act(async()=>{});frame(1);
+    expect(revision).toBe(1);expect(result.current.state.elapsedMs).toBe(1);
+    expect(result.current).toMatchObject({seekState:{revision:1,targetMs:0,status:'settled'}});
+    frame(50);expect(result.current).toMatchObject({seekState:{revision:1,targetMs:0,status:'settled'}});
+  });
+  it('only confirms the latest user seek and cancels pending provenance on a policy replacement',async()=>{
+    const f=syntheticAdapter();let release!:(()=>void);
+    f.adapter.ensure=vi.fn(async(ms,signal,demand)=>{
+      if(ms===7000)await new Promise<void>(r=>{release=r;});
+      if(signal.aborted)return;
+      const next=syntheticSnapshot();next.requestedCursor=next.presentedCursor=cursorAt(next.descriptor,ms,demand?.endingPeriod);f.publish(next);
+    });
+    const {result,rerender}=renderHook(({policy}:{policy:PlaybackPolicy|undefined})=>useMatchPlayback(f.adapter,true,policy),{initialProps:{policy:undefined as PlaybackPolicy|undefined}});
+    act(()=>result.current.seek(7000));await act(async()=>{});
+    act(()=>result.current.seek(200));await act(async()=>{});
+    expect(result.current).toMatchObject({seekState:{revision:2,targetMs:200,status:'settled'}});
+    await act(async()=>release());expect(result.current).toMatchObject({seekState:{revision:2,targetMs:200,status:'settled'}});
+    act(()=>result.current.seek(7000));await act(async()=>{});
+    await act(async()=>rerender({policy:{id:'halftime-check-1',fromMs:0,toMs:9000,speeds:[1],pauseAt:[]}}));
+    expect(result.current).toMatchObject({seekState:{revision:3,targetMs:7000,status:'cancelled'}});
+  });
   it('equivalent policy rerenders while the wall clock advances do not buffer or request the source again', async () => {
     const f=syntheticAdapter();f.adapter.ensure=vi.fn(async()=>{});
     const policy:PlaybackPolicy={id:'ayew-equaliser-1',fromMs:1000,toMs:9000,speeds:[.5,1,2],pauseAt:[]};

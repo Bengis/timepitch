@@ -10,11 +10,11 @@
 }
 .pbk.unified-transport { display: grid; gap: 6px; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--pbk-line); background: var(--pbk-panel); color: var(--pbk-ink); }
 .pbk button { margin: 0; }
-.pbk-main { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; }
+.pbk-main { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px 16px; }
 
 /* Botones de icono */
 .pbk-btns { display: flex; align-items: center; gap: 6px; }
-.pbk .pbk-btn { width: 38px; height: 38px; min-width: 0; min-height: 0; padding: 0; border-radius: 10px; border: 1px solid var(--pbk-line); background: var(--pbk-btn); color: var(--pbk-ink); display: grid; place-items: center; }
+.pbk .pbk-btn { width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; border-radius: 10px; border: 1px solid var(--pbk-line); background: var(--pbk-btn); color: var(--pbk-ink); display: grid; place-items: center; }
 .pbk .pbk-btn svg { width: 18px; height: 18px; }
 .pbk .pbk-btn.pbk-play { width: 52px; height: 52px; min-width: 0; border-radius: 50%; border: 0; background: linear-gradient(180deg, #fff, #d9e2f2); color: #0a1020; box-shadow: 0 8px 20px -8px rgba(255,255,255,.4); }
 .pbk .pbk-btn.pbk-play svg { width: 22px; height: 22px; }
@@ -25,21 +25,27 @@
 
 /* Scrubber: rail visual + input range nativo (teclado y lectores) encima, transparente salvo la perilla.
    El rail va metido 8 px por lado para que el centro de la perilla (16 px) coincida con el porcentaje. */
-.pbk-scrub { position: relative; height: 48px; min-width: 0; }
-.pbk-rail, .pbk-marks { position: absolute; left: 8px; right: 8px; }
+.pbk-scrub { grid-column: 1 / -1; position: relative; height: 62px; min-width: 0; }
+.pbk-scrub:has(.pbk-marks) { height: 100px; }
+.pbk-rail, .pbk-marks { position: absolute; left: 22px; right: 22px; }
 .pbk-rail { top: 24px; height: 6px; }
+.pbk-scrub:has(.pbk-marks) .pbk-rail { top: 62px; }
 .pbk-track, .pbk-fill { position: absolute; top: 0; left: 0; height: 6px; border-radius: 3px; }
 .pbk-track { right: 0; background: var(--pbk-track); }
 .pbk-fill { width: var(--pbk-fill, 0%); background: linear-gradient(90deg, var(--pbk-hi), #9cc0ff); }
 .pbk-ht { position: absolute; top: -6px; left: var(--pbk-at); width: 2px; height: 18px; transform: translateX(-50%); background: var(--pbk-ink3); }
-.pbk-marks { top: 0; height: 18px; pointer-events: none; }
-.pbk .pbk-mk { position: absolute; top: 0; left: var(--pbk-at); transform: translateX(-50%); width: 18px; height: 18px; min-width: 0; min-height: 0; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--pbk-ink); display: grid; place-items: center; pointer-events: auto; z-index: 2; }
+.pbk-marks { top: 0; height: 44px; pointer-events: none; }
+.pbk.unified-transport .pbk-mk { position: absolute; top: 0; left: var(--pbk-at); transform: translateX(-50%); width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; border: 0; border-radius: 10px; background: transparent; color: var(--pbk-ink); display: grid; place-items: center; pointer-events: auto; z-index: 2; }
 .pbk .pbk-mk svg { width: 14px; height: 14px; }
-.pbk .pbk-mk[data-kind="halftime"] { top: 18px; width: 10px; height: 18px; border-radius: 2px; }
+.pbk .pbk-mk[data-kind="halftime"] { border-radius: 10px; }
 .pbk .pbk-mk[data-kind="halftime"]::after { content: ""; display: block; width: 2px; height: 18px; margin: 0; border-radius: 1px; background: var(--pbk-ink3); }
 .pbk .pbk-mk:hover, .pbk .pbk-mk:focus-visible { background: color-mix(in srgb, var(--pbk-hi) 30%, transparent); }
+.pbk .pbk-event-select { position: absolute; top: 0; left: var(--pbk-at); transform: translateX(-50%); width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+  padding: 0 4px; border: 1px solid var(--pbk-line); border-radius: 10px; background: var(--pbk-btn); color: var(--pbk-ink); pointer-events: auto; z-index: 2; }
+.pbk .pbk-event-select:focus-visible { outline: 2px solid var(--pbk-hi); }
 
-.pbk .pbk-range { position: absolute; left: 0; right: 0; top: 17px; width: 100%; height: 20px; margin: 0; padding: 0; background: transparent; -webkit-appearance: none; appearance: none; accent-color: var(--pbk-hi); z-index: 1; }
+.pbk .pbk-range { position: absolute; left: 14px; right: 14px; top: 5px; width: calc(100% - 28px); height: 44px; margin: 0; padding: 0; background: transparent; -webkit-appearance: none; appearance: none; accent-color: var(--pbk-hi); z-index: 1; }
+.pbk-scrub:has(.pbk-marks) .pbk-range { top: 44px; }
 .pbk .pbk-range::-webkit-slider-runnable-track { height: 20px; background: transparent; border: 0; }
 .pbk .pbk-range::-moz-range-track { height: 20px; background: transparent; border: 0; }
 .pbk .pbk-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; margin-top: 2px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgba(47,123,255,.35); cursor: pointer; }
@@ -47,12 +53,15 @@
 .pbk .pbk-range:disabled::-webkit-slider-thumb { visibility: hidden; }
 .pbk .pbk-range:disabled::-moz-range-thumb { visibility: hidden; }
 .pbk .pbk-range:focus-visible { outline: 2px solid var(--pbk-hi); outline-offset: 2px; border-radius: 6px; }
-.pbk-lbls { position: absolute; left: 8px; right: 8px; top: 36px; display: flex; justify-content: space-between; font-size: 10px; line-height: 12px; color: var(--pbk-ink3); font-variant-numeric: tabular-nums; pointer-events: none; }
+.pbk-lbls { position: absolute; left: 22px; right: 22px; bottom: 0; display: flex; justify-content: space-between; font-size: 12px; line-height: 14px; color: var(--pbk-ink3); font-variant-numeric: tabular-nums; pointer-events: none; }
 .pbk-lbls .pbk-lbl-ht { position: absolute; left: var(--pbk-at); transform: translateX(-50%); }
 
 /* Velocidades en segmento */
-.pbk-speed { display: flex; gap: 2px; padding: 3px; border-radius: 9px; background: var(--pbk-seg); border: 1px solid var(--pbk-line); }
-.pbk .pbk-speed button { min-width: 0; min-height: 0; padding: 5px 8px; border: 0; border-radius: 6px; background: transparent; color: var(--pbk-ink2); font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pbk-speed { display: flex; flex-wrap: wrap; justify-self: end; justify-content: center; gap: 2px; padding: 2px; border-radius: 9px; background: var(--pbk-seg); border: 1px solid var(--pbk-line); }
+.pbk-duration-options { display: flex; flex-wrap: wrap; gap: 2px; }
+.pbk-duration-select { display: none; }
+.pbk .pbk-duration-select { width: 100%; min-width: 0; min-height: 44px; padding: 4px; border-radius: 8px; border: 1px solid var(--pbk-line); background: var(--pbk-btn); color: var(--pbk-ink); font-size: 12px; }
+.pbk .pbk-speed button { min-width: 44px; min-height: 44px; padding: 4px 6px; border: 0; border-radius: 6px; background: transparent; color: var(--pbk-ink2); font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .pbk .pbk-speed button[aria-pressed="true"] { background: var(--pbk-on); color: var(--pbk-ink); }
 
 /* Fila secundaria compacta: reloj de reproducción (no es el reloj del partido), parte y repetir */
@@ -67,12 +76,35 @@
 .pbk .pbk-sound + .pbk-replay { margin-left: 0; }
 .pbk .pbk-sound[aria-pressed="false"] { color: var(--pbk-ink3); }
 .pbk p[role="status"] { margin: 0; font-size: 11px; color: var(--pbk-ink2); }
+.pbk .pbk-phase select, .pbk .pbk-replay { min-height: 44px; }
+.pbk .unified-playback-time { border-radius: 4px; transition: background-color 150ms ease, color 150ms ease; }
+.pbk .unified-playback-time[data-seek-feedback] { background: var(--pbk-on); color: #fff; outline: 1px solid var(--pbk-hi); }
+.pbk .pbk-feedback { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.pbk button { transition: background-color 150ms ease, border-color 150ms ease; }
 
 @container pbk (max-width: 600px) {
   .pbk-main { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .pbk-main:has(.pbk-halves) { grid-template-columns: auto minmax(0, 1fr); gap: 8px; }
   .pbk-btns { justify-content: center; }
   .pbk-speed { justify-self: center; }
   .pbk-meta { justify-content: center; }
+  .pbk .pbk-replay { margin-left: 0; }
+  .pbk-halves { min-width: 0; border: 0; background: transparent; padding: 0; }
+  .pbk-halves .pbk-duration-options { display: none; }
+  .pbk-halves .pbk-speed-label { font-size: 9px; padding: 0; letter-spacing: 0; }
+  .pbk .pbk-duration-select { display: block; width: 100%; min-width: 0; min-height: 44px; padding: 4px; border-radius: 8px; border: 1px solid var(--pbk-line); background: var(--pbk-btn); color: var(--pbk-ink); font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .pbk button, .pbk .unified-playback-time { transition: none; } }
+@container pbk (min-width: 950px) {
+  .pbk.unified-transport { grid-template-columns: auto minmax(88px, auto) minmax(0, 1fr); align-items: center; gap: 6px 14px; }
+  .pbk-main { display: contents; }
+  .pbk-scrub { grid-column: 1 / -1; }
+  .pbk-btns { grid-column: 1; }
+  .pbk-speed { grid-column: 2; }
+  .pbk-halves { display: grid; grid-template-columns: auto 88px; align-items: center; gap: 6px; border: 0; background: transparent; padding: 0; }
+  .pbk-halves .pbk-duration-options { display: none; }
+  .pbk .pbk-duration-select { display: block; }
+  .pbk-meta { grid-column: 3; gap: 4px 10px; justify-content: flex-end; }
   .pbk .pbk-replay { margin-left: 0; }
 }
 /* TP254: «Cada parte» delante de las duraciones, como en FIFA. */

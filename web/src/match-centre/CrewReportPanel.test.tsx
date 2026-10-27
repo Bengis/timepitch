@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
-import { expect, it } from 'vitest';
-import { CrewReportPanel, pickReport, type CrewReportIndex, type CrewReportView } from './CrewReportPanel';
+import { act, render, screen, waitFor } from '@testing-library/react';
+import { expect, it, vi } from 'vitest';
+import { AzurePipeline, CrewReportPanel, pickReport, reportNames, type CrewReportIndex, type CrewReportView } from './CrewReportPanel';
 
 // TP246: crónica IA pregenerada de la demo, ligada a la grabación (trace_hash) y al idioma.
 const report = (locale: 'en' | 'es', evaluation: CrewReportView['evaluation'] = null): CrewReportView => ({
@@ -10,6 +10,65 @@ const report = (locale: 'en' | 'es', evaluation: CrewReportView['evaluation'] = 
 });
 const index: CrewReportIndex = { version: 'crew-demo-reports-1', reports: [report('en', { groundedness: 5, coherence: 5, fluency: 3 }), report('es')] };
 const load = () => Promise.resolve(index);
+
+it('adapts displayed identities once without partial names or cascading replacements', () => {
+  const display=reportNames([['City','Town'],['Manchester City','City'],['A. Player','B. Player']]);
+  expect(display('Manchester City and City; Citywide; A. Player.')).toBe('City and Town; Citywide; B. Player.');
+});
+
+it('shows the saved report in fictional mode without altering its receipt or source', async () => {
+  const before=JSON.stringify(index);
+  render(<CrewReportPanel traceHash="grf-trace" locale="en" open load={load} displayNames={[["Arsenal","North London Reds"]]}/>);
+  expect(await screen.findByText('North London Reds win 6–1')).toBeVisible();
+  expect(screen.getByText(/verification and evaluation refer to the original text/)).toBeVisible();
+  expect(document.querySelector('[data-crew-report]')).toHaveAttribute('data-crew-report','sha-en');
+  expect(JSON.stringify(index)).toBe(before);
+});
+
+it('keeps the saved story and source warning visible with process, model and evaluation folded away', async () => {
+  const view = render(<CrewReportPanel traceHash="grf-trace" locale="en" open load={load} />);
+  expect(await screen.findByText('First sentence. Second sentence.')).toBeVisible();
+  expect(screen.getByText('Fictional cross-era simulation.')).toBeVisible();
+  const metadata = screen.getByText(/0\.0039 USD · Foundry evaluation/);
+  const details = metadata.closest('details');
+  expect(details).not.toBeNull();
+  expect(details).not.toHaveAttribute('open');
+  expect(metadata).not.toBeVisible();
+  expect(screen.getByText(/do not guarantee the interpretation/)).toBeVisible();
+  expect(view.container.querySelectorAll('[data-crew-how]')).toHaveLength(1);
+});
+
+it('reports only full-time availability when the selected recording has a saved report', async () => {
+  const onAvailability = vi.fn();
+  const view = render(<CrewReportPanel traceHash="grf-trace" locale="en" load={load} onAvailability={onAvailability} />);
+  expect(onAvailability).toHaveBeenLastCalledWith({ halfTime: false, fullTime: false });
+  await waitFor(() => expect(onAvailability).toHaveBeenLastCalledWith({ halfTime: false, fullTime: true }));
+  view.rerender(<CrewReportPanel traceHash="missing" locale="en" load={load} onAvailability={onAvailability} />);
+  expect(onAvailability).toHaveBeenLastCalledWith({ halfTime: false, fullTime: false });
+  view.rerender(<CrewReportPanel traceHash="grf-trace" locale="es" load={load} onAvailability={onAvailability} />);
+  expect(onAvailability).toHaveBeenLastCalledWith({ halfTime: false, fullTime: true });
+});
+
+it('reports no saved report availability after the report index fails to load', async () => {
+  const onAvailability = vi.fn();
+  const view = render(<CrewReportPanel traceHash="grf-trace" locale="en" load={load} onAvailability={onAvailability} />);
+  await waitFor(() => expect(onAvailability).toHaveBeenLastCalledWith({ halfTime: false, fullTime: true }));
+  const failed = () => Promise.reject(new Error('offline'));
+  view.rerender(<CrewReportPanel traceHash="grf-trace" locale="en" load={failed} onAvailability={onAvailability} />);
+  await act(async () => { await Promise.resolve(); });
+  expect(onAvailability).toHaveBeenLastCalledWith({ halfTime: false, fullTime: false });
+  expect(view.container).toBeEmptyDOMElement();
+});
+
+it('distinguishes the saved report process from a visitor requested live report', () => {
+  const view = render(<AzurePipeline locale="en" mode="static" />);
+  expect(screen.getByText(/Visitors do not trigger any AI call/)).toBeInTheDocument();
+  view.rerender(<AzurePipeline locale="en" mode="live" />);
+  expect(screen.queryByText(/Visitors do not trigger any AI call/)).toBeNull();
+  expect(screen.queryByText(/published as a static file/)).toBeNull();
+  expect(screen.getByText(/requested for this match/)).toBeInTheDocument();
+  expect(screen.getByText(/not live progress of individual agents/)).toBeInTheDocument();
+});
 
 it('picks the report of the recording in the visitor language, falling back to the other language', () => {
   expect(pickReport(index, 'grf-trace', 'es')?.report_sha256).toBe('sha-es');

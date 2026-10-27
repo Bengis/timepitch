@@ -38,6 +38,9 @@ const TEXT = defineTexts('narration', {
     secondHalf: 'Empieza la segunda parte.',
     halftime: (s: string) => `Descanso. ${s}.`, fulltime: (s: string) => `¡Final del partido! ${s}.`,
     longPass: (a: string, b: string, m: number) => `${a} pasa en largo a ${b}, ${m} metros.`,
+    longPassAttempt: (a: string) => `${a} intenta un pase largo.`,
+    highPassAttempt: (a: string) => `${a} intenta un pase elevado.`,
+    shotAttempt: (a: string) => `${a} dispara.`,
     lostPass: (a: string, b: string) => `${a} lanza en largo, pero se la queda ${b}.`,
     carry: (a: string, m: number) => `${a} conduce el balón ${m} metros.`,
     won: (a: string, b: string | null) => b ? `${a} le roba el balón a ${b}.` : `${a} recupera el balón.`,
@@ -54,6 +57,9 @@ const TEXT = defineTexts('narration', {
     secondHalf: 'The second half is under way.',
     halftime: (s: string) => `Half-time. ${s}.`, fulltime: (s: string) => `Full-time! ${s}.`,
     longPass: (a: string, b: string, m: number) => `${a} plays a long pass to ${b}, ${m} metres.`,
+    longPassAttempt: (a: string) => `${a} attempts a long pass.`,
+    highPassAttempt: (a: string) => `${a} attempts a lofted pass.`,
+    shotAttempt: (a: string) => `${a} shoots.`,
     lostPass: (a: string, b: string) => `${a} goes long, but ${b} wins it.`,
     carry: (a: string, m: number) => `${a} carries the ball ${m} metres.`,
     won: (a: string, b: string | null) => b ? `${a} wins the ball from ${b}.` : `${a} wins the ball back.`,
@@ -98,7 +104,7 @@ export function narrate(events: readonly EventView[], ctx: NarrationContext): Na
     saver.set(String((e.details.evidence as Record<string, unknown>).shot_id), e.actorId);
   let lastWon = -Infinity;
   list.forEach((e, i) => {
-    const grf = isGrf(e), tl = e.details.engine === 'touchlines', next = (pick: (x: EventView) => boolean) => list.slice(i + 1).find(pick);
+    const grf = isGrf(e), recordedGrf = !grf && e.details.engine === 'grf', tl = e.details.engine === 'touchlines', next = (pick: (x: EventView) => boolean) => list.slice(i + 1).find(pick);
     if (e.kind === 'kickoff' && e.side && e.period === 1 && !out.some(l => l.source.kind === 'kickoff')) push(e, 'mark', t.kickoff(ctx.teams[e.side]));
     // Grabaciones: solo el saque que abre la parte (los demás reanudan tras un gol).
     else if (e.kind === 'kickoff' && e.period === 2 && e.details.period_start !== false) push(e, 'mark', t.secondHalf, e.elapsedMs, null, null);
@@ -113,6 +119,11 @@ export function narrate(events: readonly EventView[], ctx: NarrationContext): Na
       const scorer = e.side ? (own && !grf && typeof e.details.engine !== 'string' ? (e.side === 'home' ? 'away' : 'home') : e.side) : null;
       if (scorer) goals[scorer]++;
       push(e, own ? 'own_goal' : 'goal', own ? t.ownGoal(who(e.actorId), score()) : t.goal(who(e.actorId), score()));
+    } else if (recordedGrf && e.kind === 'pass' && e.actorId && (e.details.subtype === 'long_pass' || e.details.subtype === 'high_pass')) {
+      // Saved sidecars record the attempt, not its recipient, distance or completion.
+      push(e, 'pass', (e.details.subtype === 'long_pass' ? t.longPassAttempt : t.highPassAttempt)(who(e.actorId)));
+    } else if (recordedGrf && e.kind === 'shot' && e.actorId) {
+      push(e, 'shot', t.shotAttempt(who(e.actorId)));
     } else if (tl && e.kind === 'shot' && e.actorId) {
       // TouchLines graba el desenlace del tiro; la parada la hace el portero del evento `save` que lo resuelve.
       const at = num(e.details.resolved_t_ms) ? e.details.resolved_t_ms : e.elapsedMs;
@@ -163,11 +174,11 @@ export function narrate(events: readonly EventView[], ctx: NarrationContext): Na
       if (!before || !timed(before) || !before.side || before.side === e.side || !GRF_TOUCH.test(before.kind) || /long_pass|high_pass|shot/.test(before.kind)) return;
       if (e.elapsedMs - before.elapsedMs > WON_MS || e.elapsedMs - lastWon < WON_GAP_MS) return;
       lastWon = e.elapsedMs; push(e, 'won', t.won(who(e.actorId), ctx.name(before.actorId)));
-    } else if (grf && e.kind === 'corner' && e.side) push(e, 'set_piece', t.corner(ctx.teams[e.side]));
+    } else if ((grf || recordedGrf) && e.kind === 'corner' && e.side) push(e, 'set_piece', t.corner(ctx.teams[e.side]));
     // El fuera de juego se sanciona con falta: GRF graba las dos decisiones; se narra solo el fuera de juego.
-    else if (grf && e.kind === 'free_kick' && e.side && !list.slice(Math.max(0, i - 3), i).some(x => x.kind === 'offside' && e.elapsedMs - x.elapsedMs! <= OFFSIDE_FK_MS))
+    else if ((grf || recordedGrf) && e.kind === 'free_kick' && e.side && !list.slice(Math.max(0, i - 3), i).some(x => x.kind === 'offside' && e.elapsedMs - x.elapsedMs! <= OFFSIDE_FK_MS))
       push(e, 'set_piece', t.freeKick(ctx.teams[e.side]));
-    else if (grf && e.kind === 'offside') push(e, 'offside', t.offside(ctx.name(e.actorId)), e.elapsedMs, null);
+    else if ((grf || recordedGrf) && e.kind === 'offside') push(e, 'offside', t.offside(ctx.name(e.actorId)), e.elapsedMs, null);
   });
   // GRF solo graba el saque de la segunda parte: el arranque se narra igual, sin decir quién saca.
   if (list.length && !out.some(l => l.source.kind === 'kickoff' && l.source.period === 1)) {

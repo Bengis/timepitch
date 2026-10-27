@@ -3,7 +3,8 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import type { ReactNode } from 'react';
 import { LanguageProvider } from '../i18n';
 import type { PlayerSeason, TeamSeason, TeamSummary } from '../api';
-import { VersusScreen, type VersusSide } from './VersusScreen';
+import { VersusScreen, type VersusSide, type VersusScreenProps } from './VersusScreen';
+import { setNamesMode } from '../catalog/fictional';
 
 const summary = (club: string, name: string, year: number): TeamSummary => ({
   key: `${club}:${year}`, club, name, season_start: year, season_label: `${year}/${String(year + 1).slice(-2)}`,
@@ -40,17 +41,104 @@ beforeEach(() => {
     return new Response('{}', { status: 404 });
   }));
 });
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => { vi.unstubAllGlobals(); setNamesMode('real', false); });
 
 function side(key: string, team: TeamSeason | null, setKey = vi.fn()): VersusSide { return { key, setKey, team, failed: false }; }
-function mount(home: VersusSide, away: VersusSide, onPlay = vi.fn(), options?: { controls?: ReactNode }) {
-  render(<LanguageProvider><VersusScreen teams={TEAMS} home={home} away={away} onPlay={onPlay} playControls={options?.controls} /></LanguageProvider>);
+function mount(home: VersusSide, away: VersusSide, onPlay = vi.fn(), options?: { controls?: ReactNode; engine?: VersusScreenProps['engine'] }) {
+  return render(<LanguageProvider><VersusScreen teams={TEAMS} home={home} away={away} onPlay={onPlay} playControls={options?.controls} engine={options?.engine} /></LanguageProvider>);
 }
 
 describe('VersusScreen (TP213)', () => {
-  it('shows record and star at once, one Play button with the match choices in view; no demo, rivalry or "More details" (TP240, TP248)', async () => {
+  it.each([false, true])('keeps the season record visible with the star folded on compact=%s (TP271)', async compact => {
+    vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: compact, addEventListener: vi.fn(), removeEventListener: vi.fn() })));
     mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon), vi.fn(), { controls: <label>Engine<select /></label> });
-    expect(screen.getByRole('heading', { name: 'Thierry Henry' })).toBeInTheDocument();
+    const home = screen.getByRole('region', { name: 'Home: Arsenal 2003/04' });
+    const away = screen.getByRole('region', { name: 'Away: Swindon Town 1993/94' });
+    expect(await within(home).findByText('26-12-0')).toBeVisible();
+    expect(await within(away).findByText('22nd')).toBeVisible();
+    const toggle = within(home).getByRole('button', { name: 'Star player' });
+    const awayToggle = within(away).getByRole('button', { name: 'Star player' });
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    expect(document.getElementById(toggle.getAttribute('aria-controls')!)).not.toBeVisible();
+    expect(within(home).queryByRole('heading', { name: 'Thierry Henry' })).toBeNull();
+    expect(screen.getByRole('button', { name: /Play match/ })).toBeVisible();
+    expect(screen.getByLabelText('Engine')).toBeVisible();
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    expect(await within(home).findByText('26-12-0')).toBeVisible();
+    expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeVisible();
+    expect(awayToggle).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('dialog')).toBeNull();
+    fireEvent.click(toggle);
+    expect(document.getElementById(toggle.getAttribute('aria-controls')!)).not.toBeVisible();
+    expect(within(home).getByText('26-12-0')).toBeVisible();
+    expect(screen.queryByRole('dialog')).toBeNull();
+  });
+
+  it('folds a changed team star while keeping its updated record visible and the other star independent (TP271)', async () => {
+    const props = { teams: TEAMS, home: side('arsenal:2003', arsenal), away: side('swindon:1993', swindon), onPlay: vi.fn() };
+    const view = render(<LanguageProvider><VersusScreen {...props} /></LanguageProvider>);
+    const home = screen.getByRole('region', { name: 'Home: Arsenal 2003/04' });
+    const away = screen.getByRole('region', { name: 'Away: Swindon Town 1993/94' });
+    fireEvent.click(within(home).getByRole('button', { name: 'Star player' }));
+    fireEvent.click(within(away).getByRole('button', { name: 'Star player' }));
+    expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeVisible();
+    view.rerender(<LanguageProvider><VersusScreen {...props} home={side('arsenal:1992', null)} /></LanguageProvider>);
+    const changed = screen.getByRole('region', { name: 'Home: Arsenal 1992/93' });
+    expect(within(changed).getByRole('button', { name: 'Star player' })).toHaveAttribute('aria-expanded', 'false');
+    expect(await within(changed).findByText('1st')).toBeVisible();
+    expect(within(changed).queryByRole('heading', { name: 'Thierry Henry' })).toBeNull();
+    expect(within(away).getByRole('heading', { name: 'Jan Fjørtoft' })).toBeVisible();
+    expect(screen.queryByRole('dialog')).toBeNull();
+  });
+
+  it('explains the displayed identity mode while preserving the distinction between the motor and AI (TP269)', () => {
+    setNamesMode('fictional', false);
+    const view = mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon));
+    expect(screen.getByText(/Fictional names.*historical statistics.*simulated result/i)).toBeVisible();
+    expect(screen.getByText(/The engine plays.*AI agents explain/i)).toBeVisible();
+    expect(screen.queryByText(/Real club and player names/)).toBeNull();
+    setNamesMode('real', false);
+    view.rerender(<LanguageProvider><VersusScreen teams={TEAMS} home={side('arsenal:2003', arsenal)} away={side('swindon:1993', swindon)} onPlay={vi.fn()} /></LanguageProvider>);
+    expect(screen.getByText(/Real club and player names.*historical statistics.*simulated result/i)).toBeVisible();
+    expect(screen.queryByText(/^Fictional names/)).toBeNull();
+  });
+
+  it('describes sporting time and adjustable playback for the selected motor without promising generation time (TP269)', () => {
+    const props = { teams: TEAMS, home: side('arsenal:2003', arsenal), away: side('swindon:1993', swindon), onPlay: vi.fn() };
+    const view = render(<LanguageProvider><VersusScreen {...props} engine="grf" /></LanguageProvider>);
+    expect(screen.getByText(/90.*sporting minutes.*playback/i)).toBeVisible();
+    view.rerender(<LanguageProvider><VersusScreen {...props} engine="touchlines" /></LanguageProvider>);
+    expect(screen.getByText(/Arcade match.*playback/i)).toBeVisible();
+    expect(screen.queryByText(/90.*sporting minutes/)).toBeNull();
+  });
+
+  it('confirms an actual team change briefly, without announcing the initial selection (TP269)', async () => {
+    const props = { teams: TEAMS, home: side('arsenal:2003', arsenal), away: side('swindon:1993', swindon), onPlay: vi.fn() };
+    const view = render(<LanguageProvider><VersusScreen {...props} /></LanguageProvider>);
+    expect(screen.queryByText('Team updated')).toBeNull();
+    view.rerender(<LanguageProvider><VersusScreen {...props} home={side('arsenal:1992', null)} /></LanguageProvider>);
+    expect(screen.getByText('Team updated')).toBeVisible();
+    expect(screen.getByText('Team updated').closest('section')).toHaveClass('is-updated');
+    await waitFor(() => expect(screen.queryByText('Team updated')).toBeNull());
+    expect(screen.getByRole('region', { name: 'Home: Arsenal 1992/93' })).not.toHaveClass('is-updated');
+  });
+
+  it('puts launch before optional shortcuts in mobile keyboard order, retaining both shortcuts (TP269 QA)', () => {
+    vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() })));
+    mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon));
+    const buttons = screen.getAllByRole('button');
+    const launchIndex = buttons.indexOf(screen.getByRole('button', { name: /Play match/ }));
+    expect(launchIndex).toBeLessThan(buttons.indexOf(screen.getByRole('button', { name: /Swap home and away/ })));
+    expect(launchIndex).toBeLessThan(buttons.indexOf(screen.getByRole('button', { name: /Random match/ })));
+  });
+
+  it('shows the record and optional star, one Play button with the match choices in view (TP271)', async () => {
+    mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon), vi.fn(), { controls: <label>Engine<select /></label> });
+    expect(screen.queryByRole('heading', { name: 'Thierry Henry' })).toBeNull();
+    const home = screen.getByRole('region', { name: 'Home: Arsenal 2003/04' });
+    fireEvent.click(within(home).getByRole('button', { name: 'Star player' }));
+    expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeVisible();
     expect(await screen.findByText('1st')).toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: /Play match/ })).toHaveLength(1);
     expect(screen.queryByRole('button', { name: /Watch the demo|More details/ })).toBeNull();
@@ -65,6 +153,7 @@ describe('VersusScreen (TP213)', () => {
     mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon), onPlay);
     const home = screen.getByRole('region', { name: 'Home: Arsenal 2003/04' });
     expect(await within(home).findByText('1st')).toBeInTheDocument();
+    fireEvent.click(within(home).getByRole('button', { name: 'Star player' }));
     expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeInTheDocument();
     // TP240: sin etiquetas de procedencia en la portada.
     expect(home.querySelector('.chip')).toBeNull();

@@ -1,0 +1,211 @@
+/* TP271 · Studio setup. Shared theme tokens come from studio-theme.css. */
+.studio-app .vs {
+  --vs-gap: 20px;
+  padding: 0;
+  margin: 24px 0;
+  gap: 24px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color-scheme: var(--studio-scheme);
+}
+.studio-app .vs::before { content: none; }
+.studio-app .vs-stage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.studio-app .vs-side {
+  padding: 22px;
+  border: 1px solid var(--tp-line);
+  border-radius: 6px;
+  background: var(--tp-panel);
+  box-shadow: none;
+}
+.studio-app .vs-side:hover { border-color: var(--tp-ink2); box-shadow: none; }
+.studio-app .vs-side:is(.is-active, .is-updated) { border-color: var(--tp-accent); box-shadow: 0 0 0 1px var(--tp-accent); }
+.studio-app .vs-side-head { grid-template-columns: 44px minmax(0, 1fr); gap: 12px 14px; }
+.studio-app .vs-crest { width: 44px; height: 48px; border-radius: 0; box-shadow: none; background: transparent; }
+.studio-app .vs-crest .team-crest { width: 40px; height: 44px; flex-basis: 40px; }
+.studio-app .vs-side-id { display: block; }
+.studio-app .vs :is(.vs-kicker, .vs-choice > legend) { font-size: 12px; letter-spacing: .06em; font-weight: 600; color: var(--tp-ink2); }
+.studio-app .vs .vs-team-name {
+  margin: 3px 0 0;
+  font: 600 20px/1.3 var(--tp-ui);
+  letter-spacing: 0;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+.studio-app .vs .vs-season { margin: 4px 0 0; font: 400 14px/1.4 var(--tp-ui); letter-spacing: 0; }
+.studio-app .vs .vs-swatches i { width: 9px; height: 9px; border: 1px solid var(--tp-line); box-shadow: none; }
+.studio-app .vs .vs-change {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: none;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--tp-line2);
+  border-radius: 6px;
+  background: var(--tp-panel);
+  color: var(--tp-ink);
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: normal;
+}
+.studio-app .vs .vs-change:hover:not(:disabled) { border-color: var(--tp-accent); background: var(--tp-panel2); }
+.studio-app .vs-selection-status { position: static; margin: 8px 0 0; padding: 0; background: none; color: var(--studio-link); }
+.studio-app .vs-side-record { margin-top: 22px; }
+.studio-app .vs-record { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.studio-app .vs-record > div,
+.studio-app .vs-record .vs-record-pos { padding: 0; border: 0; border-radius: 0; background: none; }
+.studio-app .vs-record dt { font-size: 12px; font-weight: 400; letter-spacing: 0; overflow-wrap: anywhere; }
+.studio-app .vs-record dd { margin-top: 6px; font: 500 20px/1.3 var(--tp-ui); white-space: nowrap; }
+.studio-app .vs-record dd small { display: block; font: 400 11px/1.3 var(--tp-ui); white-space: normal; overflow-wrap: anywhere; }
+.studio-app .vs .vs-muted,
+.studio-app .vs-note { font-size: 13px; color: var(--tp-ink2); }
+.studio-app .vs-deduction { margin-top: 12px; line-height: 1.5; }
+.studio-app .vs .vs-team-details-toggle {
+  margin-top: 20px;
+  padding: 10px 0 0;
+  min-height: 44px;
+  border-top: 1px solid var(--tp-line);
+  border-radius: 0;
+  color: var(--tp-ink2);
+  font-size: 14px;
+}
+.studio-app .vs-side-body { grid-template-columns: minmax(0, 1fr); margin-top: 12px; }
+.studio-app .vs-side-body[hidden] { display: none; }
+.studio-app .vs-star { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; padding: 0; border: 0; border-radius: 0; background: none; }
+.studio-app .vs-star-art { align-items: start; background: none; border-radius: 0; }
+.studio-app .vs-star-art .tp-portrait--card { width: 44px; }
+.studio-app .vs-star-art .tp-portrait--card .tp-portrait-art svg { filter: none; }
+.studio-app .vs-star-name { margin: 4px 0 6px; font: 600 17px/1.3 var(--tp-ui); text-transform: none; letter-spacing: 0; }
+.studio-app .vs-star-facts { margin-bottom: 10px; font-size: 12px; }
+.studio-app .vs-star-stats { gap: 10px; }
+.studio-app .vs-star-stats > div { padding: 0; background: none; border: 0; border-radius: 0; }
+.studio-app .vs-star-stats dt { font-weight: 400; }
+.studio-app .vs-star-stats b { font: 500 18px/1.4 var(--tp-ui); }
+.studio-app .vs-launch { gap: 16px; padding: 20px 0 0; border-top: 1px solid var(--tp-line); }
+.studio-app .vs-launch > .vs-choices { width: 100%; max-width: none; gap: 20px; }
+.studio-app .vs-choice { gap: 8px; }
+.studio-app .vs-choice > legend { margin-bottom: 8px; }
+.studio-app .vs-seg { gap: 8px; }
+.studio-app .vs-seg > label {
+  padding: 12px;
+  border: 1px solid var(--tp-line);
+  border-radius: 6px;
+  background: var(--tp-panel);
+  color: var(--tp-ink);
+}
+.studio-app .vs-seg > label:hover { border-color: var(--tp-ink2); }
+.studio-app .vs-seg > label.on { border-color: var(--tp-accent); background: var(--tp-panel); box-shadow: inset 0 0 0 1px var(--tp-accent); }
+.studio-app .vs-seg > label:has(input:focus-visible) { outline-color: var(--tp-accent); }
+.studio-app .vs-seg b { font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.studio-app .vs-seg small { font-size: 12px; }
+.studio-app .vs .vs-cta {
+  min-height: 46px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  color: #fff;
+  background: var(--tp-accent);
+  box-shadow: none;
+  font: 600 14px/1.4 var(--tp-ui);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.studio-app .vs .vs-cta:hover:not(:disabled) { background: var(--tp-accent); filter: brightness(.92); }
+.studio-app .vs .vs-cta:disabled { opacity: .5; }
+.studio-app .vs-explainer { gap: 8px; max-width: 760px; }
+.studio-app .vs-explainer :is(.vs-duration, .vs-identity, .vs-ai-promise) { color: var(--tp-ink2); font: 400 13px/1.5 var(--tp-ui); letter-spacing: 0; }
+.studio-app .vs-shortcuts button {
+  padding: 8px 14px;
+  border: 1px solid var(--tp-line);
+  border-radius: 6px;
+  background: var(--tp-panel);
+  color: var(--tp-ink2);
+  font-weight: 500;
+}
+.studio-app .vs-shortcuts button:hover:not(:disabled) { border-color: var(--tp-accent); color: var(--tp-ink); }
+.studio-app .vs .vs-ai-link { padding: 10px 14px; border: 1px solid var(--tp-line); border-radius: 6px; color: var(--tp-ink); background: var(--tp-panel); }
+.studio-app .vs .vs-ai-link:hover,
+.studio-app .vs .vs-ai-link:focus-visible { background: var(--tp-panel2); }
+.studio-app .vs .vs-ai-link .vs-ai-icon { color: var(--tp-accent); }
+.studio-app .vs .vs-ai-link .vs-ai-text small { font-size: 12px; }
+.studio-app .vs-options > summary { min-height: 44px; padding: 12px 0; font-size: 14px; }
+.studio-app .vs-options .advanced-options { padding: 16px; border-radius: 6px; background: var(--tp-panel); border-color: var(--tp-line); }
+.studio-app .vs-choices select { color: var(--tp-ink); background: var(--tp-panel); border-color: var(--tp-line2); border-radius: 6px; }
+.studio-app .vs :is(button, input, select, summary):focus-visible { outline-color: var(--tp-accent); }
+
+/* The picker is a body portal; :has preserves Studio scope without a second app root. */
+body:has(.studio-app) .vs-modal-root { color-scheme: var(--studio-scheme); color: var(--tp-ink); font-family: var(--tp-ui); }
+body:has(.studio-app) .vs-overlay { background: rgb(20 32 46 / .35); backdrop-filter: none; }
+body:has(.studio-app) .vs-picker { padding: 20px; border: 1px solid var(--tp-line); border-radius: 6px; background: var(--tp-panel); box-shadow: 0 20px 60px rgb(20 32 46 / .18); }
+body:has(.studio-app) .vs-picker-head h2 { font: 600 20px/1.3 var(--tp-ui); letter-spacing: 0; text-transform: none; }
+body:has(.studio-app) .vs-sides { border-radius: 6px; background: var(--tp-panel2); border-color: var(--tp-line); }
+body:has(.studio-app) .vs-modal-root .vs-side-tab { border-radius: 4px; font-size: 13px; }
+body:has(.studio-app) .vs-modal-root .vs-side-tab[aria-pressed=true] { background: var(--tp-panel); color: var(--studio-link); box-shadow: inset 0 0 0 1px var(--tp-accent); }
+body:has(.studio-app) .vs-modal-root .vs-side-tab:hover { background: var(--tp-panel); }
+body:has(.studio-app) .vs-modal-root .vs-close { border-radius: 6px; background: var(--tp-panel); border-color: var(--tp-line); }
+body:has(.studio-app) .vs-modal-root .vs-close:hover { background: var(--tp-panel2); }
+body:has(.studio-app) .vs-picking { color: var(--studio-link); font-size: 13px; letter-spacing: 0; }
+body:has(.studio-app) .vs-picking .vs-muted { display: inline; }
+body:has(.studio-app) .vs-modal-root .vs-muted { color: var(--tp-ink2); font-size: 12px; }
+body:has(.studio-app) .vs-modal-root :is(input, select) { min-height: 44px; border-radius: 6px; background: var(--tp-panel); color: var(--tp-ink); border-color: var(--tp-line2); }
+body:has(.studio-app) .vs-modal-root .vs-eras button { min-height: 44px; border-radius: 6px; color: var(--tp-ink2); border-color: var(--tp-line); }
+body:has(.studio-app) .vs-modal-root .vs-eras button[aria-pressed=true] { background: var(--tp-accent); border-color: var(--tp-accent); color: #fff; }
+body:has(.studio-app) .vs-modal-root .vs-option { border-radius: 6px; background: var(--tp-panel); border-color: var(--tp-line); font-weight: 500; }
+body:has(.studio-app) .vs-modal-root .vs-option:hover { background: var(--tp-panel2); border-color: var(--tp-accent); }
+body:has(.studio-app) .vs-modal-root .vs-option[aria-pressed=true] { background: var(--tp-panel2); border-color: var(--tp-accent); box-shadow: inset 0 0 0 1px var(--tp-accent); }
+body:has(.studio-app) .vs-option-name { white-space: normal; overflow-wrap: anywhere; }
+body:has(.studio-app) .vs-option small { color: var(--tp-ink2); font: 400 13px/1.3 var(--tp-ui); }
+body:has(.studio-app) .vs-modal-root .vs-more { border-radius: 6px; }
+body:has(.studio-app) .vs-modal-root :is(button, input, select):focus-visible { outline-color: var(--tp-accent); }
+
+@media (max-width: 1000px) {
+  .studio-app .vs-record { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+}
+@media (max-width: 700px) {
+  .studio-app .vs { margin: 12px 0; gap: 12px; }
+  .studio-app .vs-stage { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .studio-app .vs-side { padding: 10px 12px 6px; }
+  .studio-app .vs-side-head { grid-template-columns: 32px minmax(0, 1fr) 88px; gap: 8px; min-height: 44px; }
+  .studio-app .vs-crest { width: 32px; height: 38px; }
+  .studio-app .vs-crest .team-crest { width: 30px; height: 36px; flex-basis: 30px; }
+  .studio-app .vs-side-id { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; }
+  .studio-app .vs-side-id .vs-team-name { flex: 1 0 100%; order: -1; margin: 0; font-size: 14px; line-height: 1.3; }
+  .studio-app .vs-side-id .vs-kicker { font-size: 12px; line-height: 1.3; letter-spacing: 0; }
+  .studio-app .vs .vs-season { margin: 0; gap: 4px; font-size: 12px; line-height: 1.3; }
+  .studio-app .vs .vs-swatches { gap: 2px; }
+  .studio-app .vs .vs-swatches i { width: 6px; height: 6px; }
+  .studio-app .vs .vs-change { grid-column: auto; padding: 6px 8px; font-size: 12px; line-height: 1.3; text-align: center; }
+  .studio-app .vs-side-record { margin-top: 8px; }
+  .studio-app .vs-record { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .studio-app .vs-record dd { margin-top: 3px; font-size: 16px; line-height: 1.25; }
+  .studio-app .vs-record dt { line-height: 1.3; }
+  .studio-app .vs-record dd small { margin-top: 2px; }
+  .studio-app .vs .vs-team-details-toggle { min-height: 44px; margin-top: 6px; padding: 6px 0; }
+  .studio-app .vs-launch { gap: 10px; padding-top: 10px; }
+  .studio-app .vs-launch > .vs-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .studio-app .vs-choice { gap: 4px; }
+  .studio-app .vs-choice > legend { margin-bottom: 4px; font-size: 12px; }
+  .studio-app .vs-seg { gap: 4px; }
+  .studio-app .vs-seg > label { min-height: 44px; padding: 8px 6px; }
+  .studio-app .vs-seg b { font-size: 13px; }
+  .studio-app .vs-seg small { font-size: 12px; }
+  .studio-app .vs .vs-cta { width: 100%; }
+  body:has(.studio-app) .vs-picker { padding: 16px 14px calc(16px + env(safe-area-inset-bottom)); border: 0; border-radius: 0; }
+}
+@media (max-width: 390px) {
+  .studio-app .vs-star { grid-template-columns: minmax(0, 1fr); }
+  .studio-app .vs-star-art { justify-content: start; }
+  .studio-app .vs-star-stats { gap: 8px; }
+}
+@media (min-width: 360px) and (max-width: 700px) {
+  .studio-app .vs-side { display: grid; grid-template-columns: minmax(0, 1fr) 72px; column-gap: 8px; }
+  .studio-app .vs-side-head,
+  .studio-app .vs-selection-status,
+  .studio-app .vs-side-body { grid-column: 1 / -1; }
+  .studio-app .vs-side-record { grid-column: 1; }
+  .studio-app .vs-record { grid-template-columns: 1.3fr .8fr 1.15fr 1fr; gap: 6px; }
+  .studio-app .vs .vs-team-details-toggle { grid-column: 2; align-self: center; min-height: 44px; margin: 8px 0 0; padding: 0; border: 0; gap: 4px; font-size: 12px; }
+}

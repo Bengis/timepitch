@@ -9,6 +9,7 @@ export type PlaybackState = {
   elapsedMs: number; pendingSeekMs: number | null; speed: number; wantsPlay: boolean; isPlaying: boolean;
   status: 'paused' | 'playing' | 'buffering' | 'ended' | 'unavailable';
   stop: PlaybackStop | null; isMatchEnd: boolean;
+  jump?: Readonly<{revision:number;fromMs:number;toMs:number}> | null;
 };
 
 export class MatchPlaybackController {
@@ -22,6 +23,8 @@ export class MatchPlaybackController {
   private pending: number | null = null;
   private policy: PlaybackPolicy | null = null;
   private stop: PlaybackStop | null = null;
+  private jump: PlaybackState['jump']=null;
+  private jumpSerial=0;
 
   private limit() { return Math.min(this.duration ?? this.elapsed, this.policy?.toMs ?? Infinity); }
   setPolicy(policy: PlaybackPolicy | null) {
@@ -32,9 +35,16 @@ export class MatchPlaybackController {
         || !policy.speeds.length || !policy.speeds.includes(1) || policy.speeds.some(s => !Number.isFinite(s) || s <= 0)
         || policy.pauseAt.some(p => !Number.isFinite(p.atMs) || p.atMs <= policy.fromMs || p.atMs >= policy.toMs || !Number.isInteger(p.endingPeriod) || p.endingPeriod <= 0)
         || new Set(policy.pauseAt.map(p => p.atMs)).size !== policy.pauseAt.length) throw new RangeError('Invalid playback policy');
+      if(policy.windows){
+        const w=policy.windows;
+        if(!w.length||policy.speeds.some(s=>s!==1)||w[0].fromMs!==policy.fromMs||w.at(-1)!.toMs!==policy.toMs
+          ||w.some((v,i)=>!Number.isFinite(v.fromMs)||!Number.isFinite(v.toMs)||v.toMs<=v.fromMs||v.fromMs<policy.fromMs||v.toMs>policy.toMs||i>0&&v.fromMs<=w[i-1].toMs)
+          ||policy.pauseAt.some(p=>!w.some(v=>v.fromMs<p.atMs&&v.toMs>p.atMs)))throw new RangeError('Invalid highlight windows');
+      }
     }
     const canonical:PlaybackPolicy|null=policy?{id:policy.id,fromMs:policy.fromMs,toMs:policy.toMs,
-      speeds:[...policy.speeds].sort((a,b)=>a-b),pauseAt:policy.pauseAt.map(p=>({atMs:p.atMs,endingPeriod:p.endingPeriod})).sort((a,b)=>a.atMs-b.atMs)}:null;
+      speeds:[...policy.speeds].sort((a,b)=>a-b),pauseAt:policy.pauseAt.map(p=>({atMs:p.atMs,endingPeriod:p.endingPeriod})).sort((a,b)=>a.atMs-b.atMs),
+      ...(policy.windows?{windows:policy.windows.map(w=>({...w}))}:{})}:null;
     if (policy?.id === this.policy?.id) {
       if (JSON.stringify(canonical) !== JSON.stringify(this.policy)) throw new RangeError('Playback policy ID changed its definition');
       return;
@@ -42,6 +52,7 @@ export class MatchPlaybackController {
     this.sync();
     this.policy = canonical;
     this.stop = null;
+    this.jump=null;
     if (policy) { this.intent = false; this.rate = 1; this.seek(policy.fromMs); }
     else if (!freeSpeed(this.rate)) this.rate = 1;
   }
@@ -65,7 +76,8 @@ export class MatchPlaybackController {
   }
   private sync() {
     const now = this.now();
-    if (this.canAdvance()) {
+    if(this.canAdvance()&&this.policy?.windows)this.advanceWindows(Math.max(0,now-this.anchor));
+    else if (this.canAdvance()) {
       const target = Math.min(this.limit(), this.horizon, this.elapsed + Math.max(0, now - this.anchor) * this.rate);
       const boundary = this.policy?.pauseAt.find(p => p.atMs > this.elapsed && p.atMs <= target);
       this.elapsed = boundary?.atMs ?? target;
@@ -74,6 +86,26 @@ export class MatchPlaybackController {
     }
     this.anchor = now;
     if (this.duration !== null && this.elapsed >= this.duration && this.pending === null) this.intent = false;
+  }
+  private advanceWindows(budget:number){
+    const policy=this.policy!,windows=policy.windows!;
+    while(budget>0&&this.canAdvance()){
+      const window=windows.find(w=>w.toMs>this.elapsed);
+      if(!window)return;
+      if(this.elapsed<window.fromMs){
+        this.jump={revision:++this.jumpSerial,fromMs:this.elapsed,toMs:window.fromMs};
+        if(window.fromMs>this.horizon){this.pending=window.fromMs;return;}
+        this.elapsed=window.fromMs;
+      }
+      const target=Math.min(window.toMs,this.horizon,this.elapsed+budget);
+      const boundary=policy.pauseAt.find(p=>p.atMs>this.elapsed&&p.atMs<=target);
+      const next=boundary?.atMs??target;
+      // A positive fractional budget may be smaller than the representable increment at this cursor.
+      if(next<=this.elapsed)return;
+      budget-=next-this.elapsed;this.elapsed=next;
+      if(boundary){this.stop={kind:'halftime',...boundary};this.intent=false;return;}
+      if(this.elapsed>=policy.toMs){this.stop={kind:'clip-end',atMs:this.elapsed};this.intent=false;return;}
+    }
   }
   currentTime() { this.sync(); return this.elapsed; }
   play() {
@@ -121,7 +153,7 @@ export class MatchPlaybackController {
       || (this.intent && this.elapsed >= this.horizon && !ended);
     const isPlaying = this.canAdvance();
     return { elapsedMs: this.elapsed, pendingSeekMs: this.pending, speed: this.rate, wantsPlay: this.intent, isPlaying,
-      stop:this.stop ? {...this.stop} : null, isMatchEnd:ended,
-      status: unavailable ? 'unavailable' : this.stop ? 'paused' : ended ? 'ended' : buffering ? 'buffering' : isPlaying ? 'playing' : 'paused' };
+      stop:this.stop ? {...this.stop} : null, isMatchEnd:ended,jump:this.jump?{...this.jump}:null,
+      status: unavailable ? 'unavailable' : ended ? 'ended' : this.stop ? 'paused' : buffering ? 'buffering' : isPlaying ? 'playing' : 'paused' };
   }
 }

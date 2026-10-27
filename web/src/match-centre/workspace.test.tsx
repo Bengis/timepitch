@@ -18,12 +18,12 @@ afterEach(()=>vi.restoreAllMocks());
 const go=(hash:string)=>{window.location.hash=hash;window.dispatchEvent(new HashChangeEvent('hashchange'));};
 it('uses capability flags even with historical reads down; navigation never creates a simulation',async()=>{
   render(<LanguageProvider><App/></LanguageProvider>);
-  // TP217: «/» abre la pantalla principal VERSUS. TP240: sin pestañas; reconstrucción y biblioteca solo por enlace directo.
+  // Studio adds compact navigation without creating a simulation or exposing unavailable historical reads.
   expect(await screen.findByRole('button',{name:'Play match'})).toBeVisible();
-  expect(screen.queryByRole('navigation',{name:'Workspace'})).toBeNull();
+  expect(screen.getByRole('navigation',{name:'Workspace'})).toBeVisible();
   expect(document.querySelector('.vs-hero')).toBeVisible();
   expect(document.querySelector('.simulation-subnav')).toBeNull();
-  expect(screen.getByRole('link',{name:/TIME\s*PITCH/})).toHaveAttribute('href','#/');
+  expect(screen.getByRole('link',{name:/Time\s*Pitch/i})).toHaveAttribute('href','#/');
   go('#/reconstruction');
   await screen.findByRole('alert');
   go('#/');

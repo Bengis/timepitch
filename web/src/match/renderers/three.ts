@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { GENERIC_APPEARANCE, type AppearanceParams, type KitSpec, type MatchKits } from '../../presentation/types';
-import { ballHeight, ballVelocity, cameraShot, framingFor, isMassReposition } from './camera';
+import { ballHeight, ballVelocity, cameraShot, framingFor, isMassReposition,walkoutShot } from './camera';
 import { applyCharacterPose, characterParts, createCharacterRig, deriveCharacterPose, type CharacterRig } from './character';
 import { createKitMaterials, createNumberAtlas, type KitMaterials, type NumberAtlas } from './kit-texture';
 import { createLighting } from './lighting';
@@ -18,7 +18,7 @@ import type { DetailLevel, PitchProjection, PitchRenderInput, RendererFactory, V
 // motor ni modifica posiciones; las raíces de jugador y balón quedan en las coordenadas de la fuente. Las poses y el
 // rodar del balón son ilustrativos (movimiento sintético), deterministas por fotograma y seguros al buscar.
 
-const BALL_RADIUS = .22;
+const BALL_RADIUS = .11;
 /** Escala visual de los personajes (1 = tamaño real, como la maqueta); la altura del cast la matiza (±10 %). */
 export const CHARACTER_VISUAL_SCALE = 1.15;
 const MAX_CONTACTS = 64;
@@ -187,7 +187,7 @@ export const createThreeRenderer: RendererFactory = (canvas, initial, onFailure)
     if (skeletons?.ready) {
       // Con los modelos cargados se ocultan los muñecos paramétricos (siguen sirviendo para elegir jugador).
       for (const squad of squads.values()) squad.art.root.visible = false;
-      skeletons.update(input, key => {
+      skeletons.update(poseInput, key => {
         const player = players.get(key); if (!player) return null;
         const kit = kitFor(player.slot, input, false).spec, look = player.appearance;
         return { shirt: kit.shirt, sleeves: kit.sleeves.left, shorts: kit.shorts, socks: kit.socks, numberColour: kit.number,
@@ -219,6 +219,11 @@ export const createThreeRenderer: RendererFactory = (canvas, initial, onFailure)
   }
   function configureCamera(input: PitchRenderInput, velocity: { x: number; y: number }) {
     const framing = framingFor(input);
+    if(input.presentation==='walkout'&&framing!=='tactical'){
+      const shot=walkoutShot(input.frame,camera.aspect);
+      camera.fov=shot.fov;camera.position.set(...shot.position);camera.lookAt(...shot.target);
+      camera.updateProjectionMatrix();camera.updateMatrixWorld(true);canvas.dataset.framing='broadcast';return;
+    }
     const selected = input.frame.players.find(player => player.key === input.selectedPlayerKey && validPoint(player));
     let focus = { x: 52.5, y: 34 };
     if (framing !== 'tactical') {
@@ -231,7 +236,7 @@ export const createThreeRenderer: RendererFactory = (canvas, initial, onFailure)
       }
     }
     let shotFraming: Parameters<typeof cameraShot>[0] = framing;
-    if (skeletons?.ready && framing === 'broadcast') {
+    if (skeletons?.ready && framing === 'broadcast' && input.presentation !== 'walkout') {
       // TP244: con esqueletos, plano de televisión (`tele`) que sigue el juego con suavidad; tras un gol, primer plano del
       // goleador mientras lo celebra.
       const cue = input.cue, age = cue ? input.frame.clock_ms - cue.t1_ms : -1;

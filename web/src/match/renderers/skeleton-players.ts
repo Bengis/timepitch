@@ -11,9 +11,9 @@ import type { PitchRenderInput } from './types';
 // (quieto → andar → trotar → esprintar). La biblioteca gratuita no trae chut, cabezazo ni estirada, así que esos gestos
 // se hacen girando huesos sobre la pose capturada; los ejes se midieron sobre el esqueleto en reposo (muslo y pantorrilla:
 // +X lleva el pie atrás; brazo: +X lo adelanta, −Z sube el derecho y +Z el izquierdo; columna y cuello: +X inclina
-// adelante). El tiempo de cada clip y de cada gesto sale del reloj del fotograma y del aviso de jugada, así que buscar en
-// la reproducción da la misma pose; solo el giro del cuerpo se suaviza entre fotogramas. Movimiento ilustrativo: las
-// posiciones son las de la fuente.
+// adelante). Los gestos salen del reloj del fotograma y del aviso de jugada; zancada y giro conservan continuidad entre
+// dibujos nuevos, sin avanzar al redibujar el mismo instante. Un corte reinicia esa continuidad, sin prometer la misma
+// pose desde cualquier historial de búsqueda. Movimiento ilustrativo: las posiciones son las de la fuente.
 
 export const PLAYER_URL = '/assets/players/player.glb';
 export const ANIMATIONS_URL = '/assets/players/animations.glb';
@@ -50,7 +50,9 @@ export type SkeletonLook = Readonly<{ shirt: string; sleeves: string; shorts: st
 type Body = { root: THREE.Object3D; mixer: THREE.AnimationMixer; actions: Map<string, THREE.AnimationAction>;
   bones: Map<BoneName, THREE.Object3D>; clean: Map<THREE.Object3D, THREE.Quaternion>; kit: Kit; look: string; facing: number; phase: number;
   /** Fase del ciclo de zancada (0–1), velocidad y giro del fotograma anterior (inclinaciones). */
-  stride: number; speed: number; turn: number };
+  stride: number; speed: number; turn: number; motionSpeed: number;
+  /** Último dibujo del actor: separado de previous, que puede repetirse al pausar o interpolar. */
+  drawn: { clock: number; x: number; y: number; period: number; presentation: PitchRenderInput['presentation']; restarting: boolean } | null };
 
 /** Gesto de un jugador en este fotograma, derivado del aviso de jugada (puro: sirve para probarlo sin WebGL). */
 export type Gesture =
@@ -154,7 +156,8 @@ export function createSkeletonPlayers(scene: THREE.Scene): SkeletonPlayers {
     let hash = 0; for (let i = 0; i < key.length; i++) hash = (Math.imul(hash, 31) + key.charCodeAt(i)) >>> 0;
     scene.add(root);
     const phase = (hash % 1000) / 1000;
-    return { root, mixer, actions, bones, clean: new Map(), kit, look: '', facing: Number.NaN, phase, stride: phase, speed: 0, turn: 0 };
+    return { root, mixer, actions, bones, clean: new Map(), kit, look: '', facing: Number.NaN, phase, stride: phase,
+      speed: 0, turn: 0, motionSpeed: 0, drawn: null };
   }
 
   /** Ciclos de zancada por segundo a una velocidad: la distancia por ciclo se interpola entre los clips vecinos. */
@@ -285,7 +288,7 @@ export function createSkeletonPlayers(scene: THREE.Scene): SkeletonPlayers {
     update(input, lookOf) {
       if (!template || disposed) return;
       const seen = new Set<string>(), clockS = input.frame.clock_ms / 1000;
-      const dt = (input.frame.clock_ms - input.previous.clock_ms) / 1000;
+      const walkout = input.presentation === 'walkout';
       const ball = input.frame.ball && Number.isFinite(input.frame.ball.x) && Number.isFinite(input.frame.ball.y) ? input.frame.ball : null;
       for (const p of input.frame.players) {
         if (!Number.isFinite(p.x) || !Number.isFinite(p.y)) continue;
@@ -295,23 +298,33 @@ export function createSkeletonPlayers(scene: THREE.Scene): SkeletonPlayers {
         if (!body) { body = create(p.key); bodies.set(p.key, body); }
         const signature = JSON.stringify(look);
         if (body.look !== signature) { body.kit.dress(look); body.look = signature; }
-        const prev = input.previous.players.find(q => q.key === p.key);
+        const prev = body.drawn, dt = prev ? (input.frame.clock_ms - prev.clock) / 1000 : 0;
         const dx = prev ? p.x - prev.x : 0, dy = prev ? p.y - prev.y : 0, dist = Math.hypot(dx, dy);
-        const cut = input.restarting || !prev || dt <= 0 || dt > .5 || dist >= 3;
-        const speed = cut ? 0 : dist / dt;
-        // Corre mirando adonde va; despacio o parado, mira el balón (o la portería rival si no hay balón).
-        let target = p.side === 'home' ? Math.PI / 2 : -Math.PI / 2;
-        if (speed > 1.2) target = Math.atan2(dx, dy);
-        else if (ball && Math.hypot(ball.x - p.x, ball.y - p.y) > .3) target = Math.atan2(ball.x - p.x, ball.y - p.y);
-        const before = Number.isFinite(body.facing) ? body.facing : target;
-        if (cut || !Number.isFinite(body.facing)) body.facing = target;
-        else { const delta = wrapAngle(target - body.facing), step = TURN_RATE * dt; body.facing = wrapAngle(body.facing + Math.max(-step, Math.min(step, delta))); }
-        // Giro (rad/s) y velocidad suavizada para las inclinaciones; la fase de zancada avanza con lo recorrido.
-        body.turn = cut ? 0 : body.turn + (wrapAngle(body.facing - before) / dt - body.turn) * .3;
-        body.speed = cut ? speed : body.speed + (speed - body.speed) * .4;
-        if (!cut) body.stride = (body.stride + cadence(speed) * dt) % 1;
-        const gesture = gestureFor(input, p, look.keeper, body.facing, speed);
-        const weights = weightsFor(gesture, speed);
+        const redraw = !!prev && dt === 0 && dist === 0 && prev.period === input.frame.period
+          && prev.presentation === input.presentation && prev.restarting === input.restarting;
+        if (!redraw) {
+          const cut = input.restarting || !prev || dt <= 0 || dt > .5 || dist >= 3
+            || prev.period !== input.frame.period || prev.presentation !== input.presentation;
+          const speed = cut ? 0 : dist / dt;
+          // En presentación mira el camino incluso despacio y al formar mira la banda de cámara (+y del campo).
+          // En partido, corriendo mira adonde va; despacio o parado conserva la atención al balón.
+          let target = walkout ? 0 : p.side === 'home' ? Math.PI / 2 : -Math.PI / 2;
+          if (walkout ? dist > .0001 && !cut : speed > 1.2) target = Math.atan2(dx, dy);
+          else if (!walkout && ball && Math.hypot(ball.x - p.x, ball.y - p.y) > .3) target = Math.atan2(ball.x - p.x, ball.y - p.y);
+          const before = Number.isFinite(body.facing) ? body.facing : target;
+          if (cut || walkout || !Number.isFinite(body.facing)) body.facing = target;
+          else { const delta = wrapAngle(target - body.facing), step = TURN_RATE * dt; body.facing = wrapAngle(body.facing + Math.max(-step, Math.min(step, delta))); }
+          // Suavizado por tiempo nuevo (los factores previos .3/.4 correspondían al paso habitual de 100 ms).
+          body.turn = cut ? 0 : body.turn + (wrapAngle(body.facing - before) / dt - body.turn) * (1 - Math.pow(.7, dt / .1));
+          body.speed = cut ? 0 : body.speed + (speed - body.speed) * (1 - Math.pow(.6, dt / .1));
+          body.stride = cut ? body.phase : (body.stride + (walkout ? dist / (GAITS[1][2] * STRIDE_SCALE) : cadence(speed) * dt)) % 1;
+          body.motionSpeed = speed;
+          body.drawn = { clock: input.frame.clock_ms, x: p.x, y: p.y, period: input.frame.period,
+            presentation: input.presentation, restarting: input.restarting };
+        }
+        const speed = body.motionSpeed;
+        const gesture: Gesture = walkout ? { kind: 'run' } : gestureFor(input, p, look.keeper, body.facing, speed);
+        const weights = walkout ? new Map([[speed > .001 ? 'Walk_Loop' : 'Idle_Loop', 1]]) : weightsFor(gesture, speed);
         for (const [name, action] of body.actions) {
           action.setEffectiveWeight(weights.get(name) ?? 0);
           const clip = action.getClip();
@@ -322,7 +335,8 @@ export function createSkeletonPlayers(scene: THREE.Scene): SkeletonPlayers {
         for (const [bone, quaternion] of body.clean) bone.quaternion.copy(quaternion);
         body.clean.clear();
         body.mixer.update(0);
-        const { lift, roll: lean, shift, pitch = 0, advance = 0 } = pose(body, gesture, clockS);
+        const { lift, roll: lean, shift, pitch = 0, advance = 0 } = walkout
+          ? { lift: 0, roll: 0, shift: 0 } : pose(body, gesture, clockS);
         // Desplazamiento lateral (estirada) en el eje +X local del cuerpo, (cos f, −sin f) en el campo, y hacia delante
         // (entrada) en su +Z local, (sin f, cos f).
         const f = body.facing;

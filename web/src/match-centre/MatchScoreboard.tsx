@@ -22,7 +22,7 @@ export function MatchScoreboard({ snapshot, elapsedMs, clock, crests, kits = nul
     if (resolved && resolved.kind !== 'none') return resolved;
     return d[side].crestUrl ? { src: d[side].crestUrl!, kind: 'hfk', source: null } : NO_CREST;
   };
-  const period = clock?.period ?? (snapshot.presentedCursor.period || null);
+  const period = clock?.state === 'halftime' ? null : clock?.period ?? (snapshot.presentedCursor.period || null);
   const meta = (side: 'home' | 'away') => [d[side].season, d[side].formation].filter(Boolean).join(' · ');
   return <header className="unified-scoreboard" data-unified-scoreboard>
     <BroadcastScorebug home={{ name: d.home.name }} away={{ name: d.away.name }} score={facts.score.value}

@@ -1,4 +1,17 @@
 {
+ "replay-audio-test": {"label":"Lokale Testtöne · KEIN Azure Speech und keine Stimme","loading":"Testaudio wird geladen…","ready":"Testaudio bereit","unavailable":"Kein kompatibles Testaudio","speed":"Testaudio außerhalb von 1× stumm","language":"Sprache des Testaudios","volume":"Lautstärke des Testaudios","mute":"Testaudio stummschalten","unmute":"Testaudio einschalten"},
+ "report-presentation": {"names":"Namen für die Anzeige an die fiktive Liga angepasst. Der gespeicherte Bericht bleibt unverändert; Prüfung und Bewertung beziehen sich auf den Originaltext."},
+ "narration-voice": {"on":"Stimme an","off":"Stimme aus","voice":"Kommentatorstimme","unavailable":"Keine unterstützte lokale Stimme. Installiere eine in den Geräteeinstellungen.","failed":"Die Stimme konnte nicht abgespielt werden. Schalte sie erneut ein.","note":"Gerätestimme · keine Azure-Anfrage. Der Kommentar folgt der Sprache der Stimme; die Ausdruckskraft hängt von der installierten Stimme ab.","provider":"Audioquelle","device":"Gerätestimme","test":"Lokale Testtöne","testOn":"Testaudio an","testOff":"Testaudio aus"},
+ "highlights": {
+  "summary": "Highlights",
+  "full": "Ganzes Spiel",
+  "restart": "Highlights neu starten",
+  "natural": "1× · natürliches Tempo; Zwischenphasen werden übersprungen",
+  "jump": "Sprung in der Wiederholung: {0} → {1}"
+ },
+
+ "director": {"showReplay":"Wiederholung anzeigen","hideReplay":"Wiederholung ausblenden","commentary":"Spielkommentar","showCommentary":"Kommentar anzeigen","hideCommentary":"Kommentar ausblenden"},
+ "studio-theme": {"toLight":"Zum hellen Design wechseln","toDark":"Zum dunklen Design wechseln"},
  "analysis": {
   "analysis": "Analyse",
   "averagePositions": "Durchschnittspositionen und Formation",
@@ -106,7 +119,7 @@
   "historical": "Historische Daten",
   "historicalNote": "Quellaufzeichnungen und Schätzungen werden getrennt angezeigt. Teamergebnisse basieren auf geprüften Spiel-Ergebnissen.",
   "home": "Heimmannschaft",
-  "intro": "Wähle zwei Premier-League-Teams seit 1992/93 und sieh ihnen beim Spiel zu.",
+  "intro": "Wähle zwei Kader auf Grundlage von Saisonstatistiken und sieh dir ein simuliertes Spiel an.",
   "language": "Sprache",
   "loadError": "Lokalen Katalog konnte nicht geladen werden.",
   "loading": "Lade historische Daten…",
@@ -123,7 +136,7 @@
   "outsideFilters": "Dein gewähltes Team liegt außerhalb dieser Filter.",
   "partial": "Teilweise",
   "participants": "Ligateilnehmer",
-  "phase": "HISTORISCHER SPIELSIMULATOR",
+  "phase": "FUSSBALL ÜBER EPOCHEN · SPIELANALYSE",
   "played": "Gespielt",
   "player": "Spieler",
   "position": "Position",
@@ -153,6 +166,8 @@
   "xg_partial_2022": "xG auf Spiel-Ebene 2022/23 beginnt ab Spielwoche 16; frühere Nullen sind keine Messwerte."
  },
  "ask": {
+  "aiNotice": "KI-Antworten anhand der Spielaufzeichnung.",
+  "howTitle": "So werden Antworten geprüft",
   "ask": "Fragen",
   "badge": "KI-Agent · Tools · Azure AI Foundry",
   "budget": "Das Fragenbudget für die Demo ist aufgebraucht.",
@@ -168,7 +183,12 @@
   "suggestions.1": "Welche Mannschaft hatte mehr Schüsse?",
   "suggestions.2": "Wie war der Vergleich der ersten Halbzeit?",
   "thinking": "Der Agent sucht die aufgezeichneten Fakten…",
-  "title": "Frage zum Spiel"
+  "title": "Frage zum Spiel",
+  "references": "Fakten-IDs für diesen Satz",
+  "evidence": "Vom Agenten abgefragte Fakten",
+  "identifiersOnly": "Von der API gelieferte IDs; der Text der Quellfakten und die Ereigniszeiten sind nicht enthalten.",
+  "cost": "Antwortkosten: {0} USD",
+  "verificationLimit": "Die Prüfung vergleicht Namen und Zahlen mit den zitierten Fakten. Sie garantiert nicht die Interpretation des Spiels."
  },
  "attribution": {
   "commonsFile": "Wikimedia Commons Datei",
@@ -264,6 +284,7 @@
   "TouchLines recording: goals and scorers come from the engine events.": "TouchLines-Aufzeichnung: Tore und Torschützen stammen aus den Engine-Ereignissen."
  },
  "crew-report": {
+  "verificationLimit": "Die Prüfung vergleicht Namen und Zahlen mit den zitierten Fakten. Sie garantiert nicht die Interpretation des Spiels.",
   "badge": "Agent Framework · Azure AI Foundry",
   "coherence": "Kohärenz",
   "evalOf": "(Englischer Bericht)",
@@ -282,7 +303,9 @@
   "steps.3": "Ein deterministischer Prüfer kontrolliert jeden Satz gegen die Fakten; bei Fehlern korrigiert der Schreiber.",
   "steps.4": "Der versiegelte Bericht wird als statische Datei veröffentlicht und mit Azure AI bewertet (Fundiertheit, Kohärenz, Sprachfluss). Besucher lösen keine KI-Anfragen aus.",
   "teaser": "Nach dem Spiel auf Azure geschrieben, basierend auf der Engine-Aufzeichnung: KI-Agenten entwerfen den Bericht, ein Prüfer kontrolliert jeden Satz anhand der Fakten.",
-  "title": "KI-Spielbericht"
+  "title": "KI-Spielbericht",
+  "processNote": "Dies erklärt den Ablauf, nicht den Live-Fortschritt einzelner Agenten.",
+  "liveStep": "Der Server prüft den für dieses Spiel angeforderten Bericht und sendet ihn an dieses Panel. Eine Anfrage kann im Rahmen der Demo-Limits KI-Arbeit auf Azure starten."
  },
  "demo": {
   "back": "Zurück",
@@ -736,13 +759,16 @@
   "fallback": "Der KI-Entwurf hat die Faktenprüfung nicht bestanden, hier sind die reinen Spiel-Fakten.",
   "fan": "Fans",
   "fullTitle": "Endbericht",
-  "halfPending": "KI-Agenten auf Azure verfassen den Halbzeitbericht…",
+  "halfPending": "Halbzeitbericht auf Azure angefordert. Warten auf die Serverantwort…",
   "halfTitle": "Halbzeitbericht",
   "how": "Geschrieben von KI-Agenten auf Azure und Zeile für Zeile mit den Spieldaten abgeglichen.",
   "limit": "Du hast das Tageslimit für KI-Berichte erreicht.",
-  "pending": "KI-Agenten auf Azure verfassen den Bericht… das dauert meist 1–2 Minuten.",
+  "pending": "Bericht auf Azure angefordert. Warten auf die Serverantwort… das dauert normalerweise 1–2 Minuten.",
   "retry": "Erneut versuchen",
-  "title": "KI-Spielbericht"
+  "title": "KI-Spielbericht",
+  "pollingPaused": "Die automatische Abfrage ist pausiert. Mit Erneut prüfen kannst du diesen Bericht wieder abfragen.",
+  "checkedAt": "Zuletzt geprüft: {0}",
+  "checkAgain": "Erneut prüfen"
  },
  "maps": {
   "goalKey": "Ausgefüllt: Tor",
@@ -864,7 +890,9 @@
   "second": "Beginn der zweiten Halbzeit",
   "skip": "Zum Anstoß springen",
   "stats": "Spielstatistiken",
-  "walkout": "Die Mannschaften betreten das Spielfeld"
+  "walkout": "Die Mannschaften betreten das Spielfeld",
+  "halfReport": "Halbzeitbericht lesen",
+  "finalAnalysis": "Spiel analysieren"
  },
  "match-meta": {
   "crest": "Wappen von {0}",
@@ -937,6 +965,9 @@
   "real": "Echte Namen"
  },
  "narration": {
+  "longPassAttempt": "{0} versucht einen langen Pass.",
+  "highPassAttempt": "{0} versucht einen hohen Pass.",
+  "shotAttempt": "{0} schießt.",
   "carry": "{0} trägt den Ball {1} Meter.",
   "corner": "Ecke für {0}.",
   "freeKick": "Freistoß für {0}.",
@@ -985,7 +1016,8 @@
   "minute": "Minute",
   "next": "Nächstes Ereignis",
   "previous": "Vorheriges Ereignis",
-  "start": "0'"
+  "start": "0'",
+  "eventSelect": "Ereignis auswählen"
  },
  "player": {
   "all": "Alle",
@@ -1369,7 +1401,7 @@
   "goalsForAgainst": "Tore (für/gegen)",
   "graphicsTitle": "Grafik",
   "grfHint": "Google Research Football",
-  "grfLabel": "Realistisch · 90 Minuten",
+  "grfLabel": "90-Minuten-Spiel",
   "h2hFailed": "Direktvergleich nicht verfügbar.",
   "h2hLoading": "Lade Direktvergleich…",
   "handAssigned": "Nicht belegte Merkmale · manuell zugewiesen",
@@ -1442,6 +1474,14 @@
   "touchlinesLabel": "Schnell · Arcade",
   "unknownRole": "Position nicht erfasst",
   "vs": "VS",
-  "wins": "{0} Siege"
+  "wins": "{0} Siege",
+  "teamDetails": "Saisonbilanz und Star",
+  "teamUpdated": "Team aktualisiert",
+  "fictionalProvenance": "Fiktive Namen · historische Statistiken · simuliertes Ergebnis. Die Spielerattribute sind Schätzungen.",
+  "realProvenance": "Echte Vereins- und Spielernamen · historische Statistiken · simuliertes Ergebnis. Die Spielerattribute sind Schätzungen.",
+  "engineAndAi": "Die Engine spielt. KI-Agenten erklären die aufgezeichneten Fakten in Berichten und Antworten; sie entscheiden keine Tore.",
+  "grfDuration": "90 Spielminuten. Einstellbare Wiedergabe: Wähle nach der Erstellung des Spiels die gewünschte Anzeigedauer.",
+  "touchlinesDuration": "Arcade-Spiel. Einstellbare Wiedergabe: Wähle nach der Erstellung des Spiels die gewünschte Anzeigedauer.",
+  "playbackDuration": "Einstellbare Wiedergabe nach der Erstellung. Spielzeit und Anzeigedauer sind unterschiedlich."
  }
 }

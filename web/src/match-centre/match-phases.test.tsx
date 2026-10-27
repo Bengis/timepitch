@@ -15,10 +15,27 @@ it('walks both teams out of the tunnel into two lines beside the halfway line, k
   expect(start.ball).toBeNull();
   expect(start.players.every(p => p.y > 68)).toBe(true);
   expect(end.players.map(p => p.key)).toEqual(['home-1', 'home-0', 'away-1', 'away-0']);
-  expect(end.players.every(p => p.y === 57)).toBe(true);
+  expect(end.players.every(p => p.y === 63)).toBe(true);
   expect(end.players.filter(p => p.side === 'home').every(p => p.x < 52.5)).toBe(true);
   expect(end.players.filter(p => p.side === 'away').every(p => p.x > 52.5)).toBe(true);
   expect(walkoutDuration({ ...kickoff, players: [] })).toBe(0);
+});
+
+it('keeps two full teams separated and walking at a bounded human pace throughout the entrance', () => {
+  const full:SceneFrame={...kickoff,players:(['home','away'] as const).flatMap(side=>Array.from({length:11},(_,i)=>player(side,i,i===0?'GK':'MID')))};
+  const original=JSON.stringify(full);let before=walkoutFrame(full,0),minimum=Infinity,maximum=0;
+  for(let t=50;t<=walkoutDuration(full)+50;t+=50){
+    const frame=walkoutFrame(full,t),prior=new Map(before.players.map(p=>[p.key,p]));
+    for(const [i,p] of frame.players.entries()){
+      const old=prior.get(p.key);if(old)maximum=Math.max(maximum,Math.hypot(p.x-old.x,p.y-old.y)/.05);
+      for(const q of frame.players.slice(i+1))minimum=Math.min(minimum,Math.hypot(p.x-q.x,p.y-q.y));
+    }before=frame;
+  }
+  expect(maximum).toBeLessThanOrEqual(1.8);
+  expect(minimum).toBeGreaterThan(.85);
+  expect(before.players).toHaveLength(22);
+  expect(JSON.stringify(full)).toBe(original);
+  expect(walkoutFrame(full,3200)).toEqual(walkoutFrame(full,3200));
 });
 
 it('half-time shows the score, scorers and statistics and starts the second half', () => {
@@ -59,4 +76,27 @@ it('TP250: the walkout lists both line-ups; full-time names the player of the ma
   expect(screen.getByText('14 Thierry Henry')).toBeInTheDocument();
   fireEvent.click(screen.getByRole('button', { name: /Read the AI match report/ }));
   expect(calls).toEqual(['report']);
+});
+
+it('offers the half-time report without resuming and prioritizes the report over replay at full-time', () => {
+  const calls: string[] = [];
+  const view = render(<MatchBreak phase="halftime" home="A" away="B" score={{ home: 1, away: 0 }}
+    onContinue={() => calls.push('continue')} onReport={() => calls.push('report')} />);
+  fireEvent.click(screen.getByRole('button', { name: /Read the half-time report/ }));
+  expect(calls).toEqual(['report']);
+  expect(screen.getByRole('button', { name: /Start the second half/ })).toBeInTheDocument();
+  view.unmount();
+  render(<MatchBreak phase="fulltime" home="A" away="B" score={{ home: 1, away: 0 }}
+    onReplay={() => calls.push('replay')} onReport={() => calls.push('report')} />);
+  const report = screen.getByRole('button', { name: /Read the AI match report/ });
+  expect(report).toHaveClass('tp-break-primary');
+  expect(report).toHaveFocus();
+  expect(screen.getByRole('button', { name: 'Watch again' })).not.toHaveClass('tp-break-primary');
+});
+
+it('offers analysis as the main full-time action when no AI report exists', () => {
+  const analyse = () => {};
+  render(<MatchBreak phase="fulltime" home="A" away="B" score={{ home: 0, away: 0 }} onAnalysis={analyse} onReplay={() => {}} />);
+  expect(screen.getByRole('button', { name: 'Analyse the match' })).toHaveClass('tp-break-primary');
+  expect(screen.getByRole('button', { name: 'Watch again' })).not.toHaveClass('tp-break-primary');
 });

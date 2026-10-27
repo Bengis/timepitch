@@ -1,0 +1,12 @@
+/* TP269: report status and evidence only. The shared match layout stays in broadcast-layout.css. */
+.crew-report .crew-live-checked,
+.crew-report .match-questions-cost,
+.crew-report .match-questions-references { color: var(--tp-ink2); font-size: 12px; }
+.crew-live-paused { display: grid; gap: 8px; padding: 10px; border: 1px solid var(--tp-line); border-radius: 8px; }
+.match-questions-sentences { display: grid; gap: 8px; margin: 6px 0; padding: 0; list-style: none; }
+.match-questions-references code { display: inline-block; margin-inline: 3px; padding: 1px 4px; border-radius: 4px; background: #ffffff0b; }
+.match-questions-evidence { margin-top: 6px; font-size: 12px; }
+.match-questions-evidence summary { min-height: 32px; display: list-item; align-content: center; cursor: pointer; color: var(--tp-sim); }
+.match-questions-evidence ul { padding-left: 20px; }
+.match-questions-evidence code, .match-questions-references code { overflow-wrap: anywhere; }
+.crew-report .crew-live-paused .crew-report-open { min-height: 40px; }

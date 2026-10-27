@@ -1,4 +1,17 @@
 {
+ "replay-audio-test": {"label":"Tons de teste locais · NÃO é Azure Speech nem uma voz","loading":"A carregar áudio de teste…","ready":"Áudio de teste pronto","unavailable":"Sem áudio de teste compatível","speed":"Áudio de teste silenciado fora de 1×","language":"Idioma do áudio de teste","volume":"Volume do áudio de teste","mute":"Silenciar áudio de teste","unmute":"Ativar som de teste"},
+ "report-presentation": {"names":"Nomes adaptados à liga fictícia apenas para apresentação. O relatório guardado permanece intacto; a verificação e a avaliação referem-se ao texto original."},
+ "narration-voice": {"on":"Voz ativada","off":"Voz desativada","voice":"Voz do narrador","unavailable":"Não há voz local compatível. Instale uma nas definições do dispositivo.","failed":"Não foi possível reproduzir a voz. Ative-a para tentar novamente.","note":"Voz do dispositivo · sem pedidos ao Azure. A narração segue o idioma da voz; a expressividade depende da voz instalada.","provider":"Fonte de áudio","device":"Voz do dispositivo","test":"Tons de teste locais","testOn":"Áudio de teste ativado","testOff":"Áudio de teste desativado"},
+ "highlights": {
+  "summary": "Resumo",
+  "full": "Jogo completo",
+  "restart": "Reiniciar resumo",
+  "natural": "1× · jogadas à velocidade natural; intervalos omitidos",
+  "jump": "Salto do replay: {0} → {1}"
+ },
+
+ "director": {"showReplay":"Mostrar repetição","hideReplay":"Ocultar repetição","commentary":"Comentário do jogo","showCommentary":"Mostrar narração","hideCommentary":"Ocultar narração"},
+ "studio-theme": {"toLight":"Mudar para o tema claro","toDark":"Mudar para o tema escuro"},
  "analysis": {
   "analysis": "Análise",
   "averagePositions": "Posições médias e forma",
@@ -106,7 +119,7 @@
   "historical": "Dados históricos",
   "historicalNote": "Registos e estimativas da fonte são mostrados separadamente. Resultados das equipas usam a fonte auditada de resultados.",
   "home": "Equipa em casa",
-  "intro": "Escolha duas equipas da Premier League desde 1992/93 e veja-as jogar entre si.",
+  "intro": "Escolha dois plantéis baseados em estatísticas da época e veja um jogo simulado.",
   "language": "Idioma",
   "loadError": "Não foi possível carregar o catálogo local.",
   "loading": "A carregar dados históricos…",
@@ -123,7 +136,7 @@
   "outsideFilters": "A equipa selecionada está fora destes filtros.",
   "partial": "Parcial",
   "participants": "participantes da liga",
-  "phase": "SIMULADOR DE JOGOS HISTÓRICOS",
+  "phase": "FUTEBOL ENTRE ÉPOCAS · ANÁLISE DO JOGO",
   "played": "Jogos",
   "player": "Jogador",
   "position": "Posição",
@@ -153,6 +166,8 @@
   "xg_partial_2022": "xG ao nível do jogo 2022/23 começa na jornada 16; zeros anteriores não são medições."
  },
  "ask": {
+  "aiNotice": "Respostas da IA baseadas na gravação do jogo.",
+  "howTitle": "Como as respostas são verificadas",
   "ask": "Perguntar",
   "badge": "Agente IA · ferramentas · Azure AI Foundry",
   "budget": "O orçamento de perguntas para a demo foi esgotado.",
@@ -168,7 +183,12 @@
   "suggestions.1": "Qual equipa teve mais remates?",
   "suggestions.2": "Como foi a primeira parte?",
   "thinking": "O agente está a consultar os factos registados…",
-  "title": "Perguntar sobre o jogo"
+  "title": "Perguntar sobre o jogo",
+  "references": "IDs dos factos desta frase",
+  "evidence": "Factos consultados pelo agente",
+  "identifiersOnly": "Identificadores devolvidos pela API; o texto dos factos originais e os tempos dos eventos não estão incluídos.",
+  "cost": "Custo da resposta: {0} USD",
+  "verificationLimit": "As verificações comparam nomes e números com os factos citados. Não garantem a interpretação do jogo."
  },
  "attribution": {
   "commonsFile": "Ficheiro Wikimedia Commons",
@@ -264,6 +284,7 @@
   "TouchLines recording: goals and scorers come from the engine events.": "Gravação TouchLines: golos e marcadores vêm dos eventos do motor."
  },
  "crew-report": {
+  "verificationLimit": "As verificações comparam nomes e números com os factos citados. Não garantem a interpretação do jogo.",
   "badge": "Agent Framework · Azure AI Foundry",
   "coherence": "coerência",
   "evalOf": "(Relatório em inglês)",
@@ -282,7 +303,9 @@
   "steps.3": "Um verificador determinístico confirma cada frase com os factos; se falhar, o escritor corrige.",
   "steps.4": "O relatório selado é publicado como ficheiro estático e avaliado pela Azure AI (fundamentação, coerência, fluência). Os visitantes não disparam chamadas de IA.",
   "teaser": "Escrito na Azure após o jogo, a partir da gravação do motor: agentes de IA elaboram o texto e um verificador confirma cada frase com os factos registados.",
-  "title": "Relatório AI do jogo"
+  "title": "Relatório AI do jogo",
+  "processNote": "Isto explica o processo, não o progresso em direto de cada agente.",
+  "liveStep": "O servidor verifica a crónica pedida para este jogo e devolve-a a este painel. Um pedido pode iniciar trabalho de IA no Azure, sujeito aos limites da demo."
  },
  "demo": {
   "back": "Voltar",
@@ -736,13 +759,16 @@
   "fallback": "O rascunho de IA não passou na verificação de factos, aqui estão os factos simples do jogo.",
   "fan": "Adeptos",
   "fullTitle": "Relatório final",
-  "halfPending": "Agentes de IA na Azure estão a escrever o relatório do intervalo…",
+  "halfPending": "Crónica do intervalo pedida no Azure. À espera da resposta do servidor…",
   "halfTitle": "Relatório do intervalo",
   "how": "Escrito por agentes de IA na Azure e verificado frase a frase com os dados do jogo.",
   "limit": "Alcançou o limite de relatórios de IA para hoje.",
-  "pending": "Agentes de IA na Azure estão a escrever o relatório… normalmente demora 1–2 minutos.",
+  "pending": "Crónica pedida no Azure. À espera da resposta do servidor… normalmente demora 1–2 minutos.",
   "retry": "Tentar novamente",
-  "title": "Relatório de IA do jogo"
+  "title": "Relatório de IA do jogo",
+  "pollingPaused": "A consulta automática está em pausa. Use Consultar novamente para verificar esta mesma crónica.",
+  "checkedAt": "Última consulta: {0}",
+  "checkAgain": "Consultar novamente"
  },
  "maps": {
   "goalKey": "Preenchido: golo",
@@ -864,7 +890,9 @@
   "second": "Início da segunda parte",
   "skip": "Ir para o pontapé de saída",
   "stats": "Estatísticas do jogo",
-  "walkout": "As equipas entram em campo"
+  "walkout": "As equipas entram em campo",
+  "halfReport": "Ler a crónica do intervalo",
+  "finalAnalysis": "Analisar o jogo"
  },
  "match-meta": {
   "crest": "Emblema de {0}",
@@ -937,6 +965,9 @@
   "real": "Nomes reais"
  },
  "narration": {
+  "longPassAttempt": "{0} tenta um passe longo.",
+  "highPassAttempt": "{0} tenta um passe pelo alto.",
+  "shotAttempt": "{0} remata.",
   "carry": "{0} conduz a bola {1} metros.",
   "corner": "Canto para {0}.",
   "freeKick": "Livre para {0}.",
@@ -985,7 +1016,8 @@
   "minute": "Minuto",
   "next": "Próximo evento",
   "previous": "Evento anterior",
-  "start": "0'"
+  "start": "0'",
+  "eventSelect": "Escolher um evento"
  },
  "player": {
   "all": "Todos",
@@ -1369,7 +1401,7 @@
   "goalsForAgainst": "GM-GS",
   "graphicsTitle": "Gráficos",
   "grfHint": "Google Research Football",
-  "grfLabel": "Realista · 90 minutos",
+  "grfLabel": "Jogo de 90 minutos",
   "h2hFailed": "Confronto direto indisponível.",
   "h2hLoading": "A carregar confronto direto…",
   "handAssigned": "Características sem fonte · atribuídas manualmente",
@@ -1442,6 +1474,14 @@
   "touchlinesLabel": "Rápido · arcade",
   "unknownRole": "Posição não registada",
   "vs": "VS",
-  "wins": "{0} vitórias"
+  "wins": "{0} vitórias",
+  "teamDetails": "Balanço da época e estrela",
+  "teamUpdated": "Equipa atualizada",
+  "fictionalProvenance": "Nomes fictícios · estatísticas históricas · resultado simulado. Os atributos dos jogadores são estimados.",
+  "realProvenance": "Nomes reais de clubes e jogadores · estatísticas históricas · resultado simulado. Os atributos dos jogadores são estimados.",
+  "engineAndAi": "O motor joga. Os agentes de IA explicam os factos registados em crónicas e respostas; não decidem os golos.",
+  "grfDuration": "90 minutos de jogo. Reprodução ajustável: escolha quanto tempo ver após a geração do jogo.",
+  "touchlinesDuration": "Jogo arcade. Reprodução ajustável: escolha quanto tempo ver após a geração do jogo.",
+  "playbackDuration": "Reprodução ajustável após a geração. O tempo de jogo e o tempo para o ver são diferentes."
  }
 }

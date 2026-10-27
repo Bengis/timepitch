@@ -1,0 +1,252 @@
+/* Studio presents one score above the pitch and live commentary, with replay and context below.
+   The contents wrappers retain the existing tabpanel and report lifecycles. [hidden]
+   must never become contents: switching tabs still removes the pitch from interaction. */
+.studio-app .tp-director-field:not([hidden]) { display: contents; }
+.studio-app .tp-director-field[hidden], .studio-app .tp-side-report[hidden] { display: none; }
+.studio-app .tp-shell[data-view="broadcast"] > .tp-director-replay-tools { order: 2; display: flex; justify-content: flex-end; }
+.studio-app .tp-director-replay-tools button { min-height: 44px; padding: 10px 16px; color: var(--studio-link); background: var(--tp-panel); border: 1px solid var(--tp-line); border-radius: 6px; }
+.studio-app .tp-shell[data-view="broadcast"][data-replay-collapsed] .tp-playback-panel { display: none; }
+.studio-app .tp-shell[data-director-phase="fulltime"] .tp-side-report:not([hidden]) { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.studio-app .tp-side-report > * { min-width: 0; margin: 0; }
+.studio-app .tp-side-report > :only-child { grid-column: 1 / -1; }
+.studio-app .tp-shell[data-director-phase="fulltime"] .tp-side-summary { display: none; }
+.studio-app .tp-shell .tp-director-commentary { grid-column: 1 / -1; min-width: 0; border: 1px solid var(--tp-line); border-radius: 6px; background: var(--tp-panel); }
+.studio-app .tp-director-commentary > summary { padding: 12px 16px; min-height: 44px; cursor: pointer; color: var(--tp-ink2); font-size: 13px; }
+.studio-app .tp-director-commentary[open] > summary { border-bottom: 1px solid var(--tp-line); }
+.studio-app .tp-shell .tp-director-commentary .tpa-panel { margin: 0; border: 0; }
+.studio-app .tp-director-commentary .tpa-panel-h { display: none; }
+.studio-app .tp-commentary-timeline { border-top: 1px solid var(--tp-line); }
+.studio-app .tp-commentary-timeline > summary { padding: 12px 16px; min-height: 44px; cursor: pointer; color: var(--tp-ink2); font-size: 13px; }
+.studio-app .tp-highlights { min-width: 0; padding: 0 0 12px; color: var(--tp-ink2); font-size: 12px; }
+.studio-app .tp-highlights-modes { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.studio-app .tp-highlights button { min-height: 44px; padding: 8px 12px; border: 1px solid var(--tp-line); border-radius: 6px; background: var(--tp-panel); color: var(--tp-ink2); }
+.studio-app .tp-highlights button[aria-pressed="true"] { background: var(--studio-selected); color: var(--studio-link); }
+.studio-app .tp-highlights p { margin: 8px 0 0; overflow-wrap: anywhere; }
+.studio-app .tp-highlights-duration { font-variant-numeric: tabular-nums; }
+.studio-app .tp-highlights-cut { position: absolute; z-index: 4; top: 72px; left: 12px; max-width: calc(100% - 24px); margin: 0; padding: 8px 12px; border-radius: 6px; background: var(--tp-panel); color: var(--tp-ink); border: 1px solid var(--tp-line); font-size: 12px; overflow-wrap: anywhere; pointer-events: none; }
+.studio-app :is(.crew-report-head, .match-questions-head) .crew-report-badge { display: none; }
+@media (max-width: 850px) {
+  .studio-app .tp-shell[data-director-phase="fulltime"] .tp-side-report:not([hidden]) { grid-template-columns: minmax(0, 1fr); }
+}
+.studio-app .unified-centre { container-name: studio-match; color: var(--tp-ink); font-family: var(--tp-ui); }
+.studio-app .tp-shell[data-view="broadcast"] { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.studio-app .tp-shell[data-view="broadcast"] > * { order: 8; min-width: 0; }
+.studio-app .tp-shell[data-view="broadcast"] > .demo-appbar { order: 0; }
+.studio-app .tp-shell[data-view="broadcast"] > .unified-scoreboard { order: 1; }
+.studio-app .tp-shell[data-view="broadcast"] > .tp-screen-tabs { order: 4; }
+.studio-app .tp-shell[data-view="broadcast"] .unified-panel,
+.studio-app .tp-shell[data-view="broadcast"] .unified-match-area:not([hidden]),
+.studio-app .tp-shell[data-view="broadcast"] .unified-stage-main { display: contents; }
+.studio-app .tp-shell .unified-match-area[hidden],
+.studio-app .tp-shell .tp-pitch-settings-host[hidden] { display: none; }
+.studio-app .tp-shell[data-view="broadcast"] .unified-stage-main > *,
+.studio-app .tp-shell[data-view="broadcast"] .pitch-section > *,
+.studio-app .tp-shell[data-view="broadcast"] .sequence-field-host > * { order: 7; min-width: 0; }
+.studio-app .tp-shell[data-view="broadcast"] .retro-field { order: 2; width: 100%; max-width: none; border-radius: 6px; }
+.studio-app .tp-shell[data-view="broadcast"] .tp-banner--below { order: 2; }
+.studio-app .tp-shell[data-view="broadcast"] .tp-playback-panel { order: 3; width: 100%; }
+.studio-app .tp-shell[data-view="broadcast"] .tpa-side { order: 5; }
+.studio-app .tp-shell[data-view="broadcast"] .tp-pitch-settings-host { order: 6; }
+.studio-app .tp-shell .unified-layer-evidence:empty { display: none; }
+
+/* A calm, full-name score. Reds and the accessible score/clock stay untouched. */
+.studio-app .unified-centre .unified-scoreboard { gap: 4px; padding: 10px 18px; background: var(--tp-panel); border: 1px solid var(--tp-line); border-radius: 6px; }
+.studio-app .unified-centre .unified-scoreboard .tp-scorebug { width: 100%; border-radius: 0; background: none; box-shadow: none; overflow: visible; }
+.studio-app .unified-scoreboard .tp-sb-team { padding: 4px 0; gap: 12px; background: none; }
+.studio-app .unified-scoreboard .tp-sb-team--home { justify-content: flex-start; }
+.studio-app .unified-scoreboard .tp-sb-team--home .tp-sb-crest { order: -1; }
+.studio-app .unified-scoreboard .tp-sb-team--home .tp-sb-name { align-items: flex-start; text-align: left; }
+.studio-app .unified-scoreboard .tp-sb-team--away { justify-content: flex-end; }
+.studio-app .unified-scoreboard .tp-sb-team--away .tp-sb-crest { order: 1; }
+.studio-app .unified-scoreboard .tp-sb-team--away .tp-sb-name { align-items: flex-end; text-align: right; }
+.studio-app .unified-scoreboard .tp-sb-abbr,
+.studio-app .unified-scoreboard .tp-sb-kitstrip,
+.studio-app .unified-scoreboard .tp-sb-livedot { display: none; }
+.studio-app .unified-scoreboard .tp-sb-full { display: block; font: 600 clamp(13px, 1.6vw, 20px)/1.3 var(--tp-ui); color: var(--tp-ink); text-transform: none; letter-spacing: 0; white-space: normal; overflow-wrap: anywhere; }
+.studio-app .unified-scoreboard .tp-sb-crest { width: 32px; height: 32px; border-radius: 0; background: transparent; box-shadow: none; }
+.studio-app .unified-scoreboard .tp-sb-score { background: none; padding: 0 12px; }
+.studio-app .unified-scoreboard .tp-sb-digits { font: 600 34px/1.2 var(--tp-ui); font-variant-numeric: tabular-nums; min-width: 98px; gap: 10px; color: var(--tp-ink); }
+.studio-app .unified-scoreboard .tp-sb-flash { animation: none; }
+.studio-app .unified-scoreboard .tp-sb-clock { background: none; border: 0; padding: 8px 0 0; gap: 8px; color: var(--tp-ink2); }
+.studio-app .unified-scoreboard .tp-sb-t { font: 600 14px/1.4 var(--tp-ui); color: var(--tp-ink); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.studio-app .unified-scoreboard .tp-sb-clabel { font-size: 12px; text-transform: none; letter-spacing: 0; color: var(--tp-ink2); }
+.studio-app .unified-scoreboard .tp-sb-half { background: var(--tp-panel2); color: var(--tp-ink2); font-size: 12px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+.studio-app .unified-scoreboard .tp-sb-reds i { box-shadow: none; }
+.studio-app .unified-scoreboard .unified-score-meta { width: 100%; color: var(--tp-ink2); font-size: 12px; }
+@container studio-match (min-width: 701px) {
+  .studio-app .tp-shell .unified-scoreboard .tp-sb-clock { position: absolute; top: calc(100% + 4px); left: 50%; width: max-content; max-width: 50%; transform: translateX(-50%); padding: 0; }
+  .studio-app .tp-shell .unified-scoreboard .unified-score-meta { min-height: 22px; align-items: center; }
+}
+
+/* Replay retains all durations and its native range/select keyboard controls. */
+.studio-app .tp-shell .tp-playback-panel .pbk {
+  --pbk-panel: var(--tp-panel); --pbk-line: var(--tp-line);
+  --pbk-ink: var(--tp-ink); --pbk-ink2: var(--tp-ink2); --pbk-ink3: var(--tp-ink2);
+  --pbk-btn: var(--tp-panel); --pbk-track: var(--tp-line); --pbk-seg: var(--tp-panel2);
+  --pbk-on: var(--studio-selected); --pbk-hi: var(--tp-goal);
+  border-radius: 6px; padding: 12px 16px;
+}
+.studio-app .tp-shell .pbk .pbk-btn { border-radius: 6px; }
+.studio-app .tp-shell .pbk .pbk-btn.pbk-play { background: var(--tp-goal); color: #fff; border-radius: 6px; box-shadow: none; }
+.studio-app .tp-shell .pbk .pbk-btn.pbk-play:disabled { background: var(--tp-panel2); color: var(--tp-ink2); }
+.studio-app .tp-shell .pbk-fill { background: var(--tp-goal); }
+.studio-app .tp-shell .pbk .pbk-range::-webkit-slider-thumb { background: var(--tp-goal); box-shadow: 0 0 0 3px #246bff26; }
+.studio-app .tp-shell .pbk .pbk-range::-moz-range-thumb { background: var(--tp-goal); box-shadow: 0 0 0 3px #246bff26; }
+.studio-app .tp-shell .pbk :is(.pbk-speed-label, .pbk-meta output small) { font-size: 12px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+.studio-app .tp-shell .pbk .unified-playback-time[data-seek-feedback] { color: var(--tp-ink); }
+.studio-app .tp-shell .pbk .pbk-speed button { font-weight: 500; }
+.studio-app .tp-shell .pbk select { margin: 0; }
+.studio-app .tp-shell .tp-banner--below:empty { display: none; }
+
+/* One flat navigation row, followed by wide context cards rather than a sidebar. */
+.studio-app .tp-shell .tp-screen-tabs { gap: 8px 16px; padding-block: 4px; border-bottom: 1px solid var(--tp-line); }
+.studio-app .tp-shell :is(.tp-tabs-main, .tp-tabs-analysis) { padding: 0; border: 0; border-radius: 0; background: none; overflow: visible; flex-wrap: wrap; }
+.studio-app .tp-shell .tp-tabs-analysis { margin-left: auto; }
+.studio-app .tp-shell .tp-screen-tabs button { min-height: 44px; padding: 8px 12px; border: 0; border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--tp-ink2); }
+.studio-app .tp-shell .tp-screen-tabs button[aria-selected="true"] { background: var(--studio-selected); color: var(--studio-link); box-shadow: none; }
+.studio-app .tp-shell .tp-tabs-label { font: 400 12px var(--tp-ui); letter-spacing: 0; text-transform: none; color: var(--tp-ink2); }
+.studio-app .tp-shell .tpa-side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-height: none; overflow: visible; align-content: start; }
+.studio-app .tp-shell .tpa-side > * { min-width: 0; }
+.studio-app .tp-shell .tpa-side > :is(.tp-side-report, .tp-scope-bar, .tpa-log) { grid-column: 1 / -1; }
+.studio-app .tp-shell .tpa-side .tpa-summary { display: block; }
+.studio-app .tp-shell :is(.tpa-panel, .tp-side-summary, .crew-report, .tpa-log, .tp-scope-bar, .unified-plot, .tp-pc-blk, .tp-card-empty, .tp-lu-team, .tp-mm) { background: var(--tp-panel); border: 1px solid var(--tp-line); border-radius: 6px; box-shadow: none; }
+.studio-app .tp-shell :is(.tpa-panel-h h3, .crew-report-head h2, .crew-report-period, .tpa-mark .tpa-tx b, .tp-lu-title, .tp-lu-list-title) { font-family: var(--tp-ui); font-weight: 600; letter-spacing: 0; text-transform: none; }
+.studio-app .tp-shell :is(.tpa-panel-h h3, .crew-report-head h2) { font-size: 15px; }
+.studio-app .tp-shell :is(.tpa-note, .tpa-empty, .tpa-tx small, .crew-report-foot p, .tpa-missing) { font-size: 12px; line-height: 1.5; color: var(--tp-ink2); }
+.studio-app .tp-shell .tpa-tl button:hover,
+.studio-app .tp-shell .tpa-tl li[data-current] button { background: var(--tp-panel2); box-shadow: none; }
+.studio-app .tp-shell :is(.tpa-seg, .tpa-ic, .tpa-half, .tpa-no, .tp-pc-attr .b) { background: var(--tp-panel2); }
+.studio-app .tp-shell .tpa-goal .tpa-ic { background: var(--studio-selected); color: var(--studio-link); }
+.studio-app .tp-shell .tpa-seg button { font-size: 12px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+.studio-app .tp-shell .tpa-seg button[aria-pressed="true"] { background: var(--studio-selected); color: var(--studio-link); }
+.studio-app .tp-shell .tp-side-report:focus { outline-color: var(--tp-goal); border-radius: 6px; }
+.studio-app .tp-shell .crew-report { padding: 18px; gap: 10px; }
+.studio-app .tp-shell .crew-report-headline { font: 600 22px/1.3 var(--tp-ui); }
+.studio-app .tp-shell .crew-report p { font-size: 14px; line-height: 1.6; }
+.studio-app .tp-shell :is(.crew-report-open, .match-questions-form button) { background: var(--tp-goal); color: #fff; border-radius: 6px; }
+.studio-app .tp-shell :is(.crew-audience button, .match-questions-suggestions button) { border-color: var(--tp-line); border-radius: 6px; }
+.studio-app .tp-shell .crew-audience button[aria-pressed="true"] { background: var(--studio-selected); color: var(--studio-link); border-color: var(--studio-selected-line); }
+.studio-app .tp-shell .match-questions-form input { background: var(--tp-panel); border-color: var(--tp-line); color: var(--tp-ink); border-radius: 6px; }
+.studio-app .tp-shell .crew-report-half { border-color: var(--tp-line); }
+.studio-app .tp-shell .crew-how > summary { color: var(--studio-link); }
+.studio-app .tp-shell .match-questions-check { color: var(--studio-success); }
+.studio-app .tp-shell :is(.tp-pc-back, .tp-pc-picker button) { background: var(--tp-panel); color: var(--tp-ink); border-color: var(--tp-line); border-radius: 6px; }
+.studio-app .tp-shell .tp-pc-picker button[aria-pressed="true"] { background: var(--studio-selected); border-color: var(--studio-selected-line); color: var(--studio-link); }
+.studio-app .tp-shell .tp-mm b { color: var(--tp-ink); }
+.studio-app .tp-shell .tp-lu-row:hover { background: var(--tp-panel2); }
+.studio-app .tp-shell .tp-pitch-settings-host .pitch-settings { border-radius: 6px; }
+
+/* Technical filters, narration and player detail share the same readable surfaces. */
+.studio-app .tp-shell :is(.tpa-select select, .tp-scope-bar .tp-scope-reveal) { background: var(--tp-panel); color: var(--tp-ink); border-color: var(--tp-line); }
+.studio-app .tp-shell .tp-scope-bar { padding: 8px 12px; }
+.studio-app .tp-shell .tp-narr :is(button:hover, button:focus-visible) { background: var(--tp-panel2); }
+.studio-app .tp-shell .tp-narr-line:is([data-kind="goal"], [data-kind="own_goal"]) .tp-narr-tx { color: var(--studio-link); font-weight: 600; }
+.studio-app .tp-shell .tp-lu-head h3 { font: 600 20px/1.3 var(--tp-ui); text-transform: none; letter-spacing: 0; }
+.studio-app .tp-shell .tp-pc-hero { background: var(--tp-panel); border: 1px solid var(--tp-line); border-radius: 6px; box-shadow: none; }
+.studio-app .tp-shell .tp-pc-stripes { display: none; }
+.studio-app .tp-shell .tp-pc-bignum { color: var(--tp-panel2); }
+.studio-app .tp-shell .tp-pc-nameplate { background: var(--tp-panel); }
+.studio-app .tp-shell .tp-pc-crest small { color: var(--tp-ink2); text-shadow: none; text-transform: none; letter-spacing: 0; }
+.studio-app .tp-shell .tp-pc-first { color: var(--tp-ink2); text-transform: none; letter-spacing: 0; }
+.studio-app .tp-shell .tp-pc-last { font: 600 32px/1.15 var(--tp-ui); text-transform: none; letter-spacing: 0; }
+.studio-app .tp-shell .tp-pc-meta b { color: var(--tp-ink); }
+.studio-app .tp-shell .tp-pc-avatar svg { filter: none; }
+
+/* Broadcast appbar and camera controls are interface surfaces, not pitch materials. */
+.studio-app .demo-appbar .demo-back { background: var(--tp-panel); color: var(--tp-ink); border-color: var(--tp-line); border-radius: 6px; }
+.studio-app .demo-appbar .movement-selector { background: var(--tp-panel); color: var(--tp-ink2); border-color: var(--tp-line); border-radius: 6px; }
+.studio-app .demo-appbar .movement-selector button { color: var(--tp-ink2); }
+.studio-app .demo-appbar .movement-selector button[aria-pressed="true"] { background: var(--studio-selected); color: var(--studio-link); }
+.studio-app .demo-appbar .movement-selector button:disabled { text-decoration-color: var(--tp-line2); }
+.studio-app .pitch-hud-glass,
+.studio-app .pitch-hud-tl .chip.chip { background: var(--tp-panel); color: var(--tp-ink2); border-color: var(--tp-line); border-radius: 6px; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.studio-app .pitch-hud-camtabs button { color: var(--tp-ink2); }
+.studio-app .pitch-hud-camtabs button:is(.on, :hover) { background: var(--studio-selected); color: var(--studio-link); }
+.studio-app .pitch-hud-camtabs button:focus-visible { outline-color: var(--tp-goal); }
+.studio-app :is(.pitch-hud-caption b, .pitch-hud-engine b) { color: var(--tp-ink); }
+.studio-app .tp-big-play { min-height: 52px; padding: 10px 20px; font-size: 16px; font-weight: 600; background: var(--tp-goal); color: #fff; border-radius: 6px; box-shadow: none; }
+.studio-app .tp-big-play svg { width: 24px; height: 24px; }
+
+/* Phase dialogs remain readable against both renderers. */
+.studio-app .tp-shell .tp-break-card { background: var(--tp-panel); color: var(--tp-ink); border: 1px solid var(--tp-line); border-radius: 6px; box-shadow: 0 12px 40px #14202e26; }
+.studio-app .tp-shell .tp-break-card .tp-break-kicker { color: var(--tp-ink2); }
+.studio-app .tp-shell .tp-break-actions button { background: var(--tp-panel); color: var(--tp-ink); border-color: var(--tp-line); border-radius: 6px; }
+.studio-app .tp-shell .tp-break-actions .tp-break-primary { background: var(--tp-goal); border-color: var(--tp-goal); color: #fff; }
+
+@container studio-match (max-width: 700px) {
+  .studio-app .tp-shell .tpa-side { grid-template-columns: minmax(0, 1fr); }
+  .studio-app .tp-shell .tp-tabs-analysis { margin-left: 0; }
+  .studio-app .tp-shell .tp-screen-tabs { gap: 6px; }
+  .studio-app .tp-shell :is(.tp-tabs-main, .tp-tabs-analysis) { width: 100%; }
+  .studio-app .tp-shell .tp-screen-tabs button { flex: 1 1 0; padding: 8px 5px; font-size: 12px; white-space: normal; }
+  .studio-app .unified-centre .unified-scoreboard { padding: 8px; }
+  .studio-app .unified-scoreboard .tp-sb-team { padding: 2px; gap: 5px; }
+  .studio-app .unified-scoreboard .tp-sb-crest { width: 24px; height: 24px; }
+  .studio-app .unified-scoreboard .tp-sb-full { font-size: 12px; }
+  .studio-app .unified-scoreboard .tp-sb-score { padding-inline: 6px; }
+  .studio-app .unified-scoreboard .tp-sb-digits { font-size: 27px; min-width: 65px; gap: 5px; }
+  .studio-app .unified-scoreboard .tp-sb-clabel { font-size: 11px; }
+  .studio-app .unified-scoreboard .tp-sb-clock { padding-top: 4px; }
+  .studio-app .tp-shell .tp-playback-panel .pbk { padding: 10px 8px; }
+  .studio-app .tp-shell .pbk-main:has(.pbk-halves) { grid-template-columns: minmax(0, 1fr) 72px; gap: 6px; }
+  .studio-app .tp-shell .pbk-btns { gap: 4px; }
+  .studio-app .tp-shell .pbk .pbk-btn.pbk-play { width: 44px; height: 44px; }
+  .studio-app .tp-shell .pbk-scrub:not(:has(.pbk-marks)) { height: 54px; }
+  .studio-app .tp-shell .pbk .pbk-halves { display: grid; gap: 2px; width: 72px; }
+  .studio-app .tp-shell .pbk .pbk-speed-label { padding: 0; font-size: 11px; line-height: 14px; }
+  .studio-app .tp-shell .pbk .pbk-duration-select { height: 44px; min-width: 0; padding: 2px 4px; font-size: 12px; }
+  .studio-app .tp-shell .pbk-meta { gap: 4px; justify-content: space-between; }
+  .studio-app .tp-shell .pbk-meta output { flex-basis: 100%; text-align: center; }
+  .studio-app .tp-shell .pbk .pbk-meta output small { font-size: 11px; }
+  .studio-app .tp-shell .pbk .pbk-phase { gap: 4px; font-size: 11px; }
+  .studio-app .tp-shell .pbk .pbk-phase select { box-sizing: border-box; height: 44px; width: 44px; padding: 2px 4px; font-size: 12px; }
+  .studio-app .tp-shell .pbk .pbk-replay { min-width: 0; padding: 2px 5px; font-size: 11px; }
+  .studio-app .tp-shell .crew-report { padding: 14px; }
+  .studio-app .tp-shell .match-questions-form { flex-wrap: wrap; }
+  .studio-app .tp-shell .match-questions-form input { flex-basis: 100%; }
+}
+
+/* At 320 px the duration and metadata share explicit rows. An auto-sized button
+   cluster must not claim the duration selector's space and push it off-screen. */
+@container studio-match (max-width: 332px) {
+  .studio-app .tp-shell .tp-playback-panel .pbk { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .studio-app .tp-shell .pbk-main,
+  .studio-app .tp-shell .pbk-meta { display: contents; }
+  .studio-app .tp-shell .pbk-scrub,
+  .studio-app .tp-shell .pbk-btns { grid-column: 1 / -1; }
+  .studio-app .tp-shell .pbk-btns { justify-self: center; }
+  .studio-app .tp-shell .pbk .pbk-halves { grid-column: 1 / 3; display: grid; grid-template-columns: minmax(0, 1fr) 72px; align-items: center; gap: 4px; width: auto; justify-self: stretch; }
+  .studio-app .tp-shell .pbk .pbk-speed-label { font-size: 10px; white-space: normal; }
+  .studio-app .tp-shell .pbk-meta output { grid-column: 3 / 5; text-align: right; align-self: center; font-size: 10px; }
+  .studio-app .tp-shell .pbk:not(:has(.pbk-halves)) .pbk-meta output { grid-column: 1 / -1; text-align: center; }
+  .studio-app .tp-shell .pbk .pbk-phase { grid-column: 1; flex-direction: column; align-items: stretch; gap: 2px; line-height: 14px; text-align: center; }
+  .studio-app .tp-shell .pbk .pbk-phase select { width: 100%; }
+  .studio-app .tp-shell .pbk .pbk-replay { justify-content: center; align-self: end; padding: 2px; gap: 2px; font-size: 10px; }
+}
+
+/* Live commentary shares the pitch row. Keep the existing nodes and final-report layout. */
+.tp-voice-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 12px; }
+.tp-voice-controls button, .tp-voice-controls select { min-height: 44px; max-width: 100%; background: var(--tp-panel); color: var(--tp-ink); border: 1px solid var(--tp-line); border-radius: 6px; padding: 6px 10px; }
+.tp-voice-controls button[aria-pressed="true"] { background: var(--studio-selected); }
+.tp-voice-controls label { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; max-width: 100%; }
+.tp-voice-controls small { color: var(--tp-ink2); flex-basis: 100%; overflow-wrap: anywhere; }
+.tp-test-audio { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; width: 100%; min-width: 0; padding: 10px; border: 1px solid var(--tp-line); border-radius: 6px; }
+.tp-test-audio strong, .tp-test-audio small { flex-basis: 100%; overflow-wrap: anywhere; }
+.tp-test-audio input[type="range"] { max-width: 100%; width: 130px; min-height: 44px; }
+.tp-director-commentary[open] > summary .tp-commentary-show,
+.tp-director-commentary:not([open]) > summary .tp-commentary-hide { display: none; }
+.studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] > * { grid-column: 1 / -1; }
+.studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .tpa-side { display: contents; }
+.studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .tpa-side > * { grid-column: 1 / -1; order: 6; }
+.studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .tp-playback-panel { grid-column: 1 / -1; }
+.studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .tp-director-commentary { order: 2; max-height: 220px; overflow: auto; overflow-anchor: none; }
+.studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .tp-director-commentary .tp-narr { max-height: none; overflow: visible; }
+@media (min-width: 1000px) {
+  .studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] { grid-template-columns: minmax(0, 1fr) clamp(260px, 23vw, 320px); }
+  .studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .retro-field { grid-column: 1; }
+  .studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .tp-director-commentary { grid-column: 2; align-self: stretch; contain: size; min-height: 0; max-height: none; }
+  .studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .tp-director-commentary:not([open]) { align-self: start; height: 44px; }
+}
+
+.studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"]:has([data-director-commentary]:not([open])) { grid-template-columns: minmax(0, 1fr); }
+.studio-app .tp-shell[data-view="broadcast"][data-director-phase="live"] .tp-director-commentary:not([open]) { grid-column: 1 / -1; order: 1; justify-self: end; align-self: start; contain: none; height: auto; }

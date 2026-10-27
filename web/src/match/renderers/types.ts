@@ -24,6 +24,8 @@ export type PitchRenderInput = Readonly<{
   frame: SceneFrame; previous: SceneFrame; cue?: VisualCue; restarting: boolean;
   selectedPlayerKey: string | null; camera: CameraMode; appearance: Appearance; detail: DetailLevel;
   fieldFocus?: Readonly<{x:number;y:number}> | null;
+  /** Presentation-only frames before kick-off, separate from recorded match actions. */
+  presentation?: 'walkout';
   labels: Readonly<{ home: string; away: string; clock: string; goal: string }>;
   /** Identidad visual opcional (equipación, dorsal, aspecto por clave de jugador). Sin ella, colores por lado. */
   cast?: MatchCast | null;

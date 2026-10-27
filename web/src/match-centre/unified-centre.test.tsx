@@ -75,7 +75,7 @@ describe('one complete Match Centre', () => {
   });
 
   it('keeps focused filters and transport mounted across cutoff reads; passes explicit demand', async () => {
-    const f = screenFixture('timepitch'); render(<MatchCentre adapter={f.adapter} visible onBack={() => {}} />);
+    const f = screenFixture('historical'); render(<MatchCentre adapter={f.adapter} visible onBack={() => {}} />);
     const filter = screen.getByRole('combobox', { name: 'Event type' }); filter.focus();
     const slider = screen.getByRole('slider');
     act(() => f.publish({ ...f.adapter.snapshot(), panels: { ...f.initial.panels, match: { ...f.panel, cutoff: { elapsedMs: 0, period: 1, periodMs: 0 } } } }));
@@ -182,16 +182,25 @@ describe('TP226: simulated matches open in the broadcast shell and start by them
   it('autoplay starts once at the 5-minute speed (1× for this short fixture) and does not restart after a pause (TP252)', async () => {
     reduceMotion(false);
     const f = screenFixture('timepitch'); render(<MatchCentre adapter={f.adapter} visible onBack={() => {}} autoplay />);
+    expect(screen.queryByRole('button', { name: 'Play the match' })).not.toBeInTheDocument();
     const pause = await screen.findByRole('button', { name: 'Pause' });
     expect(within(screen.getByRole('group', { name: 'Each half' })).getAllByRole('button').filter(b => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1);
     fireEvent.click(pause); await act(async () => {});
     expect(screen.getByRole('button', { name: 'Play' })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Play the match' })).not.toBeInTheDocument();
   });
-  it('without autoplay the match opens paused at 1×', () => {
+  it('a saved replay opens paused with a visible pitch play action that stays dismissed after its first use', async () => {
     const f = screenFixture('timepitch'); render(<MatchCentre adapter={f.adapter} visible onBack={() => {}} />);
     expect(screen.getByRole('button', { name: 'Play' })).toBeEnabled();
     expect(within(screen.getByRole('group', { name: 'Each half' })).getAllByRole('button').filter(b => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1);
+    const big = screen.getByRole('button', { name: 'Play the match' });
+    await waitFor(() => expect(big).toBeEnabled());
+    fireEvent.click(big);
+    const pause = await screen.findByRole('button', { name: 'Pause' });
+    expect(screen.queryByRole('button', { name: 'Play the match' })).not.toBeInTheDocument();
+    fireEvent.click(pause);
+    expect(screen.getByRole('button', { name: 'Play' })).toBeEnabled();
+    expect(screen.queryByRole('button', { name: 'Play the match' })).not.toBeInTheDocument();
   });
   it('with reduced motion it does not start and offers a big play button over the pitch', async () => {
     reduceMotion(true);

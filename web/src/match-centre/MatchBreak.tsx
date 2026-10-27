@@ -10,17 +10,19 @@ export type BreakScorer = Readonly<{ id: string; name: string; minute: string; o
 
 const TEXT = defineTexts('match-break', {
   en: { walkout: 'The teams walk out', skip: 'Skip to kick-off', halftime: 'Half-time', fulltime: 'Full-time', second: 'Start the second half',
-    again: 'Watch again', close: 'Close', og: 'og', stats: 'Match statistics', report: 'Read the AI match report', motm: 'Player of the match' },
+    again: 'Watch again', close: 'Close', og: 'og', stats: 'Match statistics', report: 'Read the AI match report', halfReport: 'Read the half-time report', finalAnalysis: 'Analyse the match', motm: 'Player of the match' },
   es: { walkout: 'Salen los equipos', skip: 'Ir al saque inicial', halftime: 'Descanso', fulltime: 'Final del partido', second: 'Empezar la segunda parte',
-    again: 'Ver otra vez', close: 'Cerrar', og: 'p.p.', stats: 'Estadísticas del partido', report: 'Leer la crónica IA', motm: 'Jugador del partido' },
+    again: 'Ver otra vez', close: 'Cerrar', og: 'p.p.', stats: 'Estadísticas del partido', report: 'Leer la crónica IA', halfReport: 'Leer la crónica del descanso', finalAnalysis: 'Analizar el partido', motm: 'Jugador del partido' },
 });
 
-export function MatchBreak({ phase, home, away, score, scorers, stats, onContinue, onReplay, onClose, onReport, best, lineups }: {
+export function MatchBreak({ phase, home, away, score, scorers, stats, onContinue, onReplay, onClose, onReport, onAnalysis, best, lineups }: {
   phase: MatchPhase; home: string; away: string; score: Readonly<{ home: number; away: number }> | null;
   scorers?: Readonly<{ home: readonly BreakScorer[]; away: readonly BreakScorer[] }>; stats?: ReactNode;
   onContinue?: () => void; onReplay?: () => void; onClose?: () => void;
   /** TP250: final con la crónica IA a un clic y el jugador del partido. */
   onReport?: () => void; best?: Readonly<{ name: string; detail: string }> | null;
+  /** Recorded analysis remains available when the session has no matching AI report. */
+  onAnalysis?: () => void;
   /** TP250: alineaciones durante la salida de los equipos (dorsal y nombre, portero primero). */
   lineups?: Readonly<{ home: readonly string[]; away: readonly string[] }>;
 }) {
@@ -50,8 +52,9 @@ export function MatchBreak({ phase, home, away, score, scorers, stats, onContinu
       {stats && <div className="tp-break-stats" aria-label={t.stats}>{stats}</div>}
       <div className="tp-break-actions">
         {phase === 'halftime' && onContinue && <button type="button" className="tp-break-primary" onClick={onContinue} autoFocus>{t.second} ▶</button>}
-        {phase === 'fulltime' && onReplay && <button type="button" className="tp-break-primary" onClick={onReplay} autoFocus>{t.again}</button>}
-        {phase === 'fulltime' && onReport && <button type="button" className="tp-break-report" onClick={onReport}>✦ {t.report}</button>}
+        {onReport && <button type="button" className={`tp-break-report${phase === 'fulltime' ? ' tp-break-primary' : ''}`} onClick={onReport} autoFocus={phase === 'fulltime'}>✦ {phase === 'halftime' ? t.halfReport : t.report}</button>}
+        {phase === 'fulltime' && !onReport && onAnalysis && <button type="button" className="tp-break-primary" onClick={onAnalysis} autoFocus>{t.finalAnalysis}</button>}
+        {phase === 'fulltime' && onReplay && <button type="button" className={onReport || onAnalysis ? undefined : 'tp-break-primary'} onClick={onReplay} autoFocus={!onReport && !onAnalysis}>{t.again}</button>}
         {phase === 'fulltime' && onClose && <button type="button" onClick={onClose}>{t.close}</button>}
       </div>
     </section>

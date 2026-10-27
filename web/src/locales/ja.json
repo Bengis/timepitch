@@ -1,4 +1,17 @@
 {
+ "replay-audio-test": {"label":"ローカルテスト音 · Azure Speechでも音声でもありません","loading":"テスト音を読み込み中…","ready":"テスト音の準備完了","unavailable":"対応するテスト音がありません","speed":"1×以外ではテスト音をミュート","language":"テスト音の言語","volume":"テスト音の音量","mute":"テスト音をミュート","unmute":"テスト音のミュートを解除"},
+ "report-presentation": {"names":"表示名のみ架空リーグに合わせています。保存済みレポートは変更していません。検証と評価は原文に対するものです。"},
+ "narration-voice": {"on":"音声オン","off":"音声オフ","voice":"実況の声","unavailable":"対応するローカル音声がありません。端末の設定からインストールしてください。","failed":"音声を再生できませんでした。オンにして再試行してください。","note":"端末の音声 · Azureへのリクエストなし。実況は音声の言語に従い、表現力はインストールされた音声によって異なります。","provider":"音声ソース","device":"端末の音声","test":"ローカルテスト音","testOn":"テスト音オン","testOff":"テスト音オフ"},
+ "highlights": {
+  "summary": "ハイライト",
+  "full": "試合全編",
+  "restart": "ハイライトを最初から",
+  "natural": "1× · 自然な速度で再生し、場面間をスキップ",
+  "jump": "リプレイのスキップ：{0} → {1}"
+ },
+
+ "director": {"showReplay":"リプレイを表示","hideReplay":"リプレイを非表示","commentary":"試合実況","showCommentary":"実況を表示","hideCommentary":"実況を非表示"},
+ "studio-theme": {"toLight":"ライトテーマに切り替え","toDark":"ダークテーマに切り替え"},
  "analysis": {
   "analysis": "分析",
   "averagePositions": "平均ポジションとフォーメーション",
@@ -106,7 +119,7 @@
   "historical": "過去データ",
   "historicalNote": "ソースの記録と推定値は別々に表示されます。チーム結果は監査済みの試合結果ソースを使用しています。",
   "home": "ホームチーム",
-  "intro": "1992/93年以降のプレミアリーグの任意の2チームを選び、対戦を観戦しよう。",
+  "intro": "シーズン統計に基づく2つのチームを選び、シミュレーションされた試合を観戦します。",
   "language": "言語",
   "loadError": "ローカルカタログの読み込みに失敗しました。",
   "loading": "過去データを読み込み中…",
@@ -123,7 +136,7 @@
   "outsideFilters": "選択したチームはこのフィルターの範囲外です。",
   "partial": "部分的",
   "participants": "リーグ参加チーム数",
-  "phase": "歴史的試合シミュレーター",
+  "phase": "時代を超えたサッカー · 試合分析",
   "played": "試合数",
   "player": "選手名",
   "position": "ポジション",
@@ -153,6 +166,8 @@
   "xg_partial_2022": "2022/23の試合単位xGは第16節から開始。以前のゼロは計測値ではありません。"
  },
  "ask": {
+  "aiNotice": "記録された試合に基づくAIの回答です。",
+  "howTitle": "回答の確認方法",
   "ask": "質問する",
   "badge": "AIエージェント · ツール · Azure AI Foundry",
   "budget": "デモ用の質問予算が使い切られました。",
@@ -168,7 +183,12 @@
   "suggestions.1": "どちらのチームがシュート数が多かった？",
   "suggestions.2": "前半戦の比較は？",
   "thinking": "エージェントが記録された事実を調査中…",
-  "title": "試合に質問する"
+  "title": "試合に質問する",
+  "references": "この文が参照する事実のID",
+  "evidence": "エージェントが参照した事実",
+  "identifiersOnly": "APIから返された識別子です。元の事実の本文やイベント時刻は含まれていません。",
+  "cost": "回答費用: {0} USD",
+  "verificationLimit": "検証では名前や数値を引用された事実と照合します。試合の解釈が正しいことは保証しません。"
  },
  "attribution": {
   "commonsFile": "Wikimedia Commons ファイル",
@@ -264,6 +284,7 @@
   "TouchLines recording: goals and scorers come from the engine events.": "TouchLines記録：ゴールと得点者はエンジンイベントから取得。"
  },
  "crew-report": {
+  "verificationLimit": "検証では名前や数値を引用された事実と照合します。試合の解釈が正しいことは保証しません。",
   "badge": "Agent Framework · Azure AI Foundry",
   "coherence": "一貫性",
   "evalOf": "（英語レポート）",
@@ -282,7 +303,9 @@
   "steps.3": "決定論的検証者が文ごとに事実と照合。誤りがあればライターが修正。",
   "steps.4": "封印されたレポートは静的ファイルとして公開され、Azure AI評価（根拠性、一貫性、流暢さ）で採点。閲覧者はAI呼び出しを行いません。",
   "teaser": "試合後にAzure上で作成。エンジンの記録からAIエージェントが草稿を作成し、検証者が記録と照合してチェックします。",
-  "title": "AI試合レポート"
+  "title": "AI試合レポート",
+  "processNote": "これは処理の説明であり、各エージェントの進行状況をリアルタイムで示すものではありません。",
+  "liveStep": "この試合について依頼したレポートをサーバーが検証し、このパネルに返します。依頼により、デモの制限内でAzure上のAI処理が開始される場合があります。"
  },
  "demo": {
   "back": "戻る",
@@ -736,13 +759,16 @@
   "fallback": "AI草稿が事実検証に通らなかったため、試合の事実のみ表示します。",
   "fan": "ファン向け",
   "fullTitle": "フルタイムレポート",
-  "halfPending": "Azure上のAIエージェントがハーフタイムレポートを作成中…",
+  "halfPending": "Azureに前半のレポートを依頼しました。サーバーの応答を待っています…",
   "halfTitle": "ハーフタイムレポート",
   "how": "Azure上のAIエージェントが作成し、試合データと文ごとに照合してチェック。",
   "limit": "本日のAIレポート利用上限に達しました。",
-  "pending": "Azure上のAIエージェントがレポートを作成中…通常1〜2分かかります。",
+  "pending": "Azureにレポートを依頼しました。サーバーの応答を待っています…通常1～2分かかります。",
   "retry": "再試行",
-  "title": "AI試合レポート"
+  "title": "AI試合レポート",
+  "pollingPaused": "自動確認は一時停止しています。「再確認」で同じレポートを確認できます。",
+  "checkedAt": "最終確認: {0}",
+  "checkAgain": "再確認"
  },
  "maps": {
   "goalKey": "塗りつぶし：ゴール",
@@ -864,7 +890,9 @@
   "second": "後半開始",
   "skip": "キックオフまでスキップ",
   "stats": "試合統計",
-  "walkout": "両チームがピッチに登場"
+  "walkout": "両チームがピッチに登場",
+  "halfReport": "前半のレポートを読む",
+  "finalAnalysis": "試合を分析"
  },
  "match-meta": {
   "crest": "{0} エンブレム",
@@ -937,6 +965,9 @@
   "real": "実名"
  },
  "narration": {
+  "longPassAttempt": "{0}がロングパスを試みる。",
+  "highPassAttempt": "{0}が浮き球のパスを試みる。",
+  "shotAttempt": "{0}がシュート。",
   "carry": "{0}がボールを{1}メートル運ぶ。",
   "corner": "コーナーキック、{0}の攻撃。",
   "freeKick": "フリーキック、{0}のチャンス。",
@@ -985,7 +1016,8 @@
   "minute": "分",
   "next": "次のイベント",
   "previous": "前のイベント",
-  "start": "0分"
+  "start": "0分",
+  "eventSelect": "イベントを選択"
  },
  "player": {
   "all": "すべて",
@@ -1369,7 +1401,7 @@
   "goalsForAgainst": "得失点",
   "graphicsTitle": "グラフィック",
   "grfHint": "Google Research Football",
-  "grfLabel": "リアル・90分",
+  "grfLabel": "90分の試合",
   "h2hFailed": "対戦成績は利用できません。",
   "h2hLoading": "対戦成績を読み込み中…",
   "handAssigned": "情報元なし・手動割当",
@@ -1442,6 +1474,14 @@
   "touchlinesLabel": "クイック・アーケード",
   "unknownRole": "ポジション未記録",
   "vs": "対",
-  "wins": "勝利数 {0}"
+  "wins": "勝利数 {0}",
+  "teamDetails": "シーズン成績と注目選手",
+  "teamUpdated": "チームを更新しました",
+  "fictionalProvenance": "架空の名前 · 過去の統計 · シミュレーション結果。選手の能力値は推定です。",
+  "realProvenance": "クラブと選手の実名 · 過去の統計 · シミュレーション結果。選手の能力値は推定です。",
+  "engineAndAi": "試合はエンジンが進行します。AIエージェントは記録された事実をレポートと質問への回答で説明し、得点は決めません。",
+  "grfDuration": "試合内では90分。試合生成後に再生時間を調整できます。",
+  "touchlinesDuration": "アーケード形式の試合。試合生成後に再生時間を調整できます。",
+  "playbackDuration": "生成後に再生時間を調整できます。試合内の時間と視聴時間は異なります。"
  }
 }

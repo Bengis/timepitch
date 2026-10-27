@@ -1,0 +1,136 @@
+{
+  "version": "saved-speech-preview-1",
+  "kind": "azure-canary",
+  "source": {
+    "replayId": "arsenal2003-mancity2024-43:grf-cal1",
+    "engine": "grf",
+    "engineVersion": "grf-2.10.2-activity-1",
+    "calibration": "cal1",
+    "datasetVersion": "sha256:db1058122565391a67622e920e3c05f40c6f3039c2ebd5efbed243325f28fcb7",
+    "seed": 43,
+    "homeKey": "arsenal:2003",
+    "awayKey": "mancity:2024",
+    "traceHash": "0dd67ae120fb5b9db4d82659848ccf2eda910110350085a003f30b8f58ff0e67",
+    "recordingSha256": "5197daaea0c311911c9ec52e065c10ab109349ef19942c69de854f308bfa0092",
+    "eventsSha256": "02562e7435b4fd9ab1ad1aad97fb05466fcdb8cc38aa4b0c36b12ac628227b4f",
+    "narratorVersion": "narration-tp278-1",
+    "namesVersion": "fictional-fnv1a-1:142c9db8cea30ea9ddafd55d8beff0aea2bcdf617b6d88f549faf0ac00300d0e",
+    "namesMode": "fictional"
+  },
+  "items": [
+    {
+      "cue": {
+        "id": "goal:grf:goal:0:en-goal",
+        "eventId": "grf:goal:0",
+        "kind": "goal",
+        "text": "Jude Norris shoots… GOAL! North London Reds 1–0 Mancunian Sky.",
+        "atMs": 409500,
+        "playUntilMs": 417500,
+        "maxDurationMs": 7750,
+        "locale": "en",
+        "voice": "en-US-GuyNeural",
+        "style": "excited",
+        "format": "audio-24khz-48kbitrate-mono-mp3",
+        "textSha256": "a72333db70c9569cb11c4486c0a8ad6af8e992132e0aadd1cb331746626156d4",
+        "ssmlSha256": "f2b219308e2cbb69f94fd94bf1a0a747bf690777841eaa16df737bcda78e0f30",
+        "ssml": "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"en-US\"><voice name=\"en-US-GuyNeural\"><mstts:express-as style=\"excited\"><prosody rate=\"+5%\" pitch=\"+3%\">Jude Norris shoots… GOAL! North London Reds 1–0 Mancunian Sky.</prosody></mstts:express-as></voice></speak>",
+        "bytes": 333,
+        "binding": {
+          "version": "azure-speech-dry-1",
+          "sourceSha256": "812e4848a62cc42fdb92502e9de8ee1df444cbf662c6909bb3d608d2b56bcc8e",
+          "eventId": "grf:goal:0",
+          "atMs": 409500,
+          "window": {
+            "fromMs": 395500,
+            "toMs": 417500
+          },
+          "preset": {
+            "id": "en-goal",
+            "locale": "en",
+            "language": "en-US",
+            "voice": "en-US-GuyNeural",
+            "style": "excited",
+            "rate": "+5%",
+            "pitch": "+3%"
+          },
+          "format": "audio-24khz-48kbitrate-mono-mp3",
+          "textSha256": "a72333db70c9569cb11c4486c0a8ad6af8e992132e0aadd1cb331746626156d4",
+          "ssmlSha256": "f2b219308e2cbb69f94fd94bf1a0a747bf690777841eaa16df737bcda78e0f30"
+        },
+        "cacheKey": "4b76d8eaf824eaf0df76fec568e274c6792a9d40d23cfb92136e4fafb28479d2",
+        "audio": {
+          "state": "not_generated",
+          "assetSha256": null,
+          "durationMs": null
+        }
+      },
+      "asset": {
+        "file": "/speech-preview/02-en-excited.mp3",
+        "sha256": "abe6d87fd66b38bbe3de2c7e93c1492c72e7916dcdccc42afb0823429113927e",
+        "durationMs": 7704.0,
+        "mime": "audio/mpeg",
+        "sampleRate": 24000,
+        "channels": 1,
+        "bitRate": 48000
+      }
+    },
+    {
+      "cue": {
+        "id": "goal:grf:goal:0:es-goal-prosody-2",
+        "eventId": "grf:goal:0",
+        "kind": "goal",
+        "text": "Jude Norris dispara… ¡GOL! North London Reds 1–0 Mancunian Sky.",
+        "atMs": 409500,
+        "playUntilMs": 417500,
+        "maxDurationMs": 7750,
+        "locale": "es",
+        "voice": "es-ES-AlvaroNeural",
+        "style": null,
+        "format": "audio-24khz-48kbitrate-mono-mp3",
+        "textSha256": "1789428404a30cd5ad3bb634817b5ee4bf9ed87d36f8ece64b7105ebc024198e",
+        "ssmlSha256": "b43efe782f633b409171d3dc902c728de17e3c2dae58a83cd3acd2698f3e14bf",
+        "ssml": "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"es-ES\"><voice name=\"es-ES-AlvaroNeural\"><prosody rate=\"+5%\" pitch=\"+3%\">Jude Norris dispara… ¡GOL! North London Reds 1–0 Mancunian Sky.</prosody></voice></speak>",
+        "bytes": 285,
+        "binding": {
+          "version": "azure-speech-dry-1",
+          "sourceSha256": "812e4848a62cc42fdb92502e9de8ee1df444cbf662c6909bb3d608d2b56bcc8e",
+          "eventId": "grf:goal:0",
+          "atMs": 409500,
+          "window": {
+            "fromMs": 395500,
+            "toMs": 417500
+          },
+          "preset": {
+            "id": "es-goal-prosody-2",
+            "locale": "es",
+            "language": "es-ES",
+            "voice": "es-ES-AlvaroNeural",
+            "style": null,
+            "rate": "+5%",
+            "pitch": "+3%",
+            "label": "More energetic prosody"
+          },
+          "format": "audio-24khz-48kbitrate-mono-mp3",
+          "textSha256": "1789428404a30cd5ad3bb634817b5ee4bf9ed87d36f8ece64b7105ebc024198e",
+          "ssmlSha256": "b43efe782f633b409171d3dc902c728de17e3c2dae58a83cd3acd2698f3e14bf"
+        },
+        "cacheKey": "02bd6b6305bdbbd82ca9fb3dbbe5a4238e4e8508764430af5fa0d1af8600cfa0",
+        "treatment": "More energetic prosody",
+        "audio": {
+          "state": "not_generated",
+          "assetSha256": null,
+          "durationMs": null
+        }
+      },
+      "asset": {
+        "file": "/speech-preview/04-es-prosody.mp3",
+        "sha256": "901ff6b715b649d31090d3405a6eab821b6797b47163279a0983606a943cf7d1",
+        "durationMs": 6720.0,
+        "mime": "audio/mpeg",
+        "sampleRate": 24000,
+        "channels": 1,
+        "bitRate": 48000
+      }
+    }
+  ]
+}

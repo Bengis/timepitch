@@ -28,14 +28,9 @@ import {installGestureUnlock} from './match/audio/engine';
 import {useVersusText} from './versus/messages';
 import {DEFAULT_RENDERER,pitchStorage,readPitchPreferences,writePitchPreferences} from './match/renderers/preferences';
 import type {SelectableRendererId} from './match/renderers/types';
-// TP215/TP240: portada propia dentro del build (asset con hash).
-import premierArt from './assets/timepitch-premier.webp';
-import conceptArt from './assets/timepitch-concept.webp';
-import { fictional } from './catalog/fictional';
 import { NamesToggle } from './catalog/NamesToggle';
-
-// TP259: la liga ficticia usa la ilustración de jugadores genéricos; la otra recuerda a jugadores reales.
-const coverArt = fictional() ? conceptArt : premierArt;
+import { StudioNavigation } from './studio/StudioNavigation';
+import {StudioThemeToggle,useStudioTheme} from './studio/StudioThemeToggle';
 
 function TeamPanel({ side, selection,grf }: { side: 'home' | 'away'; selection: TeamSelection;grf:boolean }) {
   const { t } = useLanguage();
@@ -58,6 +53,7 @@ function TeamPanel({ side, selection,grf }: { side: 'home' | 'away'; selection: 
 }
 
 export default function App() {
+  const {theme,toggle}=useStudioTheme();
   const { t } = useLanguage();
   const m = useMatchText();
   const g = useGrfText();
@@ -190,12 +186,15 @@ export default function App() {
     getTeams(controller.signal).then(setTeams).catch(error => { if (error.name !== 'AbortError') setFailed(true); });
     return () => controller.abort();
   }, [attempt]);
-  return <div className={`app-shell${twoModes?' two-modes':''}`}>
-    {twoModes?<WorkspaceShell route={route} onNavigate={next=>navigate(next.mode==='reconstruction'?historyRouteRef.current:next)} busy={busy} ready={!!active}>{null}</WorkspaceShell>:<header className="topbar"><a className="wordmark" href="/">TIME<span>PITCH</span><i /></a><nav className="workspace-nav" aria-label={c.workspace}>
-      <button disabled={busy} aria-current={page==='setup'?'page':undefined} onClick={()=>setPage('setup')}>{c.newMatch}</button>
-      <button disabled={busy||!active} aria-current={page==='match'?'page':undefined} onClick={()=>setPage('match')}>{c.matchCentre}</button>
-      <button disabled={busy} aria-current={page==='library'?'page':undefined} onClick={()=>setPage('library')}>{c.library}</button>
-    </nav><div className="topbar-right">{isLocalPreview()&&<span className="local-label"><b />{t.local}</span>}<NamesToggle /><LanguageSelector /></div></header>}
+  const workspaceLabel = page === 'setup' ? c.newMatch : page === 'library' ? c.library : page === 'historical' ? h.archive : c.matchCentre;
+  return <div className={`app-shell studio-app${twoModes?' two-modes':''}`}>
+    <StudioNavigation page={page === 'setup' ? 'setup' : page === 'match' || page === 'demo' ? 'match' : page === 'library' ? 'library' : 'other'} busy={busy}
+      matchAvailable={twoModes || !!active || page === 'demo'}
+      onLibrary={twoModes ? undefined : ()=>{setLegacyPage('library');navigate({mode:'library'});}}
+      onSetup={()=>{setDemoReport(false);setLegacyPage('setup');navigate(HOME_ROUTE);}}
+      onMatch={()=>{if(active){setLegacyPage('match');navigate({mode:'simulation',view:'centre',tab:simulationTab.current});}
+        else{setDemoAutoplay(false);setDemoReport(false);navigate({mode:'demo'});}}}/>
+    {twoModes?<WorkspaceShell route={route} onNavigate={next=>navigate(next.mode==='reconstruction'?historyRouteRef.current:next)} busy={busy} ready={!!active} label={workspaceLabel} themeControl={<StudioThemeToggle theme={theme} onToggle={toggle}/>} >{null}</WorkspaceShell>:<header className="topbar"><a className="wordmark" href="#/">Time<span>Pitch</span></a><span className="studio-context">{workspaceLabel}</span><div className="topbar-right">{isLocalPreview()&&<span className="local-label"><b />{t.local}</span>}<NamesToggle /><StudioThemeToggle theme={theme} onToggle={toggle}/><LanguageSelector /></div></header>}
     <main>
       {twoModes&&<>
         {route.mode==='reconstruction'&&(!(historicalCapabilities?.reconstruction_enabled&&historicalCapabilities.dataset_version)?<p role="alert" className="historical-workspace">{h.unavailable}</p>:!route.matchId?<HistoricalExplorer route={route} datasetVersion={historicalCapabilities.dataset_version} onNavigate={navigate}/>:null)}
@@ -208,14 +207,13 @@ export default function App() {
         onBack={()=>{if(demoReport){setDemoReport(false);navigate(HOME_ROUTE);return;}setLegacyPage('library');navigate({mode:'library'});}}/>}
       {active&&<div hidden={page!=='match'}>{active.engine==='touchlines'?<TouchLinesMatchView key={active.id} id={active.id} record={active.record} visible={page==='match'} tab={twoModes?simulationTab.current:undefined} onSectionChange={section=>{if(modesRef.current&&routeRef.current.mode==='simulation')navigate({...routeRef.current,tab:section});}} onBack={()=>setPage('setup')} autoplay/>:active.engine==='grf'?<GrfMatchView key={active.id} id={active.id} record={active.record} visible={page==='match'} tab={twoModes?simulationTab.current:undefined} onSectionChange={section=>{if(modesRef.current&&routeRef.current.mode==='simulation')navigate({...routeRef.current,tab:section});}} onBack={()=>setPage('setup')} autoplay/>:<MatchView key={active.id} id={active.id} record={active.record} visible={page==='match'} tab={twoModes?simulationTab.current:undefined} onSectionChange={section=>{if(modesRef.current&&routeRef.current.mode==='simulation')navigate({...routeRef.current,tab:section});}} onBack={()=>setPage('setup')} autoplay />}</div>}
       <section className="setup-view" hidden={page!=='setup'}>
-      {/* TP240 («vuelve a la de ayer»): otra vez la portada con la ilustración y las cifras del catálogo. */}
+      {/* TP271: Studio replaces the illustrated banner with a plain workspace heading. */}
       <section className="hero vs-hero">
-        <figure className="vs-hero-banner"><img src={coverArt} alt={fictional() ? t.coverAltFictional : t.coverAlt} width={1672} height={941} /><figcaption className="art-caption">{t.coverNote}</figcaption></figure>
-        <div className="hero-copy"><p className="eyebrow">{t.phase}</p><h1>{t.title}</h1><p className="intro">{t.intro}</p></div>
+        <div className="hero-copy"><p className="eyebrow">{t.phase}</p><h1><span className="studio-desktop-title">{t.title}</span><span className="studio-mobile-title">{c.newMatch}</span></h1><p className="intro">{t.intro}</p></div>
         {teams && <div className="catalog-numbers"><div><strong>{new Set(teams.map(team => team.season_start)).size}</strong><span>{t.seasons}</span></div><div><strong>{new Set(teams.map(team => team.club)).size}</strong><span>{t.clubs}</span></div><div><strong>{teams.length}</strong><span>{t.combinations}</span></div></div>}
       </section>
       {failed ? <div role="alert" className="panel-message">{t.loadError} <button onClick={() => setAttempt(attempt + 1)}>{t.retry}</button></div> : !teams ? <p role="status" className="panel-message">{t.loading}</p> : <>
-        <VersusScreen teams={teams} home={home} away={away}
+        <VersusScreen teams={teams} home={home} away={away} engine={engine}
           // TP236 (24-oct: «el match no debería requerir dos clics»): «Jugar partido» simula directamente.
           onPlay={()=>{void start();}} playDisabled={!canStart}
           // TP253 (25-oct: «pa mi esto sobra, mejor al final una crónica»): sin píldora en la portada; la crónica IA va al final del partido.

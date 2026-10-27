@@ -129,10 +129,10 @@ it('ball_null_removes_mesh and never derives altitude or attaches to a player', 
   const value = input(), { renderer, drawn } = setup(value);
   renderer.update(value);
   const ball = drawn().scene.getObjectByName('ball')!;
-  expect(ball.position.toArray()).toEqual([60, .22, 35]);
+  expect(ball.position.toArray()).toEqual([60, .11, 35]);
   renderer.update({ ...value, frame: { ...value.frame, ball: null } });
   expect(drawn().scene.getObjectByName('ball')).toBeUndefined();
-  renderer.update(value); expect(drawn().scene.getObjectByName('ball')!.position.toArray()).toEqual([60, .22, 35]);
+  renderer.update(value); expect(drawn().scene.getObjectByName('ball')!.position.toArray()).toEqual([60, .11, 35]);
 });
 
 it('focus falls back from active selection to known ball to centre; low detail bounds shadows', () => {
@@ -276,10 +276,10 @@ it('ball height is drawn only when the source provides it, with a ground shadow'
   const value = input(), { renderer, drawn } = setup(value);
   renderer.update({ ...value, frame: { ...value.frame, ball: { x: 60, y: 35, z: 2 } as never } });
   const ball = drawn().scene.getObjectByName('ball')!;
-  expect(ball.position.toArray()).toEqual([60, 2.22, 35]);
+  expect(ball.position.toArray()).toEqual([60, 2.11, 35]);
   const shadow = ball.getObjectByName('ball-contact')!;
   expect(ball.position.y + shadow.position.y).toBeCloseTo(.018);
-  renderer.update(value); expect(ball.position.toArray()).toEqual([60, .22, 35]);
+  renderer.update(value); expect(ball.position.toArray()).toEqual([60, .11, 35]);
 });
 
 it.each(['standard', 'low'] as const)('a full 22-player %s frame, shadow pass included, stays within the draw-call and triangle budget', detail => {

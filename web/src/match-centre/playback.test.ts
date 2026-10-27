@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { MatchPlaybackController } from './playback';
 import { cursorAt } from './session';
 import { syntheticSnapshot } from './unified-fixtures';
@@ -6,6 +6,39 @@ import { AYEW_POLICY } from './sequence/pilot';
 import { halftimeMs, stepTarget, transportTargets } from './transport';
 
 describe('optional sequence policy', () => {
+  it('finishes fractional wall-clock steps at large replay times instead of looping on rounding residue',()=>{
+    const {player,advance}=clock(5811700);
+    player.setPolicy({id:'match-highlights-1',fromMs:0,toMs:5811700,speeds:[1],pauseAt:[{atMs:2925900,endingPeriod:1}],windows:[{fromMs:0,toMs:5811700}]});
+    player.seek(2924900);player.play();
+    // Bound a buggy loop so a regression fails this test instead of freezing the test worker.
+    const internal=player as unknown as {canAdvance:()=>boolean},original=internal.canAdvance.bind(player);let checks=0;
+    const guard=vi.spyOn(internal,'canAdvance').mockImplementation(()=>{if(++checks>12)throw new Error('Clock failed to make progress');return original();});
+    try{advance(.3);expect(()=>player.currentTime()).not.toThrow();expect(player.currentTime()).toBeCloseTo(2924900.3,6);}
+    finally{guard.mockRestore();}
+    advance(1000);expect(player.snapshot().stop).toMatchObject({kind:'halftime',atMs:2925900});
+  });
+  it('plays highlight windows at 1×, skips only gaps and stops at the real half-time',()=>{
+    const {player,advance}=clock(10000);
+    player.setPolicy({id:'match-highlights-1',fromMs:0,toMs:10000,speeds:[1],pauseAt:[{atMs:5000,endingPeriod:1}],windows:[{fromMs:0,toMs:1000},{fromMs:4500,toMs:5500},{fromMs:9000,toMs:10000}]});
+    player.play();advance(500);expect(player.currentTime()).toBe(500);
+    advance(700);expect(player.snapshot()).toMatchObject({elapsedMs:4700,speed:1,status:'playing',jump:{fromMs:1000,toMs:4500}});
+    player.pause();advance(5000);expect(player.currentTime()).toBe(4700);
+    player.play();advance(5000);expect(player.snapshot()).toMatchObject({elapsedMs:5000,status:'paused',stop:{kind:'halftime'}});
+    player.continueAfterStop();advance(600);expect(player.currentTime()).toBe(9100);
+    advance(900);expect(player.snapshot()).toMatchObject({elapsedMs:10000,isMatchEnd:true,wantsPlay:false,status:'ended'});
+    expect(()=>player.setSpeed(2)).toThrow();
+  });
+  it('preserves the cursor when leaving highlights and fences gaps beyond the available horizon',()=>{
+    const {player,advance}=clock(10000);
+    const policy={id:'match-highlights-1' as const,fromMs:0,toMs:10000,speeds:[1],pauseAt:[],windows:[{fromMs:0,toMs:1000},{fromMs:9000,toMs:10000}]};
+    player.setPolicy(policy);player.setHorizon(5000,'ready');player.play();advance(1100);
+    expect(player.snapshot()).toMatchObject({elapsedMs:1000,pendingSeekMs:9000,status:'buffering'});
+    player.setHorizon(10000,'ready');expect(player.currentTime()).toBe(9000);
+    player.pause();player.seek(9400);player.setPolicy(null);expect(player.snapshot()).toMatchObject({elapsedMs:9400,speed:1,status:'paused'});
+    const before=player.snapshot();
+    expect(()=>player.setPolicy({...policy,windows:[{fromMs:0,toMs:3000},{fromMs:2000,toMs:10000}]})).toThrow();
+    expect(player.snapshot()).toEqual(before);
+  });
   it('bounds the clip, pauses at clip end and preserves legacy speeds when removed', () => {
     const {player,advance}=clock(5851968);player.setPolicy(AYEW_POLICY);
     expect(player.snapshot()).toMatchObject({elapsedMs:1684024,speed:1,status:'paused',stop:null,isMatchEnd:false});

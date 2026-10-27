@@ -30,12 +30,15 @@
 .pitch-hud-camtabs button:hover { color: #fff; }
 .pitch-hud-camtabs button.on { background: #fff; color: #0a0f1a; }
 .pitch-hud-camtabs button:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.pitch-hud-overlay .pitch-hud-controls .pitch-hud-camtabs button { min-width: 44px; min-height: 44px; }
+.pitch-hud-overlay .pitch-hud-controls .pitch-hud-camtabs button::after { display: none; }
 /* Teléfono (TP223): una sola fila arriba que no tapa el campo. Chips y reloj a la izquierda, pestañas de cámara a la
    derecha; el texto largo del rótulo queda solo para lectores de pantalla (y en el title). */
 @container pitchhud (max-width: 600px) {
   .pitch-hud-engine { display: none; }
   .pitch-hud-tl { left: 6px; top: 6px; max-width: calc(100% - 140px); flex-wrap: nowrap; gap: 4px; }
   .pitch-hud-tr { right: 6px; top: 6px; }
+  .pitch-hud-wrap:has(.pitch-hud-controls) .pitch-hud-tl { max-width: calc(100% - 230px); }
   .pitch-hud-tl .chip { font-size: 9px; padding: 2px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
   .pitch-hud-caption { font-size: 10px; padding: 2px 6px; gap: 0; white-space: nowrap; flex: none; }
   .pitch-hud-caption-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -43,6 +46,7 @@
   /* Botón visible de 19 px; la zona táctil sigue midiendo 44 px con una capa transparente que sobresale (la clase
      extra gana a la regla de 44 px de .unified-centre). */
   .pitch-hud-overlay .pitch-hud-camtabs.pitch-hud-glass button { font-size: 10px; padding: 3px 6px; min-height: 0; position: relative; }
+  .pitch-hud-overlay .pitch-hud-controls .pitch-hud-camtabs.pitch-hud-glass button { min-height: 44px; }
   .pitch-hud-overlay .pitch-hud-camtabs.pitch-hud-glass button::after { content: ""; position: absolute; inset: -6px 0 -19px; }
 }
 /* Los chips de procedencia sobre el campo llevan fondo glass (maqueta: .pitch-hud .chip), si no se pierden sobre la grada. */

@@ -1,4 +1,17 @@
 {
+ "replay-audio-test": {"label":"本地测试音 · 不是 Azure Speech，也不是人声","loading":"正在加载测试音频…","ready":"测试音频已就绪","unavailable":"没有兼容的测试音频","speed":"非1×速度时测试音频静音","language":"测试音频语言","volume":"测试音频音量","mute":"将测试音频静音","unmute":"取消测试音频静音"},
+ "report-presentation": {"names":"仅将显示名称替换为虚构联赛名称。已保存的报告保持不变；验证和评估针对原文。"},
+ "narration-voice": {"on":"语音已开启","off":"语音已关闭","voice":"解说员声音","unavailable":"没有受支持的本地语音。请在设备设置中安装。","failed":"无法播放语音。请重新开启后再试。","note":"设备语音 · 不发送 Azure 请求。解说使用所选声音的语言，表现力取决于已安装的语音。","provider":"音频来源","device":"设备语音","test":"本地测试音","testOn":"测试音频已开启","testOff":"测试音频已关闭"},
+ "highlights": {
+  "summary": "精彩集锦",
+  "full": "完整比赛",
+  "restart": "重新播放集锦",
+  "natural": "1× · 以自然速度播放，跳过场面之间的片段",
+  "jump": "回放跳转：{0} → {1}"
+ },
+
+ "director": {"showReplay":"显示回放","hideReplay":"隐藏回放","commentary":"比赛解说","showCommentary":"显示解说","hideCommentary":"隐藏解说"},
+ "studio-theme": {"toLight":"切换为浅色主题","toDark":"切换为深色主题"},
  "analysis": {
   "analysis": "分析",
   "averagePositions": "平均位置与阵型",
@@ -106,7 +119,7 @@
   "historical": "历史数据",
   "historicalNote": "来源记录和估算分开显示。球队结果使用审核后的比赛结果来源。",
   "home": "主队",
-  "intro": "选择1992/93赛季以来的任意两支英超球队，观看他们的对决。",
+  "intro": "选择两支基于赛季统计的球队，观看模拟比赛。",
   "language": "语言",
   "loadError": "无法加载本地目录。",
   "loading": "正在加载历史数据…",
@@ -123,7 +136,7 @@
   "outsideFilters": "您选择的球队不在当前筛选范围内。",
   "partial": "部分",
   "participants": "联赛参赛队伍",
-  "phase": "历史比赛模拟器",
+  "phase": "跨时代足球 · 比赛分析",
   "played": "出场",
   "player": "球员",
   "position": "位置",
@@ -153,6 +166,8 @@
   "xg_partial_2022": "2022/23赛季比赛级xG从第16轮开始；之前的零值非实测。"
  },
  "ask": {
+  "aiNotice": "根据比赛记录生成的AI回答。",
+  "howTitle": "回答的核查方式",
   "ask": "提问",
   "badge": "AI 代理 · 工具 · Azure AI Foundry",
   "budget": "演示的提问额度已用尽。",
@@ -168,7 +183,12 @@
   "suggestions.1": "哪方射门更多？",
   "suggestions.2": "上半场表现如何？",
   "thinking": "代理正在查询记录的事实……",
-  "title": "询问比赛"
+  "title": "询问比赛",
+  "references": "本句引用的事实ID",
+  "evidence": "智能体查询的事实",
+  "identifiersOnly": "这些是API返回的标识符，不包含原始事实文本和事件时间。",
+  "cost": "回答费用：{0} USD",
+  "verificationLimit": "核验会将姓名和数字与引用的事实进行比对，但不保证对比赛的解读正确。"
  },
  "attribution": {
   "commonsFile": "维基共享资源文件",
@@ -264,6 +284,7 @@
   "TouchLines recording: goals and scorers come from the engine events.": "TouchLines 记录：进球和射手数据来自引擎事件。"
  },
  "crew-report": {
+  "verificationLimit": "核验会将姓名和数字与引用的事实进行比对，但不保证对比赛的解读正确。",
   "badge": "Agent Framework · Azure AI Foundry",
   "coherence": "一致性",
   "evalOf": "（英文报告）",
@@ -282,7 +303,9 @@
   "steps.3": "确定性验证器核对每句内容，若有错误，撰稿人修正。",
   "steps.4": "密封报告作为静态文件发布，并通过 Azure AI 评估（真实性、一致性、流畅度）评分。访客不会触发任何 AI 调用。",
   "teaser": "比赛结束后在Azure上生成，基于引擎记录：AI代理起草，验证者逐句核对事实。",
-  "title": "AI比赛报告"
+  "title": "AI比赛报告",
+  "processNote": "这里说明处理流程，并非各智能体的实时进度。",
+  "liveStep": "服务器会核验为这场比赛请求的战报，并返回到此面板。请求可能会在演示额度限制内启动Azure上的AI任务。"
  },
  "demo": {
   "back": "返回",
@@ -736,13 +759,16 @@
   "fallback": "AI 草稿未通过事实核查，以下为纯比赛事实。",
   "fan": "球迷",
   "fullTitle": "全场报告",
-  "halfPending": "Azure 上的 AI 代理正在撰写半场报告……",
+  "halfPending": "已向Azure请求上半场战报。正在等待服务器返回…",
   "halfTitle": "半场报告",
   "how": "由 Azure 上的 AI 代理撰写，并逐行核对比赛数据。",
   "limit": "您已达到今日 AI 报告上限。",
-  "pending": "Azure 上的 AI 代理正在撰写报告……通常需 1–2 分钟。",
+  "pending": "已向Azure请求战报。正在等待服务器返回…通常需要1至2分钟。",
   "retry": "重试",
-  "title": "AI 比赛报告"
+  "title": "AI 比赛报告",
+  "pollingPaused": "自动查询已暂停。点击“重新查询”可查看同一份战报。",
+  "checkedAt": "上次查询：{0}",
+  "checkAgain": "重新查询"
  },
  "maps": {
   "goalKey": "实心：进球",
@@ -864,7 +890,9 @@
   "second": "开始下半场",
   "skip": "跳至开球",
   "stats": "比赛统计",
-  "walkout": "双方球员入场"
+  "walkout": "双方球员入场",
+  "halfReport": "阅读上半场战报",
+  "finalAnalysis": "分析比赛"
  },
  "match-meta": {
   "crest": "{0} 徽章",
@@ -937,6 +965,9 @@
   "real": "真实名称"
  },
  "narration": {
+  "longPassAttempt": "{0}尝试长传。",
+  "highPassAttempt": "{0}尝试高空传球。",
+  "shotAttempt": "{0}射门。",
   "carry": "{0}带球前进{1}米。",
   "corner": "角球，{0}发球。",
   "freeKick": "任意球，{0}主罚。",
@@ -985,7 +1016,8 @@
   "minute": "分钟",
   "next": "下一个事件",
   "previous": "上一个事件",
-  "start": "0'"
+  "start": "0'",
+  "eventSelect": "选择事件"
  },
  "player": {
   "all": "全部",
@@ -1369,7 +1401,7 @@
   "goalsForAgainst": "进-失球",
   "graphicsTitle": "画面",
   "grfHint": "Google Research Football",
-  "grfLabel": "真实 · 90分钟",
+  "grfLabel": "90分钟比赛",
   "h2hFailed": "交锋记录不可用。",
   "h2hLoading": "正在加载交锋记录…",
   "handAssigned": "无来源特征 · 手动分配",
@@ -1442,6 +1474,14 @@
   "touchlinesLabel": "快速 · 街机风",
   "unknownRole": "位置未记录",
   "vs": "对阵",
-  "wins": "{0}胜"
+  "wins": "{0}胜",
+  "teamDetails": "赛季成绩与明星球员",
+  "teamUpdated": "球队已更新",
+  "fictionalProvenance": "虚构姓名 · 历史统计 · 模拟结果。球员属性为估算值。",
+  "realProvenance": "真实俱乐部和球员姓名 · 历史统计 · 模拟结果。球员属性为估算值。",
+  "engineAndAi": "引擎负责比赛。AI智能体通过战报和问答解释已记录的事实，不决定进球。",
+  "grfDuration": "比赛内时间为90分钟。生成比赛后可以调整观看时长。",
+  "touchlinesDuration": "街机式比赛。生成比赛后可以调整观看时长。",
+  "playbackDuration": "生成后可调整播放时长。比赛时间与观看时间不同。"
  }
 }

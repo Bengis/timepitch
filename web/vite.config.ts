@@ -1,10 +1,13 @@
 import { configDefaults,defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { localReplays } from './dev/local-replays.mjs';
+import {localSpeechTest} from './dev/local-speech-test.mjs';
+import {localSpeechPreview} from './dev/local-speech-preview.mjs';
+import {localSummarySpeechPreview} from './dev/local-summary-speech-preview.mjs';
 const env=(globalThis as typeof globalThis&{process?:{env:Record<string,string|undefined>}}).process?.env;
 
 export default defineConfig({
-  plugins: [react(), localReplays()],
+  plugins: [react(), localReplays(),localSpeechTest(),localSpeechPreview(),localSummarySpeechPreview()],
   build: { manifest: 'assets/pitch-renderer-manifest.json' },
   server: {
     host: '127.0.0.1',

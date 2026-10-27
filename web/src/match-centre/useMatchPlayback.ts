@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useReducer } from 'react';
-import { MatchPlaybackController } from './playback';
+import { useEffect, useMemo, useSyncExternalStore } from 'react';
+import { MatchPlaybackController, type PlaybackState } from './playback';
 import { sampleInterval } from './sampling';
 import { cursorAt, identityKey, type MatchSessionAdapter, type MotionInterval, type SampleView, type SessionSnapshot, type SessionDemand } from './session';
 import type { PlaybackPolicy } from './sequence/types';
+
+export type PlaybackSeekState=Readonly<{revision:number;targetMs:number;status:'pending'|'settled'|'cancelled'}>;
 
 function contains(interval: MotionInterval | null, time: number): interval is MotionInterval {
   return interval !== null && time >= interval.fromMs && time <= interval.toMs;
@@ -25,17 +27,17 @@ function createPlayback(adapter: MatchSessionAdapter, policy?: PlaybackPolicy) {
   let lastDemand: string | null = null;
   let requestedCursor: number | null = null;
   let requestedEnding: number | undefined;
-  let notify = () => {};
+  let listener = () => {};
   let lastView: SampleView | null = null;
   let policyId=policy?.id??null;
+  let seekRevision=0,seekState:PlaybackSeekState|null=null;
 
-  function context(): SessionDemand {
-    const state=controller.snapshot();
+  function context(state:PlaybackState=controller.snapshot()): SessionDemand {
     return {playback:state.wantsPlay?'playing':'paused',...(state.stop?.kind==='halftime'?{endingPeriod:state.stop.endingPeriod}:{})};
   }
-  function resolved(next:SessionSnapshot,time:number) {
-    const stop=controller.snapshot().stop;
-    if(next.presentedCursor.period!==cursorAt(next.descriptor,time,context().endingPeriod).period)return false;
+  function resolved(next:SessionSnapshot,time:number,state:PlaybackState=controller.snapshot()) {
+    const stop=state.stop;
+    if(next.presentedCursor.period!==cursorAt(next.descriptor,time,context(state).endingPeriod).period)return false;
     return resolves(next.interval,time) || stop?.kind==='halftime' && contains(next.interval,time)
       && next.presentedCursor.period===stop.endingPeriod && next.presentedCursor.elapsedMs===time;
   }
@@ -49,6 +51,10 @@ function createPlayback(adapter: MatchSessionAdapter, policy?: PlaybackPolicy) {
     snapshot = next;
     controller.setDuration(next.descriptor.durationMs);
     controller.setHorizon(next.horizonMs, next.loadState);
+    // Retain the acknowledgement even when playback advances before React renders the exact target.
+    if(seekState?.status==='pending'&&next.requestedCursor.elapsedMs===seekState.targetMs
+      &&(next.loadState==='ready'||next.loadState==='facts_only')&&controller.snapshot().pendingSeekMs===null)
+      seekState={...seekState,status:'settled'};
     notify();
   }
   function cancelDemand() {
@@ -89,10 +95,10 @@ function createPlayback(adapter: MatchSessionAdapter, policy?: PlaybackPolicy) {
       accept({ ...snapshot, loadState: 'unavailable', reason: 'Playback data could not be loaded' });
     });
   }
-  function view(): SampleView | null {
-    const time = controller.currentTime();
+  function view(state:PlaybackState): SampleView | null {
+    const time = state.elapsedMs;
     if (snapshot.loadState === 'facts_only' || snapshot.loadState === 'unavailable') return null;
-    if (!resolved(snapshot, time)) return lastView;
+    if (!resolved(snapshot, time, state)) return lastView;
     const interval = snapshot.interval!;
     const frame = sampleInterval(interval, time);
     const previousTime = Math.max(0, time - 100);
@@ -102,13 +108,15 @@ function createPlayback(adapter: MatchSessionAdapter, policy?: PlaybackPolicy) {
     const restarting = !previousInterval || previous.period !== frame.period
       || (interval.continuousPlayers.size === 0 && !interval.continuousBall);
     lastView = { frame, previous, restarting, cue: snapshot.cue, clockMs: snapshot.clockMs,
-      cursor: cursorAt(snapshot.descriptor, time, context().endingPeriod) };
+      cursor: cursorAt(snapshot.descriptor, time, context(state).endingPeriod) };
     return lastView;
   }
   function tick(now: number) {
     raf = null;
     if (!active || !visible) return;
-    if (now - lastPublish >= 32) {
+    // A 32ms batch can spend a verified clip's native-start budget before play().
+    // Publish playing cursors at 60Hz; paused/buffering views keep the lower cadence.
+    if (now - lastPublish >= (published.state.isPlaying ? 16 : 32)) {
       lastPublish = now;
       const state = controller.snapshot();
       const target = state.pendingSeekMs ?? state.elapsedMs;
@@ -119,14 +127,20 @@ function createPlayback(adapter: MatchSessionAdapter, policy?: PlaybackPolicy) {
     }
     if (active && visible) raf = requestAnimationFrame(tick);
   }
+  function capture() {
+    const state=controller.snapshot();
+    return {state,snapshot,view:view(state),policyId,
+      seekState:seekState?{...seekState}:null,demand:context(state)};
+  }
+  // Reading React's store must be pure. Advance once outside render, then publish
+  // the state, sampled frame and demand together, including terminal arrivals.
+  let published=capture();
+  function notify(){published=capture();listener();}
   return {
     controller,
-    policyId:()=>policyId,
-    context,
-    snapshot: () => snapshot,
-    view,
-    mount(listener: () => void) {
-      active = true; notify = listener;
+    getSnapshot:()=>published,
+    mount(onChange: () => void) {
+      active = true; listener = onChange;
       const unsubscribe = adapter.subscribe(() => {
         const next = adapter.snapshot();
         // While seeking, only the requested destination may publish a new window.
@@ -155,10 +169,12 @@ function createPlayback(adapter: MatchSessionAdapter, policy?: PlaybackPolicy) {
     play() { if (visible) { controller.play(); notify(); } },
     pause() { controller.pause(); notify(); },
     seek(ms: number) {
-      if (!visible) return;
+      if (!visible) return null;
       // Mark the window unknown first, including a backwards seek inside the old horizon.
       controller.setHorizon(snapshot.horizonMs, 'buffering'); controller.seek(ms);
-      request(controller.snapshot().pendingSeekMs ?? controller.currentTime(), true); notify();
+      const target=controller.snapshot().pendingSeekMs??controller.currentTime();
+      seekState={revision:++seekRevision,targetMs:target,status:'pending'};
+      request(target, true); notify();return seekRevision;
     },
     setSpeed(speed: number) { controller.setSpeed(speed); notify(); },
     setPolicy(next:PlaybackPolicy|null) {
@@ -166,6 +182,7 @@ function createPlayback(adapter: MatchSessionAdapter, policy?: PlaybackPolicy) {
       const before=controller.snapshot();controller.setPolicy(next);
       policyId=next?.id??null;
       if(changed) {
+        if(seekState?.status==='pending')seekState={...seekState,status:'cancelled'};
         const after=controller.snapshot();
         cancelDemand();
         if(before.elapsedMs!==after.elapsedMs||before.pendingSeekMs!==after.pendingSeekMs)lastView=null;
@@ -185,14 +202,11 @@ function createPlayback(adapter: MatchSessionAdapter, policy?: PlaybackPolicy) {
 export function useMatchPlayback(adapter: MatchSessionAdapter, visible: boolean, policy?: PlaybackPolicy) {
   const key = identityKey(adapter.identity);
   const playback = useMemo(() => createPlayback(adapter,policy), [key]);
-  const [, update] = useReducer((n: number) => n + 1, 0);
-  useEffect(() => playback.mount(update), [playback]);
+  const published=useSyncExternalStore(playback.mount,playback.getSnapshot,playback.getSnapshot);
   useEffect(() => { playback.setPolicy(policy??null); },[playback,policy]);
   useEffect(() => { playback.setVisible(visible); }, [playback, visible]);
   return {
-    state: playback.controller.snapshot(), snapshot: playback.snapshot(), view: playback.view(),
-    policyId:playback.policyId(),
-    demand:playback.context(),continueAfterStop:()=>playback.continueAfterStop(),
+    ...published,continueAfterStop:()=>playback.continueAfterStop(),
     play: () => playback.play(), pause: () => playback.pause(), seek: (ms: number) => playback.seek(ms),
     setSpeed: (speed: number) => playback.setSpeed(speed), replay: () => playback.replay(),
   };

@@ -1,0 +1,23 @@
+import {render,screen,fireEvent} from '@testing-library/react';
+import {afterEach,it,expect,vi} from 'vitest';
+import {NarrationVoice} from './NarrationVoice';
+import type {TimelineContext} from '../analysis/RecordedAnalysisViews';
+import type {ReplayAudioSource} from './ReplayAudio';
+import type {EventView} from '../session';
+vi.mock('./ReplayAudioControls',()=>({ReplayAudioControls:({frame}:{frame:{enabled:boolean}})=><div data-testid="test-player" data-enabled={frame.enabled}/> }));
+afterEach(()=>vi.unstubAllGlobals());
+it('keeps device synthesis and test audio mutually exclusive, resetting enable on provider switches',()=>{
+  const speak=vi.fn(),cancel=vi.fn(),voice={lang:'en-US',name:'Local',voiceURI:'local',localService:true};
+  vi.stubGlobal('speechSynthesis',{getVoices:()=>[voice],addEventListener:vi.fn(),removeEventListener:vi.fn(),speak,cancel,speaking:false});
+  vi.stubGlobal('SpeechSynthesisUtterance',class {constructor(public text:string){}});
+  const ctx={player:()=>({name:'Player'}),teams:{home:{name:'Home'},away:{name:'Away'}}} as unknown as TimelineContext;
+  const testAudio={manifestUrl:'/speech-test/fictional.json'} as ReplayAudioSource;
+  const goal=(at:number):EventView=>({id:String(at),kind:'goal',elapsedMs:at,period:1,periodMs:at,sourceIndex:at,side:'home',actorId:'a',participantIds:['a'],outcome:'goal',provenance:'native_observed',refs:[],details:{engine:'grf'}});
+  const props={ctx,testAudio,events:[] as EventView[],keepers:new Set<string>(),cursor:0,active:true,seekToken:0,cut:0};
+  const view=render(<NarrationVoice {...props}/>);
+  fireEvent.click(screen.getByRole('button',{name:'Test audio off'}));view.rerender(<NarrationVoice {...props} cursor={1000} events={[goal(1000)]}/>);
+  expect(screen.getByTestId('test-player')).toHaveAttribute('data-enabled','true');expect(speak).not.toHaveBeenCalled();
+  fireEvent.change(screen.getByRole('combobox',{name:'Audio source'}),{target:{value:'device'}});expect(screen.getByRole('button',{name:'Voice off'})).toHaveAttribute('aria-pressed','false');
+  fireEvent.click(screen.getByRole('button',{name:'Voice off'}));view.rerender(<NarrationVoice {...props} cursor={2000} events={[goal(1000),goal(2000)]}/>);expect(speak).toHaveBeenCalledOnce();
+  fireEvent.change(screen.getByRole('combobox',{name:'Audio source'}),{target:{value:'test'}});expect(cancel).toHaveBeenCalledOnce();expect(screen.getByTestId('test-player')).toHaveAttribute('data-enabled','false');
+});
