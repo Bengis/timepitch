@@ -35,12 +35,12 @@ function verticalFov(width: number, distance: number, aspect: number) {
   return clamp(2 * Math.atan(Math.tan(half) / Math.max(aspect, 1e-3)) * 180 / Math.PI, 8, 60);
 }
 
-/** Entrance direction follows the visible queue rather than the empty centre of the pitch. */
+/** Follow the front of the entrance queue; newly visible actors must not reset the camera centre. */
 export function walkoutShot(frame:Pick<SceneFrame,'players'>,aspect:number):CameraShot {
   const actors=frame.players.filter(valid);
   const xs=actors.map(p=>p.x),ys=actors.map(p=>p.y);
   const minX=actors.length?Math.min(...xs):51,maxX=actors.length?Math.max(...xs):54;
-  const x=(minX+maxX)/2,y=actors.length?(Math.min(...ys)+Math.max(...ys))/2:68;
+  const x=(minX+maxX)/2,y=actors.length?Math.min(...ys):68;
   const height=10,ground=height/Math.tan(TILT),width=clamp(maxX-minX+8,18,44);
   return {position:[x,height,y+ground],target:[x,0,y],fov:verticalFov(width,Math.hypot(height,ground),aspect)};
 }

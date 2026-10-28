@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { describe, expect, it } from 'vitest';
 import { ballHeight, ballVelocity, BROADCAST_TILT_DEG, cameraShot, framingFor, isMassReposition, walkoutShot, type CameraShot } from './camera';
 import type { SceneFrame } from '../retroScene';
+import { walkoutDuration, walkoutFrame } from '../../match-centre/match-phases';
 
 it('centres the entrance actors and opens the shot as the team line grows',()=>{
   const close=walkoutShot(frame(0,[['h',51.1,70],['a',53.9,70]]),16/9);
@@ -10,6 +11,23 @@ it('centres the entrance actors and opens the shot as the team line grows',()=>{
   expect(wide.target).toEqual([52.5,0,63]);
   expect(wide.fov).toBeGreaterThan(close.fov);
   expect(walkoutShot(frame(0,[]),16/9).fov).toBeGreaterThan(0);
+});
+
+it('keeps the walkout camera continuous as each new pair emerges from the tunnel', () => {
+  const kickoff = frame(0, ['h', 'a'].flatMap(side => Array.from({ length: 11 }, (_, i) =>
+    [`${side}${i}`, 52.5, 34] as [string, number, number])));
+  let before = walkoutShot(walkoutFrame(kickoff, 0), 16 / 9), maximumStep = 0;
+  for (let t = 1000 / 60; t <= walkoutDuration(kickoff); t += 1000 / 60) {
+    const entrance = walkoutFrame(kickoff, t), current = walkoutShot(entrance, 16 / 9);
+    maximumStep = Math.max(maximumStep, Math.hypot(...current.target.map((v, i) => v - before.target[i])));
+    for (const p of entrance.players) for (const height of [0, 2.1]) {
+      const point = project(current, 16 / 9, p.x, p.y, height);
+      expect(Math.max(Math.abs(point.x), Math.abs(point.y))).toBeLessThan(1);
+    }
+    before = current;
+  }
+  // A walking queue must not move the camera backwards whenever a new actor becomes visible.
+  expect(maximumStep).toBeLessThanOrEqual(.03);
 });
 
 function frame(clock: number, players: [string, number, number][], ball: { x: number; y: number } | null = { x: 50, y: 30 }, period = 1): SceneFrame {
@@ -21,10 +39,10 @@ function tilt(shot: CameraShot) {
   const [px, py, pz] = shot.position, [tx, ty, tz] = shot.target;
   return THREE.MathUtils.radToDeg(Math.atan2(py - ty, Math.hypot(px - tx, pz - tz)));
 }
-function project(shot: CameraShot, aspect: number, x: number, z: number) {
+function project(shot: CameraShot, aspect: number, x: number, z: number, height = 0) {
   const camera = new THREE.PerspectiveCamera(shot.fov, aspect, .1, 2000);
   camera.position.set(...shot.position); camera.lookAt(...shot.target); camera.updateMatrixWorld(true);
-  return new THREE.Vector3(x, 0, z).project(camera);
+  return new THREE.Vector3(x, height, z).project(camera);
 }
 
 describe('framingFor', () => {

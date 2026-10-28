@@ -110,6 +110,8 @@
 }
 
 /* ---------- VS ---------- */
+.vs-icon { width: 18px; height: 18px; flex: none; vertical-align: middle; }
+.vs-star-label, .vs-star .vs-kicker { display: inline-flex; align-items: center; gap: 7px; }
 .vs-badge { display: grid; place-items: center; }
 .vs-badge span {
   display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; transform: rotate(-8deg);

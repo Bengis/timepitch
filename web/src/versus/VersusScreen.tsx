@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, 
 import { createPortal } from 'react-dom';
 import type { PlayerSeason, Statistic, TeamSeason, TeamSummary } from '../api';
 import { TeamCrest } from '../catalog/TeamCrest';
+import { VersusIcon } from './VersusIcon';
 import { fictional } from '../catalog/fictional';
 import type { Engine } from '../grf/EngineSelector';
 import { resolveKits } from '../catalog/kits';
@@ -92,7 +93,7 @@ function StarBlock({ team, teamKey, t, side }: { team: TeamSeason; teamKey: stri
         kit={kit} number={number} size="card" label={p.name} note={false} />
     </div>
     <div className="vs-star-body">
-      <p className="vs-kicker"><span aria-hidden="true">★ </span>{t.star}</p>
+      <p className="vs-kicker"><VersusIcon name="star" />{t.star}</p>
       <h3 id={titleId} className="vs-star-name">{record?.display ?? p.name}</h3>
       <p className="vs-star-facts">
         <span>{t.number} <b>{number ?? '—'}</b></span>
@@ -134,13 +135,13 @@ function SideCard({ side, sel, summary, record, open, onChoose, t, buttonRef }: 
   side: Side; sel: VersusSide; summary: TeamSummary | undefined; record: Load<TeamSeasonRecord>; open: boolean; onChoose: () => void; t: VersusText;
   buttonRef: (el: HTMLButtonElement | null) => void;
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const [updated, setUpdated] = useState(false);
   const previousKey = useRef(sel.key);
   useEffect(() => {
     if (previousKey.current === sel.key) return;
     previousKey.current = sel.key;
-    setExpanded(false);
+    setExpanded(true);
     setUpdated(true);
     const timer = setTimeout(() => setUpdated(false), 650);
     return () => clearTimeout(timer);
@@ -172,12 +173,12 @@ function SideCard({ side, sel, summary, record, open, onChoose, t, buttonRef }: 
           {kit && <span className="vs-swatches" aria-hidden="true">{[kit.shirt, kit.shorts, kit.socks].map((c, i) => <i key={i} style={{ background: c }} />)}</span>}</p>
       </div>
       <button type="button" ref={buttonRef} className="vs-change" aria-haspopup="dialog" aria-expanded={open} onClick={onChoose}>
-        <span aria-hidden="true">⇄ </span>{sel.key ? t.changeTeam : t.chooseTeam}</button>
+        <VersusIcon name="swap" />{sel.key ? t.changeTeam : t.chooseTeam}</button>
     </header>
     <p className="vs-selection-status" role="status">{updated ? t.teamUpdated : ''}</p>
     <div className="vs-side-record"><RecordLine record={record} t={t} /></div>
     <button type="button" className="vs-team-details-toggle" aria-expanded={detailsOpen} aria-controls={detailsId}
-      onClick={() => setExpanded(value => !value)}>{t.star} <span aria-hidden="true">{detailsOpen ? '−' : '+'}</span></button>
+      onClick={() => setExpanded(value => !value)}><span className="vs-star-label"><VersusIcon name="star" />{t.star}</span><VersusIcon name={detailsOpen ? 'minus' : 'plus'} /></button>
     <div className="vs-side-body" id={detailsId} hidden={!detailsOpen}>
       {sel.failed ? <p className="vs-muted vs-star-missing">{t.starUnavailable}</p>
         : team ? <StarBlock team={team} teamKey={sel.key} t={t} side={side} />
@@ -319,6 +320,7 @@ export function VersusScreen({ teams, home, away, onPlay, onOpenAiReport, playDi
     <div className="vs-stage">
       <SideCard side="home" sel={home} summary={byKey.get(home.key)} record={homeRecord} open={picking === 'home'} onChoose={() => open('home')} t={t}
         buttonRef={el => { opener.current.home = el; }} />
+      <div className="vs-badge" aria-hidden="true"><span>{t.vs}</span></div>
       <SideCard side="away" sel={away} summary={byKey.get(away.key)} record={awayRecord} open={picking === 'away'} onChoose={() => open('away')} t={t}
         buttonRef={el => { opener.current.away = el; }} />
     </div>
@@ -327,21 +329,21 @@ export function VersusScreen({ teams, home, away, onPlay, onOpenAiReport, playDi
     <div className="vs-launch">
       {/* TP248: motor y gráficos a la vista, encima de «Jugar partido». */}
       {playControls}
-      <button type="button" className="vs-cta" disabled={!ready || playDisabled} onClick={onPlay}>{t.play} <span aria-hidden="true">▸</span></button>
+      <button type="button" className="vs-cta" disabled={!ready || playDisabled} onClick={onPlay}>{t.play} <VersusIcon name="play" /></button>
       {playStatus ?? (!ready && <p className="vs-muted">{t.playWaiting}</p>)}
       <div className="vs-explainer">
         <p className="vs-duration">{engine === 'grf' ? t.grfDuration : engine === 'touchlines' ? t.touchlinesDuration : t.playbackDuration}</p>
         <p className="vs-identity">{fictional() ? t.fictionalProvenance : t.realProvenance}</p>
-        <p className="vs-ai-promise"><span aria-hidden="true">✦ </span>{t.engineAndAi}</p>
+        <p className="vs-ai-promise"><VersusIcon name="sparkles" /> {t.engineAndAi}</p>
       </div>
       <div className="vs-shortcuts">
-        <button type="button" onClick={swap} disabled={!ready}><span aria-hidden="true">⇄</span> {t.swap}</button>
-        <button type="button" onClick={random} disabled={teams.length < 2}><span aria-hidden="true">🎲</span> {t.random}</button>
+        <button type="button" onClick={swap} disabled={!ready}><VersusIcon name="swap" />{t.swap}</button>
+        <button type="button" onClick={random} disabled={teams.length < 2}><VersusIcon name="random" />{t.random}</button>
       </div>
       {/* TP250 («no se entiende para qué sirve»): dice qué abre y cuándo se escribe la crónica. */}
-      {onOpenAiReport && <button type="button" className="vs-ai-link" onClick={onOpenAiReport}><span className="vs-ai-icon" aria-hidden="true">✦</span>
+      {onOpenAiReport && <button type="button" className="vs-ai-link" onClick={onOpenAiReport}><span className="vs-ai-icon" aria-hidden="true"><VersusIcon name="sparkles" /></span>
         <span className="vs-ai-text"><span>{t.aiReport} <span aria-hidden="true">→</span></span><small>{t.aiReportNote}</small></span></button>}
-      {moreDetails && <details className="vs-options"><summary><span aria-hidden="true">⚙ </span>{t.options}</summary>{moreDetails}</details>}
+      {moreDetails && <details className="vs-options"><summary><VersusIcon name="settings" /> {t.options}</summary>{moreDetails}</details>}
     </div>
     {picking && <TeamPicker teams={teams} side={picking} setSide={open} home={home} away={away} onClose={close} t={t} />}
   </section>;

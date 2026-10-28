@@ -6,7 +6,7 @@
 
 **What would happen if Arsenal 2003/04 played Manchester City 2024/25?** TimePitch lets you pick Premier League team-seasons from any era between 1992/93 and 2025/26 and watch them play a full match, in a stylised 3D broadcast or in retro 16-bit graphics. Every match is fictional; the history behind each side (squads and season statistics) is real. By default the app shows a **fictional league** with invented club and player names; one click switches to the real names. Outside the hackathon demo it can also replay real recorded matches from open event data, so you can compare what a simulator does with what actually happened.
 
-- **Video (under 2 min):** https://youtu.be/bWofJc5pgN4
+- **Video (under 2 min):** https://youtu.be/0Q6rrvn7V50
 - **Live demo:** https://timepitch.livelywater-efc07e50.swedencentral.azurecontainerapps.io
 - **Source code:** https://github.com/Bengis/timepitch (this repository, AGPL-3.0-or-later)
 

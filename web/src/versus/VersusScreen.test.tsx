@@ -49,43 +49,39 @@ function mount(home: VersusSide, away: VersusSide, onPlay = vi.fn(), options?: {
 }
 
 describe('VersusScreen (TP213)', () => {
-  it.each([false, true])('keeps the season record visible with the star folded on compact=%s (TP271)', async compact => {
-    vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: compact, addEventListener: vi.fn(), removeEventListener: vi.fn() })));
+  it('shows both star players by default and keeps their collapse controls independent (TP319)', async () => {
     mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon), vi.fn(), { controls: <label>Engine<select /></label> });
     const home = screen.getByRole('region', { name: 'Home: Arsenal 2003/04' });
     const away = screen.getByRole('region', { name: 'Away: Swindon Town 1993/94' });
     expect(await within(home).findByText('26-12-0')).toBeVisible();
-    expect(await within(away).findByText('22nd')).toBeVisible();
     const toggle = within(home).getByRole('button', { name: 'Star player' });
     const awayToggle = within(away).getByRole('button', { name: 'Star player' });
-    expect(toggle).toHaveAttribute('aria-expanded', 'false');
-    expect(document.getElementById(toggle.getAttribute('aria-controls')!)).not.toBeVisible();
-    expect(within(home).queryByRole('heading', { name: 'Thierry Henry' })).toBeNull();
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    expect(awayToggle).toHaveAttribute('aria-expanded', 'true');
+    expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeVisible();
+    expect(within(away).getByRole('heading', { name: 'Jan Fjørtoft' })).toBeVisible();
     expect(screen.getByRole('button', { name: /Play match/ })).toBeVisible();
     expect(screen.getByLabelText('Engine')).toBeVisible();
     fireEvent.click(toggle);
-    expect(toggle).toHaveAttribute('aria-expanded', 'true');
-    expect(await within(home).findByText('26-12-0')).toBeVisible();
-    expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeVisible();
-    expect(awayToggle).toHaveAttribute('aria-expanded', 'false');
-    expect(screen.queryByRole('dialog')).toBeNull();
-    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
     expect(document.getElementById(toggle.getAttribute('aria-controls')!)).not.toBeVisible();
     expect(within(home).getByText('26-12-0')).toBeVisible();
+    expect(within(away).getByRole('heading', { name: 'Jan Fjørtoft' })).toBeVisible();
+    fireEvent.click(toggle);
+    expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeVisible();
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 
-  it('folds a changed team star while keeping its updated record visible and the other star independent (TP271)', async () => {
+  it('reveals the new team star without displaying the previous player or changing the other card (TP319)', async () => {
     const props = { teams: TEAMS, home: side('arsenal:2003', arsenal), away: side('swindon:1993', swindon), onPlay: vi.fn() };
     const view = render(<LanguageProvider><VersusScreen {...props} /></LanguageProvider>);
     const home = screen.getByRole('region', { name: 'Home: Arsenal 2003/04' });
     const away = screen.getByRole('region', { name: 'Away: Swindon Town 1993/94' });
-    fireEvent.click(within(home).getByRole('button', { name: 'Star player' }));
-    fireEvent.click(within(away).getByRole('button', { name: 'Star player' }));
     expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeVisible();
+    fireEvent.click(within(home).getByRole('button', { name: 'Star player' }));
     view.rerender(<LanguageProvider><VersusScreen {...props} home={side('arsenal:1992', null)} /></LanguageProvider>);
     const changed = screen.getByRole('region', { name: 'Home: Arsenal 1992/93' });
-    expect(within(changed).getByRole('button', { name: 'Star player' })).toHaveAttribute('aria-expanded', 'false');
+    expect(within(changed).getByRole('button', { name: 'Star player' })).toHaveAttribute('aria-expanded', 'true');
     expect(await within(changed).findByText('1st')).toBeVisible();
     expect(within(changed).queryByRole('heading', { name: 'Thierry Henry' })).toBeNull();
     expect(within(away).getByRole('heading', { name: 'Jan Fjørtoft' })).toBeVisible();
@@ -133,11 +129,9 @@ describe('VersusScreen (TP213)', () => {
     expect(launchIndex).toBeLessThan(buttons.indexOf(screen.getByRole('button', { name: /Random match/ })));
   });
 
-  it('shows the record and optional star, one Play button with the match choices in view (TP271)', async () => {
+  it('shows the record and star, one Play button with the match choices in view (TP319)', async () => {
     mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon), vi.fn(), { controls: <label>Engine<select /></label> });
-    expect(screen.queryByRole('heading', { name: 'Thierry Henry' })).toBeNull();
     const home = screen.getByRole('region', { name: 'Home: Arsenal 2003/04' });
-    fireEvent.click(within(home).getByRole('button', { name: 'Star player' }));
     expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeVisible();
     expect(await screen.findByText('1st')).toBeInTheDocument();
     expect(screen.getAllByRole('button', { name: /Play match/ })).toHaveLength(1);
@@ -153,7 +147,6 @@ describe('VersusScreen (TP213)', () => {
     mount(side('arsenal:2003', arsenal), side('swindon:1993', swindon), onPlay);
     const home = screen.getByRole('region', { name: 'Home: Arsenal 2003/04' });
     expect(await within(home).findByText('1st')).toBeInTheDocument();
-    fireEvent.click(within(home).getByRole('button', { name: 'Star player' }));
     expect(within(home).getByRole('heading', { name: 'Thierry Henry' })).toBeInTheDocument();
     // TP240: sin etiquetas de procedencia en la portada.
     expect(home.querySelector('.chip')).toBeNull();
@@ -241,7 +234,7 @@ describe('VersusScreen (TP213)', () => {
       expect(await screen.findByText('1.º')).toBeInTheDocument();
       expect(await screen.findByText('−9 sanción')).toBeInTheDocument();
       expect(screen.getByText(/Sanción de 9 puntos \(90 puntos por resultados\)\. Motivo de prueba\./)).toBeInTheDocument();
-      expect([...document.querySelectorAll('.vs-star .vs-kicker')].map(e => e.textContent)).toEqual(['★ Estrella', '★ Estrella']);
+      expect([...document.querySelectorAll('.vs-star .vs-kicker')].map(e => e.textContent?.trim())).toEqual(['Estrella', 'Estrella']);
     } finally { localStorage.removeItem('timepitch.locale'); }
   });
   it('keeps the W-D-L record on one line in narrow cards (TP217)', async () => {
