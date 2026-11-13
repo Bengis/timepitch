@@ -7,7 +7,7 @@
 **What would happen if Arsenal 2003/04 played Manchester City 2024/25?** TimePitch lets you pick Premier League team-seasons from any era between 1992/93 and 2025/26 and watch them play a full match, in a stylised 3D broadcast or in retro 16-bit graphics. Every match is fictional; the history behind each side (squads and season statistics) is real. By default the app shows a **fictional league** with invented club and player names; one click switches to the real names. Outside the hackathon demo it can also replay real recorded matches from open event data, so you can compare what a simulator does with what actually happened.
 
 - **Video (under 2 min):** https://youtu.be/0Q6rrvn7V50
-- **Live demo:** https://timepitch.livelywater-efc07e50.swedencentral.azurecontainerapps.io
+- **Live demo:** taken down after the hackathon judging closed (November 2026). The video shows it running; the app runs locally from this repository.
 - **Source code:** https://github.com/Bengis/timepitch (this repository, AGPL-3.0-or-later)
 
 ## Hackathon entry: Inside the Game (Microsoft + Premier League)
@@ -152,7 +152,7 @@ Player and club names are used factually. TimePitch is an independent fan projec
 - Starting XIs in simulation are chosen by the user or automatically; exact historical line-ups are only shown in Reconstruction. Player identities are never merged across sources by name.
 - Ratings are estimates with uneven coverage across eras; older seasons have less individual data. No probability calibration: simulated scores are plausible outcomes, not forecasts.
 - Reconstruction covers 2015/16 and Arsenal 2003/04 only, and its movement between events is synthetic.
-- The public demo runs on Azure Container Apps with rate limits (and a mirror on a home server) and may answer "busy" under load. GRF matches take about 20 seconds to prepare. Live AI reports are capped per session, per IP and per day, and take 30–60 seconds after full time.
+- The public demo ran on Azure Container Apps during the hackathon and has been taken down since. GRF matches take about 20 seconds to prepare. Live AI reports are capped per session, per IP and per day, and take 30–60 seconds after full time.
 - The report verifier checks facts, not nuance: a phrase that misdescribes a correct fact can still pass.
 
 ## Credits
